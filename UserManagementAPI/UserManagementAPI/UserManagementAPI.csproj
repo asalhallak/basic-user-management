@@ -10,7 +10,10 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
     </ItemGroup>
-
+    <ItemGroup>
+        <ProjectReference Include="..\DataAccess.EFCore\DataAccess.EFCore.csproj" />
+        <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
 
 
 
