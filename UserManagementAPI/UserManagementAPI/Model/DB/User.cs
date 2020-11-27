@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace UserManagementAPI.Model.DB
 {
-    public class Users
+    public class User
     {
         public int Id { get; set; }
         public string LoginName { get; set; }

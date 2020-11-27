@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserManagementAPI", "UserManagementAPI\UserManagementAPI.csproj", "{0E6B5502-B824-4C3D-B4A4-A5054CCDF455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.EFCore", "DataAccess.EFCore\DataAccess.EFCore.csproj", "{8CD2954D-7E53-46C9-B62E-AE54873B5ABB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{EC474BE9-994F-41AF-870B-EDC7792BA12F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{0E6B5502-B824-4C3D-B4A4-A5054CCDF455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E6B5502-B824-4C3D-B4A4-A5054CCDF455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E6B5502-B824-4C3D-B4A4-A5054CCDF455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CD2954D-7E53-46C9-B62E-AE54873B5ABB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CD2954D-7E53-46C9-B62E-AE54873B5ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CD2954D-7E53-46C9-B62E-AE54873B5ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CD2954D-7E53-46C9-B62E-AE54873B5ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC474BE9-994F-41AF-870B-EDC7792BA12F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC474BE9-994F-41AF-870B-EDC7792BA12F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC474BE9-994F-41AF-870B-EDC7792BA12F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC474BE9-994F-41AF-870B-EDC7792BA12F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
