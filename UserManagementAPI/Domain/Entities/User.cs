@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Domain.Model.DB;
 
 namespace Domain.Entities
 {

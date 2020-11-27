@@ -1,4 +1,4 @@
-namespace Domain.Model.DB
+namespace Domain.Entities
 {
     public class Address
     {
