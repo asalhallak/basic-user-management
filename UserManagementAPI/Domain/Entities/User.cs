@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Domain.Model.DB;
 
-namespace UserManagementAPI.Model.DB
+namespace Domain.Entities
 {
     public class User
     {

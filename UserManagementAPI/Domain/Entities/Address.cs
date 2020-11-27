@@ -1,4 +1,4 @@
-namespace UserManagementAPI.Model.DB
+namespace Domain.Model.DB
 {
     public class Address
     {
