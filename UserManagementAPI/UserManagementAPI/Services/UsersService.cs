@@ -5,7 +5,6 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.VisualBasic;
-using UserManagementAPI.Models;
 
 namespace UserManagementAPI.Services
 {

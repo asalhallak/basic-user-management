@@ -1,6 +1,6 @@
 using AutoMapper;
 using Domain.Entities;
-using UserManagementAPI.Models;
+using UserManagementAPI.Resources;
 
 namespace UserManagementAPI.Mapper
 {
@@ -10,6 +10,8 @@ namespace UserManagementAPI.Mapper
         {
             CreateMap<User, UserResource>();
             CreateMap<Address, AddressResource>();
+            CreateMap<AddressResource, Address>();
+            CreateMap<UserResource, User>();
         }
     }
 }

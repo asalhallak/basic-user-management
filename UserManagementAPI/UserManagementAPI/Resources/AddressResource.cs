@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace UserManagementAPI.Models
+namespace UserManagementAPI.Resources
 {
     public class AddressResource
     {

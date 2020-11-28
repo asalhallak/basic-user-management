@@ -4,7 +4,7 @@ using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using UserManagementAPI.Models;
+using UserManagementAPI.Resources;
 using UserManagementAPI.Services;
 
 namespace UserManagementAPI.Controllers
