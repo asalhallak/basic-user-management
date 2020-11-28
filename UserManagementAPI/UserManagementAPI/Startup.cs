@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataAccess.EFCore;
 using DataAccess.EFCore.Repositories;
 using DataAccess.EFCore.UnitOfWorks;
+using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using UserManagementAPI.Services;
 
 namespace UserManagementAPI
 {
@@ -35,12 +38,14 @@ namespace UserManagementAPI
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddAutoMapper(typeof(Startup));
             #region Repositories
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAddressRepository, AddressRepository>();
             #endregion
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<UsersService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -17,6 +17,12 @@ namespace DataAccess.EFCore.Repositories
         {
             _context.Set<T>().Add(entity);
         }
+
+        public void Update(T entity)
+        { 
+            _context.Set<T>().Update(entity);
+        }
+
         public void AddRange(IEnumerable<T> entities)
         {
             _context.Set<T>().AddRange(entities);
