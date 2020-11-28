@@ -18,11 +18,12 @@ namespace UserManagementAPI.Services
 
         public IEnumerable<User> GetAll()
         {
-            return _unitOfWork.Users.GetAll();
+            return _unitOfWork.Users.GetAllIncludeAddress();
         }
         public User Get(int id)
         {
-            return _unitOfWork.Users.GetById(id);
+            var user = _unitOfWork.Users.GetById(id);
+            return user;
         }
         public User Update(User user)
         {

@@ -51,9 +51,10 @@ namespace UserManagementAPI.Controllers
             return Ok();
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] UserResource user)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody] UserResource user)
         {
+            user.Id = id;
             _usersService.Update(_mapper.Map<User>(user));
             return Ok();
         }

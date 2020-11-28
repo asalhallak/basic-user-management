@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
@@ -10,6 +11,7 @@ namespace Domain.Entities
         public string DisplayName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Country { get; set; }
+        [ForeignKey("AddressId")]
         public Address Address { get; set; }
         public bool IsActive { get; set; }
         public float Salary { get; set; }
