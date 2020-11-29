@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserManagementAPI.Resources;
 using UserManagementAPI.Services;
@@ -10,6 +11,7 @@ using UserManagementAPI.Services;
 namespace UserManagementAPI.Controllers
 {
     [Route("api/users")]
+    [Authorize]
     [ApiController]
     public class UsersController : ControllerBase
     {
