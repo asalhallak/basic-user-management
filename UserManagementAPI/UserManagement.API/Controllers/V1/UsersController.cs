@@ -2,15 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Domain.Entities;
-using Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UserManagementAPI.Resources;
 using UserManagementAPI.Services;
 
-namespace UserManagementAPI.Controllers
+namespace UserManagementAPI.Controllers.V1
 {
-    [Route("api/users")]
+    [Route("api/v1/users")]
     [Authorize]
     [ApiController]
     public class UsersController : ControllerBase

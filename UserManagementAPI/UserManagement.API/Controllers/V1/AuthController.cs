@@ -1,11 +1,10 @@
-using System.Diagnostics.Eventing.Reader;
 using Microsoft.AspNetCore.Mvc;
 using UserManagementAPI.Resources;
 using UserManagementAPI.Services;
 
-namespace UserManagementAPI.Controllers
+namespace UserManagementAPI.Controllers.V1
 {
-    [Route("api/auth")]
+    [Route("api/v1/auth")]
     [ApiController]
     public class AuthController: ControllerBase
     {
@@ -15,7 +14,7 @@ namespace UserManagementAPI.Controllers
             _auth = auth;
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public IActionResult Login([FromBody] Credentials credentials)
         {
            var res = _auth.Login(credentials);
