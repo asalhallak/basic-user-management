@@ -41,8 +41,8 @@ namespace UserManagementAPI.Controllers.V1
         [HttpPost]
         public IActionResult Add([FromBody] UserResource user)
         {
-            _usersService.Add(_mapper.Map<User>(user));
-            return Ok();
+            var _user = _usersService.Add(_mapper.Map<User>(user));
+            return Ok(_user);
         }
 
         [HttpDelete("{id}")]

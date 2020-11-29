@@ -37,10 +37,11 @@ namespace UserManagementAPI.Services
             _unitOfWork.Users.Remove(user);
             _unitOfWork.Complete();
         }
-        public void Add(User user)
+        public User Add(User user)
         {
             _unitOfWork.Users.Add(user);
             _unitOfWork.Complete();
+            return user;
         }
     }
 }
