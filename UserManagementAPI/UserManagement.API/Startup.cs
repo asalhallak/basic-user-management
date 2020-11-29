@@ -61,14 +61,9 @@ namespace UserManagementAPI
                         ValidateAudience = false
                     };
                 });
-            #region Repositories
-            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IAddressRepository, AddressRepository>();
-            #endregion
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<UsersService>();
-            services.AddTransient<AuthService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<UsersService>();
+            services.AddScoped<AuthService>();
             services.AddScoped<JwtHelper>();
         }
 
