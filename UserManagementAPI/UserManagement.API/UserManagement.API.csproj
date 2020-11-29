@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>UserManagementAPI</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -15,8 +16,8 @@
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\DataAccess.EFCore\DataAccess.EFCore.csproj" />
-        <ProjectReference Include="..\Domain\Domain.csproj" />
+        <ProjectReference Include="..\UserManagement.DataAccess.EFCore\UserManagement.DataAccess.EFCore.csproj" />
+        <ProjectReference Include="..\UserManagement.Domain\UserManagement.Domain.csproj" />
     </ItemGroup>
 
 

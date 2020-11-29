@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>DataAccess.EFCore</RootNamespace>
     </PropertyGroup>
     
     <ItemGroup>
@@ -9,9 +10,9 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0" />
     </ItemGroup>
-
+    
     <ItemGroup>
-        <ProjectReference Include="..\Domain\Domain.csproj" />
+      <ProjectReference Include="..\UserManagement.Domain\UserManagement.Domain.csproj" />
     </ItemGroup>
 
 </Project>
