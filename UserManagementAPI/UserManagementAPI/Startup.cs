@@ -43,7 +43,7 @@ namespace UserManagementAPI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper(typeof(Startup));
-            var key = Encoding.ASCII.GetBytes( Configuration["Secret"]);
+            var key = Encoding.ASCII.GetBytes( Configuration["JwtSecret"]);
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
