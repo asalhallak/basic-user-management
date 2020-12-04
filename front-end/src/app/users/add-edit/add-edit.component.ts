@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
-import { AccountService, AlertService } from '../_services';
+import { AccountService, AlertService } from '../../services';
 
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
@@ -24,7 +24,7 @@ export class AddEditComponent implements OnInit {
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
-        
+
         // password not required in edit mode
         const passwordValidators = [Validators.minLength(6)];
         if (this.isAddMode) {
