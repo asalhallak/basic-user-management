@@ -9,35 +9,32 @@ import { User } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<User>;
-    public user: Observable<User>;
-
+    private claims: any;
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-        this.user = this.userSubject.asObservable();
+        this.claims = JSON.parse(localStorage.getItem('claims'));
     }
 
-    public get userValue(): User {
-        return this.userSubject.value;
+    public get Claims() {
+        return this.claims;
     }
 
     login(username, password) {
         return this.http.post<User>(`${environment.apiUrl}/api/v1/auth/login`, { username, password })
-            .pipe(map(user => {
+            .pipe(map(claims => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
-                this.userSubject.next(user);
-                return user;
+                localStorage.setItem('claims', JSON.stringify(claims));
+                this.claims = claims;
+                return claims;
             }));
     }
 
     logout() {
         // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
-        this.userSubject.next(null);
+        localStorage.removeItem('claims');
+        this.claims = null;
         this.router.navigate(['/account/login']);
     }
 
@@ -54,19 +51,7 @@ export class AccountService {
     }
 
     update(id, params) {
-        return this.http.put(`${environment.apiUrl}/api/v1/users/${id}`, params)
-            .pipe(map(x => {
-                // update stored user if the logged in user updated their own record
-                if (id == this.userValue.id) {
-                    // update local storage
-                    const user = { ...this.userValue, ...params };
-                    localStorage.setItem('user', JSON.stringify(user));
-
-                    // publish updated user to subscribers
-                    this.userSubject.next(user);
-                }
-                return x;
-            }));
+        return this.http.put(`${environment.apiUrl}/api/v1/users/${id}`, params);
     }
 
     delete(id: string) {

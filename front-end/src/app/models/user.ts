@@ -1,8 +1,18 @@
 export class User {
-    id: string;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-    token: string;
+    id: number;
+    loginName: string;
+    displayName: string;
+    country: string;
+    isActive: boolean;
+    salary: number;
+    profilePictureUrl: string;
+    address: {
+        id: number,
+        city: string;
+        country: string;
+        postalCode: string;
+        state: string;
+        streetName: string;
+        streetNumber: string;
+    }
 }
