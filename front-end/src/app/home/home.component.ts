@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { User } from '../_models';
+import { User } from '../models';
 import { AccountService } from '../services';
 
 @Component({ templateUrl: 'home.component.html' })
