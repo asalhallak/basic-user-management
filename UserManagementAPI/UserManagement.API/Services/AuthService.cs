@@ -16,7 +16,7 @@ namespace UserManagementAPI.Services
         {
             // Assume this will call auth servers
             // This Fake Auth
-            if (user?.UserName == "admin" && user.Password == "qwerty1234@")
+            if (user?.UserName == "admin" && user.Password == "123456789")
             {
                 var claims = new Claims {UserName = user.UserName};
                 claims.Token = _jwt.GenerateToken(claims);

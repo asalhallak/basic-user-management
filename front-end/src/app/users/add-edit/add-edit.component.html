@@ -3,40 +3,111 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-row">
         <div class="form-group col">
-            <label for="firstName">First Name</label>
-            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                <div *ngIf="f.firstName.errors.required">First Name is required</div>
+            <label for="displayName">Display Name</label>
+            <input type="text" formControlName="displayName" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && controls.displayName.errors }" />
+            <div *ngIf="submitted && controls.displayName.errors" class="invalid-feedback">
+                <div *ngIf="controls.displayName.errors.required">Display Name is required</div>
             </div>
         </div>
         <div class="form-group col">
-            <label for="lastName">Last Name</label>
-            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            <label for="loginName">Login Name</label>
+            <input type="text" formControlName="loginName" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && controls.loginName.errors }" />
+            <div *ngIf="submitted && controls.loginName.errors" class="invalid-feedback">
+                <div *ngIf="controls.loginName.errors.required">Login Name is required</div>
             </div>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col">
-            <label for="username">Username</label>
-            <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Username is required</div>
+            <label for="isActive">Is Active</label>
+            <select formControlName="isActive" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && controls.isActive.errors }">
+                <option [ngValue]="true">Yes</option>
+                <option [ngValue]="false">No</option>
+            </select>
+            <div *ngIf="submitted && controls.isActive.errors" class="invalid-feedback">
+                <div *ngIf="controls.isActive.errors.required">Is Active is required</div>
             </div>
         </div>
         <div class="form-group col">
-            <label for="password">
-                Password
-                <em *ngIf="!isAddMode">(Leave blank to keep the same password)</em>
-            </label>
-            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                <div *ngIf="f.password.errors.required">Password is required</div>
-                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            <label for="salary">Salary</label>
+            <input type="number" formControlName="salary" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && controls.salary.errors }" />
+            <div *ngIf="submitted && controls.salary.errors" class="invalid-feedback">
+                <div *ngIf="controls.salary.errors.required">Salary is required</div>
             </div>
         </div>
     </div>
+    <div class="form-row">
+
+        <div class="form-group col">
+            <label for="profilePictureUrl">Profile Picture Url</label>
+            <input type="text" formControlName="profilePictureUrl" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && controls.profilePictureUrl.errors }" />
+            <div *ngIf="submitted && controls.profilePictureUrl.errors" class="invalid-feedback">
+                <div *ngIf="controls.profilePictureUrl.errors.required">Salary is required</div>
+            </div>
+        </div>
+    </div>
+    <div formGroupName="address">
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="city">city</label>
+                <input type="text" formControlName="city" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.city.errors }" />
+                <div *ngIf="submitted && controls.address.controls.city.errors" class="invalid-feedback">
+                    <div *ngIf="controls.address.controls.city.errors.required">City Name is required</div>
+                </div>
+            </div>
+            <div class="form-group col">
+                <label for="state">State Name</label>
+                <input type="text" formControlName="state" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.state.errors }"/>
+                <div *ngIf="submitted && controls.address.controls.state.errors" class="invalid-feedback">
+                    <div *ngIf="controls.address.controls.state.errors.required">State is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="country">Country</label>
+                <input type="text" formControlName="country" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.city.errors }" />
+                <div *ngIf="submitted && controls.address.controls.country.errors" class="invalid-feedback">
+                    <div *ngIf="controls.address.controls.country.errors.required">country is required</div>
+                </div>
+            </div>
+            <div class="form-group col">
+                <label for="postalCode">Postal Code</label>
+                <input type="text" formControlName="postalCode" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.postalCode.errors }"/>
+                <div *ngIf="submitted && controls.address.controls.postalCode.errors" class="invalid-feedback">
+                    <div *ngIf="controls.address.controls.postalCode.errors.required">PostalCode is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="streetName">Street Name</label>
+                <input type="text" formControlName="streetName" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.streetName.errors }" />
+                <div *ngIf="submitted && controls.address.controls.streetName.errors" class="invalid-feedback">
+                    <div *ngIf="controls.address.controls.streetName.errors.required">Street name is required</div>
+                </div>
+            </div>
+            <div class="form-group col">
+                <label for="streetNumber">Street Number</label>
+                <input type="text" formControlName="streetNumber" class="form-control"
+                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.streetNumber.errors }"/>
+                <div *ngIf="submitted && controls.address.controls.streetNumber.errors" class="invalid-feedback">
+                    <div *ngIf="controls.address.controls.streetNumber.errors.required">Street Number is required</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="form-group">
         <button [disabled]="loading" class="btn btn-primary">
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>

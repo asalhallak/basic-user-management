@@ -22,7 +22,7 @@ namespace UserManagementAPI.Services
         }
         public User Get(int id)
         {
-            var user = _unitOfWork.Users.GetById(id);
+            var user = _unitOfWork.Users.GetIncludeAddress(id);
             return user;
         }
         public User Update(User user)

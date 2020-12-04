@@ -32,23 +32,36 @@ export class AddEditComponent implements OnInit {
         }
 
         this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            username: ['', Validators.required],
-            password: ['', passwordValidators]
+            displayName: ['', Validators.required],
+            loginName: ['', Validators.required],
+            isActive: [false, Validators.required],
+            salary: ['', Validators.required],
+            profilePictureUrl: ['', Validators.required],
+            address: this.formBuilder.group({
+                city: ['', Validators.required],
+                postalCode: ['', Validators.required],
+                state: ['', Validators.required],
+                streetNumber: ['', Validators.required],
+                streetName: ['', Validators.required],
+                country: ['', Validators.required]
+            }),
         });
 
         if (!this.isAddMode) {
             this.accountService.getById(this.id)
                 .pipe(first())
-                .subscribe(x => this.form.patchValue(x));
+                .subscribe(x => {
+                    console.log(x)
+                    this.form.patchValue(x);
+                });
         }
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.form.controls; }
+    get controls() { return this.form.controls; }
 
     onSubmit() {
+        console.log(this.form.value)
         this.submitted = true;
 
         // reset alerts on submit
@@ -68,6 +81,7 @@ export class AddEditComponent implements OnInit {
     }
 
     private createUser() {
+        console.log(this.form.value)
         this.accountService.register(this.form.value)
             .pipe(first())
             .subscribe({

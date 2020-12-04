@@ -6,5 +6,6 @@ namespace Domain.Interfaces
     public interface IUserRepository: IGenericRepository<User>
     {
         public IEnumerable<User> GetAllIncludeAddress();
+        public User GetIncludeAddress(int id);
     }
 }
