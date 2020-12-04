@@ -22,6 +22,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using UserManagementAPI.Helpers;
+using UserManagementAPI.MiddlewareConfiguration;
 using UserManagementAPI.Services;
 
 namespace UserManagementAPI
@@ -38,6 +39,7 @@ namespace UserManagementAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCorsOrigin();
             services.AddControllers();
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(
@@ -61,6 +63,7 @@ namespace UserManagementAPI
                         ValidateAudience = false
                     };
                 });
+            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<UsersService>();
             services.AddScoped<AuthService>();
@@ -74,7 +77,7 @@ namespace UserManagementAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCorsOrigin();
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -82,6 +85,7 @@ namespace UserManagementAPI
             app.UseAuthentication();
 
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
