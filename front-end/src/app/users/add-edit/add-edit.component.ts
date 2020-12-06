@@ -76,7 +76,7 @@ export class AddEditComponent implements OnInit {
 
     private createUser() {
         console.log(this.form.value)
-        this.accountService.register(this.form.value)
+        this.accountService.add(this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {
