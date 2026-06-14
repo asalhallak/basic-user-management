@@ -2,6 +2,22 @@
 
 A full-stack sample application for managing users with authentication, built as a learning-friendly reference for layered .NET APIs and Angular front ends.
 
+## Table of contents
+
+- [What it does](#what-it-does)
+- [Architecture](#architecture)
+- [Tech stack](#tech-stack)
+- [Prerequisites](#prerequisites)
+- [Getting started](#getting-started)
+- [Verify the stack](#verify-the-stack)
+- [Default login](#default-login)
+- [API reference](#api-reference)
+- [Try it with curl](#try-it-with-curl)
+- [Project structure](#project-structure)
+- [Development notes](#development-notes)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+
 ## What it does
 
 - **Authenticate** with JWT bearer tokens
@@ -103,6 +119,40 @@ npm start
 
 Open `http://localhost:4200` in your browser. The app is configured to call the API at `http://localhost:5000` (see `front-end/src/environments/environment.ts`).
 
+### Build commands
+
+```bash
+# Build the .NET solution
+cd UserManagementAPI
+dotnet build
+
+# Production build of the Angular app
+cd front-end
+npm run build
+```
+
+Production API URL can be changed in `front-end/src/environments/environment.prod.ts`.
+
+### Stop the database
+
+```bash
+docker compose down
+```
+
+To remove persisted data as well, add `-v` to delete the Docker volume.
+
+## Verify the stack
+
+After starting all services, confirm each layer is reachable:
+
+| Check | Command or action | Expected result |
+|-------|-------------------|-----------------|
+| Database | `docker compose ps` | `db` container is running |
+| API | `curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/api/v1/users` | `401` (unauthorized without a token) |
+| Front end | Open `http://localhost:4200` | Login page loads |
+
+A `401` from the users endpoint without a token means the API is up and JWT protection is working.
+
 ## Default login
 
 Authentication is intentionally simple for local development:
@@ -166,7 +216,103 @@ All user endpoints require a valid `Authorization: Bearer <token>` header.
 | `isActive` | bool | |
 | `salary` | float | |
 | `profilePictureUrl` | string | Optional URL |
-| `address` | object | Nested address (city, country, postal code, state, street) |
+| `address` | object | Nested address (see below) |
+
+### Address model
+
+When creating or updating a user, the nested `address` object supports:
+
+| Field | Type | Notes |
+|-------|------|-------|
+| `id` | int | Assigned by the database on create |
+| `city` | string | |
+| `country` | string | |
+| `postalCode` | string | |
+| `state` | string | |
+| `streetName` | string | |
+| `streetNumber` | string | |
+
+**Example create-user body:**
+
+```json
+{
+  "loginName": "jdoe",
+  "displayName": "Jane Doe",
+  "dateOfBirth": "1990-05-15T00:00:00",
+  "country": "US",
+  "isActive": true,
+  "salary": 75000,
+  "profilePictureUrl": "https://example.com/avatar.png",
+  "address": {
+    "city": "Seattle",
+    "country": "US",
+    "postalCode": "98101",
+    "state": "WA",
+    "streetName": "Main St",
+    "streetNumber": "100"
+  }
+}
+```
+
+## Try it with curl
+
+These examples assume the API is running on `http://localhost:5000`.
+
+**1. Log in and capture the token:**
+
+```bash
+TOKEN=$(curl -s -X POST http://localhost:5000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"userName":"admin","password":"123456789"}' \
+  | grep -o '"token":"[^"]*"' | cut -d'"' -f4)
+```
+
+**2. List users:**
+
+```bash
+curl -s http://localhost:5000/api/v1/users \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+**3. Create a user:**
+
+```bash
+curl -s -X POST http://localhost:5000/api/v1/users \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "loginName": "jdoe",
+    "displayName": "Jane Doe",
+    "dateOfBirth": "1990-05-15T00:00:00",
+    "country": "US",
+    "isActive": true,
+    "salary": 75000,
+    "address": {
+      "city": "Seattle",
+      "country": "US",
+      "postalCode": "98101",
+      "state": "WA",
+      "streetName": "Main St",
+      "streetNumber": "100"
+    }
+  }'
+```
+
+**4. Update a user (replace `{id}` with the user ID):**
+
+```bash
+curl -s -X PUT http://localhost:5000/api/v1/users/{id} \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"displayName":"Jane Smith","isActive":true}'
+```
+
+**5. Delete a user:**
+
+```bash
+curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
+  -H "Authorization: Bearer $TOKEN"
+```
 
 ## Project structure
 
@@ -189,6 +335,29 @@ All user endpoints require a valid `Authorization: Bearer <token>` header.
 - **CORS** is configured for local front-end development. See `MiddlewareConfiguration/CorsOriginConfiguration.cs`.
 - **Migrations** live in `UserManagement.DataAccess.EFCore/Migrations/`. Create new ones with `dotnet ef migrations add <Name> --startup-project ../UserManagement.API`.
 - **Secrets**: `appsettings.json` contains a development JWT secret and database password. Replace these before deploying anywhere real.
+- **JWT configuration**: Tokens are signed with the `JwtSecret` value from `appsettings.json`. Issuer and audience validation are disabled for simplicity in this sample.
+- **Repository pattern**: Data access goes through `IUnitOfWork` and repository interfaces in `UserManagement.Domain`, with EF Core implementations in `UserManagement.DataAccess.EFCore`.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---------|--------------|-----|
+| Migration fails with a connection error | SQL Server container is still starting | Wait 15–30 seconds after `docker compose up -d`, then retry `dotnet ef database update` |
+| `Cannot open database "UserManagement"` | Migrations not applied | Run the migration step from [Getting started](#getting-started) |
+| Port `1434` already in use | Another SQL Server instance on the host | Stop the conflicting service or change the host port in `docker-compose.yml` and update `appsettings.json` to match |
+| API returns `401` on all user endpoints | Missing or expired JWT | Log in again via `/api/v1/auth/login` and include `Authorization: Bearer <token>` |
+| Front end cannot reach the API | API not running or wrong URL | Confirm `dotnet run` is active and `environment.apiUrl` points to `http://localhost:5000` |
+| `dotnet ef` command not found | EF Core CLI tool not installed | Run `dotnet tool install --global dotnet-ef` |
+
+**Reset the database completely:**
+
+```bash
+docker compose down -v
+docker compose up -d
+# wait for SQL Server to start, then re-apply migrations
+cd UserManagementAPI/UserManagement.DataAccess.EFCore
+dotnet ef database update --startup-project ../UserManagement.API
+```
 
 ## License
 
