@@ -12,10 +12,13 @@ A full-stack sample application for managing users with authentication, built as
 - [Getting started](#getting-started)
 - [Verify the stack](#verify-the-stack)
 - [Default login](#default-login)
+- [Authentication vs user data](#authentication-vs-user-data)
+- [Front-end and API integration](#front-end-and-api-integration)
 - [API reference](#api-reference)
 - [Try it with curl](#try-it-with-curl)
 - [Project structure](#project-structure)
 - [Development notes](#development-notes)
+- [Testing](#testing)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
 
@@ -185,6 +188,35 @@ Authentication is intentionally simple for local development:
 | Password | `123456789` |
 
 After login, the JWT is attached to subsequent API requests automatically.
+
+## Authentication vs user data
+
+Login and user CRUD are intentionally separate in this sample:
+
+| Concern | How it works |
+|---------|--------------|
+| **Login** | Hardcoded in `AuthService` (`admin` / `123456789`). Not backed by database users. |
+| **User records** | Stored in SQL Server via EF Core. Created through the API or Angular UI after you are logged in. |
+| **Register page** | Posts to `POST /api/v1/users`, which requires a JWT. It is not a public sign-up flow. |
+| **Seed data** | Migrations create empty tables. No users are inserted automatically. |
+
+Creating a user through the API or UI does **not** create a new login account. To add real credential-based auth, wire `AuthService.Login` to validate against stored users (or an identity provider).
+
+## Front-end and API integration
+
+The Angular app was adapted from a tutorial that used a local fake backend. When pointing it at the real API, keep these mismatches in mind:
+
+| Area | Front end | API | Notes |
+|------|-----------|-----|-------|
+| Login payload | `{ username, password }` in `account.service.ts` | `{ userName, password }` in `Credentials.cs` | ASP.NET Core model binding is case-insensitive, so login usually works. Prefer `userName` for consistency with the API. |
+| User model | `username`, `firstName`, `lastName` (register form) | `loginName`, `displayName`, nested `address` | User list/editor aligns with the API; the register form does not. |
+| Fake backend | `fakeBackendProvider` in `app.module.ts` | N/A | Intercepts legacy `/users/authenticate` routes. Remove this provider when using the real API exclusively. |
+
+**Recommended steps to use the real API end-to-end:**
+
+1. Remove `fakeBackendProvider` from the `providers` array in `front-end/src/app/app.module.ts`.
+2. Log in with the [default credentials](#default-login) before using register or user management screens.
+3. Align register/create payloads with the [user model](#user-model) (`loginName`, `displayName`, `address`, etc.).
 
 ## API reference
 
@@ -372,6 +404,25 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 - **JWT configuration**: Tokens are signed with the `JwtSecret` value from `appsettings.json`. Issuer and audience validation are disabled for simplicity in this sample.
 - **Repository pattern**: Data access goes through `IUnitOfWork` and repository interfaces in `UserManagement.Domain`, with EF Core implementations in `UserManagement.DataAccess.EFCore`.
 
+## Testing
+
+The repository exposes test-related npm scripts but does not include automated tests yet.
+
+| Command | Location | Status |
+|---------|----------|--------|
+| `npm test` | `front-end/` | Karma/Jasmine configured; no `*.spec.ts` files present |
+| `npm run lint` | `front-end/` | TSLint available |
+| `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
+| `dotnet test` | N/A | No .NET test projects in the solution |
+
+**Smoke testing:** Use `./scripts/verify-stack.sh` or the [Verify the stack](#verify-the-stack) checklist after starting Docker, the API, and the front end.
+
+**Good first tests to add:**
+
+- `AuthService.Login` returns a token for valid credentials and `null` otherwise
+- `UsersController` CRUD with an in-memory database or test container
+- Angular `AccountService.login` maps the API response into local storage
+
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
@@ -381,6 +432,8 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 | Port `1434` already in use | Another SQL Server instance on the host | Stop the conflicting service or change the host port in `docker-compose.yml` and update `appsettings.json` to match |
 | API returns `401` on all user endpoints | Missing or expired JWT | Log in again via `/api/v1/auth/login` and include `Authorization: Bearer <token>` |
 | Front end cannot reach the API | API not running or wrong URL | Confirm `dotnet run` is active and `environment.apiUrl` points to `http://localhost:5000` |
+| Login works in curl but not in the UI | Fake backend still enabled or stale local storage | Remove `fakeBackendProvider` from `app.module.ts` and clear browser local storage |
+| Register fails with `401` | User endpoints require a JWT | Log in first; register is not a public endpoint (see [Authentication vs user data](#authentication-vs-user-data)) |
 | `dotnet ef` command not found | EF Core CLI tool not installed | Run `dotnet tool install --global dotnet-ef` |
 
 **Reset the database completely:**
