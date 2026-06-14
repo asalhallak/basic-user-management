@@ -8,6 +8,7 @@ A full-stack sample application for managing users with authentication, built as
 - [Architecture](#architecture)
 - [Tech stack](#tech-stack)
 - [Prerequisites](#prerequisites)
+- [Configuration reference](#configuration-reference)
 - [Getting started](#getting-started)
 - [Verify the stack](#verify-the-stack)
 - [Default login](#default-login)
@@ -76,6 +77,21 @@ The solution follows a classic layered layout:
 - [Node.js 12+](https://nodejs.org/) and npm
 - [Docker](https://www.docker.com/) (for the database)
 - [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) global tool (for migrations)
+
+## Configuration reference
+
+These values must stay aligned across Docker, the API, and the front end when running locally.
+
+| Setting | Location | Value (default) | Notes |
+|---------|----------|-----------------|-------|
+| SQL host port | `docker-compose.yml` | `1434:1433` | Host port `1434` maps to container `1433` |
+| SA password | `docker-compose.yml` → `SA_PASSWORD` | See compose file | Must match the API connection string password |
+| Connection string | `UserManagementAPI/UserManagement.API/appsettings.json` | `Server=127.0.0.1,1434;Database=UserManagement;...` | Update host port and password together with Docker |
+| JWT signing secret | `appsettings.json` → `JwtSecret` | Development-only value | Replace before any real deployment |
+| JWT lifetime | `UserManagementAPI/UserManagement.API/Helpers/JwtHelper.cs` | 7 days | Tokens expire; log in again when requests return `401` |
+| API base URL | `front-end/src/environments/environment.ts` | `http://localhost:5000` | Production URL is in `environment.prod.ts` |
+
+To point the front end at a different API host, change `apiUrl` in the environment file and rebuild or restart `ng serve`.
 
 ## Getting started
 
@@ -151,6 +167,12 @@ After starting all services, confirm each layer is reachable:
 | API | `curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/api/v1/users` | `401` (unauthorized without a token) |
 | Front end | Open `http://localhost:4200` | Login page loads |
 
+Or run the helper script from the repository root (requires Docker and a running API):
+
+```bash
+./scripts/verify-stack.sh
+```
+
 A `401` from the users endpoint without a token means the API is up and JWT protection is working.
 
 ## Default login
@@ -203,6 +225,16 @@ All user endpoints require a valid `Authorization: Bearer <token>` header.
 | `POST` | `/users` | Create a user |
 | `PUT` | `/users/{id}` | Update a user |
 | `DELETE` | `/users/{id}` | Delete a user |
+
+### HTTP status codes
+
+| Status | When |
+|--------|------|
+| `200 OK` | Successful login, read, create, update, or delete |
+| `401 Unauthorized` | Missing/invalid JWT on a protected route, or invalid login credentials |
+| `404 Not Found` | Requested user ID does not exist (when the service throws for a missing record) |
+
+Protected routes always require `Authorization: Bearer <token>`. Re-authenticate when a token expires (see [Configuration reference](#configuration-reference)).
 
 ### User model
 
@@ -319,6 +351,8 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ```
 .
 ├── docker-compose.yml          # SQL Server container
+├── scripts/
+│   └── verify-stack.sh         # Smoke-check database + API locally
 ├── front-end/                  # Angular SPA
 │   └── src/app/
 │       ├── auth/               # Login & register
