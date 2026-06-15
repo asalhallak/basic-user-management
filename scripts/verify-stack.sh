@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Quick smoke check for local development: database container + API JWT guard.
+# Quick smoke check for local development: database container, API JWT guard, and front end.
+# Override defaults with API_URL and FRONTEND_URL when services run on non-standard ports.
 set -euo pipefail
 
 API_URL="${API_URL:-http://localhost:5000}"
+FRONTEND_URL="${FRONTEND_URL:-http://localhost:4200}"
 USERS_ENDPOINT="${API_URL}/api/v1/users"
 
 echo "==> Database (docker compose)"
@@ -25,6 +27,21 @@ elif [[ "${http_code}" == "000" ]]; then
   exit 1
 else
   echo "WARN: Expected 401, got ${http_code}"
+  exit 1
+fi
+
+echo ""
+echo "==> Front end (${FRONTEND_URL})"
+frontend_code="$(curl -s -o /dev/null -w "%{http_code}" "${FRONTEND_URL}" || true)"
+
+if [[ "${frontend_code}" == "200" ]]; then
+  echo "OK: Front end returned 200"
+elif [[ "${frontend_code}" == "000" ]]; then
+  echo "FAIL: Could not reach the front end at ${FRONTEND_URL}"
+  echo "Start it with: cd front-end && npm start"
+  exit 1
+else
+  echo "WARN: Expected 200, got ${frontend_code}"
   exit 1
 fi
 
