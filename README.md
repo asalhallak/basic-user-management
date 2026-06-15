@@ -16,6 +16,8 @@ A full-stack sample application for managing users with authentication, built as
 - [Authentication vs user data](#authentication-vs-user-data)
 - [Front-end and API integration](#front-end-and-api-integration)
 - [API reference](#api-reference)
+- [API examples (HTTP Client)](#api-examples-http-client)
+- [Database schema](#database-schema)
 - [Try it with curl](#try-it-with-curl)
 - [Project structure](#project-structure)
 - [Development notes](#development-notes)
@@ -408,6 +410,53 @@ When creating or updating a user, the nested `address` object supports:
 }
 ```
 
+## API examples (HTTP Client)
+
+For interactive testing in VS Code (REST Client extension) or JetBrains IDEs, use the ready-made request file:
+
+```
+docs/api-examples.http
+```
+
+The file logs in, captures the JWT from the response, and exercises every `/api/v1` endpoint. Start the API with `make run-api` before sending requests.
+
+## Database schema
+
+The database has two related tables created by the initial EF Core migration:
+
+```mermaid
+erDiagram
+    Users ||--o| Addresses : "has optional"
+    Users {
+        int Id PK
+        string LoginName UK
+        string DisplayName
+        datetime DateOfBirth
+        string Country
+        int AddressId FK
+        bool IsActive
+        float Salary
+        string ProfilePictureUrl
+    }
+    Addresses {
+        int Id PK
+        string City
+        string Country
+        string PostalCode
+        string State
+        string StreetName
+        string StreetNumber
+    }
+```
+
+| Constraint | Column | Notes |
+|------------|--------|-------|
+| Primary key | `Users.Id`, `Addresses.Id` | Identity columns |
+| Unique | `Users.LoginName` | Enforced at the database level |
+| Foreign key | `Users.AddressId` → `Addresses.Id` | Optional one-to-one; `ON DELETE RESTRICT` |
+
+Migrations live in `UserManagementAPI/UserManagement.DataAccess.EFCore/Migrations/`. Apply them with `make migrate` or the steps in [Getting started](#getting-started).
+
 ## Try it with curl
 
 These examples assume the API is running on `http://localhost:5000`.
@@ -488,6 +537,8 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 .
 ├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
+├── docs/
+│   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
 │   ├── get-token.sh            # Fetch a JWT from the local API
