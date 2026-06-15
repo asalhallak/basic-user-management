@@ -82,6 +82,12 @@ The solution follows a classic layered layout:
 - [Docker](https://www.docker.com/) (for the database)
 - [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) global tool (for migrations)
 
+Verify required tools are installed:
+
+```bash
+make check-deps
+```
+
 ## Configuration reference
 
 These values must stay aligned across Docker, the API, and the front end when running locally.
@@ -108,9 +114,11 @@ To point the front end at a different API host, change `apiUrl` in the environme
 
 ## Getting started
 
-**Quick setup** (database + migrations in one step):
+**Quick setup** (dependencies, database, and migrations):
 
 ```bash
+make check-deps
+make install
 make setup
 ```
 
@@ -185,6 +193,8 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | Target | What it does |
 |--------|----------------|
 | `make help` | List all targets |
+| `make check-deps` | Verify Docker, .NET, Node.js, and npm are on PATH |
+| `make install` | Run `npm install` and `dotnet restore` |
 | `make setup` | Start the database and apply migrations (first-time setup) |
 | `make db-up` | Start the SQL Server container |
 | `make db-down` | Stop the SQL Server container |
@@ -453,6 +463,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
 ├── scripts/
+│   ├── check-deps.sh           # Verify local prerequisites
 │   └── verify-stack.sh         # Smoke-check database + API locally
 ├── front-end/                  # Angular SPA
 │   └── src/app/

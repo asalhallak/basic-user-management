@@ -1,7 +1,14 @@
-.PHONY: help setup db-up db-down db-reset migrate build-api build-frontend build verify verify-api
+.PHONY: help check-deps install setup db-up db-down db-reset migrate build-api build-frontend build verify verify-api
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
+
+check-deps: ## Verify Docker, .NET, Node.js, and npm are installed
+	./scripts/check-deps.sh
+
+install: ## Install npm packages and restore .NET dependencies
+	cd front-end && npm install
+	cd UserManagementAPI && dotnet restore
 
 setup: db-up migrate ## Start the database and apply migrations (first-time setup)
 
