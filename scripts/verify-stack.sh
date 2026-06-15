@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-# Quick smoke check for local development: database container, API JWT guard, and front end.
-# Override defaults with API_URL and FRONTEND_URL when services run on non-standard ports.
+# Quick smoke check for local development: database container, API JWT guard, auth login, and front end.
+# Override defaults with API_URL, FRONTEND_URL, AUTH_USER, and AUTH_PASSWORD when needed.
 set -euo pipefail
 
 API_URL="${API_URL:-http://localhost:5000}"
 FRONTEND_URL="${FRONTEND_URL:-http://localhost:4200}"
+AUTH_USER="${AUTH_USER:-admin}"
+AUTH_PASSWORD="${AUTH_PASSWORD:-123456789}"
 USERS_ENDPOINT="${API_URL}/api/v1/users"
+LOGIN_ENDPOINT="${API_URL}/api/v1/auth/login"
 
 echo "==> Database (docker compose)"
 if ! docker compose ps --status running 2>/dev/null | grep -q 'db'; then
@@ -27,6 +30,26 @@ elif [[ "${http_code}" == "000" ]]; then
   exit 1
 else
   echo "WARN: Expected 401, got ${http_code}"
+  exit 1
+fi
+
+echo ""
+echo "==> Auth login (${LOGIN_ENDPOINT})"
+login_body="$(printf '{"userName":"%s","password":"%s"}' "${AUTH_USER}" "${AUTH_PASSWORD}")"
+login_response="$(curl -s -w $'\n%{http_code}' -X POST "${LOGIN_ENDPOINT}" \
+  -H "Content-Type: application/json" \
+  -d "${login_body}" || true)"
+login_http_code="${login_response##*$'\n'}"
+login_payload="${login_response%$'\n'*}"
+
+if [[ "${login_http_code}" == "200" ]] && echo "${login_payload}" | grep -q '"token"'; then
+  echo "OK: Login returned 200 with a JWT"
+elif [[ "${login_http_code}" == "000" ]]; then
+  echo "FAIL: Could not reach the login endpoint at ${LOGIN_ENDPOINT}"
+  exit 1
+else
+  echo "FAIL: Expected 200 with a token, got HTTP ${login_http_code}"
+  echo "Response: ${login_payload}"
   exit 1
 fi
 
