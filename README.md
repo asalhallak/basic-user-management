@@ -187,13 +187,27 @@ Or run the helper script from the repository root (requires Docker, a running AP
 ./scripts/verify-stack.sh
 ```
 
-The script checks the database container, confirms the API returns `401` without a token, logs in with the [default credentials](#default-login), verifies `GET /api/v1/users` succeeds with the returned JWT, and confirms the front end responds on port `4200`. Override defaults when needed:
+The script checks the database container, confirms the API returns `401` without a token, logs in with the [default credentials](#default-login), verifies `GET /api/v1/users` succeeds with the returned JWT, and confirms the front end responds on port `4200`.
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `API_URL` | `http://localhost:5000` | Base URL for auth and users endpoints |
+| `FRONTEND_URL` | `http://localhost:4200` | Angular dev server to smoke-check |
+| `AUTH_USER` | `admin` | Login username for the auth check |
+| `AUTH_PASSWORD` | `123456789` | Login password for the auth check |
+| `SKIP_FRONTEND` | `0` | Set to `1` to skip the front-end check (API-only workflow) |
+
+Override defaults when needed:
 
 ```bash
 API_URL=http://localhost:5000 FRONTEND_URL=http://localhost:4200 ./scripts/verify-stack.sh
 ```
 
-Use `AUTH_USER` and `AUTH_PASSWORD` if you change the hardcoded login in `AuthService`.
+API-only check (database + JWT + login + authenticated users, no Angular dev server):
+
+```bash
+SKIP_FRONTEND=1 ./scripts/verify-stack.sh
+```
 
 A `401` from the users endpoint without a token means the API is up and JWT protection is working.
 

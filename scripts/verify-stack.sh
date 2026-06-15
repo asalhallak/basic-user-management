@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Quick smoke check for local development: database container, API JWT guard, auth login, authenticated users, and front end.
-# Override defaults with API_URL, FRONTEND_URL, AUTH_USER, and AUTH_PASSWORD when needed.
+# Override defaults with API_URL, FRONTEND_URL, AUTH_USER, AUTH_PASSWORD, and SKIP_FRONTEND when needed.
 set -euo pipefail
 
 API_URL="${API_URL:-http://localhost:5000}"
@@ -69,19 +69,24 @@ else
   exit 1
 fi
 
-echo ""
-echo "==> Front end (${FRONTEND_URL})"
-frontend_code="$(curl -s -o /dev/null -w "%{http_code}" "${FRONTEND_URL}" || true)"
-
-if [[ "${frontend_code}" == "200" ]]; then
-  echo "OK: Front end returned 200"
-elif [[ "${frontend_code}" == "000" ]]; then
-  echo "FAIL: Could not reach the front end at ${FRONTEND_URL}"
-  echo "Start it with: cd front-end && npm start"
-  exit 1
+if [[ "${SKIP_FRONTEND:-0}" == "1" ]]; then
+  echo ""
+  echo "==> Front end (skipped; SKIP_FRONTEND=1)"
 else
-  echo "WARN: Expected 200, got ${frontend_code}"
-  exit 1
+  echo ""
+  echo "==> Front end (${FRONTEND_URL})"
+  frontend_code="$(curl -s -o /dev/null -w "%{http_code}" "${FRONTEND_URL}" || true)"
+
+  if [[ "${frontend_code}" == "200" ]]; then
+    echo "OK: Front end returned 200"
+  elif [[ "${frontend_code}" == "000" ]]; then
+    echo "FAIL: Could not reach the front end at ${FRONTEND_URL}"
+    echo "Start it with: cd front-end && npm start"
+    exit 1
+  else
+    echo "WARN: Expected 200, got ${frontend_code}"
+    exit 1
+  fi
 fi
 
 echo ""
