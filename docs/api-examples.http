@@ -1,0 +1,69 @@
+# API examples for local development
+# Use with the VS Code REST Client extension or JetBrains HTTP Client.
+# Start the API first: make run-api
+# Default credentials: admin / 123456789
+
+@baseUrl = http://localhost:5000/api/v1
+@userName = admin
+@password = 123456789
+
+### Log in (no auth required)
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "userName": "{{userName}}",
+  "password": "{{password}}"
+}
+
+### Capture JWT from login response
+@token = {{login.response.body.token}}
+
+### List users (requires JWT)
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+### Get one user by ID (replace 1 with a real ID)
+GET {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+
+### Create a user
+POST {{baseUrl}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "loginName": "jdoe",
+  "displayName": "Jane Doe",
+  "dateOfBirth": "1990-05-15T00:00:00",
+  "country": "US",
+  "isActive": true,
+  "salary": 75000,
+  "profilePictureUrl": "https://example.com/avatar.png",
+  "address": {
+    "city": "Seattle",
+    "country": "US",
+    "postalCode": "98101",
+    "state": "WA",
+    "streetName": "Main St",
+    "streetNumber": "100"
+  }
+}
+
+### Update a user (replace 1 with a real ID)
+PUT {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "displayName": "Jane Smith",
+  "isActive": true
+}
+
+### Delete a user (replace 1 with a real ID)
+DELETE {{baseUrl}}/users/1
+Authorization: Bearer {{token}}
+
+### Users endpoint without a token (expect 401)
+GET {{baseUrl}}/users
