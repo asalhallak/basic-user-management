@@ -122,7 +122,14 @@ make install
 make setup
 ```
 
-Then run the API and front end in separate terminals (steps 3–4 below).
+Then run the API and front end in separate terminals:
+
+```bash
+make run-api       # terminal 1
+make run-frontend  # terminal 2
+```
+
+Or follow steps 3–4 below manually.
 
 ### 1. Start the database
 
@@ -200,6 +207,8 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make db-down` | Stop the SQL Server container |
 | `make db-reset` | Wipe the database volume and re-apply migrations |
 | `make migrate` | Apply EF Core migrations (retries until SQL Server is ready) |
+| `make run-api` | Run the API with `dotnet run` (listens on `http://localhost:5000`) |
+| `make run-frontend` | Run the Angular dev server with `npm start` (listens on `http://localhost:4200`) |
 | `make build-api` | Build the .NET solution |
 | `make build-frontend` | Production build of the Angular app |
 | `make build` | Build API and front end |
@@ -210,8 +219,9 @@ Example local workflow:
 
 ```bash
 make setup
-# In separate terminals: dotnet run (API) and npm start (front end)
-make verify
+make run-api       # terminal 1
+make run-frontend  # terminal 2
+make verify        # terminal 3 (after API and front end are up)
 ```
 
 ## Verify the stack

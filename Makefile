@@ -1,4 +1,4 @@
-.PHONY: help check-deps install setup db-up db-down db-reset migrate build-api build-frontend build verify verify-api
+.PHONY: help check-deps install setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build verify verify-api
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -21,6 +21,12 @@ db-down: ## Stop the SQL Server container
 db-reset: ## Wipe the database volume and re-apply migrations
 	docker compose down -v
 	$(MAKE) setup
+
+run-api: ## Run the ASP.NET Core API (blocks; http://localhost:5000)
+	cd UserManagementAPI/UserManagement.API && dotnet run
+
+run-frontend: ## Run the Angular dev server (blocks; http://localhost:4200)
+	cd front-end && npm start
 
 migrate: ## Apply EF Core migrations to the local database
 	@echo "Waiting for SQL Server to accept connections..."
