@@ -94,6 +94,15 @@ These values must stay aligned across Docker, the API, and the front end when ru
 | JWT lifetime | `UserManagementAPI/UserManagement.API/Helpers/JwtHelper.cs` | 7 days | Tokens expire; log in again when requests return `401` |
 | API base URL | `front-end/src/environments/environment.ts` | `http://localhost:5000` | Production URL is in `environment.prod.ts` |
 
+### Ports at a glance
+
+| Service | URL or port | Used for |
+|---------|-------------|----------|
+| SQL Server (host) | `127.0.0.1:1434` | Database connections from the API |
+| API (HTTP) | `http://localhost:5000` | REST endpoints and Angular `apiUrl` |
+| API (HTTPS) | `https://localhost:5001` | Optional TLS profile in `launchSettings.json` |
+| Angular dev server | `http://localhost:4200` | Browser UI during `npm start` |
+
 To point the front end at a different API host, change `apiUrl` in the environment file and rebuild or restart `ng serve`.
 
 ## Getting started
@@ -168,6 +177,7 @@ After starting all services, confirm each layer is reachable:
 |-------|-------------------|-----------------|
 | Database | `docker compose ps` | `db` container is running |
 | API | `curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/api/v1/users` | `401` (unauthorized without a token) |
+| Auth | `POST /api/v1/auth/login` with default credentials | `200` with a JWT in the response body |
 | Front end | Open `http://localhost:4200` or run `./scripts/verify-stack.sh` | Login page loads (`200` from dev server) |
 
 Or run the helper script from the repository root (requires Docker, a running API, and the Angular dev server):
@@ -176,11 +186,13 @@ Or run the helper script from the repository root (requires Docker, a running AP
 ./scripts/verify-stack.sh
 ```
 
-The script checks the database container, confirms the API returns `401` without a token, and verifies the front end responds on port `4200`. Override defaults when needed:
+The script checks the database container, confirms the API returns `401` without a token, logs in with the [default credentials](#default-login), and verifies the front end responds on port `4200`. Override defaults when needed:
 
 ```bash
 API_URL=http://localhost:5000 FRONTEND_URL=http://localhost:4200 ./scripts/verify-stack.sh
 ```
+
+Use `AUTH_USER` and `AUTH_PASSWORD` if you change the hardcoded login in `AuthService`.
 
 A `401` from the users endpoint without a token means the API is up and JWT protection is working.
 
