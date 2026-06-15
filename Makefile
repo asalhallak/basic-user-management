@@ -1,4 +1,4 @@
-.PHONY: help check-deps install setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build verify verify-api
+.PHONY: help check-deps install setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build verify verify-api token
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -54,3 +54,6 @@ verify: ## Run full stack smoke checks (database, API, front end)
 
 verify-api: ## Run API-only smoke checks (set SKIP_FRONTEND=1)
 	SKIP_FRONTEND=1 ./scripts/verify-stack.sh
+
+token: ## Print a JWT from the local API (for curl or manual testing)
+	./scripts/get-token.sh

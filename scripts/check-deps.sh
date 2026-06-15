@@ -26,6 +26,7 @@ require "Docker" docker "docker --version"
 require ".NET SDK" dotnet "dotnet --version"
 require "Node.js" node "node --version"
 require "npm" npm "npm --version"
+require "curl" curl "curl --version"
 
 echo ""
 echo "==> Optional tools"
