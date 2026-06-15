@@ -108,6 +108,14 @@ To point the front end at a different API host, change `apiUrl` in the environme
 
 ## Getting started
 
+**Quick setup** (database + migrations in one step):
+
+```bash
+make setup
+```
+
+Then run the API and front end in separate terminals (steps 3–4 below).
+
 ### 1. Start the database
 
 From the repository root:
@@ -177,9 +185,11 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | Target | What it does |
 |--------|----------------|
 | `make help` | List all targets |
+| `make setup` | Start the database and apply migrations (first-time setup) |
 | `make db-up` | Start the SQL Server container |
 | `make db-down` | Stop the SQL Server container |
-| `make migrate` | Apply EF Core migrations |
+| `make db-reset` | Wipe the database volume and re-apply migrations |
+| `make migrate` | Apply EF Core migrations (retries until SQL Server is ready) |
 | `make build-api` | Build the .NET solution |
 | `make build-frontend` | Production build of the Angular app |
 | `make build` | Build API and front end |
@@ -189,8 +199,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 Example local workflow:
 
 ```bash
-make db-up
-make migrate
+make setup
 # In separate terminals: dotnet run (API) and npm start (front end)
 make verify
 ```
@@ -497,6 +506,12 @@ The repository exposes test-related npm scripts but does not include automated t
 | `dotnet ef` command not found | EF Core CLI tool not installed | Run `dotnet tool install --global dotnet-ef` |
 
 **Reset the database completely:**
+
+```bash
+make db-reset
+```
+
+Or manually:
 
 ```bash
 docker compose down -v
