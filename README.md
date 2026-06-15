@@ -10,6 +10,7 @@ A full-stack sample application for managing users with authentication, built as
 - [Prerequisites](#prerequisites)
 - [Configuration reference](#configuration-reference)
 - [Getting started](#getting-started)
+- [Makefile shortcuts](#makefile-shortcuts)
 - [Verify the stack](#verify-the-stack)
 - [Default login](#default-login)
 - [Authentication vs user data](#authentication-vs-user-data)
@@ -168,6 +169,31 @@ docker compose down
 ```
 
 To remove persisted data as well, add `-v` to delete the Docker volume.
+
+## Makefile shortcuts
+
+The repository root includes a `Makefile` that wraps the commands above for day-to-day development:
+
+| Target | What it does |
+|--------|----------------|
+| `make help` | List all targets |
+| `make db-up` | Start the SQL Server container |
+| `make db-down` | Stop the SQL Server container |
+| `make migrate` | Apply EF Core migrations |
+| `make build-api` | Build the .NET solution |
+| `make build-frontend` | Production build of the Angular app |
+| `make build` | Build API and front end |
+| `make verify` | Run `./scripts/verify-stack.sh` (full stack) |
+| `make verify-api` | Run verify-stack with `SKIP_FRONTEND=1` (API only) |
+
+Example local workflow:
+
+```bash
+make db-up
+make migrate
+# In separate terminals: dotnet run (API) and npm start (front end)
+make verify
+```
 
 ## Verify the stack
 
@@ -415,6 +441,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ```
 .
+├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
 ├── scripts/
 │   └── verify-stack.sh         # Smoke-check database + API locally
