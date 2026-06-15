@@ -178,6 +178,7 @@ After starting all services, confirm each layer is reachable:
 | Database | `docker compose ps` | `db` container is running |
 | API | `curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/api/v1/users` | `401` (unauthorized without a token) |
 | Auth | `POST /api/v1/auth/login` with default credentials | `200` with a JWT in the response body |
+| Authenticated API | `GET /api/v1/users` with the JWT from login | `200` with a JSON array (may be empty) |
 | Front end | Open `http://localhost:4200` or run `./scripts/verify-stack.sh` | Login page loads (`200` from dev server) |
 
 Or run the helper script from the repository root (requires Docker, a running API, and the Angular dev server):
@@ -186,7 +187,7 @@ Or run the helper script from the repository root (requires Docker, a running AP
 ./scripts/verify-stack.sh
 ```
 
-The script checks the database container, confirms the API returns `401` without a token, logs in with the [default credentials](#default-login), and verifies the front end responds on port `4200`. Override defaults when needed:
+The script checks the database container, confirms the API returns `401` without a token, logs in with the [default credentials](#default-login), verifies `GET /api/v1/users` succeeds with the returned JWT, and confirms the front end responds on port `4200`. Override defaults when needed:
 
 ```bash
 API_URL=http://localhost:5000 FRONTEND_URL=http://localhost:4200 ./scripts/verify-stack.sh
