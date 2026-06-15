@@ -80,6 +80,7 @@ The solution follows a classic layered layout:
 - [.NET SDK 3.1+](https://dotnet.microsoft.com/download)
 - [Node.js 12+](https://nodejs.org/) and npm
 - [Docker](https://www.docker.com/) (for the database)
+- [curl](https://curl.se/) (for smoke checks and API examples)
 - [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) global tool (for migrations)
 
 Verify required tools are installed:
@@ -214,6 +215,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make build` | Build API and front end |
 | `make verify` | Run `./scripts/verify-stack.sh` (full stack) |
 | `make verify-api` | Run verify-stack with `SKIP_FRONTEND=1` (API only) |
+| `make token` | Print a JWT from the running API (for curl or manual testing) |
 
 Example local workflow:
 
@@ -413,11 +415,25 @@ These examples assume the API is running on `http://localhost:5000`.
 **1. Log in and capture the token:**
 
 ```bash
+TOKEN=$(./scripts/get-token.sh)
+```
+
+Or with `make`:
+
+```bash
+TOKEN=$(make token)
+```
+
+Manual alternative (no helper script):
+
+```bash
 TOKEN=$(curl -s -X POST http://localhost:5000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"userName":"admin","password":"123456789"}' \
   | grep -o '"token":"[^"]*"' | cut -d'"' -f4)
 ```
+
+Override login defaults with `API_URL`, `AUTH_USER`, and `AUTH_PASSWORD` (same as [verify-stack](#verify-the-stack)).
 
 **2. List users:**
 
@@ -474,6 +490,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── docker-compose.yml          # SQL Server container
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
+│   ├── get-token.sh            # Fetch a JWT from the local API
 │   └── verify-stack.sh         # Smoke-check database + API locally
 ├── front-end/                  # Angular SPA
 │   └── src/app/
