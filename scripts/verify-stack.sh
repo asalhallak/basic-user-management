@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Quick smoke check for local development: database container, API JWT guard, auth login, and front end.
+# Quick smoke check for local development: database container, API JWT guard, auth login, authenticated users, and front end.
 # Override defaults with API_URL, FRONTEND_URL, AUTH_USER, and AUTH_PASSWORD when needed.
 set -euo pipefail
 
@@ -44,12 +44,28 @@ login_payload="${login_response%$'\n'*}"
 
 if [[ "${login_http_code}" == "200" ]] && echo "${login_payload}" | grep -q '"token"'; then
   echo "OK: Login returned 200 with a JWT"
+  token="$(echo "${login_payload}" | grep -o '"token":"[^"]*"' | cut -d'"' -f4)"
 elif [[ "${login_http_code}" == "000" ]]; then
   echo "FAIL: Could not reach the login endpoint at ${LOGIN_ENDPOINT}"
   exit 1
 else
   echo "FAIL: Expected 200 with a token, got HTTP ${login_http_code}"
   echo "Response: ${login_payload}"
+  exit 1
+fi
+
+echo ""
+echo "==> Authenticated users (${USERS_ENDPOINT})"
+auth_code="$(curl -s -o /dev/null -w "%{http_code}" "${USERS_ENDPOINT}" \
+  -H "Authorization: Bearer ${token}" || true)"
+
+if [[ "${auth_code}" == "200" ]]; then
+  echo "OK: GET /users returned 200 with a valid JWT"
+elif [[ "${auth_code}" == "000" ]]; then
+  echo "FAIL: Could not reach the users endpoint at ${USERS_ENDPOINT}"
+  exit 1
+else
+  echo "FAIL: Expected 200 with a valid token, got HTTP ${auth_code}"
   exit 1
 fi
 
