@@ -221,6 +221,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make build-frontend` | Production build of the Angular app |
 | `make build` | Build API and front end |
 | `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
+| `make clean` | Remove .NET `bin`/`obj` folders and the Angular `dist` output |
 | `make verify` | Run `./scripts/verify-stack.sh` (full stack) |
 | `make verify-api` | Run verify-stack with `SKIP_FRONTEND=1` (API only) |
 | `make token` | Print a JWT from the running API (for curl or manual testing) |
@@ -542,6 +543,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ```
 .
 ├── .editorconfig                 # Shared editor formatting defaults
+├── .gitattributes                # Line-ending normalization (LF; complements editorconfig)
 ├── .github/
 │   ├── pull_request_template.md  # Default PR description checklist
 │   └── workflows/

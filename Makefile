@@ -1,4 +1,4 @@
-.PHONY: help check-deps install install-ef setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build ci verify verify-api token
+.PHONY: help check-deps install install-ef setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build ci clean verify verify-api token
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -60,6 +60,10 @@ build: build-api build-frontend ## Build API and front end
 ci: ## Run the same build steps as GitHub Actions CI (no database required)
 	cd UserManagementAPI && dotnet restore && dotnet build --no-restore
 	cd front-end && npm ci && npm run build
+
+clean: ## Remove build artifacts (dotnet bin/obj and front-end dist)
+	cd UserManagementAPI && dotnet clean
+	rm -rf front-end/dist
 
 verify: ## Run full stack smoke checks (database, API, front end)
 	./scripts/verify-stack.sh
