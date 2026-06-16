@@ -24,6 +24,7 @@ A full-stack sample application for managing users with authentication, built as
 - [Testing](#testing)
 - [Continuous integration](#continuous-integration)
 - [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
 - [License](#license)
 
 ## What it does
@@ -540,6 +541,10 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── .github/
 │   └── workflows/
 │       └── ci.yml              # Build verification on push/PR
+├── .vscode/
+│   ├── extensions.json         # Recommended editor extensions
+│   └── settings.json           # REST Client defaults for api-examples.http
+├── CONTRIBUTING.md             # Contributor workflow and PR expectations
 ├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
 ├── docs/
@@ -625,6 +630,12 @@ docker compose up -d
 cd UserManagementAPI/UserManagement.DataAccess.EFCore
 dotnet ef database update --startup-project ../UserManagement.API
 ```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the local development workflow, verification commands, and pull request expectations.
+
+Recommended VS Code extensions (REST Client, C#, Angular) are listed in [`.vscode/extensions.json`](.vscode/extensions.json).
 
 ## License
 

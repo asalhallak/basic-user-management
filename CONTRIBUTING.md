@@ -1,0 +1,74 @@
+# Contributing
+
+Thank you for improving this sample project. The goal is to keep changes small, well documented, and easy to review.
+
+## Before you start
+
+1. Read the [README](README.md) for architecture, prerequisites, and local setup.
+2. Verify your machine has the required tools:
+
+   ```bash
+   make check-deps
+   ```
+
+3. Install dependencies and prepare the database:
+
+   ```bash
+   make install
+   make setup
+   ```
+
+## Local development workflow
+
+Run the API and front end in separate terminals:
+
+```bash
+make run-api       # terminal 1 — http://localhost:5000
+make run-frontend  # terminal 2 — http://localhost:4200
+```
+
+Smoke-test the stack when both are running:
+
+```bash
+make verify
+```
+
+For API-only checks (no Angular dev server):
+
+```bash
+make verify-api
+```
+
+### API testing
+
+- **REST Client:** Open [`docs/api-examples.http`](docs/api-examples.http) in VS Code or a JetBrains IDE. The [recommended extensions](.vscode/extensions.json) include REST Client.
+- **curl:** Use [`scripts/get-token.sh`](scripts/get-token.sh) or `make token`, then follow the examples in [README — Try it with curl](README.md#try-it-with-curl).
+
+### Builds
+
+```bash
+make build          # API + front end
+make build-api      # .NET solution only
+make build-frontend # Angular production build
+```
+
+CI runs the same build steps on every push and pull request to `main` (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+
+## Making changes
+
+- **Scope:** Prefer focused changes. Documentation and small tooling improvements are welcome.
+- **Conventions:** Match existing naming, layout, and Makefile patterns in the repository.
+- **Secrets:** Do not commit real credentials. `appsettings.json` and `docker-compose.yml` use development-only values.
+- **Database:** After schema changes, add an EF Core migration under `UserManagementAPI/UserManagement.DataAccess.EFCore/Migrations/` and document any new setup steps in the README.
+
+## Pull requests
+
+1. Branch from `main` with a descriptive name (for example `docs/add-troubleshooting-note`).
+2. Run `make build` (and `make verify` when your change affects runtime behavior).
+3. Open a pull request against `main` with a short summary of what changed and why.
+4. Link related issues when applicable.
+
+## Getting help
+
+- **Troubleshooting:** See [README — Troubleshooting](README.md#troubleshooting).
+- **Configuration:** See [README — Configuration reference](README.md#configuration-reference).

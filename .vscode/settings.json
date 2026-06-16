@@ -1,0 +1,12 @@
+{
+  "rest-client.environmentVariables": {
+    "$shared": {
+      "baseUrl": "http://localhost:5000/api/v1"
+    }
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/bin": true,
+    "**/obj": true
+  }
+}
