@@ -12,7 +12,7 @@
 ## Checklist
 
 - [ ] Branch is based on `main`
-- [ ] `make build` passes (run `make verify` when runtime behavior changed)
+- [ ] `make ci` passes (or `make build`; run `make verify` when runtime behavior changed)
 - [ ] README or CONTRIBUTING updated when setup, scripts, or workflow changed
 - [ ] No real secrets or credentials committed
 

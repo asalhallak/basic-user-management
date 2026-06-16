@@ -218,6 +218,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make build-api` | Build the .NET solution |
 | `make build-frontend` | Production build of the Angular app |
 | `make build` | Build API and front end |
+| `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
 | `make verify` | Run `./scripts/verify-stack.sh` (full stack) |
 | `make verify-api` | Run verify-stack with `SKIP_FRONTEND=1` (API only) |
 | `make token` | Print a JWT from the running API (for curl or manual testing) |
@@ -602,6 +603,14 @@ GitHub Actions runs on every push and pull request to `main`:
 | `build` | `dotnet build` for the API solution and `npm run build` for the Angular app |
 
 Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The front-end job uses Node.js 16 to stay compatible with Angular 11 (newer Node versions may require `NODE_OPTIONS=--openssl-legacy-provider` for local builds).
+
+Run the same steps locally before opening a pull request:
+
+```bash
+make ci
+```
+
+This restores and builds the API, then runs `npm ci` and a production front-end build—matching CI without starting Docker or the dev servers.
 
 ## Troubleshooting
 
