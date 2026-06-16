@@ -27,6 +27,7 @@ A full-stack sample application for managing users with authentication, built as
 - [Continuous integration](#continuous-integration)
 - [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
+- [Security](#security)
 - [License](#license)
 
 ## What it does
@@ -552,6 +553,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── extensions.json         # Recommended editor extensions
 │   └── settings.json           # REST Client defaults for api-examples.http
 ├── CONTRIBUTING.md             # Contributor workflow and PR expectations
+├── SECURITY.md                 # Security policy and known sample-app limitations
 ├── LICENSE                     # MIT license
 ├── .nvmrc                      # Recommended Node.js version (16, matches CI)
 ├── Makefile                    # Common dev commands (make help)
@@ -653,6 +655,12 @@ dotnet ef database update --startup-project ../UserManagement.API
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the local development workflow, verification commands, and pull request expectations.
 
 Recommended VS Code extensions (REST Client, C#, Angular) are listed in [`.vscode/extensions.json`](.vscode/extensions.json).
+
+## Security
+
+This project uses hardcoded development credentials and a sample JWT secret. It is intended for local learning only.
+
+See [SECURITY.md](SECURITY.md) for the vulnerability reporting process, known limitations, and guidance before deploying beyond `localhost`.
 
 ## License
 
