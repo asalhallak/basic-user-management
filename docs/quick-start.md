@@ -56,6 +56,7 @@ make verify-api      # API only (SKIP_FRONTEND=1)
 | `make build` | Build API and front end |
 | `make ci` | Same build steps as GitHub Actions |
 | `make db-down` | Stop the SQL Server container |
+| `make db-logs` | Follow SQL Server container logs |
 | `make db-reset` | Wipe data and re-apply migrations |
 
 ## Test the API

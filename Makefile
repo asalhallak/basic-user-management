@@ -1,4 +1,4 @@
-.PHONY: help check-deps install install-ef setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build ci clean verify verify-api token
+.PHONY: help check-deps install install-ef setup db-up db-down db-logs db-reset migrate run-api run-frontend build-api build-frontend build ci clean verify verify-api token
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -25,6 +25,9 @@ db-up: ## Start the SQL Server container (docker compose up -d)
 
 db-down: ## Stop the SQL Server container
 	docker compose down
+
+db-logs: ## Follow SQL Server container logs (useful when migrations fail)
+	docker compose logs -f db
 
 db-reset: ## Wipe the database volume and re-apply migrations
 	docker compose down -v
