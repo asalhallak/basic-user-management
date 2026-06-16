@@ -41,6 +41,7 @@ make verify-api
 
 ### API testing
 
+- **Documentation index:** See [`docs/README.md`](docs/README.md) for script usage, environment variables, and related assets.
 - **REST Client:** Open [`docs/api-examples.http`](docs/api-examples.http) in VS Code or a JetBrains IDE. The [recommended extensions](.vscode/extensions.json) include REST Client.
 - **curl:** Use [`scripts/get-token.sh`](scripts/get-token.sh) or `make token`, then follow the examples in [README — Try it with curl](README.md#try-it-with-curl).
 

@@ -2,6 +2,24 @@
 # Verify local prerequisites listed in README.md before starting development.
 set -euo pipefail
 
+usage() {
+  cat <<'EOF'
+Usage: check-deps.sh [--help]
+
+Verify that Docker, .NET SDK, Node.js, npm, and curl are available on PATH.
+Also reports whether the optional dotnet-ef global tool is installed.
+
+Exit code 0 when all required tools are present; 1 otherwise.
+
+See README.md#prerequisites and docs/README.md for setup guidance.
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
 fail=0
 
 require() {
