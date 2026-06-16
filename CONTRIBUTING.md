@@ -50,9 +50,10 @@ make verify-api
 make build          # API + front end
 make build-api      # .NET solution only
 make build-frontend # Angular production build
+make ci             # Same steps as GitHub Actions (restore + npm ci + production build)
 ```
 
-CI runs the same build steps on every push and pull request to `main` (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+CI runs `make ci` on every push and pull request to `main` (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 
 ## Making changes
 
