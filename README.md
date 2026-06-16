@@ -215,6 +215,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make setup` | Start the database and apply migrations (first-time setup) |
 | `make db-up` | Start the SQL Server container |
 | `make db-down` | Stop the SQL Server container |
+| `make db-logs` | Follow SQL Server container logs (helpful when migrations fail) |
 | `make db-reset` | Wipe the database volume and re-apply migrations |
 | `make migrate` | Apply EF Core migrations (retries until SQL Server is ready) |
 | `make run-api` | Run the API with `dotnet run` (listens on `http://localhost:5000`) |
@@ -438,6 +439,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | Resource | Purpose |
 |----------|---------|
 | [docs/quick-start.md](docs/quick-start.md) | One-page local setup checklist |
+| [docs/code-map.md](docs/code-map.md) | Where to change endpoints, auth, schema, and UI |
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
 
@@ -574,6 +576,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── docs/
 │   ├── README.md               # Documentation index and script reference
 │   ├── quick-start.md          # One-page local setup checklist
+│   ├── code-map.md             # Where to change API, auth, schema, and UI
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
@@ -639,7 +642,7 @@ This restores and builds the API, then runs `npm ci` and a production front-end 
 
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
-| Migration fails with a connection error | SQL Server container is still starting | Wait 15–30 seconds after `docker compose up -d`, then retry `dotnet ef database update` |
+| Migration fails with a connection error | SQL Server container is still starting | Wait 15–30 seconds after `docker compose up -d`, then retry `dotnet ef database update`. Use `make db-logs` to watch startup progress |
 | `Cannot open database "UserManagement"` | Migrations not applied | Run the migration step from [Getting started](#getting-started) |
 | Port `1434` already in use | Another SQL Server instance on the host | Stop the conflicting service or change the host port in `docker-compose.yml` and update `appsettings.json` to match |
 | API returns `401` on all user endpoints | Missing or expired JWT | Log in again via `/api/v1/auth/login` and include `Authorization: Bearer <token>` |

@@ -76,3 +76,7 @@ Content-Type: application/json
 
 ### Users endpoint without a token (expect 401)
 GET {{baseUrl}}/users
+
+### Users endpoint with an invalid token (expect 401)
+GET {{baseUrl}}/users
+Authorization: Bearer invalid-token

@@ -5,13 +5,14 @@ Thank you for improving this sample project. The goal is to keep changes small, 
 ## Before you start
 
 1. Read the [README](README.md) for architecture, prerequisites, and local setup (or the shorter [docs/quick-start.md](docs/quick-start.md) checklist).
-2. Verify your machine has the required tools:
+2. Skimming [docs/code-map.md](docs/code-map.md) helps you find the right files when changing API, auth, or UI behavior.
+3. Verify your machine has the required tools:
 
    ```bash
    make check-deps
    ```
 
-3. Install dependencies and prepare the database:
+4. Install dependencies and prepare the database:
 
    ```bash
    make install
