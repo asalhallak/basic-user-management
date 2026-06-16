@@ -1,4 +1,4 @@
-.PHONY: help check-deps install setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build verify verify-api token
+.PHONY: help check-deps install install-ef setup db-up db-down db-reset migrate run-api run-frontend build-api build-frontend build verify verify-api token
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -6,9 +6,17 @@ help: ## Show available targets
 check-deps: ## Verify Docker, .NET, Node.js, and npm are installed
 	./scripts/check-deps.sh
 
-install: ## Install npm packages and restore .NET dependencies
+install: install-ef ## Install npm packages, restore .NET dependencies, and ensure dotnet-ef is available
 	cd front-end && npm install
 	cd UserManagementAPI && dotnet restore
+
+install-ef: ## Install the dotnet-ef global tool if it is not already present
+	@if dotnet tool list -g 2>/dev/null | grep -q 'dotnet-ef'; then \
+		echo "OK: dotnet-ef already installed"; \
+	else \
+		echo "Installing dotnet-ef global tool..."; \
+		dotnet tool install --global dotnet-ef; \
+	fi
 
 setup: db-up migrate ## Start the database and apply migrations (first-time setup)
 
