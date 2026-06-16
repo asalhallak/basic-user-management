@@ -1,5 +1,7 @@
 # Basic User Management
 
+[![CI](https://github.com/asalhallak/basic-user-management/actions/workflows/ci.yml/badge.svg)](https://github.com/asalhallak/basic-user-management/actions/workflows/ci.yml)
+
 A full-stack sample application for managing users with authentication, built as a learning-friendly reference for layered .NET APIs and Angular front ends.
 
 ## Table of contents
@@ -539,6 +541,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ```
 .
+├── .editorconfig                 # Shared editor formatting defaults
 ├── .github/
 │   ├── pull_request_template.md  # Default PR description checklist
 │   └── workflows/
@@ -547,6 +550,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── extensions.json         # Recommended editor extensions
 │   └── settings.json           # REST Client defaults for api-examples.http
 ├── CONTRIBUTING.md             # Contributor workflow and PR expectations
+├── LICENSE                     # MIT license
 ├── .nvmrc                      # Recommended Node.js version (16, matches CI)
 ├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
@@ -650,4 +654,4 @@ Recommended VS Code extensions (REST Client, C#, Angular) are listed in [`.vscod
 
 ## License
 
-This project is provided as-is for educational and demonstration purposes.
+This project is licensed under the [MIT License](LICENSE). It is provided as-is for educational and demonstration purposes.

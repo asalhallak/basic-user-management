@@ -59,6 +59,7 @@ CI runs `make ci` on every push and pull request to `main` (see [`.github/workfl
 
 - **Scope:** Prefer focused changes. Documentation and small tooling improvements are welcome.
 - **Conventions:** Match existing naming, layout, and Makefile patterns in the repository.
+- **Editor settings:** [`.editorconfig`](.editorconfig) defines shared indentation and line-ending defaults for C#, TypeScript, Markdown, and shell scripts. Most editors apply it automatically.
 - **Secrets:** Do not commit real credentials. `appsettings.json` and `docker-compose.yml` use development-only values.
 - **Database:** After schema changes, add an EF Core migration under `UserManagementAPI/UserManagement.DataAccess.EFCore/Migrations/` and document any new setup steps in the README.
 
