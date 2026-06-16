@@ -4,7 +4,7 @@ Thank you for improving this sample project. The goal is to keep changes small, 
 
 ## Before you start
 
-1. Read the [README](README.md) for architecture, prerequisites, and local setup.
+1. Read the [README](README.md) for architecture, prerequisites, and local setup (or the shorter [docs/quick-start.md](docs/quick-start.md) checklist).
 2. Verify your machine has the required tools:
 
    ```bash
