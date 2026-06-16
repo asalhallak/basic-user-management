@@ -437,6 +437,7 @@ Additional guides live under [`docs/`](docs/README.md):
 
 | Resource | Purpose |
 |----------|---------|
+| [docs/quick-start.md](docs/quick-start.md) | One-page local setup checklist |
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
 
@@ -572,6 +573,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── docker-compose.yml          # SQL Server container
 ├── docs/
 │   ├── README.md               # Documentation index and script reference
+│   ├── quick-start.md          # One-page local setup checklist
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
