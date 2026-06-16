@@ -22,6 +22,7 @@ A full-stack sample application for managing users with authentication, built as
 - [Project structure](#project-structure)
 - [Development notes](#development-notes)
 - [Testing](#testing)
+- [Continuous integration](#continuous-integration)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
 
@@ -204,7 +205,8 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 |--------|----------------|
 | `make help` | List all targets |
 | `make check-deps` | Verify Docker, .NET, Node.js, and npm are on PATH |
-| `make install` | Run `npm install` and `dotnet restore` |
+| `make install` | Run `npm install`, `dotnet restore`, and install `dotnet-ef` if missing |
+| `make install-ef` | Install the `dotnet-ef` global tool (required for migrations) |
 | `make setup` | Start the database and apply migrations (first-time setup) |
 | `make db-up` | Start the SQL Server container |
 | `make db-down` | Stop the SQL Server container |
@@ -535,6 +537,9 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ```
 .
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # Build verification on push/PR
 ├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
 ├── docs/
@@ -581,6 +586,16 @@ The repository exposes test-related npm scripts but does not include automated t
 - `UsersController` CRUD with an in-memory database or test container
 - Angular `AccountService.login` maps the API response into local storage
 
+## Continuous integration
+
+GitHub Actions runs on every push and pull request to `main`:
+
+| Job | What it verifies |
+|-----|------------------|
+| `build` | `dotnet build` for the API solution and `npm run build` for the Angular app |
+
+Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The front-end job uses Node.js 16 to stay compatible with Angular 11 (newer Node versions may require `NODE_OPTIONS=--openssl-legacy-provider` for local builds).
+
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
@@ -592,7 +607,8 @@ The repository exposes test-related npm scripts but does not include automated t
 | Front end cannot reach the API | API not running or wrong URL | Confirm `dotnet run` is active and `environment.apiUrl` points to `http://localhost:5000` |
 | Login works in curl but not in the UI | Fake backend still enabled or stale local storage | Remove `fakeBackendProvider` from `app.module.ts` and clear browser local storage |
 | Register fails with `401` | User endpoints require a JWT | Log in first; register is not a public endpoint (see [Authentication vs user data](#authentication-vs-user-data)) |
-| `dotnet ef` command not found | EF Core CLI tool not installed | Run `dotnet tool install --global dotnet-ef` |
+| `dotnet ef` command not found | EF Core CLI tool not installed | Run `make install-ef` or `dotnet tool install --global dotnet-ef` |
+| `npm run build` fails with OpenSSL error on Node 17+ | Angular 11 Webpack incompatibility | Use Node.js 16 (as in CI), or run `NODE_OPTIONS=--openssl-legacy-provider npm run build` |
 
 **Reset the database completely:**
 

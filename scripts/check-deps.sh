@@ -33,7 +33,7 @@ echo "==> Optional tools"
 if dotnet tool list -g 2>/dev/null | grep -q 'dotnet-ef'; then
   echo "OK: dotnet-ef global tool"
 else
-  echo "WARN: dotnet-ef not installed (run: dotnet tool install --global dotnet-ef)"
+  echo "WARN: dotnet-ef not installed (run: make install-ef)"
 fi
 
 echo ""
