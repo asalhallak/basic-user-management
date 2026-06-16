@@ -65,5 +65,14 @@ Content-Type: application/json
 DELETE {{baseUrl}}/users/1
 Authorization: Bearer {{token}}
 
+### Invalid login (expect 401)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "userName": "{{userName}}",
+  "password": "wrong-password"
+}
+
 ### Users endpoint without a token (expect 401)
 GET {{baseUrl}}/users

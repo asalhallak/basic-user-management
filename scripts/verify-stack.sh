@@ -3,6 +3,33 @@
 # Override defaults with API_URL, FRONTEND_URL, AUTH_USER, AUTH_PASSWORD, and SKIP_FRONTEND when needed.
 set -euo pipefail
 
+usage() {
+  cat <<'EOF'
+Usage: verify-stack.sh [--help]
+
+Smoke-check the local stack:
+  1. SQL Server container (docker compose)
+  2. API returns 401 without a JWT
+  3. Login returns a JWT
+  4. GET /users succeeds with the JWT
+  5. Angular dev server responds (unless skipped)
+
+Environment variables:
+  API_URL         Base API URL (default: http://localhost:5000)
+  FRONTEND_URL    Angular dev server (default: http://localhost:4200)
+  AUTH_USER       Login username (default: admin)
+  AUTH_PASSWORD   Login password (default: 123456789)
+  SKIP_FRONTEND   Set to 1 to skip the front-end check (API-only)
+
+Also available as: make verify or make verify-api (SKIP_FRONTEND=1).
+EOF
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
 API_URL="${API_URL:-http://localhost:5000}"
 FRONTEND_URL="${FRONTEND_URL:-http://localhost:4200}"
 AUTH_USER="${AUTH_USER:-admin}"

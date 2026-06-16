@@ -19,6 +19,7 @@ A full-stack sample application for managing users with authentication, built as
 - [Front-end and API integration](#front-end-and-api-integration)
 - [API reference](#api-reference)
 - [API examples (HTTP Client)](#api-examples-http-client)
+- [Documentation index](#documentation-index)
 - [Database schema](#database-schema)
 - [Try it with curl](#try-it-with-curl)
 - [Project structure](#project-structure)
@@ -428,6 +429,17 @@ docs/api-examples.http
 
 The file logs in, captures the JWT from the response, and exercises every `/api/v1` endpoint. Start the API with `make run-api` before sending requests.
 
+See [docs/README.md](docs/README.md) for a full list of documentation assets, script environment variables, and quick-start pointers.
+
+## Documentation index
+
+Additional guides live under [`docs/`](docs/README.md):
+
+| Resource | Purpose |
+|----------|---------|
+| [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
+| [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
+
 ## Database schema
 
 The database has two related tables created by the initial EF Core migration:
@@ -559,6 +571,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
 ├── docs/
+│   ├── README.md               # Documentation index and script reference
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
