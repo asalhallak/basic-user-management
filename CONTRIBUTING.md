@@ -65,7 +65,7 @@ CI runs the same build steps on every push and pull request to `main` (see [`.gi
 
 1. Branch from `main` with a descriptive name (for example `docs/add-troubleshooting-note`).
 2. Run `make build` (and `make verify` when your change affects runtime behavior).
-3. Open a pull request against `main` with a short summary of what changed and why.
+3. Open a pull request against `main`. GitHub pre-fills [`.github/pull_request_template.md`](.github/pull_request_template.md) with a short checklist—fill in the summary and check applicable boxes.
 4. Link related issues when applicable.
 
 ## Getting help

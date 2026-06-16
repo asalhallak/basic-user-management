@@ -82,7 +82,7 @@ The solution follows a classic layered layout:
 ## Prerequisites
 
 - [.NET SDK 3.1+](https://dotnet.microsoft.com/download)
-- [Node.js 12+](https://nodejs.org/) and npm
+- [Node.js 12+](https://nodejs.org/) and npm (Node **16** recommended; see `.nvmrc` and [Troubleshooting](#troubleshooting))
 - [Docker](https://www.docker.com/) (for the database)
 - [curl](https://curl.se/) (for smoke checks and API examples)
 - [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) global tool (for migrations)
@@ -539,12 +539,14 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ```
 .
 ├── .github/
+│   ├── pull_request_template.md  # Default PR description checklist
 │   └── workflows/
 │       └── ci.yml              # Build verification on push/PR
 ├── .vscode/
 │   ├── extensions.json         # Recommended editor extensions
 │   └── settings.json           # REST Client defaults for api-examples.http
 ├── CONTRIBUTING.md             # Contributor workflow and PR expectations
+├── .nvmrc                      # Recommended Node.js version (16, matches CI)
 ├── Makefile                    # Common dev commands (make help)
 ├── docker-compose.yml          # SQL Server container
 ├── docs/
