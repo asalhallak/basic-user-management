@@ -65,6 +65,7 @@ make verify-api      # API only (SKIP_FRONTEND=1)
 
 - **REST Client:** See [`rest-client-guide.md`](rest-client-guide.md) for setup, then send requests from [`api-examples.http`](api-examples.http).
 - **Response shapes:** See [`api-responses.md`](api-responses.md) for example JSON bodies returned by each endpoint.
+- **Errors and edge cases:** See [`api-errors.md`](api-errors.md) for `401`/`500` behavior, duplicate `loginName`, and missing-user quirks.
 - **curl:** `TOKEN=$(make token)` then `curl -H "Authorization: Bearer $TOKEN" http://localhost:5000/api/v1/users`
 
 ## Authentication flow

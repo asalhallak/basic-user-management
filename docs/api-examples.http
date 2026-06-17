@@ -3,6 +3,7 @@
 # Start the API first: make run-api
 # Default credentials: admin / 123456789
 # Example response bodies: docs/api-responses.md
+# Error and edge cases: docs/api-errors.md
 
 @baseUrl = http://localhost:5000/api/v1
 @userName = admin
@@ -81,3 +82,21 @@ GET {{baseUrl}}/users
 ### Users endpoint with an invalid token (expect 401)
 GET {{baseUrl}}/users
 Authorization: Bearer invalid-token
+
+### Get a user ID that does not exist (expect 200 with null body today, not 404)
+GET {{baseUrl}}/users/99999
+Authorization: Bearer {{token}}
+
+### Create a user with a duplicate loginName (expect 500 — unique index violation)
+POST {{baseUrl}}/users
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "loginName": "jdoe",
+  "displayName": "Duplicate Login Name",
+  "dateOfBirth": "1990-05-15T00:00:00",
+  "country": "US",
+  "isActive": true,
+  "salary": 1
+}

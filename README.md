@@ -367,7 +367,7 @@ All user endpoints require a valid `Authorization: Bearer <token>` header.
 |--------|------|
 | `200 OK` | Successful login, read, create, update, or delete |
 | `401 Unauthorized` | Missing/invalid JWT on a protected route, or invalid login credentials |
-| `404 Not Found` | Requested user ID does not exist (when the service throws for a missing record) |
+| `404 Not Found` | Requested user ID does not exist (intended; see [docs/api-errors.md](docs/api-errors.md) for current behavior) |
 
 Protected routes always require `Authorization: Bearer <token>`. Re-authenticate when a token expires (see [Configuration reference](#configuration-reference)).
 
@@ -443,6 +443,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/code-map.md](docs/code-map.md) | Where to change endpoints, auth, schema, and UI |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
+| [docs/api-errors.md](docs/api-errors.md) | Error statuses, constraint violations, and API edge cases |
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
 | [docs/rest-client-guide.md](docs/rest-client-guide.md) | Step-by-step REST Client setup and JWT variable usage |
@@ -583,6 +584,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── code-map.md             # Where to change API, auth, schema, and UI
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
+│   ├── api-errors.md           # Error statuses and API edge cases
 │   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
