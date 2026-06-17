@@ -41,11 +41,25 @@ make verify-api    # SKIP_FRONTEND=1 smoke checks
 make token         # JWT for curl or docs/api-examples.http
 ```
 
-Use [`api-examples.http`](api-examples.http) or the [curl examples](../README.md#try-it-with-curl) in the README.
+Use [`api-examples.http`](api-examples.http) or the [curl examples](../README.md#try-it-with-curl) in the README. Expected response shapes are in [api-responses.md](api-responses.md).
+
+## Angular routes
+
+| URL | Component | Auth | Purpose |
+|-----|-----------|------|---------|
+| `/` | `HomeComponent` | JWT required | Landing page after login |
+| `/users` | `ListComponent` | JWT required | Browse users |
+| `/users/add` | `AddEditComponent` | JWT required | Create a user |
+| `/users/edit/:id` | `AddEditComponent` | JWT required | Edit a user |
+| `/account/login` | `LoginComponent` | Public | Sign in |
+| `/account/register` | `RegisterComponent` | Public | Register form (posts to protected API) |
+
+Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing.module.ts`, and `users/users-routing.module.ts`. Unauthenticated visitors are redirected to `/account/login` by `AuthGuard`.
 
 ## Related docs
 
 - [quick-start.md](quick-start.md) — install, run, verify
+- [api-responses.md](api-responses.md) — example API response JSON
 - [README — Development notes](../README.md#development-notes)
 - [README — Authentication vs user data](../README.md#authentication-vs-user-data)
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — pull request workflow
