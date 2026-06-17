@@ -58,7 +58,7 @@ make ci             # Same steps as GitHub Actions (restore + npm ci + productio
 make clean          # Remove .NET bin/obj and front-end dist (before a fresh build)
 ```
 
-CI runs `make ci` on every push and pull request to `main` (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+CI runs `make ci` on every push and pull request to `main` (see [`.github/workflows/ci.yml`](.github/workflows/ci.yml)). For what CI covers (and does not), how it differs from `make build` and `make verify`, and common failure fixes, see [`docs/ci-and-builds.md`](docs/ci-and-builds.md).
 
 ## Making changes
 
