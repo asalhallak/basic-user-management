@@ -13,6 +13,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
 | [api-request-flow.md](api-request-flow.md) | HTTP middleware pipeline and layered flow from controller to SQL Server |
 | [ci-and-builds.md](ci-and-builds.md) | What GitHub Actions CI runs, `make ci` vs `make build`, and common failures |
+| [manual-testing.md](manual-testing.md) | Pre-PR checklist: `make ci`, smoke tests, UI walkthrough, and API spot checks |
 | [api-errors.md](api-errors.md) | Error statuses, database constraint failures, and known API edge cases |
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
 | [rest-client-guide.md](rest-client-guide.md) | How to send requests with the REST Client extension and capture the JWT |
