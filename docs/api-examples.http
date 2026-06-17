@@ -2,6 +2,7 @@
 # Use with the VS Code REST Client extension or JetBrains HTTP Client.
 # Start the API first: make run-api
 # Default credentials: admin / 123456789
+# Example response bodies: docs/api-responses.md
 
 @baseUrl = http://localhost:5000/api/v1
 @userName = admin

@@ -441,6 +441,7 @@ Additional guides live under [`docs/`](docs/README.md):
 |----------|---------|
 | [docs/quick-start.md](docs/quick-start.md) | One-page local setup checklist |
 | [docs/code-map.md](docs/code-map.md) | Where to change endpoints, auth, schema, and UI |
+| [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
 
@@ -578,6 +579,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── README.md               # Documentation index and script reference
 │   ├── quick-start.md          # One-page local setup checklist
 │   ├── code-map.md             # Where to change API, auth, schema, and UI
+│   ├── api-responses.md        # Example JSON response bodies for API endpoints
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
