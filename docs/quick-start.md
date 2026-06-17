@@ -63,7 +63,7 @@ make verify-api      # API only (SKIP_FRONTEND=1)
 
 ## Test the API
 
-- **REST Client:** Open [`api-examples.http`](api-examples.http) in VS Code or a JetBrains IDE. Send **Log in** first to capture the JWT.
+- **REST Client:** See [`rest-client-guide.md`](rest-client-guide.md) for setup, then send requests from [`api-examples.http`](api-examples.http).
 - **Response shapes:** See [`api-responses.md`](api-responses.md) for example JSON bodies returned by each endpoint.
 - **curl:** `TOKEN=$(make token)` then `curl -H "Authorization: Bearer $TOKEN" http://localhost:5000/api/v1/users`
 
