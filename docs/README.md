@@ -11,6 +11,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [database.md](database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
+| [api-request-flow.md](api-request-flow.md) | HTTP middleware pipeline and layered flow from controller to SQL Server |
 | [api-errors.md](api-errors.md) | Error statuses, database constraint failures, and known API edge cases |
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
 | [rest-client-guide.md](rest-client-guide.md) | How to send requests with the REST Client extension and capture the JWT |

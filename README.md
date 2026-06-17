@@ -444,6 +444,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/database.md](docs/database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
+| [docs/api-request-flow.md](docs/api-request-flow.md) | HTTP middleware pipeline and layered request flow (controller → SQL) |
 | [docs/api-errors.md](docs/api-errors.md) | Error statuses, constraint violations, and API edge cases |
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
@@ -589,6 +590,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── database.md             # SQL Server connection, migrations, and inspection
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
+│   ├── api-request-flow.md     # HTTP pipeline and layered request flow
 │   ├── api-errors.md           # Error statuses and API edge cases
 │   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
 │   ├── vscode-setup.md         # VS Code debugging, tasks, and extension workflow
