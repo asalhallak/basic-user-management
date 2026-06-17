@@ -61,6 +61,8 @@ make verify-api      # API only (SKIP_FRONTEND=1)
 | `make db-logs` | Follow SQL Server container logs |
 | `make db-reset` | Wipe data and re-apply migrations |
 
+Database connection details, migrations, and sqlcmd examples: [database.md](database.md).
+
 ## Test the API
 
 - **REST Client:** See [`rest-client-guide.md`](rest-client-guide.md) for setup, then send requests from [`api-examples.http`](api-examples.http).

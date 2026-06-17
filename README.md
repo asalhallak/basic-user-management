@@ -441,6 +441,7 @@ Additional guides live under [`docs/`](docs/README.md):
 |----------|---------|
 | [docs/quick-start.md](docs/quick-start.md) | One-page local setup checklist |
 | [docs/code-map.md](docs/code-map.md) | Where to change endpoints, auth, schema, and UI |
+| [docs/database.md](docs/database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
 | [docs/api-errors.md](docs/api-errors.md) | Error statuses, constraint violations, and API edge cases |
@@ -483,7 +484,7 @@ erDiagram
 | Unique | `Users.LoginName` | Enforced at the database level |
 | Foreign key | `Users.AddressId` → `Addresses.Id` | Optional one-to-one; `ON DELETE RESTRICT` |
 
-Migrations live in `UserManagementAPI/UserManagement.DataAccess.EFCore/Migrations/`. Apply them with `make migrate` or the steps in [Getting started](#getting-started).
+Migrations live in `UserManagementAPI/UserManagement.DataAccess.EFCore/Migrations/`. Apply them with `make migrate` or the steps in [Getting started](#getting-started). For connection settings, sqlcmd inspection, and reset procedures, see [docs/database.md](docs/database.md).
 
 ## Try it with curl
 
@@ -582,6 +583,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── README.md               # Documentation index and script reference
 │   ├── quick-start.md          # One-page local setup checklist
 │   ├── code-map.md             # Where to change API, auth, schema, and UI
+│   ├── database.md             # SQL Server connection, migrations, and inspection
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
 │   ├── api-errors.md           # Error statuses and API edge cases

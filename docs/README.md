@@ -8,6 +8,7 @@ Supplementary guides and assets for local development. The main setup guide live
 |----------|-------------|
 | [quick-start.md](quick-start.md) | One-page checklist: install, run, verify, and everyday commands |
 | [code-map.md](code-map.md) | Where to change API endpoints, auth, database schema, and Angular UI |
+| [database.md](database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
 | [api-errors.md](api-errors.md) | Error statuses, database constraint failures, and known API edge cases |

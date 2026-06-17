@@ -9,7 +9,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Add or change an API endpoint | `UserManagementAPI/UserManagement.API/Controllers/V1/` | Wire through a service in `Services/` and DTOs in `Resources/` |
 | Change login or JWT behavior | `UserManagementAPI/UserManagement.API/Services/AuthService.cs`, `Helpers/JwtHelper.cs` | Login is hardcoded for local dev; JWT secret is in `appsettings.json` |
 | Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork` |
-| Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see below) |
+| Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see [database.md](database.md)) |
 | Change repository queries | `UserManagementAPI/UserManagement.DataAccess.EFCore/Repositories/` | Implement interfaces from `UserManagement.Domain/Interfaces/` |
 | Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles |
 | Adjust CORS for the Angular app | `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` | Permissive for local development |
@@ -59,6 +59,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 
 ## Related docs
 
+- [database.md](database.md) — connection settings, migrations, sqlcmd, and reset
 - [quick-start.md](quick-start.md) — install, run, verify
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
 - [api-responses.md](api-responses.md) — example API response JSON
