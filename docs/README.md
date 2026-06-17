@@ -8,6 +8,7 @@ Supplementary guides and assets for local development. The main setup guide live
 |----------|-------------|
 | [quick-start.md](quick-start.md) | One-page checklist: install, run, verify, and everyday commands |
 | [code-map.md](code-map.md) | Where to change API endpoints, auth, database schema, and Angular UI |
+| [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
 | [../scripts/check-deps.sh](../scripts/check-deps.sh) | Verify Docker, .NET, Node.js, npm, and curl are installed (`make check-deps`) |
