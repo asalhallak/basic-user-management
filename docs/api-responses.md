@@ -57,9 +57,11 @@ Returns a JSON array. An empty database yields `[]`.
 
 Returns a single user object with the same shape as one element from the list above.
 
-### `GET /users/{id}` — not found (`404`)
+### `GET /users/{id}` — not found
 
-Empty body when the requested ID does not exist.
+**Intended:** `404` with an empty body when the ID does not exist.
+
+**Current behavior:** `200 OK` with a `null` body because the controller does not check for a missing record. See [api-errors.md](api-errors.md) for edge cases and improvement notes.
 
 ### `POST /users` — success (`200`)
 
@@ -112,5 +114,6 @@ Empty body.
 ## Related docs
 
 - [README — API reference](../README.md#api-reference) — endpoints, request models, and status codes
+- [api-errors.md](api-errors.md) — error statuses and edge cases
 - [api-examples.http](api-examples.http) — send requests with REST Client
 - [code-map.md](code-map.md) — where to change controllers, services, and DTOs

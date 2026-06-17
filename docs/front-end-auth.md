@@ -104,4 +104,5 @@ Public routes live under `/account` (login and register). Route tables are liste
 - [quick-start.md](quick-start.md) — run the stack and sign in
 - [code-map.md](code-map.md) — where to change login UI and auth behavior
 - [api-responses.md](api-responses.md) — login response JSON shape
+- [api-errors.md](api-errors.md) — error and edge-case behavior
 - [README — Front-end and API integration](../README.md#front-end-and-api-integration) — model field mismatches between UI and API

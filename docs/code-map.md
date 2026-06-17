@@ -62,6 +62,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [quick-start.md](quick-start.md) — install, run, verify
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
 - [api-responses.md](api-responses.md) — example API response JSON
+- [api-errors.md](api-errors.md) — error statuses and edge cases
 - [README — Development notes](../README.md#development-notes)
 - [README — Authentication vs user data](../README.md#authentication-vs-user-data)
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — pull request workflow
