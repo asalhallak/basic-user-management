@@ -448,6 +448,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
 | [docs/rest-client-guide.md](docs/rest-client-guide.md) | Step-by-step REST Client setup and JWT variable usage |
+| [docs/vscode-setup.md](docs/vscode-setup.md) | VS Code debugging, tasks, extensions, and REST Client workflow |
 
 ## Database schema
 
@@ -572,7 +573,9 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │       └── ci.yml              # Build verification on push/PR
 ├── .vscode/
 │   ├── extensions.json         # Recommended editor extensions
-│   └── settings.json           # REST Client defaults for api-examples.http
+│   ├── launch.json             # Debug the API (F5) and attach to a running process
+│   ├── settings.json           # REST Client defaults for api-examples.http
+│   └── tasks.json              # Makefile-backed tasks (setup, run-api, run-frontend)
 ├── CONTRIBUTING.md             # Contributor workflow and PR expectations
 ├── SECURITY.md                 # Security policy and known sample-app limitations
 ├── LICENSE                     # MIT license
@@ -588,6 +591,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
 │   ├── api-errors.md           # Error statuses and API edge cases
 │   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
+│   ├── vscode-setup.md         # VS Code debugging, tasks, and extension workflow
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
@@ -684,7 +688,7 @@ dotnet ef database update --startup-project ../UserManagement.API
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the local development workflow, verification commands, and pull request expectations.
 
-Recommended VS Code extensions (REST Client, C#, Angular) are listed in [`.vscode/extensions.json`](.vscode/extensions.json).
+Recommended VS Code extensions (REST Client, C#, Angular) are listed in [`.vscode/extensions.json`](.vscode/extensions.json). For debugging the API, workspace tasks, and REST Client setup, see [docs/vscode-setup.md](docs/vscode-setup.md).
 
 ## Security
 

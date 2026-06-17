@@ -65,6 +65,7 @@ Database connection details, migrations, and sqlcmd examples: [database.md](data
 
 ## Test the API
 
+- **VS Code:** See [`vscode-setup.md`](vscode-setup.md) to debug the API (F5) or run `setup` / `run-api` / `run-frontend` from **Run Task…**.
 - **REST Client:** See [`rest-client-guide.md`](rest-client-guide.md) for setup, then send requests from [`api-examples.http`](api-examples.http).
 - **Response shapes:** See [`api-responses.md`](api-responses.md) for example JSON bodies returned by each endpoint.
 - **Errors and edge cases:** See [`api-errors.md`](api-errors.md) for `401`/`500` behavior, duplicate `loginName`, and missing-user quirks.
