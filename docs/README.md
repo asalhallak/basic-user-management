@@ -11,6 +11,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
 | [../scripts/check-deps.sh](../scripts/check-deps.sh) | Verify Docker, .NET, Node.js, npm, and curl are installed (`make check-deps`) |
 | [../scripts/get-token.sh](../scripts/get-token.sh) | Fetch a JWT from the running API (`make token`) |
+| [../scripts/status.sh](../scripts/status.sh) | Show whether database, API, and front end are running (`make status`) |
 | [../scripts/verify-stack.sh](../scripts/verify-stack.sh) | Smoke-check database, API auth, and front end (`make verify`) |
 
 ## Quick start

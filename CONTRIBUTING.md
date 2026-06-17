@@ -31,6 +31,7 @@ make run-frontend  # terminal 2 — http://localhost:4200
 Smoke-test the stack when both are running:
 
 ```bash
+make status   # quick report before running full checks
 make verify
 ```
 
