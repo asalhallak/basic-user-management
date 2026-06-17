@@ -225,6 +225,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make build` | Build API and front end |
 | `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
 | `make clean` | Remove .NET `bin`/`obj` folders and the Angular `dist` output |
+| `make status` | Show whether the database, API, and front end are running |
 | `make verify` | Run `./scripts/verify-stack.sh` (full stack) |
 | `make verify-api` | Run verify-stack with `SKIP_FRONTEND=1` (API only) |
 | `make token` | Print a JWT from the running API (for curl or manual testing) |
@@ -581,6 +582,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
 │   ├── get-token.sh            # Fetch a JWT from the local API
+│   ├── status.sh               # Show whether database, API, and front end are up
 │   └── verify-stack.sh         # Smoke-check database + API locally
 ├── front-end/                  # Angular SPA
 │   └── src/app/

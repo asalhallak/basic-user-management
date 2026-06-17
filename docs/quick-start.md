@@ -43,6 +43,7 @@ Open `http://localhost:4200` and sign in with:
 With the API running (and the front end, unless you skip that check):
 
 ```bash
+make status          # quick report: what is running right now
 make verify          # full stack (database + API + front end)
 make verify-api      # API only (SKIP_FRONTEND=1)
 ```
@@ -52,6 +53,7 @@ make verify-api      # API only (SKIP_FRONTEND=1)
 | Command | Purpose |
 |---------|---------|
 | `make help` | List all Makefile targets |
+| `make status` | Show whether database, API, and front end are running |
 | `make token` | Print a JWT for curl or REST Client |
 | `make build` | Build API and front end |
 | `make ci` | Same build steps as GitHub Actions |
