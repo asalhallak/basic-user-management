@@ -11,6 +11,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
+| [rest-client-guide.md](rest-client-guide.md) | How to send requests with the REST Client extension and capture the JWT |
 | [../scripts/check-deps.sh](../scripts/check-deps.sh) | Verify Docker, .NET, Node.js, npm, and curl are installed (`make check-deps`) |
 | [../scripts/get-token.sh](../scripts/get-token.sh) | Fetch a JWT from the running API (`make token`) |
 | [../scripts/status.sh](../scripts/status.sh) | Show whether database, API, and front end are running (`make status`) |
@@ -23,7 +24,7 @@ New to the project? Start with **[quick-start.md](quick-start.md)** for a conden
 For the full guide, follow [Getting started](../README.md#getting-started) in the README, then:
 
 1. Start the API: `make run-api`.
-2. Open `api-examples.http` in VS Code (REST Client extension) or a JetBrains IDE and send the **Log in** request first—the file captures the JWT for later requests.
+2. Follow **[rest-client-guide.md](rest-client-guide.md)** to send requests from `api-examples.http` (install REST Client, log in, capture the JWT).
 
 ## Environment variables
 
