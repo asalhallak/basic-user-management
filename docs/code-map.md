@@ -17,6 +17,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Change login/register UI | `front-end/src/app/auth/` | `account.service.ts` calls `/api/v1/auth/login` |
 | Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users` |
 | Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only |
+| Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |
 
 ## Add an EF Core migration
 
@@ -59,6 +60,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 ## Related docs
 
 - [quick-start.md](quick-start.md) — install, run, verify
+- [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
 - [api-responses.md](api-responses.md) — example API response JSON
 - [README — Development notes](../README.md#development-notes)
 - [README — Authentication vs user data](../README.md#authentication-vs-user-data)
