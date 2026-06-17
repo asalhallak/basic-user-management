@@ -59,6 +59,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 
 ## Related docs
 
+- [api-request-flow.md](api-request-flow.md) — middleware pipeline and controller → service → repository flow
 - [database.md](database.md) — connection settings, migrations, sqlcmd, and reset
 - [quick-start.md](quick-start.md) — install, run, verify
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
