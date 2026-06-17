@@ -14,6 +14,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [api-errors.md](api-errors.md) | Error statuses, database constraint failures, and known API edge cases |
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
 | [rest-client-guide.md](rest-client-guide.md) | How to send requests with the REST Client extension and capture the JWT |
+| [vscode-setup.md](vscode-setup.md) | VS Code debugging (F5), workspace tasks, extensions, and REST Client workflow |
 | [../scripts/check-deps.sh](../scripts/check-deps.sh) | Verify Docker, .NET, Node.js, npm, and curl are installed (`make check-deps`) |
 | [../scripts/get-token.sh](../scripts/get-token.sh) | Fetch a JWT from the running API (`make token`) |
 | [../scripts/status.sh](../scripts/status.sh) | Show whether database, API, and front end are running (`make status`) |
@@ -26,7 +27,8 @@ New to the project? Start with **[quick-start.md](quick-start.md)** for a conden
 For the full guide, follow [Getting started](../README.md#getting-started) in the README, then:
 
 1. Start the API: `make run-api`.
-2. Follow **[rest-client-guide.md](rest-client-guide.md)** to send requests from `api-examples.http` (install REST Client, log in, capture the JWT).
+2. Optional: follow **[vscode-setup.md](vscode-setup.md)** to debug the API from the editor or run Makefile tasks from **Run Task…**.
+3. Follow **[rest-client-guide.md](rest-client-guide.md)** to send requests from `api-examples.http` (install REST Client, log in, capture the JWT).
 
 ## Environment variables
 
