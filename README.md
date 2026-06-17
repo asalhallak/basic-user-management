@@ -429,7 +429,7 @@ For interactive testing in VS Code (REST Client extension) or JetBrains IDEs, us
 docs/api-examples.http
 ```
 
-The file logs in, captures the JWT from the response, and exercises every `/api/v1` endpoint. Start the API with `make run-api` before sending requests.
+The file logs in, captures the JWT from the response, and exercises every `/api/v1` endpoint. Start the API with `make run-api` before sending requests. See [docs/rest-client-guide.md](docs/rest-client-guide.md) for extension setup and variable usage.
 
 See [docs/README.md](docs/README.md) for a full list of documentation assets, script environment variables, and quick-start pointers.
 
@@ -445,6 +445,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
+| [docs/rest-client-guide.md](docs/rest-client-guide.md) | Step-by-step REST Client setup and JWT variable usage |
 
 ## Database schema
 
@@ -582,6 +583,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── code-map.md             # Where to change API, auth, schema, and UI
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
+│   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites
