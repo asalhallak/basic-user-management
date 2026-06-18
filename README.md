@@ -447,6 +447,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-request-flow.md](docs/api-request-flow.md) | HTTP middleware pipeline and layered request flow (controller → SQL) |
 | [docs/ci-and-builds.md](docs/ci-and-builds.md) | GitHub Actions CI scope, `make ci` vs local builds, and common failures |
 | [docs/manual-testing.md](docs/manual-testing.md) | Pre-PR checklist: builds, smoke tests, UI walkthrough, and API spot checks |
+| [docs/environment-variables.md](docs/environment-variables.md) | Consolidated reference for Docker, API, Angular, script, and CI settings |
 | [docs/api-errors.md](docs/api-errors.md) | Error statuses, constraint violations, and API edge cases |
 | [docs/README.md](docs/README.md) | Index of docs, scripts, and environment variables |
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
@@ -594,6 +595,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
 │   ├── api-request-flow.md     # HTTP pipeline and layered request flow
 │   ├── api-errors.md           # Error statuses and API edge cases
+│   ├── environment-variables.md # Docker, API, Angular, script, and CI settings
 │   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
 │   ├── vscode-setup.md         # VS Code debugging, tasks, and extension workflow
 │   └── api-examples.http       # REST Client requests for local API testing
