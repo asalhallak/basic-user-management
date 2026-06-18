@@ -17,6 +17,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [manual-testing.md](manual-testing.md) | Pre-PR checklist: `make ci`, smoke tests, UI walkthrough, and API spot checks |
 | [faq.md](faq.md) | Short answers: auth vs users, status vs verify, CI vs smoke tests, and common pitfalls |
 | [glossary.md](glossary.md) | Definitions for JWT, loginName vs userName, layers, and local-dev commands |
+| [improvement-ideas.md](improvement-ideas.md) | Known gaps, intentional simplifications, and good first contribution ideas |
 | [environment-variables.md](environment-variables.md) | Consolidated reference for Docker, API, Angular, script, and CI settings |
 | [scripts.md](scripts.md) | Shell scripts reference: when to use status vs verify, exit codes, and examples |
 | [api-errors.md](api-errors.md) | Error statuses, database constraint failures, and known API edge cases |

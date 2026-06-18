@@ -37,6 +37,7 @@ Read in this order the first time you touch the project:
 | 2 | [glossary.md](glossary.md) | Terms like `loginName`, JWT, and fake backend |
 | 3 | [code-map.md](code-map.md) | Where to change API, auth, schema, and UI |
 | 4 | [faq.md](faq.md) | Common pitfalls (auth vs users, `status` vs `verify`) |
+| 5 | [improvement-ideas.md](improvement-ideas.md) | Known gaps and good first tasks if you are looking for what to build |
 
 Then branch by what you are changing:
 

@@ -62,7 +62,7 @@ CI runs `make ci` on every push and pull request to `main` (see [`.github/workfl
 
 ## Making changes
 
-- **Scope:** Prefer focused changes. Documentation and small tooling improvements are welcome.
+- **Scope:** Prefer focused changes. Documentation and small tooling improvements are welcome. Not sure what to work on? See [docs/improvement-ideas.md](docs/improvement-ideas.md) for known gaps and suggested first contributions.
 - **Conventions:** Match existing naming, layout, and Makefile patterns in the repository.
 - **Editor settings:** [`.editorconfig`](.editorconfig) defines shared indentation and line-ending defaults for C#, TypeScript, Markdown, and shell scripts. Most editors apply it automatically. [`.gitattributes`](.gitattributes) keeps LF line endings in Git (especially for shell scripts).
 - **Secrets:** Do not commit real credentials. `appsettings.json` and `docker-compose.yml` use development-only values. See [SECURITY.md](SECURITY.md) for the full list of intentional sample-app limitations.
