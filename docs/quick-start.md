@@ -1,6 +1,6 @@
 # Quick start
 
-A one-page checklist to run the stack locally. For architecture, API details, and troubleshooting, see the [repository README](../README.md).
+A one-page checklist to run the stack locally. For a guided reading order and first tasks, see [onboarding.md](onboarding.md). For architecture, API details, and troubleshooting, see the [repository README](../README.md).
 
 ## Prerequisites
 

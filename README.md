@@ -439,6 +439,7 @@ Additional guides live under [`docs/`](docs/README.md):
 
 | Resource | Purpose |
 |----------|---------|
+| [docs/onboarding.md](docs/onboarding.md) | New contributor path: setup, reading order, first tasks, and pre-PR checks |
 | [docs/quick-start.md](docs/quick-start.md) | One-page local setup checklist |
 | [docs/code-map.md](docs/code-map.md) | Where to change endpoints, auth, schema, and UI |
 | [docs/database.md](docs/database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
@@ -591,16 +592,20 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 ├── docker-compose.yml          # SQL Server container
 ├── docs/
 │   ├── README.md               # Documentation index and script reference
+│   ├── onboarding.md           # New contributor setup, reading order, and first tasks
 │   ├── quick-start.md          # One-page local setup checklist
 │   ├── code-map.md             # Where to change API, auth, schema, and UI
 │   ├── database.md             # SQL Server connection, migrations, and inspection
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
 │   ├── api-request-flow.md     # HTTP pipeline and layered request flow
-│   ├── api-errors.md           # Error statuses and API edge cases
+│   ├── ci-and-builds.md        # GitHub Actions CI scope and local build parity
+│   ├── manual-testing.md       # Pre-PR checklist and UI walkthrough
+│   ├── faq.md                  # Common setup, auth, and API questions
 │   ├── glossary.md             # Project terminology reference
 │   ├── environment-variables.md # Docker, API, Angular, script, and CI settings
 │   ├── scripts.md              # Shell scripts reference (status, verify, get-token)
+│   ├── api-errors.md           # Error statuses and API edge cases
 │   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
 │   ├── vscode-setup.md         # VS Code debugging, tasks, and extension workflow
 │   └── api-examples.http       # REST Client requests for local API testing

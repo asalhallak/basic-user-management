@@ -6,6 +6,7 @@ Supplementary guides and assets for local development. The main setup guide live
 
 | Resource | Description |
 |----------|-------------|
+| [onboarding.md](onboarding.md) | New contributor path: setup, reading order, first tasks, and pre-PR checks |
 | [quick-start.md](quick-start.md) | One-page checklist: install, run, verify, and everyday commands |
 | [code-map.md](code-map.md) | Where to change API endpoints, auth, database schema, and Angular UI |
 | [database.md](database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
@@ -29,7 +30,7 @@ Supplementary guides and assets for local development. The main setup guide live
 
 ## Quick start
 
-New to the project? Start with **[quick-start.md](quick-start.md)** for a condensed setup checklist.
+New to the project? Start with **[onboarding.md](onboarding.md)** for setup, a suggested reading order, and first tasks. Use **[quick-start.md](quick-start.md)** as a one-page command checklist.
 
 For the full guide, follow [Getting started](../README.md#getting-started) in the README, then:
 
