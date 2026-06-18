@@ -78,4 +78,4 @@ CI runs `make ci` on every push and pull request to `main` (see [`.github/workfl
 ## Getting help
 
 - **Troubleshooting:** See [README — Troubleshooting](README.md#troubleshooting).
-- **Configuration:** See [README — Configuration reference](README.md#configuration-reference).
+- **Configuration:** See [README — Configuration reference](README.md#configuration-reference) and [`docs/environment-variables.md`](docs/environment-variables.md).
