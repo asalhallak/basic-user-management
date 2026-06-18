@@ -47,7 +47,7 @@ Then branch by what you are changing:
 | Angular / JWT | [front-end-auth.md](front-end-auth.md), [README — Front-end and API integration](../README.md#front-end-and-api-integration) |
 | Database / migrations | [database.md](database.md), [code-map.md — Add an EF Core migration](code-map.md#add-an-ef-core-migration) |
 | Scripts / Makefile | [scripts.md](scripts.md), [environment-variables.md](environment-variables.md) |
-| Before opening a PR | [manual-testing.md](manual-testing.md), [ci-and-builds.md](ci-and-builds.md) |
+| Before opening a PR | [manual-testing.md](manual-testing.md), [ci-and-builds.md](ci-and-builds.md), [coding-standards.md](coding-standards.md) |
 
 ## First hands-on tasks
 
