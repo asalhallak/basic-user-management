@@ -448,6 +448,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/ci-and-builds.md](docs/ci-and-builds.md) | GitHub Actions CI scope, `make ci` vs local builds, and common failures |
 | [docs/manual-testing.md](docs/manual-testing.md) | Pre-PR checklist: builds, smoke tests, UI walkthrough, and API spot checks |
 | [docs/faq.md](docs/faq.md) | Short answers to common setup, auth, and API behavior questions |
+| [docs/glossary.md](docs/glossary.md) | Glossary of project terms (JWT, layers, loginName vs userName, Makefile targets) |
 | [docs/environment-variables.md](docs/environment-variables.md) | Consolidated reference for Docker, API, Angular, script, and CI settings |
 | [docs/scripts.md](docs/scripts.md) | Shell scripts reference: status vs verify, exit codes, and Makefile targets |
 | [docs/api-errors.md](docs/api-errors.md) | Error statuses, constraint violations, and API edge cases |
@@ -597,6 +598,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
 │   ├── api-request-flow.md     # HTTP pipeline and layered request flow
 │   ├── api-errors.md           # Error statuses and API edge cases
+│   ├── glossary.md             # Project terminology reference
 │   ├── environment-variables.md # Docker, API, Angular, script, and CI settings
 │   ├── scripts.md              # Shell scripts reference (status, verify, get-token)
 │   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
