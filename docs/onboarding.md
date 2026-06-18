@@ -49,6 +49,7 @@ Then branch by what you are changing:
 | Database / migrations | [database.md](database.md), [code-map.md — Add an EF Core migration](code-map.md#add-an-ef-core-migration) |
 | Scripts / Makefile | [scripts.md](scripts.md), [environment-variables.md](environment-variables.md) |
 | Before opening a PR | [manual-testing.md](manual-testing.md), [ci-and-builds.md](ci-and-builds.md), [coding-standards.md](coding-standards.md) |
+| Version / upgrade questions | [technology-stack.md](technology-stack.md) — pinned .NET, Angular, Node.js, and EF Core versions |
 
 ## First hands-on tasks
 
