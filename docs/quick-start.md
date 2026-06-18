@@ -98,4 +98,4 @@ Login uses hardcoded development credentials. User CRUD records live in SQL Serv
 | Front end cannot reach API | Check `front-end/src/environments/environment.ts` → `apiUrl` |
 | `401` on user endpoints | Log in again; JWT may have expired |
 
-Full troubleshooting: [README — Troubleshooting](../README.md#troubleshooting).
+Full troubleshooting: [README — Troubleshooting](../README.md#troubleshooting). Common questions: [faq.md](faq.md).

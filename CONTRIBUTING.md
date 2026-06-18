@@ -78,4 +78,5 @@ CI runs `make ci` on every push and pull request to `main` (see [`.github/workfl
 ## Getting help
 
 - **Troubleshooting:** See [README — Troubleshooting](README.md#troubleshooting).
+- **FAQ:** See [`docs/faq.md`](docs/faq.md) for auth vs users, `status` vs `verify`, and CI vs smoke tests.
 - **Configuration:** See [README — Configuration reference](README.md#configuration-reference) and [`docs/environment-variables.md`](docs/environment-variables.md).

@@ -14,6 +14,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [api-request-flow.md](api-request-flow.md) | HTTP middleware pipeline and layered flow from controller to SQL Server |
 | [ci-and-builds.md](ci-and-builds.md) | What GitHub Actions CI runs, `make ci` vs `make build`, and common failures |
 | [manual-testing.md](manual-testing.md) | Pre-PR checklist: `make ci`, smoke tests, UI walkthrough, and API spot checks |
+| [faq.md](faq.md) | Short answers: auth vs users, status vs verify, CI vs smoke tests, and common pitfalls |
 | [environment-variables.md](environment-variables.md) | Consolidated reference for Docker, API, Angular, script, and CI settings |
 | [scripts.md](scripts.md) | Shell scripts reference: when to use status vs verify, exit codes, and examples |
 | [api-errors.md](api-errors.md) | Error statuses, database constraint failures, and known API edge cases |
