@@ -26,6 +26,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [rest-client-guide.md](rest-client-guide.md) | How to send requests with the REST Client extension and capture the JWT |
 | [vscode-setup.md](vscode-setup.md) | VS Code debugging (F5), workspace tasks, extensions, and REST Client workflow |
 | [coding-standards.md](coding-standards.md) | EditorConfig, Git line endings, and formatting expectations for C# and Angular |
+| [technology-stack.md](technology-stack.md) | Pinned .NET, Angular, EF Core, Node.js, and Docker versions with upgrade notes |
 | [../scripts/check-deps.sh](../scripts/check-deps.sh) | Verify Docker, .NET, Node.js, npm, and curl are installed (`make check-deps`) |
 | [../scripts/get-token.sh](../scripts/get-token.sh) | Fetch a JWT from the running API (`make token`) |
 | [../scripts/status.sh](../scripts/status.sh) | Show whether database, API, and front end are running (`make status`) |
