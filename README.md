@@ -441,6 +441,7 @@ Additional guides live under [`docs/`](docs/README.md):
 |----------|---------|
 | [docs/onboarding.md](docs/onboarding.md) | New contributor path: setup, reading order, first tasks, and pre-PR checks |
 | [docs/quick-start.md](docs/quick-start.md) | One-page local setup checklist |
+| [docs/day-2-workflows.md](docs/day-2-workflows.md) | Daily dev loop, after `git pull`, API-only work, and local resets |
 | [docs/code-map.md](docs/code-map.md) | Where to change endpoints, auth, schema, and UI |
 | [docs/database.md](docs/database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
@@ -596,6 +597,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── README.md               # Documentation index and script reference
 │   ├── onboarding.md           # New contributor setup, reading order, and first tasks
 │   ├── quick-start.md          # One-page local setup checklist
+│   ├── day-2-workflows.md      # Daily loop, git pull, resets, troubleshooting flow
 │   ├── code-map.md             # Where to change API, auth, schema, and UI
 │   ├── database.md             # SQL Server connection, migrations, and inspection
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)

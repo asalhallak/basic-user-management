@@ -8,6 +8,7 @@ Supplementary guides and assets for local development. The main setup guide live
 |----------|-------------|
 | [onboarding.md](onboarding.md) | New contributor path: setup, reading order, first tasks, and pre-PR checks |
 | [quick-start.md](quick-start.md) | One-page checklist: install, run, verify, and everyday commands |
+| [day-2-workflows.md](day-2-workflows.md) | Daily dev loop, after `git pull`, API-only work, resets, and troubleshooting flow |
 | [code-map.md](code-map.md) | Where to change API endpoints, auth, database schema, and Angular UI |
 | [database.md](database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |

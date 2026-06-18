@@ -99,3 +99,5 @@ Login uses hardcoded development credentials. User CRUD records live in SQL Serv
 | `401` on user endpoints | Log in again; JWT may have expired |
 
 Full troubleshooting: [README — Troubleshooting](../README.md#troubleshooting). Common questions: [faq.md](faq.md).
+
+For everyday work after the first setup, see [day-2-workflows.md](day-2-workflows.md).
