@@ -24,6 +24,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
 | [rest-client-guide.md](rest-client-guide.md) | How to send requests with the REST Client extension and capture the JWT |
 | [vscode-setup.md](vscode-setup.md) | VS Code debugging (F5), workspace tasks, extensions, and REST Client workflow |
+| [coding-standards.md](coding-standards.md) | EditorConfig, Git line endings, and formatting expectations for C# and Angular |
 | [../scripts/check-deps.sh](../scripts/check-deps.sh) | Verify Docker, .NET, Node.js, npm, and curl are installed (`make check-deps`) |
 | [../scripts/get-token.sh](../scripts/get-token.sh) | Fetch a JWT from the running API (`make token`) |
 | [../scripts/status.sh](../scripts/status.sh) | Show whether database, API, and front end are running (`make status`) |

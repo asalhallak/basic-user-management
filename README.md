@@ -458,6 +458,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-examples.http](docs/api-examples.http) | REST Client requests for local API testing |
 | [docs/rest-client-guide.md](docs/rest-client-guide.md) | Step-by-step REST Client setup and JWT variable usage |
 | [docs/vscode-setup.md](docs/vscode-setup.md) | VS Code debugging, tasks, extensions, and REST Client workflow |
+| [docs/coding-standards.md](docs/coding-standards.md) | EditorConfig, Git line endings, and C#/Angular formatting expectations |
 
 ## Database schema
 
@@ -610,6 +611,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── api-errors.md           # Error statuses and API edge cases
 │   ├── rest-client-guide.md    # REST Client extension setup and JWT variables
 │   ├── vscode-setup.md         # VS Code debugging, tasks, and extension workflow
+│   ├── coding-standards.md     # EditorConfig, line endings, and formatting rules
 │   └── api-examples.http       # REST Client requests for local API testing
 ├── scripts/
 │   ├── check-deps.sh           # Verify local prerequisites

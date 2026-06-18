@@ -2,6 +2,8 @@
 
 Thank you for improving this sample project. The goal is to keep changes small, well documented, and easy to review.
 
+Formatting and line-ending rules are documented in [docs/coding-standards.md](docs/coding-standards.md) (`.editorconfig` and `.gitattributes`).
+
 ## Before you start
 
 1. Read the [README](README.md) for architecture, prerequisites, and local setup. New contributors: follow [docs/onboarding.md](docs/onboarding.md) for setup, reading order, and first tasks (or the shorter [docs/quick-start.md](docs/quick-start.md) checklist).
