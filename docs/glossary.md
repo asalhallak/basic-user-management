@@ -63,6 +63,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 ## Related docs
 
 - [faq.md](faq.md) — common questions about auth, CI, and API quirks
+- [improvement-ideas.md](improvement-ideas.md) — known gaps and good first contribution tasks
 - [code-map.md](code-map.md) — where to change endpoints, auth, schema, and UI
 - [front-end-auth.md](front-end-auth.md) — JWT flow in the Angular app
 - [api-responses.md](api-responses.md) — example JSON response bodies

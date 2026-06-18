@@ -44,6 +44,21 @@ make token         # JWT for curl or docs/api-examples.http
 
 Use [`api-examples.http`](api-examples.http) or the [curl examples](../README.md#try-it-with-curl) in the README. Expected response shapes are in [api-responses.md](api-responses.md).
 
+## API endpoints (V1)
+
+All routes are defined under `UserManagementAPI/UserManagement.API/Controllers/V1/`. Protected endpoints require `Authorization: Bearer <token>`. Request and response shapes are in the [README API reference](../README.md#api-reference) and [api-responses.md](api-responses.md).
+
+| Method | Route | Auth | Controller action | Source file |
+|--------|-------|------|-------------------|-------------|
+| `POST` | `/api/v1/auth/login` | No | `AuthController.Login` | [`AuthController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/AuthController.cs) |
+| `GET` | `/api/v1/users` | Yes | `UsersController.Get` | [`UsersController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs) |
+| `GET` | `/api/v1/users/{id}` | Yes | `UsersController.Get` | [`UsersController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs) |
+| `POST` | `/api/v1/users` | Yes | `UsersController.Add` | [`UsersController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs) |
+| `PUT` | `/api/v1/users/{id}` | Yes | `UsersController.Update` | [`UsersController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs) |
+| `DELETE` | `/api/v1/users/{id}` | Yes | `UsersController.Delete` | [`UsersController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs) |
+
+Business logic lives in `Services/` (`AuthService`, `UsersService`). JWT middleware and `[Authorize]` are configured in [`Startup.cs`](../UserManagementAPI/UserManagement.API/Startup.cs). For the HTTP pipeline order, see [api-request-flow.md](api-request-flow.md).
+
 ## Angular routes
 
 | URL | Component | Auth | Purpose |
