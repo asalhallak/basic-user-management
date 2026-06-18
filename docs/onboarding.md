@@ -65,7 +65,7 @@ make ci
 
 When your change affects runtime behavior, also run `make verify` (or `make verify-api` for API-only work) and follow [manual-testing.md](manual-testing.md).
 
-Documentation-only changes still need `make ci` if you touched Markdown inside CI scope; otherwise a quick link check is enough.
+Documentation-only changes don't require `make verify`; `make ci` is still the minimum check before opening a PR.
 
 ## Related docs
 
