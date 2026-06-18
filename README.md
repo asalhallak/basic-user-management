@@ -447,6 +447,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-request-flow.md](docs/api-request-flow.md) | HTTP middleware pipeline and layered request flow (controller → SQL) |
 | [docs/ci-and-builds.md](docs/ci-and-builds.md) | GitHub Actions CI scope, `make ci` vs local builds, and common failures |
 | [docs/manual-testing.md](docs/manual-testing.md) | Pre-PR checklist: builds, smoke tests, UI walkthrough, and API spot checks |
+| [docs/faq.md](docs/faq.md) | Short answers to common setup, auth, and API behavior questions |
 | [docs/environment-variables.md](docs/environment-variables.md) | Consolidated reference for Docker, API, Angular, script, and CI settings |
 | [docs/scripts.md](docs/scripts.md) | Shell scripts reference: status vs verify, exit codes, and Makefile targets |
 | [docs/api-errors.md](docs/api-errors.md) | Error statuses, constraint violations, and API edge cases |
