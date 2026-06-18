@@ -106,4 +106,5 @@ Full troubleshooting: [README — Troubleshooting](../README.md#troubleshooting)
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — pull request workflow
 - [quick-start.md](quick-start.md) — install, run, and everyday commands
 - [ci-and-builds.md](ci-and-builds.md) — what CI runs vs local smoke checks
+- [scripts.md](scripts.md) — shell scripts reference and when to use status vs verify
 - [code-map.md](code-map.md) — where to change API, auth, schema, and UI

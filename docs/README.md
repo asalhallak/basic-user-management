@@ -15,6 +15,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [ci-and-builds.md](ci-and-builds.md) | What GitHub Actions CI runs, `make ci` vs `make build`, and common failures |
 | [manual-testing.md](manual-testing.md) | Pre-PR checklist: `make ci`, smoke tests, UI walkthrough, and API spot checks |
 | [environment-variables.md](environment-variables.md) | Consolidated reference for Docker, API, Angular, script, and CI settings |
+| [scripts.md](scripts.md) | Shell scripts reference: when to use status vs verify, exit codes, and examples |
 | [api-errors.md](api-errors.md) | Error statuses, database constraint failures, and known API edge cases |
 | [api-examples.http](api-examples.http) | REST Client requests for every `/api/v1` endpoint (login, CRUD, and error cases) |
 | [rest-client-guide.md](rest-client-guide.md) | How to send requests with the REST Client extension and capture the JWT |
@@ -38,7 +39,7 @@ For the full guide, follow [Getting started](../README.md#getting-started) in th
 
 Script overrides (`API_URL`, `AUTH_USER`, `AUTH_PASSWORD`, `FRONTEND_URL`, `SKIP_FRONTEND`) and application settings (connection strings, JWT secret, Angular `apiUrl`) are documented in **[environment-variables.md](environment-variables.md)**.
 
-Run `./scripts/<name>.sh --help` for per-script usage.
+For per-script behavior, Makefile equivalents, and when to use `status` vs `verify`, see **[scripts.md](scripts.md)**. Run `./scripts/<name>.sh --help` for inline usage.
 
 ## Related project docs
 

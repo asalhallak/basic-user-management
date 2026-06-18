@@ -17,7 +17,7 @@ See [database.md](database.md) for connection-string details and [README — Con
 
 ## Shell script variables
 
-Scripts under `scripts/` and Makefile smoke targets accept the same overrides. Run `./scripts/<name>.sh --help` for usage.
+Scripts under `scripts/` and Makefile smoke targets accept the same overrides. Run `./scripts/<name>.sh --help` for usage. For per-script behavior, exit codes, and when to use `status` vs `verify`, see [scripts.md](scripts.md).
 
 | Variable | Default | Used by | Purpose |
 |----------|---------|---------|---------|
