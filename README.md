@@ -450,6 +450,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/manual-testing.md](docs/manual-testing.md) | Pre-PR checklist: builds, smoke tests, UI walkthrough, and API spot checks |
 | [docs/faq.md](docs/faq.md) | Short answers to common setup, auth, and API behavior questions |
 | [docs/glossary.md](docs/glossary.md) | Glossary of project terms (JWT, layers, loginName vs userName, Makefile targets) |
+| [docs/improvement-ideas.md](docs/improvement-ideas.md) | Known gaps, intentional simplifications, and good first contribution ideas |
 | [docs/environment-variables.md](docs/environment-variables.md) | Consolidated reference for Docker, API, Angular, script, and CI settings |
 | [docs/scripts.md](docs/scripts.md) | Shell scripts reference: status vs verify, exit codes, and Makefile targets |
 | [docs/api-errors.md](docs/api-errors.md) | Error statuses, constraint violations, and API edge cases |
@@ -603,6 +604,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── manual-testing.md       # Pre-PR checklist and UI walkthrough
 │   ├── faq.md                  # Common setup, auth, and API questions
 │   ├── glossary.md             # Project terminology reference
+│   ├── improvement-ideas.md    # Known gaps and good first contribution ideas
 │   ├── environment-variables.md # Docker, API, Angular, script, and CI settings
 │   ├── scripts.md              # Shell scripts reference (status, verify, get-token)
 │   ├── api-errors.md           # Error statuses and API edge cases
