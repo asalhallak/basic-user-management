@@ -9,7 +9,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Add or change an API endpoint | `UserManagementAPI/UserManagement.API/Controllers/V1/` | Wire through a service in `Services/` and DTOs in `Resources/` |
 | Change login or JWT behavior | `UserManagementAPI/UserManagement.API/Services/AuthService.cs`, `Helpers/JwtHelper.cs` | Login is hardcoded for local dev; JWT secret is in `appsettings.json` |
 | Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork` |
-| Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see [database.md](database.md)) |
+| Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see [database.md](database.md) and [domain-model.md](domain-model.md)) |
 | Change repository queries | `UserManagementAPI/UserManagement.DataAccess.EFCore/Repositories/` | Implement interfaces from `UserManagement.Domain/Interfaces/` |
 | Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles |
 | Adjust CORS for the Angular app | `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` | Permissive for local development |
@@ -74,6 +74,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 
 ## Related docs
 
+- [domain-model.md](domain-model.md) — entity, API resource, and database column mapping
 - [solution-structure.md](solution-structure.md) — .NET project references, DI registration, and Angular folder layout
 - [api-request-flow.md](api-request-flow.md) — middleware pipeline and controller → service → repository flow
 - [database.md](database.md) — connection settings, migrations, sqlcmd, and reset

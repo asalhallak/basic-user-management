@@ -24,7 +24,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **`displayName`** | Human-readable name shown in the user list and editor. |
 | **UserResource** | API DTO in `Resources/UserResource.cs`—the JSON shape returned and accepted by user endpoints. |
 | **AddressResource** | Nested address object on create/update user requests. |
-| **Entity** | Domain model class in `UserManagement.Domain/Entities/` (e.g. `User`, `Address`). Mapped to database tables by EF Core. |
+| **Entity** | Domain model class in `UserManagement.Domain/Entities/` (e.g. `User`, `Address`). Mapped to database tables by EF Core. See [domain-model.md](domain-model.md) for field mapping. |
 | **Migration** | EF Core schema change file under `Migrations/`. Applied with `make migrate` or `dotnet ef database update`. |
 | **Unit of work** | `IUnitOfWork` coordinates repositories and saves changes in a single transaction. |
 
