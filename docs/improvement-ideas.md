@@ -18,7 +18,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API |
 | Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
-| CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment |
+| CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 
 ## API hardening
 
@@ -54,7 +54,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 
 - Replace `JwtSecret` and database passwords (never commit production values).
 - Replace hardcoded login in `AuthService` with real credential validation.
-- Restrict CORS origins in `CorsOriginConfiguration.cs`.
+- Restrict CORS origins in `CorsOriginConfiguration.cs` — see [cors-configuration.md](cors-configuration.md).
 - Enable HTTPS and set `RequireHttpsMetadata` appropriately for JWT bearer middleware.
 
 ## How to pick a task

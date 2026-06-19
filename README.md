@@ -449,6 +449,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/repository-pattern.md](docs/repository-pattern.md) | Repository + unit-of-work pattern, GenericRepository, and CRUD persistence flow |
 | [docs/automapper-mapping.md](docs/automapper-mapping.md) | AutoMapper profile: entity ↔ DTO mapping, controller usage, and extension steps |
 | [docs/api-jwt-authentication.md](docs/api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
+| [docs/cors-configuration.md](docs/cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/front-end-models.md](docs/front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
@@ -612,6 +613,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── repository-pattern.md   # Repository + unit-of-work pattern and CRUD flow
 │   ├── automapper-mapping.md   # Entity ↔ DTO AutoMapper profile and controller usage
 │   ├── api-jwt-authentication.md # API JWT login, signing, validation, and protected routes
+│   ├── cors-configuration.md     # CORS policy for local Angular dev and production tightening
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── front-end-models.md     # Angular form fields vs API JSON (loginName, register legacy)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
@@ -647,7 +649,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Development notes
 
-- **CORS** is configured for local front-end development. See `MiddlewareConfiguration/CorsOriginConfiguration.cs`.
+- **CORS** is configured for local front-end development. See [docs/cors-configuration.md](docs/cors-configuration.md) and `MiddlewareConfiguration/CorsOriginConfiguration.cs`.
 - **Migrations** live in `UserManagement.DataAccess.EFCore/Migrations/`. Create new ones with `dotnet ef migrations add <Name> --startup-project ../UserManagement.API`.
 - **Secrets**: `appsettings.json` contains a development JWT secret and database password. Replace these before deploying anywhere real.
 - **JWT configuration**: Tokens are signed with the `JwtSecret` value from `appsettings.json`. Issuer and audience validation are disabled for simplicity in this sample.

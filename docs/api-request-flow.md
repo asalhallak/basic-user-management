@@ -22,7 +22,7 @@ flowchart TD
 
 | Middleware | Purpose |
 |------------|---------|
-| `UseCorsOrigin` | Allows the Angular dev server (`http://localhost:4200`) to call the API |
+| `UseCorsOrigin` | Allows the Angular dev server (`http://localhost:4200`) to call the API — see [cors-configuration.md](cors-configuration.md) |
 | `UseAuthentication` | Validates the `Authorization: Bearer` JWT on protected routes |
 | `UseAuthorization` | Enforces `[Authorize]` on `UsersController` |
 
@@ -110,6 +110,7 @@ Controllers receive services through constructor injection.
 
 ## Related docs
 
+- [cors-configuration.md](cors-configuration.md) — cross-origin policy, preflight requests, and production tightening
 - [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping profile and controller usage
 - [api-jwt-authentication.md](api-jwt-authentication.md) — login flow, token signing, and JWT bearer validation
 - [front-end-auth.md](front-end-auth.md) — how the Angular app obtains and sends the JWT
