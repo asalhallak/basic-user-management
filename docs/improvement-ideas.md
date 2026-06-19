@@ -66,6 +66,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 
 - [api-errors.md](api-errors.md) — current error statuses and edge cases
 - [code-map.md](code-map.md) — file locations by task
+- [repository-pattern.md](repository-pattern.md) — repository interfaces, UnitOfWork, and CRUD flow
 - [faq.md](faq.md) — auth vs users, `status` vs `verify`, deploy safety
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON
 - [SECURITY.md](../SECURITY.md) — vulnerability reporting and known limitations

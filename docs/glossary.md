@@ -26,7 +26,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **AddressResource** | Nested address object on create/update user requests. |
 | **Entity** | Domain model class in `UserManagement.Domain/Entities/` (e.g. `User`, `Address`). Mapped to database tables by EF Core. See [domain-model.md](domain-model.md) for field mapping. |
 | **Migration** | EF Core schema change file under `Migrations/`. Applied with `make migrate` or `dotnet ef database update`. |
-| **Unit of work** | `IUnitOfWork` coordinates repositories and saves changes in a single transaction. |
+| **Unit of work** | `IUnitOfWork` coordinates repositories and saves changes in a single transaction. See [repository-pattern.md](repository-pattern.md). |
 
 ## Architecture layers
 
@@ -37,7 +37,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **UserManagement.DataAccess.EFCore** | EF Core `ApplicationContext`, repository implementations, and migrations. |
 | **Controller** | Thin HTTP adapter in `Controllers/V1/` that delegates to a service. |
 | **Service** | Business logic (`AuthService`, `UsersService`) between controllers and repositories. |
-| **Repository** | Data-access class implementing a domain interface (e.g. `UserRepository`). |
+| **Repository** | Data-access class implementing a domain interface (e.g. `UserRepository`). See [repository-pattern.md](repository-pattern.md). |
 | **AutoMapper** | Maps between domain entities and API resources via `DomainToResourceMappingProfile`. |
 
 ## Front end

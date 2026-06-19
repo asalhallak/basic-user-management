@@ -92,7 +92,7 @@ Persistence implementation and schema migrations.
 |--------|---------|
 | `ApplicationContext.cs` | EF Core `DbContext` and entity configuration |
 | `Repositories/` | Concrete repository classes |
-| `UnitOfWorks/` | `UnitOfWork` — coordinates repositories and `SaveChanges` |
+| `UnitOfWorks/` | `UnitOfWork` — coordinates repositories and `SaveChanges` (see [repository-pattern.md](repository-pattern.md)) |
 | `Migrations/` | EF Core migration history (apply with `make migrate`) |
 
 ## Namespaces vs project names
@@ -147,3 +147,4 @@ Top-level routing is in `app-routing.module.ts`. Feature modules define their ow
 - [technology-stack.md](technology-stack.md) — pinned package and toolchain versions
 - [glossary.md](glossary.md) — terms for layers, JWT, and local commands
 - [database.md](database.md) — connection string, migrations, and reset
+- [repository-pattern.md](repository-pattern.md) — repository interfaces, UnitOfWork, and CRUD flow
