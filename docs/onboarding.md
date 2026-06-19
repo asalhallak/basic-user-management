@@ -45,7 +45,7 @@ Then branch by what you are changing:
 
 | Goal | Read next |
 |------|-----------|
-| API or services | [api-jwt-authentication.md](api-jwt-authentication.md), [cors-configuration.md](cors-configuration.md), [api-request-flow.md](api-request-flow.md), [automapper-mapping.md](automapper-mapping.md), [repository-pattern.md](repository-pattern.md), [api-responses.md](api-responses.md), [api-errors.md](api-errors.md) |
+| API or services | [api-jwt-authentication.md](api-jwt-authentication.md), [cors-configuration.md](cors-configuration.md), [api-request-flow.md](api-request-flow.md), [api-users-crud.md](api-users-crud.md), [automapper-mapping.md](automapper-mapping.md), [repository-pattern.md](repository-pattern.md), [api-responses.md](api-responses.md), [api-errors.md](api-errors.md) |
 | Angular / JWT | [front-end-auth.md](front-end-auth.md), [api-jwt-authentication.md](api-jwt-authentication.md), [front-end-models.md](front-end-models.md), [README — Front-end and API integration](../README.md#front-end-and-api-integration) |
 | Database / migrations | [database.md](database.md), [code-map.md — Add an EF Core migration](code-map.md#add-an-ef-core-migration) |
 | Scripts / Makefile | [scripts.md](scripts.md), [environment-variables.md](environment-variables.md) |
@@ -58,7 +58,7 @@ Good low-risk ways to learn the codebase:
 
 1. **API-only smoke test** — Run `make setup`, `make run-api`, and `make verify-api` without starting the Angular dev server.
 2. **REST Client** — Follow [rest-client-guide.md](rest-client-guide.md) and send requests from [api-examples.http](api-examples.http).
-3. **Trace a request** — Log in, list users, and follow the flow in [api-request-flow.md](api-request-flow.md) from controller to SQL Server.
+3. **Trace a request** — Log in, list users, and follow the flow in [api-users-crud.md](api-users-crud.md) (per-endpoint) or [api-request-flow.md](api-request-flow.md) (middleware pipeline).
 4. **UI walkthrough** — Complete the table in [manual-testing.md](manual-testing.md#3-manual-ui-walkthrough).
 
 ## Before you open a pull request

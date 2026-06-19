@@ -23,7 +23,7 @@ Empty body. The API returns `401 Unauthorized` when the username or password doe
 
 ## Users
 
-Protected routes require `Authorization: Bearer <token>`. Without a valid token, responses are `401 Unauthorized` with an empty body.
+Protected routes require `Authorization: Bearer <token>`. Without a valid token, responses are `401 Unauthorized` with an empty body. For per-endpoint controller and service flow, see [api-users-crud.md](api-users-crud.md).
 
 ### `GET /users` — success (`200`)
 

@@ -114,6 +114,7 @@ Controllers receive services through constructor injection.
 - [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping profile and controller usage
 - [api-jwt-authentication.md](api-jwt-authentication.md) — login flow, token signing, and JWT bearer validation
 - [front-end-auth.md](front-end-auth.md) — how the Angular app obtains and sends the JWT
+- [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks
 - [api-responses.md](api-responses.md) — example response bodies
 - [api-errors.md](api-errors.md) — `401`, constraint failures, and missing-user edge cases
 - [database.md](database.md) — connection string, migrations, and inspection
