@@ -59,7 +59,7 @@ Start/stop: `make db-up`, `make db-down`, `make db-reset`.
 | `Logging:LogLevel` | ASP.NET Core log verbosity | `Information` by default |
 | `AllowedHosts` | Host filtering | `*` for local development |
 
-JWT lifetime (7 days) is set in code: `UserManagementAPI/UserManagement.API/Helpers/JwtHelper.cs`. Issuer and audience validation are disabled for simplicity.
+JWT lifetime (7 days) is set in code: `UserManagementAPI/UserManagement.API/Helpers/JwtHelper.cs`. Issuer and audience validation are disabled for simplicity. See [api-jwt-authentication.md](api-jwt-authentication.md) for the full login and validation flow.
 
 **Development overrides:** ASP.NET Core also reads `appsettings.Development.json` when `ASPNETCORE_ENVIRONMENT=Development` (the default for `dotnet run`). Use it for local-only overrides without editing the committed base file.
 
@@ -105,6 +105,7 @@ User records in SQL Server are separate from login accounts. See [README — Aut
 ## Related docs
 
 - [database.md](database.md) — connection string, migrations, sqlcmd, reset
+- [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [front-end-auth.md](front-end-auth.md) — JWT storage and interceptors
 - [ci-and-builds.md](ci-and-builds.md) — CI vs local builds
 - [SECURITY.md](../SECURITY.md) — known limitations before deployment

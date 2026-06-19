@@ -6,7 +6,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 
 | Term | Meaning in this project |
 |------|-------------------------|
-| **JWT** | JSON Web Token returned by `POST /api/v1/auth/login`. The Angular app stores it in `localStorage` and sends it as `Authorization: Bearer <token>` on protected routes. |
+| **JWT** | JSON Web Token returned by `POST /api/v1/auth/login`. Signed with `JwtSecret` in `JwtHelper`; validated by JWT bearer middleware in `Startup.cs`. The Angular app stores it in `localStorage` and sends it as `Authorization: Bearer <token>` on protected routes. See [api-jwt-authentication.md](api-jwt-authentication.md) and [front-end-auth.md](front-end-auth.md). |
 | **Bearer token** | HTTP header format the API expects on protected endpoints: `Authorization: Bearer <jwt>`. |
 | **Login credentials** | Hardcoded development username/password (`admin` / `123456789`) validated in `AuthService`. Not stored in the database. |
 | **User record** | A profile row in SQL Server (`Users` table) managed through CRUD endpoints. Creating a user does **not** create a login account. |
@@ -66,6 +66,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 - [faq.md](faq.md) — common questions about auth, CI, and API quirks
 - [improvement-ideas.md](improvement-ideas.md) — known gaps and good first contribution tasks
 - [code-map.md](code-map.md) — where to change endpoints, auth, schema, and UI
+- [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [front-end-auth.md](front-end-auth.md) — JWT flow in the Angular app
 - [api-responses.md](api-responses.md) — example JSON response bodies
 - [environment-variables.md](environment-variables.md) — configuration reference

@@ -110,6 +110,7 @@ Controllers receive services through constructor injection.
 
 ## Related docs
 
+- [api-jwt-authentication.md](api-jwt-authentication.md) — login flow, token signing, and JWT bearer validation
 - [front-end-auth.md](front-end-auth.md) — how the Angular app obtains and sends the JWT
 - [api-responses.md](api-responses.md) — example response bodies
 - [api-errors.md](api-errors.md) — `401`, constraint failures, and missing-user edge cases
