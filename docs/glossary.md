@@ -62,6 +62,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 
 ## Related docs
 
+- [solution-structure.md](solution-structure.md) — .NET solution layout, namespaces, and Angular folders
 - [faq.md](faq.md) — common questions about auth, CI, and API quirks
 - [improvement-ideas.md](improvement-ideas.md) — known gaps and good first contribution tasks
 - [code-map.md](code-map.md) — where to change endpoints, auth, schema, and UI

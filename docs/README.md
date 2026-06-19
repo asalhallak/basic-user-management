@@ -10,6 +10,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [quick-start.md](quick-start.md) | One-page checklist: install, run, verify, and everyday commands |
 | [day-2-workflows.md](day-2-workflows.md) | Daily dev loop, after `git pull`, API-only work, resets, and troubleshooting flow |
 | [code-map.md](code-map.md) | Where to change API endpoints, auth, database schema, and Angular UI |
+| [solution-structure.md](solution-structure.md) | .NET solution layout, project references, DI registration, and Angular folders |
 | [database.md](database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |

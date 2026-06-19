@@ -443,6 +443,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/quick-start.md](docs/quick-start.md) | One-page local setup checklist |
 | [docs/day-2-workflows.md](docs/day-2-workflows.md) | Daily dev loop, after `git pull`, API-only work, and local resets |
 | [docs/code-map.md](docs/code-map.md) | Where to change endpoints, auth, schema, and UI |
+| [docs/solution-structure.md](docs/solution-structure.md) | .NET solution layout, project references, DI registration, and Angular folders |
 | [docs/database.md](docs/database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
@@ -600,6 +601,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── quick-start.md          # One-page local setup checklist
 │   ├── day-2-workflows.md      # Daily loop, git pull, resets, troubleshooting flow
 │   ├── code-map.md             # Where to change API, auth, schema, and UI
+│   ├── solution-structure.md   # .NET projects, references, DI, and Angular layout
 │   ├── database.md             # SQL Server connection, migrations, and inspection
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
