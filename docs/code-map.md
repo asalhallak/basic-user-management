@@ -11,7 +11,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork` |
 | Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see [database.md](database.md) and [domain-model.md](domain-model.md)) |
 | Change repository queries | `UserManagementAPI/UserManagement.DataAccess.EFCore/Repositories/` | Implement interfaces from `UserManagement.Domain/Interfaces/`; see [repository-pattern.md](repository-pattern.md) |
-| Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles |
+| Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles; see [automapper-mapping.md](automapper-mapping.md) |
 | Adjust CORS for the Angular app | `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` | Permissive for local development |
 | Change API base URL from the UI | `front-end/src/environments/environment.ts` | Production URL in `environment.prod.ts` |
 | Change login/register UI | `front-end/src/app/auth/` | `account.service.ts` calls `/api/v1/auth/login`; see [front-end-models.md](front-end-models.md) for field-name alignment |
@@ -74,6 +74,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 
 ## Related docs
 
+- [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping profile and controller usage
 - [domain-model.md](domain-model.md) — entity, API resource, and database column mapping
 - [repository-pattern.md](repository-pattern.md) — GenericRepository, UnitOfWork, and CRUD persistence flow
 - [solution-structure.md](solution-structure.md) — .NET project references, DI registration, and Angular folder layout

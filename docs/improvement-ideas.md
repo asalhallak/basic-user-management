@@ -14,6 +14,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | User `DELETE` | `500` when ID is missing | Check existence first; return `404` |
 | Duplicate `loginName` | `500` from database constraint | Catch unique violation; return `409 Conflict` |
 | Validation | No `[Required]` on API models | Add FluentValidation or data annotations on `UserResource` |
+| POST `/users` response | Returns domain `User` entity instead of mapped `UserResource` | Map outbound response in `UsersController.Add` — see [automapper-mapping.md](automapper-mapping.md) |
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API |
 | Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
@@ -64,6 +65,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 
 ## Related docs
 
+- [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping and POST response consistency
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [api-errors.md](api-errors.md) — current error statuses and edge cases
 - [code-map.md](code-map.md) — file locations by task
