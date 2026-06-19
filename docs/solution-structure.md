@@ -138,7 +138,7 @@ Root: `front-end/src/app/`
 | `models/` | TypeScript interfaces (`User`, `Alert`) |
 | `environments/` | `apiUrl` and build-time configuration |
 
-Top-level routing is in `app-routing.module.ts`. Feature modules define their own routes under `auth/auth-routing.module.ts` and `users/users-routing.module.ts`. JWT flow details: [front-end-auth.md](front-end-auth.md).
+Top-level routing is in `app-routing.module.ts`. Feature modules define their own routes under `auth/auth-routing.module.ts` and `users/users-routing.module.ts`. JWT flow details: [front-end-auth.md](front-end-auth.md). Alert banners: [front-end-alerts.md](front-end-alerts.md).
 
 ## Related docs
 
