@@ -33,6 +33,7 @@ Documented mismatches between intended REST behavior and the current implementat
 The Angular app was adapted from a tutorial that used a local fake backend. When pointing at the real API:
 
 - Remove `fakeBackendProvider` from `front-end/src/app/app.module.ts` ([front-end-auth.md](front-end-auth.md)).
+- Add or change routes following the lazy-module pattern in [angular-routing.md](angular-routing.md).
 - Log in with the [default credentials](../README.md#default-login) before using register or user management screens.
 - Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [front-end-models.md](front-end-models.md) and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
 
@@ -72,6 +73,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [code-map.md](code-map.md) — file locations by task
 - [repository-pattern.md](repository-pattern.md) — repository interfaces, UnitOfWork, and CRUD flow
 - [faq.md](faq.md) — auth vs users, `status` vs `verify`, deploy safety
+- [angular-routing.md](angular-routing.md) — route map, lazy modules, and AuthGuard flow
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON
 - [SECURITY.md](../SECURITY.md) — vulnerability reporting and known limitations
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — branch workflow and PR checklist

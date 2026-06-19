@@ -70,7 +70,7 @@ Business logic lives in `Services/` (`AuthService`, `UsersService`). JWT middlew
 | `/account/login` | `LoginComponent` | Public | Sign in |
 | `/account/register` | `RegisterComponent` | Public | Register form (posts to protected API) |
 
-Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing.module.ts`, and `users/users-routing.module.ts`. Unauthenticated visitors are redirected to `/account/login` by `AuthGuard`.
+Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing.module.ts`, and `users/users-routing.module.ts`. Unauthenticated visitors are redirected to `/account/login` by `AuthGuard`. For lazy loading, layout components, and `returnUrl` behavior, see [angular-routing.md](angular-routing.md).
 
 ## Related docs
 
@@ -84,6 +84,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [quick-start.md](quick-start.md) — install, run, verify
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, JWT signing, and bearer validation
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
+- [angular-routing.md](angular-routing.md) — lazy-loaded modules, route map, and AuthGuard flow
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks
 - [api-responses.md](api-responses.md) — example API response JSON
 - [api-errors.md](api-errors.md) — error statuses and edge cases

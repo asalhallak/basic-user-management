@@ -451,6 +451,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-jwt-authentication.md](docs/api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
 | [docs/cors-configuration.md](docs/cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
+| [docs/angular-routing.md](docs/angular-routing.md) | Angular route map, lazy modules, AuthGuard, and `returnUrl` navigation |
 | [docs/front-end-models.md](docs/front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
 | [docs/api-users-crud.md](docs/api-users-crud.md) | Per-endpoint Users CRUD walkthrough: controller, service, repository, and quirks |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
@@ -616,6 +617,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── api-jwt-authentication.md # API JWT login, signing, validation, and protected routes
 │   ├── cors-configuration.md     # CORS policy for local Angular dev and production tightening
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
+│   ├── angular-routing.md      # Route map, lazy modules, AuthGuard, and navigation flow
 │   ├── front-end-models.md     # Angular form fields vs API JSON (loginName, register legacy)
 │   ├── api-users-crud.md       # Per-endpoint Users CRUD walkthrough and quirks
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
