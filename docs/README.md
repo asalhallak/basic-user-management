@@ -19,6 +19,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [cors-configuration.md](cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [front-end-models.md](front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
+| [api-users-crud.md](api-users-crud.md) | Per-endpoint Users CRUD walkthrough: controller, service, repository, and quirks |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
 | [api-request-flow.md](api-request-flow.md) | HTTP middleware pipeline and layered flow from controller to SQL Server |
 | [ci-and-builds.md](ci-and-builds.md) | What GitHub Actions CI runs, `make ci` vs `make build`, and common failures |

@@ -100,6 +100,7 @@ Run `make ci` after changes to confirm the solution still builds.
 
 ## Related docs
 
+- [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD behavior and quirks
 - [domain-model.md](domain-model.md) — entity ↔ resource ↔ SQL column mapping
 - [api-request-flow.md](api-request-flow.md) — where AutoMapper runs in the request pipeline
 - [api-responses.md](api-responses.md) — example JSON response bodies

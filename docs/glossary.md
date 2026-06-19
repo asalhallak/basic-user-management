@@ -36,7 +36,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **UserManagement.API** | ASP.NET Core web project—controllers, services, JWT setup, AutoMapper profiles. |
 | **UserManagement.Domain** | Entities and repository interfaces; no database or HTTP dependencies. |
 | **UserManagement.DataAccess.EFCore** | EF Core `ApplicationContext`, repository implementations, and migrations. |
-| **Controller** | Thin HTTP adapter in `Controllers/V1/` that delegates to a service. |
+| **Controller** | Thin HTTP adapter in `Controllers/V1/` that delegates to a service. `UsersController` handles all `/api/v1/users` CRUD — see [api-users-crud.md](api-users-crud.md). |
 | **Service** | Business logic (`AuthService`, `UsersService`) between controllers and repositories. |
 | **Repository** | Data-access class implementing a domain interface (e.g. `UserRepository`). See [repository-pattern.md](repository-pattern.md). |
 | **AutoMapper** | Maps between domain entities and API resources via `DomainToResourceMappingProfile`. See [automapper-mapping.md](automapper-mapping.md). |

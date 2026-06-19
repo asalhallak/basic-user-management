@@ -8,7 +8,7 @@ A quick reference for where to change common behavior. For architecture and setu
 |------|------------|-------|
 | Add or change an API endpoint | `UserManagementAPI/UserManagement.API/Controllers/V1/` | Wire through a service in `Services/` and DTOs in `Resources/` |
 | Change login or JWT behavior | `UserManagementAPI/UserManagement.API/Services/AuthService.cs`, `Helpers/JwtHelper.cs` | Login is hardcoded for local dev; JWT secret is in `appsettings.json`; see [api-jwt-authentication.md](api-jwt-authentication.md) |
-| Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork` |
+| Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork`; see [api-users-crud.md](api-users-crud.md) |
 | Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see [database.md](database.md) and [domain-model.md](domain-model.md)) |
 | Change repository queries | `UserManagementAPI/UserManagement.DataAccess.EFCore/Repositories/` | Implement interfaces from `UserManagement.Domain/Interfaces/`; see [repository-pattern.md](repository-pattern.md) |
 | Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles; see [automapper-mapping.md](automapper-mapping.md) |
@@ -57,7 +57,7 @@ All routes are defined under `UserManagementAPI/UserManagement.API/Controllers/V
 | `PUT` | `/api/v1/users/{id}` | Yes | `UsersController.Update` | [`UsersController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs) |
 | `DELETE` | `/api/v1/users/{id}` | Yes | `UsersController.Delete` | [`UsersController.cs`](../UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs) |
 
-Business logic lives in `Services/` (`AuthService`, `UsersService`). JWT middleware and `[Authorize]` are configured in [`Startup.cs`](../UserManagementAPI/UserManagement.API/Startup.cs). For token signing and validation details, see [api-jwt-authentication.md](api-jwt-authentication.md). For the HTTP pipeline order, see [api-request-flow.md](api-request-flow.md).
+Business logic lives in `Services/` (`AuthService`, `UsersService`). JWT middleware and `[Authorize]` are configured in [`Startup.cs`](../UserManagementAPI/UserManagement.API/Startup.cs). For per-endpoint Users CRUD behavior and quirks, see [api-users-crud.md](api-users-crud.md). For token signing and validation details, see [api-jwt-authentication.md](api-jwt-authentication.md). For the HTTP pipeline order, see [api-request-flow.md](api-request-flow.md).
 
 ## Angular routes
 
@@ -84,6 +84,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [quick-start.md](quick-start.md) — install, run, verify
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, JWT signing, and bearer validation
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
+- [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks
 - [api-responses.md](api-responses.md) — example API response JSON
 - [api-errors.md](api-errors.md) — error statuses and edge cases
 - [README — Development notes](../README.md#development-notes)

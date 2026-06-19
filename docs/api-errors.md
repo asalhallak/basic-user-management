@@ -25,7 +25,7 @@ The README lists `404 Not Found` for a missing user ID. The current implementati
 | `DELETE /users/{id}` — ID missing | `200` | `500` | developer exception page (in Development) |
 | `PUT /users/{id}` — ID missing | `200` | `200` or `500` | may update nothing or fail depending on EF state |
 
-When hardening the API, add explicit not-found checks in `UsersService` or the controller and return `NotFound()` — see [code-map.md](code-map.md).
+When hardening the API, add explicit not-found checks in `UsersService` or the controller and return `NotFound()` — see [code-map.md](code-map.md) and [api-users-crud.md](api-users-crud.md).
 
 ## Database constraint violations
 

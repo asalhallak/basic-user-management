@@ -24,7 +24,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 
 Documented mismatches between intended REST behavior and the current implementation are listed in [api-errors.md](api-errors.md). The highest-impact fixes for API consumers:
 
-1. **Not-found handling** — `UsersService.Get` uses `FirstOrDefault()`; the controller always returns `Ok(...)`. Add an explicit check and `NotFound()` when the entity is missing. Start in `UserManagement.API/Services/UsersService.cs` and `Controllers/V1/UsersController.cs` ([code-map](code-map.md)).
+1. **Not-found handling** — `UsersService.Get` uses `FirstOrDefault()`; the controller always returns `Ok(...)`. Add an explicit check and `NotFound()` when the entity is missing. Start in `UserManagement.API/Services/UsersService.cs` and `Controllers/V1/UsersController.cs` ([code-map](code-map.md), [api-users-crud.md](api-users-crud.md)).
 2. **Conflict responses** — Duplicate `loginName` values surface as `500`. Catch `DbUpdateException` (or check before insert) and return `409` with a clear message.
 3. **Input validation** — Partial JSON bodies can persist unexpected defaults. Add validation on `UserResource` and return `400 Bad Request` with problem details.
 
@@ -67,6 +67,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 
 - [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping and POST response consistency
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
+- [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD behavior and quirks
 - [api-errors.md](api-errors.md) — current error statuses and edge cases
 - [code-map.md](code-map.md) — file locations by task
 - [repository-pattern.md](repository-pattern.md) — repository interfaces, UnitOfWork, and CRUD flow

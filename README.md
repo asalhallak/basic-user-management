@@ -452,6 +452,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/cors-configuration.md](docs/cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/front-end-models.md](docs/front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
+| [docs/api-users-crud.md](docs/api-users-crud.md) | Per-endpoint Users CRUD walkthrough: controller, service, repository, and quirks |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
 | [docs/api-request-flow.md](docs/api-request-flow.md) | HTTP middleware pipeline and layered request flow (controller → SQL) |
 | [docs/ci-and-builds.md](docs/ci-and-builds.md) | GitHub Actions CI scope, `make ci` vs local builds, and common failures |
@@ -616,6 +617,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── cors-configuration.md     # CORS policy for local Angular dev and production tightening
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── front-end-models.md     # Angular form fields vs API JSON (loginName, register legacy)
+│   ├── api-users-crud.md       # Per-endpoint Users CRUD walkthrough and quirks
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
 │   ├── api-request-flow.md     # HTTP pipeline and layered request flow
 │   ├── ci-and-builds.md        # GitHub Actions CI scope and local build parity
