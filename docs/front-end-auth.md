@@ -76,7 +76,7 @@ The JWT interceptor only attaches headers to requests aimed at the configured AP
 - If `localStorage` contains a `user` object, navigation proceeds.
 - Otherwise the user is redirected to `/account/login?returnUrl=<attempted path>`.
 
-Public routes live under `/account` (login and register). Route tables are listed in [code-map.md — Angular routes](code-map.md#angular-routes).
+Public routes live under `/account` (login and register). Route tables are listed in [code-map.md — Angular routes](code-map.md#angular-routes). For lazy loading, layout components, and the full navigation flow, see [angular-routing.md](angular-routing.md).
 
 ## Common pitfalls
 
@@ -104,6 +104,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON (`loginName`, register vs editor)
 - [quick-start.md](quick-start.md) — run the stack and sign in
+- [angular-routing.md](angular-routing.md) — route map, lazy modules, and AuthGuard redirect flow
 - [code-map.md](code-map.md) — where to change login UI and auth behavior
 - [api-responses.md](api-responses.md) — login response JSON shape
 - [api-errors.md](api-errors.md) — error and edge-case behavior

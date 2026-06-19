@@ -13,7 +13,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **Register page** | Angular form that posts to `POST /api/v1/users`. It requires an existing JWT—it is not public sign-up. |
 | **Fake backend** | `fakeBackendProvider` in `app.module.ts` that intercepts legacy tutorial HTTP routes. Remove it when using the real API exclusively. |
 | **CORS** | Cross-Origin Resource Sharing — browser security requiring the API to allow requests from the Angular dev server origin (`http://localhost:4200`). Configured in `CorsOriginConfiguration.cs`. See [cors-configuration.md](cors-configuration.md). |
-| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login`. |
+| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. See [angular-routing.md](angular-routing.md). |
 
 ## API and data model
 
