@@ -64,6 +64,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 
 ## Related docs
 
+- [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [api-errors.md](api-errors.md) — current error statuses and edge cases
 - [code-map.md](code-map.md) — file locations by task
 - [repository-pattern.md](repository-pattern.md) — repository interfaces, UnitOfWork, and CRUD flow

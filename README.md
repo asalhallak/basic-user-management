@@ -447,6 +447,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/database.md](docs/database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [docs/domain-model.md](docs/domain-model.md) | Entity ↔ API JSON ↔ SQL column mapping for User and Address |
 | [docs/repository-pattern.md](docs/repository-pattern.md) | Repository + unit-of-work pattern, GenericRepository, and CRUD persistence flow |
+| [docs/api-jwt-authentication.md](docs/api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/front-end-models.md](docs/front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
@@ -608,6 +609,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── database.md             # SQL Server connection, migrations, and inspection
 │   ├── domain-model.md         # Entity, API resource, and database column mapping
 │   ├── repository-pattern.md   # Repository + unit-of-work pattern and CRUD flow
+│   ├── api-jwt-authentication.md # API JWT login, signing, validation, and protected routes
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── front-end-models.md     # Angular form fields vs API JSON (loginName, register legacy)
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints
