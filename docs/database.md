@@ -1,6 +1,6 @@
 # Database guide
 
-How the SQL Server database is configured, migrated, and inspected during local development. For the entity-relationship diagram and column list, see [README — Database schema](../README.md#database-schema). For a full list of Docker and connection-string settings alongside other configuration, see [environment-variables.md](environment-variables.md).
+How the SQL Server database is configured, migrated, and inspected during local development. For the entity-relationship diagram and column list, see [README — Database schema](../README.md#database-schema). For a field-by-field map between entities, API JSON, and SQL columns, see [domain-model.md](domain-model.md). For a full list of Docker and connection-string settings alongside other configuration, see [environment-variables.md](environment-variables.md).
 
 ## Local connection
 
