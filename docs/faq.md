@@ -32,6 +32,18 @@ Use `status` for a quick snapshot; use `verify` before opening a PR when runtime
 
 ## Authentication and users
 
+### What is the difference between `userName`, `loginName`, and `username`?
+
+These names appear in different layers and mean different things:
+
+| Name | Layer | Meaning |
+|------|-------|---------|
+| `userName` | Login API (`Credentials.cs`) | Field on `POST /auth/login` — the hardcoded dev login name (`admin`) |
+| `username` | Angular login/register forms | Legacy tutorial spelling; login works because ASP.NET Core binding is case-insensitive |
+| `loginName` | User CRUD API (`UserResource`) | Unique identifier for a **user record** in SQL Server — not the login account |
+
+The user editor uses `loginName` and `displayName` correctly; the register form and `models/user.ts` still use legacy field names. See [front-end-models.md](front-end-models.md) and [domain-model.md](domain-model.md).
+
 ### Why does the register page return `401`?
 
 `POST /api/v1/users` requires a JWT. The register form is **not** public sign-up — log in with the [default credentials](../README.md#default-login) (`admin` / `123456789`) first. See [Authentication vs user data](../README.md#authentication-vs-user-data).
@@ -76,3 +88,4 @@ No, not as-is. It uses hardcoded credentials, a sample JWT secret, permissive CO
 - [scripts.md](scripts.md) — shell scripts and Makefile targets
 - [environment-variables.md](environment-variables.md) — configuration reference
 - [code-map.md](code-map.md) — where to change API, auth, schema, and UI
+- [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON

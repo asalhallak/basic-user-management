@@ -101,6 +101,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 
 ## Related docs
 
+- [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON (`loginName`, register vs editor)
 - [quick-start.md](quick-start.md) — run the stack and sign in
 - [code-map.md](code-map.md) — where to change login UI and auth behavior
 - [api-responses.md](api-responses.md) — login response JSON shape

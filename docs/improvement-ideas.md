@@ -15,7 +15,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Duplicate `loginName` | `500` from database constraint | Catch unique violation; return `409 Conflict` |
 | Validation | No `[Required]` on API models | Add FluentValidation or data annotations on `UserResource` |
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API |
-| Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [user model](../README.md#user-model) |
+| Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment |
 
@@ -33,7 +33,7 @@ The Angular app was adapted from a tutorial that used a local fake backend. When
 
 - Remove `fakeBackendProvider` from `front-end/src/app/app.module.ts` ([front-end-auth.md](front-end-auth.md)).
 - Log in with the [default credentials](../README.md#default-login) before using register or user management screens.
-- Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [README — Front-end and API integration](../README.md#front-end-and-api-integration).
+- Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [front-end-models.md](front-end-models.md) and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
 
 ## Testing
 
@@ -67,5 +67,6 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [api-errors.md](api-errors.md) — current error statuses and edge cases
 - [code-map.md](code-map.md) — file locations by task
 - [faq.md](faq.md) — auth vs users, `status` vs `verify`, deploy safety
+- [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON
 - [SECURITY.md](../SECURITY.md) — vulnerability reporting and known limitations
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — branch workflow and PR checklist
