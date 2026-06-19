@@ -70,7 +70,7 @@ The `User` entity does not expose `AddressId` as a property; EF Core creates the
 | Cardinality | One user may have zero or one address |
 | Foreign key | `Users.AddressId` → `Addresses.Id` (nullable) |
 | Delete behavior | `ON DELETE RESTRICT` — cannot delete an address while a user references it |
-| Create flow | `UsersService` persists the nested `Address` first, then the `User` with the new `AddressId` |
+| Create flow | `UsersService.Add` saves the entity graph in one `SaveChanges` call; EF Core inserts the nested `Address` and sets `AddressId` on the new `User` |
 
 Entity classes: `UserManagementAPI/UserManagement.Domain/Entities/User.cs` and `Address.cs`.
 
