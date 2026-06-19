@@ -36,9 +36,10 @@ Read in this order the first time you touch the project:
 | 1 | [quick-start.md](quick-start.md) | Install, run, and verify the stack |
 | 2 | [day-2-workflows.md](day-2-workflows.md) | Daily loop, after `git pull`, resets, and quick troubleshooting |
 | 3 | [glossary.md](glossary.md) | Terms like `loginName`, JWT, and fake backend |
-| 4 | [code-map.md](code-map.md) | Where to change API, auth, schema, and UI |
-| 5 | [faq.md](faq.md) | Common pitfalls (auth vs users, `status` vs `verify`) |
-| 6 | [improvement-ideas.md](improvement-ideas.md) | Known gaps and good first tasks if you are looking for what to build |
+| 4 | [solution-structure.md](solution-structure.md) | How the .NET projects and Angular app folders fit together |
+| 5 | [code-map.md](code-map.md) | Where to change API, auth, schema, and UI |
+| 6 | [faq.md](faq.md) | Common pitfalls (auth vs users, `status` vs `verify`) |
+| 7 | [improvement-ideas.md](improvement-ideas.md) | Known gaps and good first tasks if you are looking for what to build |
 
 Then branch by what you are changing:
 

@@ -74,6 +74,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 
 ## Related docs
 
+- [solution-structure.md](solution-structure.md) — .NET project references, DI registration, and Angular folder layout
 - [api-request-flow.md](api-request-flow.md) — middleware pipeline and controller → service → repository flow
 - [database.md](database.md) — connection settings, migrations, sqlcmd, and reset
 - [quick-start.md](quick-start.md) — install, run, verify
