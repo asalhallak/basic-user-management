@@ -28,7 +28,7 @@ flowchart LR
     U -->|AddressId FK| AT
 ```
 
-AutoMapper profiles in `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` map:
+AutoMapper profiles in `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` map (see [automapper-mapping.md](automapper-mapping.md) for controller usage and extension steps):
 
 - `User` ↔ `UserResource`
 - `Address` ↔ `AddressResource`
@@ -105,6 +105,7 @@ See [README — Authentication vs user data](../README.md#authentication-vs-user
 
 ## Related docs
 
+- [automapper-mapping.md](automapper-mapping.md) — AutoMapper profile, inbound/outbound mapping, and POST response note
 - [api-responses.md](api-responses.md) — example JSON request and response bodies
 - [database.md](database.md) — connection, migrations, and sqlcmd inspection
 - [repository-pattern.md](repository-pattern.md) — GenericRepository, UnitOfWork, and CRUD persistence

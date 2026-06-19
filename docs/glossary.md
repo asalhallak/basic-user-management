@@ -38,7 +38,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **Controller** | Thin HTTP adapter in `Controllers/V1/` that delegates to a service. |
 | **Service** | Business logic (`AuthService`, `UsersService`) between controllers and repositories. |
 | **Repository** | Data-access class implementing a domain interface (e.g. `UserRepository`). See [repository-pattern.md](repository-pattern.md). |
-| **AutoMapper** | Maps between domain entities and API resources via `DomainToResourceMappingProfile`. |
+| **AutoMapper** | Maps between domain entities and API resources via `DomainToResourceMappingProfile`. See [automapper-mapping.md](automapper-mapping.md). |
 
 ## Front end
 
