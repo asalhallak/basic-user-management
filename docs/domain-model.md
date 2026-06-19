@@ -107,6 +107,7 @@ See [README — Authentication vs user data](../README.md#authentication-vs-user
 
 - [api-responses.md](api-responses.md) — example JSON request and response bodies
 - [database.md](database.md) — connection, migrations, and sqlcmd inspection
+- [repository-pattern.md](repository-pattern.md) — GenericRepository, UnitOfWork, and CRUD persistence
 - [code-map.md](code-map.md) — where to change schema, services, and UI
 - [glossary.md](glossary.md) — `loginName` vs `userName`, entity vs resource
 - [front-end-models.md](front-end-models.md) — Angular forms and TypeScript types vs API JSON
