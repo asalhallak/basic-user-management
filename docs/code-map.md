@@ -14,7 +14,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles |
 | Adjust CORS for the Angular app | `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` | Permissive for local development |
 | Change API base URL from the UI | `front-end/src/environments/environment.ts` | Production URL in `environment.prod.ts` |
-| Change login/register UI | `front-end/src/app/auth/` | `account.service.ts` calls `/api/v1/auth/login` |
+| Change login/register UI | `front-end/src/app/auth/` | `account.service.ts` calls `/api/v1/auth/login`; see [front-end-models.md](front-end-models.md) for field-name alignment |
 | Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users` |
 | Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only |
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |

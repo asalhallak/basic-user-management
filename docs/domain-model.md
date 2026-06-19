@@ -109,4 +109,5 @@ See [README — Authentication vs user data](../README.md#authentication-vs-user
 - [database.md](database.md) — connection, migrations, and sqlcmd inspection
 - [code-map.md](code-map.md) — where to change schema, services, and UI
 - [glossary.md](glossary.md) — `loginName` vs `userName`, entity vs resource
+- [front-end-models.md](front-end-models.md) — Angular forms and TypeScript types vs API JSON
 - [README — Database schema](../README.md#database-schema) — ER diagram and constraints
