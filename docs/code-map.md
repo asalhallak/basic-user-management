@@ -18,6 +18,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users` |
 | Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only |
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |
+| Change success/error banners | `front-end/src/app/services/alert.service.ts`, `components/alert.component.ts` | Global `<alert>` in `app.component.html`; see [front-end-alerts.md](front-end-alerts.md) |
 
 ## Add an EF Core migration
 
@@ -84,6 +85,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [quick-start.md](quick-start.md) — install, run, verify
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, JWT signing, and bearer validation
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
+- [front-end-alerts.md](front-end-alerts.md) — AlertService, global alert component, and form feedback patterns
 - [angular-routing.md](angular-routing.md) — lazy-loaded modules, route map, and AuthGuard flow
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks
 - [api-responses.md](api-responses.md) — example API response JSON

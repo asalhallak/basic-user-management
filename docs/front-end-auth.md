@@ -67,6 +67,8 @@ Registered in `front-end/src/app/app.module.ts` (order matters — JWT runs befo
 | `JwtInterceptor` | `helpers/jwt.interceptor.ts` | If `localStorage.user.token` exists and the request URL starts with `environment.apiUrl`, adds `Authorization: Bearer <token>` |
 | `ErrorInterceptor` | `helpers/error.interceptor.ts` | On `401` or `403` with a stored user, calls `logout()` and re-throws the error |
 
+Form components pass re-thrown errors to `AlertService.error()` — see [front-end-alerts.md](front-end-alerts.md). The interceptor does not show alerts itself.
+
 The JWT interceptor only attaches headers to requests aimed at the configured API base URL (`environment.apiUrl`). Third-party URLs are left unchanged.
 
 ## Route protection
@@ -103,6 +105,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON (`loginName`, register vs editor)
+- [front-end-alerts.md](front-end-alerts.md) — success/error banners and AlertService usage
 - [quick-start.md](quick-start.md) — run the stack and sign in
 - [angular-routing.md](angular-routing.md) — route map, lazy modules, and AuthGuard redirect flow
 - [code-map.md](code-map.md) — where to change login UI and auth behavior
