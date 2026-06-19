@@ -13,6 +13,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [solution-structure.md](solution-structure.md) | .NET solution layout, project references, DI registration, and Angular folders |
 | [database.md](database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [domain-model.md](domain-model.md) | Entity ↔ API JSON ↔ SQL column mapping for `User` and `Address` |
+| [repository-pattern.md](repository-pattern.md) | Repository + unit-of-work pattern, `GenericRepository`, and CRUD persistence flow |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [front-end-models.md](front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
