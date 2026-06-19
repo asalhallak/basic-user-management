@@ -71,7 +71,7 @@ HTTP entry point and application services.
 | `Resources/` | Request/response DTOs (`UserResource`, `Credentials`, `AddressResource`) |
 | `Mapper/` | AutoMapper profiles (entity ↔ resource) |
 | `Helpers/` | `JwtHelper` — token creation |
-| `MiddlewareConfiguration/` | CORS setup for local Angular dev |
+| `MiddlewareConfiguration/` | CORS setup for local Angular dev — see [cors-configuration.md](cors-configuration.md) |
 | `Startup.cs` | DI registration, JWT middleware, EF `DbContext` |
 | `appsettings.json` | Connection string, `JwtSecret` |
 
@@ -142,6 +142,7 @@ Top-level routing is in `app-routing.module.ts`. Feature modules define their ow
 
 ## Related docs
 
+- [cors-configuration.md](cors-configuration.md) — cross-origin policy for Angular ↔ API
 - [code-map.md](code-map.md) — where to change endpoints, auth, schema, and UI
 - [api-request-flow.md](api-request-flow.md) — HTTP pipeline and controller → SQL flow
 - [technology-stack.md](technology-stack.md) — pinned package and toolchain versions
