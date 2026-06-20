@@ -86,7 +86,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 |---------|--------------|-----|
 | API calls lack `Authorization` header | Not logged in, or `apiUrl` mismatch | Log in; confirm `environment.apiUrl` matches the running API |
 | Sudden redirect to login | Token expired or invalid | Log in again (tokens last 7 days) |
-| Login works in REST Client but not UI | `fakeBackendProvider` still enabled | Remove it from `app.module.ts` (see [code-map.md](code-map.md)) |
+| Login works in REST Client but not UI | `fakeBackendProvider` still enabled or stale `localStorage` | Remove it from `app.module.ts` (see [fake-backend.md](fake-backend.md), [code-map.md](code-map.md)) |
 | Register returns `401` | User endpoints require JWT | Log in first; register is not public sign-up |
 
 ## Related files
@@ -103,6 +103,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 
 ## Related docs
 
+- [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [account-service.md](account-service.md) — `AccountService` methods, endpoints, and component usage
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON (`loginName`, register vs editor)
