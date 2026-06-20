@@ -137,6 +137,7 @@ Components live under `front-end/src/app/users/`. Form field names align with th
 ## Related docs
 
 - [api-responses.md](api-responses.md) — example JSON response bodies
+- [api-resources.md](api-resources.md) — DTO classes, JSON properties, and endpoint matrix
 - [api-errors.md](api-errors.md) — `401`, `500`, and missing-user edge cases
 - [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping and POST response quirk
 - [repository-pattern.md](repository-pattern.md) — `IUnitOfWork`, `UserRepository`, and `Complete()`

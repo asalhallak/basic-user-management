@@ -85,6 +85,7 @@ See [improvement-ideas.md](improvement-ideas.md) for a suggested first contribut
 ## Related docs
 
 - [domain-model.md](domain-model.md) — entity, resource, and SQL column mapping
+- [api-resources.md](api-resources.md) — API DTO reference and endpoint matrix
 - [account-service.md](account-service.md) — HTTP methods, session, and which components call the API
 - [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register forms and legacy field quirks
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and form fields

@@ -1,6 +1,6 @@
 # AutoMapper mapping guide
 
-How the API translates between domain entities (`User`, `Address`) and JSON DTOs (`UserResource`, `AddressResource`). For field-level mapping tables, see [domain-model.md](domain-model.md). For where mapping fits in the HTTP pipeline, see [api-request-flow.md](api-request-flow.md).
+How the API translates between domain entities (`User`, `Address`) and JSON DTOs (`UserResource`, `AddressResource`). For DTO class reference and endpoint usage, see [api-resources.md](api-resources.md). For field-level mapping tables, see [domain-model.md](domain-model.md). For where mapping fits in the HTTP pipeline, see [api-request-flow.md](api-request-flow.md).
 
 ## Why AutoMapper is used
 

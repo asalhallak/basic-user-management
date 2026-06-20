@@ -6,7 +6,7 @@ A quick reference for where to change common behavior. For architecture and setu
 
 | Goal | Start here | Notes |
 |------|------------|-------|
-| Add or change an API endpoint | `UserManagementAPI/UserManagement.API/Controllers/V1/` | Wire through a service in `Services/` and DTOs in `Resources/` |
+| Add or change an API endpoint | `UserManagementAPI/UserManagement.API/Controllers/V1/` | Wire through a service in `Services/` and DTOs in `Resources/`; see [api-resources.md](api-resources.md) |
 | Change login or JWT behavior | `UserManagementAPI/UserManagement.API/Services/AuthService.cs`, `Helpers/JwtHelper.cs` | Login is hardcoded for local dev; JWT secret is in `appsettings.json`; see [api-jwt-authentication.md](api-jwt-authentication.md) |
 | Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork`; see [api-users-crud.md](api-users-crud.md) |
 | Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see [database.md](database.md) and [domain-model.md](domain-model.md)) |
@@ -81,6 +81,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [cors-configuration.md](cors-configuration.md) — cross-origin policy for Angular ↔ API and production tightening
 - [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping profile and controller usage
 - [domain-model.md](domain-model.md) — entity, API resource, and database column mapping
+- [api-resources.md](api-resources.md) — API DTO classes, JSON properties, and endpoint matrix
 - [repository-pattern.md](repository-pattern.md) — GenericRepository, UnitOfWork, and CRUD persistence flow
 - [solution-structure.md](solution-structure.md) — .NET project references, DI registration, and Angular folder layout
 - [api-request-flow.md](api-request-flow.md) — middleware pipeline and controller → service → repository flow

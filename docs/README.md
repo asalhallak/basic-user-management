@@ -13,6 +13,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [solution-structure.md](solution-structure.md) | .NET solution layout, project references, DI registration, and Angular folders |
 | [database.md](database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [domain-model.md](domain-model.md) | Entity ↔ API JSON ↔ SQL column mapping for `User` and `Address` |
+| [api-resources.md](api-resources.md) | API DTO reference: `Credentials`, `Claims`, `UserResource`, `AddressResource`, and endpoint matrix |
 | [repository-pattern.md](repository-pattern.md) | Repository + unit-of-work pattern, `GenericRepository`, and CRUD persistence flow |
 | [automapper-mapping.md](automapper-mapping.md) | AutoMapper profile: entity ↔ DTO mapping, controller usage, and extension steps |
 | [api-jwt-authentication.md](api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |

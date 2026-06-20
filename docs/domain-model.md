@@ -1,6 +1,6 @@
 # Domain model reference
 
-How user data flows between the C# domain entities, API JSON resources, and SQL Server tables. For endpoint examples, see [api-responses.md](api-responses.md). For schema operations, see [database.md](database.md).
+How user data flows between the C# domain entities, API JSON resources, and SQL Server tables. For DTO field reference and endpoint matrix, see [api-resources.md](api-resources.md). For endpoint examples, see [api-responses.md](api-responses.md). For schema operations, see [database.md](database.md).
 
 ## Overview
 
