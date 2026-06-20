@@ -18,7 +18,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API — see [fake-backend.md](fake-backend.md) |
 | Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
 | Home greeting | Template uses `firstName` but login stores `userName` | Fix `home.component.html` — see [front-end-shell.md](front-end-shell.md) |
-| Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) |
+| Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md) |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 
@@ -38,7 +38,7 @@ The Angular app was adapted from a tutorial that used a local fake backend. When
 - Add or change routes following the lazy-module pattern in [angular-routing.md](angular-routing.md).
 - Log in with the [default credentials](../README.md#default-login) before using register or user management screens.
 - Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [front-end-models.md](front-end-models.md), [account-service.md](account-service.md), [front-end-users.md](front-end-users.md), and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
-- Surface API errors consistently via `AlertService` instead of per-form `subscribe` handlers — see [front-end-alerts.md](front-end-alerts.md).
+- Surface API errors consistently via `AlertService` instead of per-form `subscribe` handlers — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md).
 
 ## Testing
 
@@ -82,6 +82,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [front-end-users.md](front-end-users.md) — Users module list/editor UI and CRUD flow
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON
 - [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
+- [front-end-interceptors.md](front-end-interceptors.md) — JwtInterceptor, ErrorInterceptor, and error re-throw flow
 - [front-end-alerts.md](front-end-alerts.md) — AlertService and global alert component
 - [front-end-shell.md](front-end-shell.md) — AppComponent navbar, layouts, and HomeComponent quirks
 - [SECURITY.md](../SECURITY.md) — vulnerability reporting and known limitations

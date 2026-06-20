@@ -13,7 +13,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **Register page** | Angular form that posts to `POST /api/v1/users`. It requires an existing JWT—it is not public sign-up. See [front-end-login-register.md](front-end-login-register.md). |
 | **Fake backend** | `fakeBackendProvider` in `app.module.ts` that intercepts legacy tutorial HTTP routes (`/users/authenticate`, etc.). Remove it when using the real API exclusively. See [fake-backend.md](fake-backend.md). |
 | **CORS** | Cross-Origin Resource Sharing — browser security requiring the API to allow requests from the Angular dev server origin (`http://localhost:4200`). Configured in `CorsOriginConfiguration.cs`. See [cors-configuration.md](cors-configuration.md). |
-| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. Checks `localStorage` only—not JWT expiry. See [angular-routing.md](angular-routing.md) and [front-end-login-register.md](front-end-login-register.md). |
+| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. Checks `localStorage` only—not JWT expiry. See [angular-routing.md](angular-routing.md), [front-end-login-register.md](front-end-login-register.md), and [front-end-interceptors.md](front-end-interceptors.md). |
 
 ## API and data model
 
@@ -46,7 +46,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | Term | Meaning in this project |
 |------|-------------------------|
 | **`apiUrl`** | Base URL in `environment.ts` (default `http://localhost:5000`). All HTTP calls prepend this value. |
-| **Interceptor** | `jwt.interceptor.ts` attaches the stored JWT to outgoing API requests; `error.interceptor.ts` handles HTTP errors. |
+| **Interceptor** | Angular `HTTP_INTERCEPTORS` chain: `JwtInterceptor` attaches the stored JWT to `environment.apiUrl` requests; `ErrorInterceptor` auto-logouts on `401`/`403` and re-throws error messages. See [front-end-interceptors.md](front-end-interceptors.md). |
 | **AlertService** | Pub/sub service for Bootstrap alert banners (`success`, `error`, etc.). Rendered by `<alert>` in `app.component.html`. See [front-end-alerts.md](front-end-alerts.md). |
 | **`AccountService`** | Angular singleton that calls auth and user CRUD endpoints, stores the JWT in `localStorage`, and exposes the current session. See [account-service.md](account-service.md). |
 | **Users module** | Lazy-loaded Angular module at `/users` with list, add, and edit screens. See [front-end-users.md](front-end-users.md). |
@@ -73,6 +73,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 - [improvement-ideas.md](improvement-ideas.md) — known gaps and good first contribution tasks
 - [code-map.md](code-map.md) — where to change endpoints, auth, schema, and UI
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
+- [front-end-interceptors.md](front-end-interceptors.md) — JwtInterceptor, ErrorInterceptor, and request chain order
 - [front-end-auth.md](front-end-auth.md) — JWT flow in the Angular app
 - [front-end-shell.md](front-end-shell.md) — AppComponent navbar and home page layout
 - [api-responses.md](api-responses.md) — example JSON response bodies

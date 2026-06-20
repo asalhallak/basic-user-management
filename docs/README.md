@@ -18,6 +18,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [api-jwt-authentication.md](api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
 | [cors-configuration.md](cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
+| [front-end-interceptors.md](front-end-interceptors.md) | HTTP interceptor chain: JwtInterceptor, ErrorInterceptor, registration order, and error flow |
 | [front-end-login-register.md](front-end-login-register.md) | AuthModule login/register forms, returnUrl flow, and register quirks |
 | [fake-backend.md](fake-backend.md) | Tutorial fake-backend interceptor: legacy routes, localStorage, and removal steps |
 | [account-service.md](account-service.md) | `AccountService` HTTP client: session, endpoints, component usage, and quirks |
