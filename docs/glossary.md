@@ -23,8 +23,8 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **`userName`** | JSON field on the login request body (`Credentials.cs`). ASP.NET Core binding is case-insensitive, so `username` from the Angular app also works. |
 | **`loginName`** | Unique identifier for a user **record** in the database and API (`UserResource`). Not the same as the hardcoded login username. |
 | **`displayName`** | Human-readable name shown in the user list and editor. |
-| **UserResource** | API DTO in `Resources/UserResource.cs`—the JSON shape returned and accepted by user endpoints. |
-| **AddressResource** | Nested address object on create/update user requests. |
+| **UserResource** | API DTO in `Resources/UserResource.cs`—the JSON shape returned and accepted by user endpoints. See [api-resources.md](api-resources.md). |
+| **AddressResource** | Nested address object on create/update user requests. See [api-resources.md](api-resources.md). |
 | **Entity** | Domain model class in `UserManagement.Domain/Entities/` (e.g. `User`, `Address`). Mapped to database tables by EF Core. See [domain-model.md](domain-model.md) for field mapping. |
 | **Migration** | EF Core schema change file under `Migrations/`. Applied with `make migrate` or `dotnet ef database update`. |
 | **Unit of work** | `IUnitOfWork` coordinates repositories and saves changes in a single transaction. See [repository-pattern.md](repository-pattern.md). |

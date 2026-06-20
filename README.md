@@ -446,6 +446,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/solution-structure.md](docs/solution-structure.md) | .NET solution layout, project references, DI registration, and Angular folders |
 | [docs/database.md](docs/database.md) | SQL Server connection, migrations, sqlcmd inspection, and reset |
 | [docs/domain-model.md](docs/domain-model.md) | Entity ↔ API JSON ↔ SQL column mapping for User and Address |
+| [docs/api-resources.md](docs/api-resources.md) | API DTO reference: Credentials, Claims, UserResource, AddressResource, and endpoint matrix |
 | [docs/repository-pattern.md](docs/repository-pattern.md) | Repository + unit-of-work pattern, GenericRepository, and CRUD persistence flow |
 | [docs/automapper-mapping.md](docs/automapper-mapping.md) | AutoMapper profile: entity ↔ DTO mapping, controller usage, and extension steps |
 | [docs/api-jwt-authentication.md](docs/api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
@@ -619,6 +620,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── solution-structure.md   # .NET projects, references, DI, and Angular layout
 │   ├── database.md             # SQL Server connection, migrations, and inspection
 │   ├── domain-model.md         # Entity, API resource, and database column mapping
+│   ├── api-resources.md        # API DTO reference (Credentials, UserResource, etc.)
 │   ├── repository-pattern.md   # Repository + unit-of-work pattern and CRUD flow
 │   ├── automapper-mapping.md   # Entity ↔ DTO AutoMapper profile and controller usage
 │   ├── api-jwt-authentication.md # API JWT login, signing, validation, and protected routes
