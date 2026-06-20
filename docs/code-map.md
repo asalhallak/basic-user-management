@@ -18,6 +18,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users` |
 | Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only |
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |
+| Change front-end API calls or session | `front-end/src/app/services/account.service.ts` | Login, logout, and user CRUD HTTP methods; see [account-service.md](account-service.md) |
 | Change success/error banners | `front-end/src/app/services/alert.service.ts`, `components/alert.component.ts` | Global `<alert>` in `app.component.html`; see [front-end-alerts.md](front-end-alerts.md) |
 
 ## Add an EF Core migration
