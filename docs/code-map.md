@@ -7,8 +7,8 @@ A quick reference for where to change common behavior. For architecture and setu
 | Goal | Start here | Notes |
 |------|------------|-------|
 | Add or change an API endpoint | `UserManagementAPI/UserManagement.API/Controllers/V1/` | Wire through a service in `Services/` and DTOs in `Resources/`; see [api-controllers.md](api-controllers.md) and [api-resources.md](api-resources.md) |
-| Change login or JWT behavior | `UserManagementAPI/UserManagement.API/Services/AuthService.cs`, `Helpers/JwtHelper.cs` | Login is hardcoded for local dev; JWT secret is in `appsettings.json`; see [api-jwt-authentication.md](api-jwt-authentication.md) |
-| Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork`; see [api-users-crud.md](api-users-crud.md) |
+| Change login or JWT behavior | `UserManagementAPI/UserManagement.API/Services/AuthService.cs`, `Helpers/JwtHelper.cs` | Login is hardcoded for local dev; JWT secret is in `appsettings.json`; see [api-services.md](api-services.md) and [api-jwt-authentication.md](api-jwt-authentication.md) |
+| Change user CRUD logic | `UserManagementAPI/UserManagement.API/Services/UsersService.cs` | Controllers stay thin; persistence goes through `IUnitOfWork`; see [api-services.md](api-services.md) and [api-users-crud.md](api-users-crud.md) |
 | Add or change a database table/column | `UserManagementAPI/UserManagement.Domain/Entities/` | Add an EF migration under `UserManagement.DataAccess.EFCore/Migrations/` (see [database.md](database.md) and [domain-model.md](domain-model.md)) |
 | Change repository queries | `UserManagementAPI/UserManagement.DataAccess.EFCore/Repositories/` | Implement interfaces from `UserManagement.Domain/Interfaces/`; see [repository-pattern.md](repository-pattern.md) |
 | Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles; see [automapper-mapping.md](automapper-mapping.md) |
@@ -86,6 +86,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [repository-pattern.md](repository-pattern.md) — GenericRepository, UnitOfWork, and CRUD persistence flow
 - [solution-structure.md](solution-structure.md) — .NET project references, DI registration, and Angular folder layout
 - [api-controllers.md](api-controllers.md) — AuthController, UsersController, routing conventions, and add-endpoint checklist
+- [api-services.md](api-services.md) — AuthService, UsersService, DI registration, quirks, and add-service checklist
 - [api-request-flow.md](api-request-flow.md) — middleware pipeline and controller → service → repository flow
 - [database.md](database.md) — connection settings, migrations, sqlcmd, and reset
 - [quick-start.md](quick-start.md) — install, run, verify

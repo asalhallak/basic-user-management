@@ -146,6 +146,7 @@ public class ReportsController : ControllerBase
 
 ## Related docs
 
+- [api-services.md](api-services.md) — AuthService, UsersService, DI registration, and quirks
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD flow and quirks
 - [api-jwt-authentication.md](api-jwt-authentication.md) — login, token signing, and bearer validation
 - [api-resources.md](api-resources.md) — DTO classes and JSON property reference

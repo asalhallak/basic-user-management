@@ -1,6 +1,6 @@
 # Users API CRUD guide
 
-Per-endpoint walkthrough for `/api/v1/users`: controller actions, service methods, repository calls, and known quirks. For controller conventions and how to add endpoints, see [api-controllers.md](api-controllers.md). For example JSON bodies, see [api-responses.md](api-responses.md). For error edge cases, see [api-errors.md](api-errors.md).
+Per-endpoint walkthrough for `/api/v1/users`: controller actions, service methods, repository calls, and known quirks. For the service layer overview (`AuthService`, `UsersService`), see [api-services.md](api-services.md). For controller conventions and how to add endpoints, see [api-controllers.md](api-controllers.md). For example JSON bodies, see [api-responses.md](api-responses.md). For error edge cases, see [api-errors.md](api-errors.md).
 
 All user routes require a valid JWT (`Authorization: Bearer <token>`). Obtain a token with `POST /api/v1/auth/login` — see [api-jwt-authentication.md](api-jwt-authentication.md).
 
@@ -136,6 +136,7 @@ Components live under `front-end/src/app/users/`. Form field names align with th
 
 ## Related docs
 
+- [api-services.md](api-services.md) — AuthService and UsersService method reference
 - [api-responses.md](api-responses.md) — example JSON response bodies
 - [api-resources.md](api-resources.md) — DTO classes, JSON properties, and endpoint matrix
 - [api-errors.md](api-errors.md) — `401`, `500`, and missing-user edge cases
