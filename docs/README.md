@@ -17,6 +17,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [repository-pattern.md](repository-pattern.md) | Repository + unit-of-work pattern, `GenericRepository`, and CRUD persistence flow |
 | [automapper-mapping.md](automapper-mapping.md) | AutoMapper profile: entity ↔ DTO mapping, controller usage, and extension steps |
 | [api-controllers.md](api-controllers.md) | API controller layer: `AuthController`, `UsersController`, routing conventions, and adding endpoints |
+| [api-services.md](api-services.md) | Application services: `AuthService`, `UsersService`, DI registration, quirks, and add-service checklist |
 | [api-jwt-authentication.md](api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
 | [cors-configuration.md](cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |

@@ -37,7 +37,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **UserManagement.Domain** | Entities and repository interfaces; no database or HTTP dependencies. |
 | **UserManagement.DataAccess.EFCore** | EF Core `ApplicationContext`, repository implementations, and migrations. |
 | **Controller** | Thin HTTP adapter in `Controllers/V1/` that delegates to a service. `AuthController` handles login; `UsersController` handles all `/api/v1/users` CRUD — see [api-controllers.md](api-controllers.md) and [api-users-crud.md](api-users-crud.md). |
-| **Service** | Business logic (`AuthService`, `UsersService`) between controllers and repositories. |
+| **Service** | Business logic (`AuthService`, `UsersService`) between controllers and repositories. See [api-services.md](api-services.md). |
 | **Repository** | Data-access class implementing a domain interface (e.g. `UserRepository`). See [repository-pattern.md](repository-pattern.md). |
 | **AutoMapper** | Maps between domain entities and API resources via `DomainToResourceMappingProfile`. See [automapper-mapping.md](automapper-mapping.md). |
 
