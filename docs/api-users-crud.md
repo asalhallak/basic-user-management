@@ -1,6 +1,6 @@
 # Users API CRUD guide
 
-Per-endpoint walkthrough for `/api/v1/users`: controller actions, service methods, repository calls, and known quirks. For example JSON bodies, see [api-responses.md](api-responses.md). For error edge cases, see [api-errors.md](api-errors.md).
+Per-endpoint walkthrough for `/api/v1/users`: controller actions, service methods, repository calls, and known quirks. For controller conventions and how to add endpoints, see [api-controllers.md](api-controllers.md). For example JSON bodies, see [api-responses.md](api-responses.md). For error edge cases, see [api-errors.md](api-errors.md).
 
 All user routes require a valid JWT (`Authorization: Bearer <token>`). Obtain a token with `POST /api/v1/auth/login` — see [api-jwt-authentication.md](api-jwt-authentication.md).
 

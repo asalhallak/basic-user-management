@@ -66,7 +66,7 @@ HTTP entry point and application services.
 
 | Folder / file | Purpose |
 |---------------|---------|
-| `Controllers/V1/` | REST endpoints (`AuthController`, `UsersController`) |
+| `Controllers/V1/` | REST endpoints (`AuthController`, `UsersController`) — see [api-controllers.md](api-controllers.md) |
 | `Services/` | `AuthService`, `UsersService` — business logic |
 | `Resources/` | Request/response DTOs (`UserResource`, `Credentials`, `AddressResource`) |
 | `Mapper/` | AutoMapper profiles (entity ↔ resource) |

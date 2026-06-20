@@ -1,6 +1,6 @@
 # API JWT authentication
 
-How the ASP.NET Core API issues, validates, and protects routes with JWT bearer tokens. For the Angular client flow (localStorage, interceptors, guards), see [front-end-auth.md](front-end-auth.md). For middleware order in the HTTP pipeline, see [api-request-flow.md](api-request-flow.md).
+How the ASP.NET Core API issues, validates, and protects routes with JWT bearer tokens. For controller structure and routing conventions, see [api-controllers.md](api-controllers.md). For the Angular client flow (localStorage, interceptors, guards), see [front-end-auth.md](front-end-auth.md). For middleware order in the HTTP pipeline, see [api-request-flow.md](api-request-flow.md).
 
 ## Overview
 
