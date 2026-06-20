@@ -17,6 +17,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | POST `/users` response | Returns domain `User` entity instead of mapped `UserResource` | Map outbound response in `UsersController.Add` — see [automapper-mapping.md](automapper-mapping.md) |
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API — see [fake-backend.md](fake-backend.md) |
 | Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
+| Home greeting | Template uses `firstName` but login stores `userName` | Fix `home.component.html` — see [front-end-shell.md](front-end-shell.md) |
 | Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
@@ -81,5 +82,6 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON
 - [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
 - [front-end-alerts.md](front-end-alerts.md) — AlertService and global alert component
+- [front-end-shell.md](front-end-shell.md) — AppComponent navbar, layouts, and HomeComponent quirks
 - [SECURITY.md](../SECURITY.md) — vulnerability reporting and known limitations
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — branch workflow and PR checklist
