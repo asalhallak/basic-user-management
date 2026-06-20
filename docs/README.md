@@ -27,6 +27,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [front-end-alerts.md](front-end-alerts.md) | AlertService pub/sub, global `<alert>` component, and form error/success patterns |
 | [front-end-shell.md](front-end-shell.md) | AppComponent navbar, global alert host, nested layouts, and HomeComponent quirks |
 | [angular-routing.md](angular-routing.md) | Route map, lazy-loaded modules, AuthGuard, and navigation flow |
+| [front-end-modules.md](front-end-modules.md) | Angular NgModule layout: AppModule, lazy Auth/Users modules, shared services, and pitfalls |
 | [front-end-models.md](front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
 | [api-users-crud.md](api-users-crud.md) | Per-endpoint Users CRUD walkthrough: controller, service, repository, and quirks |
 | [api-responses.md](api-responses.md) | Example JSON response bodies for every `/api/v1` endpoint |
