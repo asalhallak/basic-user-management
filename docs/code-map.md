@@ -14,7 +14,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Map entities ↔ API models | `UserManagementAPI/UserManagement.API/Mapper/DomainToResourceMappingProfile.cs` | Uses AutoMapper profiles; see [automapper-mapping.md](automapper-mapping.md) |
 | Adjust CORS for the Angular app | `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` | Permissive for local development; see [cors-configuration.md](cors-configuration.md) |
 | Change API base URL from the UI | `front-end/src/environments/environment.ts` | Production URL in `environment.prod.ts` |
-| Change login/register UI | `front-end/src/app/auth/` | `account.service.ts` calls `/api/v1/auth/login`; see [front-end-models.md](front-end-models.md) for field-name alignment |
+| Change login/register UI | `front-end/src/app/auth/` | Login/register forms, `returnUrl`, and register quirks; see [front-end-login-register.md](front-end-login-register.md) and [front-end-models.md](front-end-models.md) |
 | Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users`; see [front-end-users.md](front-end-users.md) |
 | Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only; see [fake-backend.md](fake-backend.md) |
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |
@@ -91,6 +91,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-alerts.md](front-end-alerts.md) — AlertService, global alert component, and form feedback patterns
 - [front-end-shell.md](front-end-shell.md) — AppComponent navbar, nested layouts, and HomeComponent quirks
+- [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register UI and returnUrl flow
 - [angular-routing.md](angular-routing.md) — lazy-loaded modules, route map, and AuthGuard flow
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks
 - [api-responses.md](api-responses.md) — example API response JSON

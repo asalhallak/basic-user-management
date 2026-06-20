@@ -105,6 +105,7 @@ Example: a read-only `/reports` area would add a `ReportsModule`, lazy-load it f
 ## Related docs
 
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and login flow
+- [front-end-login-register.md](front-end-login-register.md) — login/register forms and `returnUrl` handling
 - [front-end-shell.md](front-end-shell.md) — AppComponent navbar, nested layouts, and HomeComponent
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-models.md](front-end-models.md) — Form fields vs API JSON on login/register/user screens
