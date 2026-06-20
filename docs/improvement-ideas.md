@@ -36,7 +36,7 @@ The Angular app was adapted from a tutorial that used a local fake backend. When
 - Remove `fakeBackendProvider` from `front-end/src/app/app.module.ts` ([front-end-auth.md](front-end-auth.md)).
 - Add or change routes following the lazy-module pattern in [angular-routing.md](angular-routing.md).
 - Log in with the [default credentials](../README.md#default-login) before using register or user management screens.
-- Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [front-end-models.md](front-end-models.md), [account-service.md](account-service.md), and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
+- Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [front-end-models.md](front-end-models.md), [account-service.md](account-service.md), [front-end-users.md](front-end-users.md), and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
 - Surface API errors consistently via `AlertService` instead of per-form `subscribe` handlers — see [front-end-alerts.md](front-end-alerts.md).
 
 ## Testing
@@ -77,6 +77,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [faq.md](faq.md) — auth vs users, `status` vs `verify`, deploy safety
 - [angular-routing.md](angular-routing.md) — route map, lazy modules, and AuthGuard flow
 - [account-service.md](account-service.md) — front-end HTTP client, session, and endpoint mapping
+- [front-end-users.md](front-end-users.md) — Users module list/editor UI and CRUD flow
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON
 - [front-end-alerts.md](front-end-alerts.md) — AlertService and global alert component
 - [SECURITY.md](../SECURITY.md) — vulnerability reporting and known limitations

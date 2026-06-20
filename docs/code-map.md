@@ -15,7 +15,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Adjust CORS for the Angular app | `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` | Permissive for local development; see [cors-configuration.md](cors-configuration.md) |
 | Change API base URL from the UI | `front-end/src/environments/environment.ts` | Production URL in `environment.prod.ts` |
 | Change login/register UI | `front-end/src/app/auth/` | `account.service.ts` calls `/api/v1/auth/login`; see [front-end-models.md](front-end-models.md) for field-name alignment |
-| Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users` |
+| Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users`; see [front-end-users.md](front-end-users.md) |
 | Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only |
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |
 | Change front-end API calls or session | `front-end/src/app/services/account.service.ts` | Login, logout, and user CRUD HTTP methods; see [account-service.md](account-service.md) |
@@ -72,7 +72,7 @@ Business logic lives in `Services/` (`AuthService`, `UsersService`). JWT middlew
 | `/account/login` | `LoginComponent` | Public | Sign in |
 | `/account/register` | `RegisterComponent` | Public | Register form (posts to protected API) |
 
-Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing.module.ts`, and `users/users-routing.module.ts`. Unauthenticated visitors are redirected to `/account/login` by `AuthGuard`. For lazy loading, layout components, and `returnUrl` behavior, see [angular-routing.md](angular-routing.md).
+Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing.module.ts`, and `users/users-routing.module.ts`. Unauthenticated visitors are redirected to `/account/login` by `AuthGuard`. For lazy loading, layout components, and `returnUrl` behavior, see [angular-routing.md](angular-routing.md). For list/editor component behavior and form fields, see [front-end-users.md](front-end-users.md).
 
 ## Related docs
 
@@ -86,6 +86,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [quick-start.md](quick-start.md) — install, run, verify
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, JWT signing, and bearer validation
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
+- [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-alerts.md](front-end-alerts.md) — AlertService, global alert component, and form feedback patterns
 - [angular-routing.md](angular-routing.md) — lazy-loaded modules, route map, and AuthGuard flow
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks

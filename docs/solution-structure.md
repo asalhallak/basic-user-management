@@ -130,7 +130,7 @@ Root: `front-end/src/app/`
 | Path | Purpose |
 |------|---------|
 | `auth/` | Login and register (`AuthModule`, lazy-loaded at `/account`) |
-| `users/` | User list and add/edit (`UsersModule`, lazy-loaded at `/users`) |
+| `users/` | User list and add/edit (`UsersModule`, lazy-loaded at `/users`) — see [front-end-users.md](front-end-users.md) |
 | `home/` | Post-login landing page (`/`) |
 | `services/` | `AccountService` (login, session), `AlertService` (UI messages) |
 | `helpers/` | `AuthGuard`, JWT/error interceptors, optional `fake-backend` |
@@ -138,7 +138,7 @@ Root: `front-end/src/app/`
 | `models/` | TypeScript interfaces (`User`, `Alert`) |
 | `environments/` | `apiUrl` and build-time configuration |
 
-Top-level routing is in `app-routing.module.ts`. Feature modules define their own routes under `auth/auth-routing.module.ts` and `users/users-routing.module.ts`. JWT flow details: [front-end-auth.md](front-end-auth.md). Alert banners: [front-end-alerts.md](front-end-alerts.md).
+Top-level routing is in `app-routing.module.ts`. Feature modules define their own routes under `auth/auth-routing.module.ts` and `users/users-routing.module.ts`. JWT flow details: [front-end-auth.md](front-end-auth.md). User list/editor UI: [front-end-users.md](front-end-users.md). Alert banners: [front-end-alerts.md](front-end-alerts.md).
 
 ## Related docs
 

@@ -452,6 +452,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/cors-configuration.md](docs/cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/account-service.md](docs/account-service.md) | AccountService HTTP client: session, endpoints, component usage, and quirks |
+| [docs/front-end-users.md](docs/front-end-users.md) | Users module: list, add/edit forms, CRUD flow, and known UI quirks |
 | [docs/front-end-alerts.md](docs/front-end-alerts.md) | AlertService pub/sub, global alert component, and form success/error patterns |
 | [docs/angular-routing.md](docs/angular-routing.md) | Angular route map, lazy modules, AuthGuard, and `returnUrl` navigation |
 | [docs/front-end-models.md](docs/front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
@@ -620,6 +621,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── cors-configuration.md     # CORS policy for local Angular dev and production tightening
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
 │   ├── account-service.md      # AccountService HTTP client and session reference
+│   ├── front-end-users.md      # Users module: list, add/edit, CRUD flow, UI quirks
 │   ├── front-end-alerts.md     # AlertService, global alert component, form feedback
 │   ├── angular-routing.md      # Route map, lazy modules, AuthGuard, and navigation flow
 │   ├── front-end-models.md     # Angular form fields vs API JSON (loginName, register legacy)
