@@ -88,6 +88,7 @@ See [improvement-ideas.md](improvement-ideas.md) for a suggested first contribut
 - [account-service.md](account-service.md) — HTTP methods, session, and which components call the API
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and form fields
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
+- [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
 - [api-responses.md](api-responses.md) — example JSON bodies
 - [README — Front-end and API integration](../README.md#front-end-and-api-integration) — fake backend and integration checklist
 - [code-map.md](code-map.md) — where to change login, register, and user editor UI

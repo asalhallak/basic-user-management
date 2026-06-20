@@ -15,7 +15,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Duplicate `loginName` | `500` from database constraint | Catch unique violation; return `409 Conflict` |
 | Validation | No `[Required]` on API models | Add FluentValidation or data annotations on `UserResource` |
 | POST `/users` response | Returns domain `User` entity instead of mapped `UserResource` | Map outbound response in `UsersController.Add` — see [automapper-mapping.md](automapper-mapping.md) |
-| Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API |
+| Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API — see [fake-backend.md](fake-backend.md) |
 | Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
 | Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
@@ -33,7 +33,7 @@ Documented mismatches between intended REST behavior and the current implementat
 
 The Angular app was adapted from a tutorial that used a local fake backend. When pointing at the real API:
 
-- Remove `fakeBackendProvider` from `front-end/src/app/app.module.ts` ([front-end-auth.md](front-end-auth.md)).
+- Remove `fakeBackendProvider` from `front-end/src/app/app.module.ts` ([fake-backend.md](fake-backend.md), [front-end-auth.md](front-end-auth.md)).
 - Add or change routes following the lazy-module pattern in [angular-routing.md](angular-routing.md).
 - Log in with the [default credentials](../README.md#default-login) before using register or user management screens.
 - Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [front-end-models.md](front-end-models.md), [account-service.md](account-service.md), [front-end-users.md](front-end-users.md), and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
@@ -79,6 +79,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [account-service.md](account-service.md) — front-end HTTP client, session, and endpoint mapping
 - [front-end-users.md](front-end-users.md) — Users module list/editor UI and CRUD flow
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON
+- [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
 - [front-end-alerts.md](front-end-alerts.md) — AlertService and global alert component
 - [SECURITY.md](../SECURITY.md) — vulnerability reporting and known limitations
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — branch workflow and PR checklist
