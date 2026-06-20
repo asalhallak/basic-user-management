@@ -460,6 +460,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/front-end-alerts.md](docs/front-end-alerts.md) | AlertService pub/sub, global alert component, and form success/error patterns |
 | [docs/front-end-shell.md](docs/front-end-shell.md) | AppComponent navbar, global alert host, nested layouts, and HomeComponent quirks |
 | [docs/angular-routing.md](docs/angular-routing.md) | Angular route map, lazy modules, AuthGuard, and `returnUrl` navigation |
+| [docs/front-end-modules.md](docs/front-end-modules.md) | Angular NgModule layout: AppModule, lazy Auth/Users modules, shared services |
 | [docs/front-end-models.md](docs/front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
 | [docs/api-users-crud.md](docs/api-users-crud.md) | Per-endpoint Users CRUD walkthrough: controller, service, repository, and quirks |
 | [docs/api-responses.md](docs/api-responses.md) | Example JSON response bodies for each API endpoint |
@@ -634,6 +635,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── front-end-alerts.md     # AlertService, global alert component, form feedback
 │   ├── front-end-shell.md      # AppComponent navbar, layouts, HomeComponent quirks
 │   ├── angular-routing.md      # Route map, lazy modules, AuthGuard, and navigation flow
+│   ├── front-end-modules.md    # AppModule vs lazy feature modules and shared services
 │   ├── front-end-models.md     # Angular form fields vs API JSON (loginName, register legacy)
 │   ├── api-users-crud.md       # Per-endpoint Users CRUD walkthrough and quirks
 │   ├── api-responses.md        # Example JSON response bodies for API endpoints

@@ -22,6 +22,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Change front-end API calls or session | `front-end/src/app/services/account.service.ts` | Login, logout, and user CRUD HTTP methods; see [account-service.md](account-service.md) |
 | Change success/error banners | `front-end/src/app/services/alert.service.ts`, `components/alert.component.ts` | Global `<alert>` in `app.component.html`; see [front-end-alerts.md](front-end-alerts.md) |
 | Change navbar, logout, or home page | `front-end/src/app/app.component.html`, `home/home.component.html` | Root shell and post-login landing; see [front-end-shell.md](front-end-shell.md) |
+| Add a lazy-loaded feature module | `front-end/src/app/app-routing.module.ts`, new folder under `app/` | Follow Auth/Users module pattern; see [front-end-modules.md](front-end-modules.md) |
 
 ## Add an EF Core migration
 
@@ -96,6 +97,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [front-end-shell.md](front-end-shell.md) — AppComponent navbar, nested layouts, and HomeComponent quirks
 - [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register UI and returnUrl flow
 - [angular-routing.md](angular-routing.md) — lazy-loaded modules, route map, and AuthGuard flow
+- [front-end-modules.md](front-end-modules.md) — AppModule vs lazy feature modules, shared services, and module pitfalls
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks
 - [api-responses.md](api-responses.md) — example API response JSON
 - [api-errors.md](api-errors.md) — error statuses and edge cases

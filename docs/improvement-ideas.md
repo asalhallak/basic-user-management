@@ -78,6 +78,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [repository-pattern.md](repository-pattern.md) — repository interfaces, UnitOfWork, and CRUD flow
 - [faq.md](faq.md) — auth vs users, `status` vs `verify`, deploy safety
 - [angular-routing.md](angular-routing.md) — route map, lazy modules, and AuthGuard flow
+- [front-end-modules.md](front-end-modules.md) — AppModule vs lazy feature modules and shared services
 - [account-service.md](account-service.md) — front-end HTTP client, session, and endpoint mapping
 - [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register UI and legacy field quirks
 - [front-end-users.md](front-end-users.md) — Users module list/editor UI and CRUD flow

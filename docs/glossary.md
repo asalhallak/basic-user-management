@@ -51,6 +51,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **`AccountService`** | Angular singleton that calls auth and user CRUD endpoints, stores the JWT in `localStorage`, and exposes the current session. See [account-service.md](account-service.md). |
 | **Users module** | Lazy-loaded Angular module at `/users` with list, add, and edit screens. See [front-end-users.md](front-end-users.md). |
 | **Auth module** | Lazy-loaded Angular module at `/account` with login and register forms. See [front-end-login-register.md](front-end-login-register.md). |
+| **NgModule** | Angular module boundary (`AppModule`, `AuthModule`, `UsersModule`). Root module registers interceptors; feature modules lazy-load on first navigation. See [front-end-modules.md](front-end-modules.md). |
 | **App shell** | Root `AppComponent` layout: navbar (when logged in), global `<alert>`, and top-level `router-outlet`. See [front-end-shell.md](front-end-shell.md). |
 | **`localStorage`** | Browser storage where `AccountService` persists the logged-in user object (including the token). |
 | **SPA** | Single-page application—the Angular app served at `http://localhost:4200` during development. |

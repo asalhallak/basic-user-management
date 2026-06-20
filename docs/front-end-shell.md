@@ -45,7 +45,7 @@ Files:
 |------|------|
 | [`app.component.ts`](../front-end/src/app/app.component.ts) | Subscribes to `AccountService.user` for navbar visibility; exposes `logout()` |
 | [`app.component.html`](../front-end/src/app/app.component.html) | Navbar, global `<alert>`, root `router-outlet`, tutorial credits |
-| [`app.module.ts`](../front-end/src/app/app.module.ts) | Declares `AppComponent`, `HomeComponent`, `AlertComponent`; registers interceptors and `fakeBackendProvider` |
+| [`app.module.ts`](../front-end/src/app/app.module.ts) | Declares `AppComponent`, `HomeComponent`, `AlertComponent`; registers interceptors and `fakeBackendProvider` — see [front-end-modules.md](front-end-modules.md) |
 
 ### Navbar
 
