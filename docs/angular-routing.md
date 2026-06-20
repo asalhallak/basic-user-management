@@ -78,7 +78,7 @@ const usersModule = () => import('./users/users.module').then(x => x.UsersModule
 | `loadChildren: usersModule` | `app-routing.module.ts` | `/users/*` routes load `UsersModule` when first visited |
 | `RouterModule.forChild(routes)` | Feature routing modules | Child routes merge under the parent path |
 
-Both feature modules use a **layout component** with a nested `<router-outlet>` so login/register and list/add-edit share consistent page chrome without duplicating markup.
+Both feature modules use a **layout component** with a nested `<router-outlet>` so login/register and list/add-edit share consistent page chrome without duplicating markup. For navbar visibility, global alerts, and layout file locations, see [front-end-shell.md](front-end-shell.md).
 
 ## Wildcard redirect
 
@@ -105,6 +105,7 @@ Example: a read-only `/reports` area would add a `ReportsModule`, lazy-load it f
 ## Related docs
 
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and login flow
+- [front-end-shell.md](front-end-shell.md) — AppComponent navbar, nested layouts, and HomeComponent
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-models.md](front-end-models.md) — Form fields vs API JSON on login/register/user screens
 - [code-map.md](code-map.md) — File locations for auth and user UI changes

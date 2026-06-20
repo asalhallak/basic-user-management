@@ -108,6 +108,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 - [account-service.md](account-service.md) — `AccountService` methods, endpoints, and component usage
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON (`loginName`, register vs editor)
 - [front-end-alerts.md](front-end-alerts.md) — success/error banners and AlertService usage
+- [front-end-shell.md](front-end-shell.md) — AppComponent navbar, global alert host, and layouts
 - [quick-start.md](quick-start.md) — run the stack and sign in
 - [angular-routing.md](angular-routing.md) — route map, lazy modules, and AuthGuard redirect flow
 - [code-map.md](code-map.md) — where to change login UI and auth behavior

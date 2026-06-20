@@ -20,6 +20,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |
 | Change front-end API calls or session | `front-end/src/app/services/account.service.ts` | Login, logout, and user CRUD HTTP methods; see [account-service.md](account-service.md) |
 | Change success/error banners | `front-end/src/app/services/alert.service.ts`, `components/alert.component.ts` | Global `<alert>` in `app.component.html`; see [front-end-alerts.md](front-end-alerts.md) |
+| Change navbar, logout, or home page | `front-end/src/app/app.component.html`, `home/home.component.html` | Root shell and post-login landing; see [front-end-shell.md](front-end-shell.md) |
 
 ## Add an EF Core migration
 
@@ -89,6 +90,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-alerts.md](front-end-alerts.md) — AlertService, global alert component, and form feedback patterns
+- [front-end-shell.md](front-end-shell.md) — AppComponent navbar, nested layouts, and HomeComponent quirks
 - [angular-routing.md](angular-routing.md) — lazy-loaded modules, route map, and AuthGuard flow
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD walkthrough and quirks
 - [api-responses.md](api-responses.md) — example API response JSON

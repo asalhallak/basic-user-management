@@ -455,6 +455,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/account-service.md](docs/account-service.md) | AccountService HTTP client: session, endpoints, component usage, and quirks |
 | [docs/front-end-users.md](docs/front-end-users.md) | Users module: list, add/edit forms, CRUD flow, and known UI quirks |
 | [docs/front-end-alerts.md](docs/front-end-alerts.md) | AlertService pub/sub, global alert component, and form success/error patterns |
+| [docs/front-end-shell.md](docs/front-end-shell.md) | AppComponent navbar, global alert host, nested layouts, and HomeComponent quirks |
 | [docs/angular-routing.md](docs/angular-routing.md) | Angular route map, lazy modules, AuthGuard, and `returnUrl` navigation |
 | [docs/front-end-models.md](docs/front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
 | [docs/api-users-crud.md](docs/api-users-crud.md) | Per-endpoint Users CRUD walkthrough: controller, service, repository, and quirks |
@@ -625,6 +626,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── account-service.md      # AccountService HTTP client and session reference
 │   ├── front-end-users.md      # Users module: list, add/edit, CRUD flow, UI quirks
 │   ├── front-end-alerts.md     # AlertService, global alert component, form feedback
+│   ├── front-end-shell.md      # AppComponent navbar, layouts, HomeComponent quirks
 │   ├── angular-routing.md      # Route map, lazy modules, AuthGuard, and navigation flow
 │   ├── front-end-models.md     # Angular form fields vs API JSON (loginName, register legacy)
 │   ├── api-users-crud.md       # Per-endpoint Users CRUD walkthrough and quirks

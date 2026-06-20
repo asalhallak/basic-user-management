@@ -132,6 +132,7 @@ this.alertService.info('Changes saved locally', { autoClose: true });
 ## Related docs
 
 - [front-end-auth.md](front-end-auth.md) — JWT session, interceptors, and logout on `401`
+- [front-end-shell.md](front-end-shell.md) — global `<alert>` placement in AppComponent
 - [front-end-models.md](front-end-models.md) — form fields vs API JSON
 - [angular-routing.md](angular-routing.md) — navigation and layout components
 - [code-map.md](code-map.md) — where to change login, register, and user editor UI
