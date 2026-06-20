@@ -18,6 +18,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users`; see [front-end-users.md](front-end-users.md) |
 | Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only; see [fake-backend.md](fake-backend.md) |
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage` |
+| Change JWT attachment or global HTTP errors | `front-end/src/app/helpers/jwt.interceptor.ts`, `error.interceptor.ts` | Registration order in `app.module.ts`; see [front-end-interceptors.md](front-end-interceptors.md) |
 | Change front-end API calls or session | `front-end/src/app/services/account.service.ts` | Login, logout, and user CRUD HTTP methods; see [account-service.md](account-service.md) |
 | Change success/error banners | `front-end/src/app/services/alert.service.ts`, `components/alert.component.ts` | Global `<alert>` in `app.component.html`; see [front-end-alerts.md](front-end-alerts.md) |
 | Change navbar, logout, or home page | `front-end/src/app/app.component.html`, `home/home.component.html` | Root shell and post-login landing; see [front-end-shell.md](front-end-shell.md) |
@@ -87,6 +88,7 @@ Route definitions: `front-end/src/app/app-routing.module.ts`, `auth/auth-routing
 - [quick-start.md](quick-start.md) — install, run, verify
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, JWT signing, and bearer validation
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
+- [front-end-interceptors.md](front-end-interceptors.md) — JwtInterceptor, ErrorInterceptor, chain order, and error re-throw flow
 - [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-alerts.md](front-end-alerts.md) — AlertService, global alert component, and form feedback patterns

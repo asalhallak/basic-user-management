@@ -451,6 +451,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-jwt-authentication.md](docs/api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
 | [docs/cors-configuration.md](docs/cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
+| [docs/front-end-interceptors.md](docs/front-end-interceptors.md) | HTTP interceptor chain: JwtInterceptor, ErrorInterceptor, order, and error flow |
 | [docs/front-end-login-register.md](docs/front-end-login-register.md) | AuthModule login/register UI, returnUrl flow, and register quirks |
 | [docs/fake-backend.md](docs/fake-backend.md) | Tutorial fake-backend interceptor: legacy routes, storage keys, and removal |
 | [docs/account-service.md](docs/account-service.md) | AccountService HTTP client: session, endpoints, component usage, and quirks |
@@ -623,6 +624,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── api-jwt-authentication.md # API JWT login, signing, validation, and protected routes
 │   ├── cors-configuration.md     # CORS policy for local Angular dev and production tightening
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
+│   ├── front-end-interceptors.md # HTTP interceptor chain (JWT attach, error handling)
 │   ├── front-end-login-register.md # AuthModule login/register forms and returnUrl flow
 │   ├── fake-backend.md         # Tutorial fake-backend interceptor and removal steps
 │   ├── account-service.md      # AccountService HTTP client and session reference

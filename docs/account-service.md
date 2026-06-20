@@ -106,6 +106,7 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 ## Related docs
 
 - [front-end-auth.md](front-end-auth.md) — JWT flow, interceptors, and route guards
+- [front-end-interceptors.md](front-end-interceptors.md) — JwtInterceptor and ErrorInterceptor behavior
 - [front-end-login-register.md](front-end-login-register.md) — login/register forms, returnUrl, and register quirks
 - [front-end-models.md](front-end-models.md) — form fields vs API JSON shapes
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow

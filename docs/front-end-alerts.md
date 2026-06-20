@@ -91,7 +91,7 @@ Login and register layouts do **not** embed their own `<alert>` tag. Messages re
 
 ## Error message source
 
-Failed HTTP calls flow through `ErrorInterceptor` (`helpers/error.interceptor.ts`):
+Failed HTTP calls flow through `ErrorInterceptor` (`helpers/error.interceptor.ts`) — see [front-end-interceptors.md](front-end-interceptors.md) for the full chain and status matrix:
 
 1. On `401` or `403` while a user session exists, `AccountService.logout()` runs.
 2. The interceptor logs the error and re-throws `err.error?.message || err.statusText`.
@@ -132,6 +132,7 @@ this.alertService.info('Changes saved locally', { autoClose: true });
 ## Related docs
 
 - [front-end-auth.md](front-end-auth.md) — JWT session, interceptors, and logout on `401`
+- [front-end-interceptors.md](front-end-interceptors.md) — ErrorInterceptor re-throw flow and status handling
 - [front-end-shell.md](front-end-shell.md) — global `<alert>` placement in AppComponent
 - [front-end-models.md](front-end-models.md) — form fields vs API JSON
 - [angular-routing.md](angular-routing.md) — navigation and layout components

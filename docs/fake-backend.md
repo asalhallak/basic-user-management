@@ -110,6 +110,7 @@ providers: [
 ## Related docs
 
 - [front-end-auth.md](front-end-auth.md) — real JWT storage, interceptors, and route guards
+- [front-end-interceptors.md](front-end-interceptors.md) — full interceptor chain, registration order, and JWT attachment rules
 - [account-service.md](account-service.md) — HTTP endpoints the app actually calls
 - [front-end-models.md](front-end-models.md) — tutorial field names vs API JSON
 - [improvement-ideas.md](improvement-ideas.md) — removing the fake backend as a good first task
