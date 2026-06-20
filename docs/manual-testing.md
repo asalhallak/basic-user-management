@@ -55,7 +55,7 @@ make verify       # or: make verify-api
 
 ## 3. Manual UI walkthrough
 
-Use this when you touched Angular components, routing, interceptors, or the login flow.
+Use this when you touched Angular components, routing, interceptors, or the login flow. For component-level detail on the user list and editor, see [front-end-users.md](front-end-users.md).
 
 | Step | Action | Expected result |
 |------|--------|-----------------|
@@ -107,4 +107,5 @@ Full troubleshooting: [README — Troubleshooting](../README.md#troubleshooting)
 - [quick-start.md](quick-start.md) — install, run, and everyday commands
 - [ci-and-builds.md](ci-and-builds.md) — what CI runs vs local smoke checks
 - [scripts.md](scripts.md) — shell scripts reference and when to use status vs verify
+- [front-end-users.md](front-end-users.md) — Users module list/editor UI walkthrough reference
 - [code-map.md](code-map.md) — where to change API, auth, schema, and UI

@@ -107,6 +107,7 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 
 - [front-end-auth.md](front-end-auth.md) — JWT flow, interceptors, and route guards
 - [front-end-models.md](front-end-models.md) — form fields vs API JSON shapes
+- [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-alerts.md](front-end-alerts.md) — success/error banners in forms
 - [angular-routing.md](angular-routing.md) — which routes call AccountService-backed components
 - [api-users-crud.md](api-users-crud.md) — back-end behavior for `/api/v1/users`

@@ -19,6 +19,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [cors-configuration.md](cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [account-service.md](account-service.md) | `AccountService` HTTP client: session, endpoints, component usage, and quirks |
+| [front-end-users.md](front-end-users.md) | Users module: list, add/edit forms, CRUD flow, and known UI quirks |
 | [front-end-alerts.md](front-end-alerts.md) | AlertService pub/sub, global `<alert>` component, and form error/success patterns |
 | [angular-routing.md](angular-routing.md) | Route map, lazy-loaded modules, AuthGuard, and navigation flow |
 | [front-end-models.md](front-end-models.md) | Angular form fields vs API JSON (`loginName`, legacy register model, TypeScript types) |
