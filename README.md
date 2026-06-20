@@ -449,6 +449,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-resources.md](docs/api-resources.md) | API DTO reference: Credentials, Claims, UserResource, AddressResource, and endpoint matrix |
 | [docs/repository-pattern.md](docs/repository-pattern.md) | Repository + unit-of-work pattern, GenericRepository, and CRUD persistence flow |
 | [docs/automapper-mapping.md](docs/automapper-mapping.md) | AutoMapper profile: entity ↔ DTO mapping, controller usage, and extension steps |
+| [docs/api-controllers.md](docs/api-controllers.md) | API controller layer: AuthController, UsersController, routing conventions, and adding endpoints |
 | [docs/api-jwt-authentication.md](docs/api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
 | [docs/cors-configuration.md](docs/cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
@@ -624,6 +625,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │   ├── api-resources.md        # API DTO reference (Credentials, UserResource, etc.)
 │   ├── repository-pattern.md   # Repository + unit-of-work pattern and CRUD flow
 │   ├── automapper-mapping.md   # Entity ↔ DTO AutoMapper profile and controller usage
+│   ├── api-controllers.md        # AuthController, UsersController, routing, and add-endpoint checklist
 │   ├── api-jwt-authentication.md # API JWT login, signing, validation, and protected routes
 │   ├── cors-configuration.md     # CORS policy for local Angular dev and production tightening
 │   ├── front-end-auth.md       # Angular JWT flow (interceptors, guards, localStorage)
