@@ -85,6 +85,7 @@ See [improvement-ideas.md](improvement-ideas.md) for a suggested first contribut
 ## Related docs
 
 - [domain-model.md](domain-model.md) — entity, resource, and SQL column mapping
+- [account-service.md](account-service.md) — HTTP methods, session, and which components call the API
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
 - [api-responses.md](api-responses.md) — example JSON bodies
 - [README — Front-end and API integration](../README.md#front-end-and-api-integration) — fake backend and integration checklist

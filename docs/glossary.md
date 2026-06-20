@@ -48,6 +48,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **`apiUrl`** | Base URL in `environment.ts` (default `http://localhost:5000`). All HTTP calls prepend this value. |
 | **Interceptor** | `jwt.interceptor.ts` attaches the stored JWT to outgoing API requests; `error.interceptor.ts` handles HTTP errors. |
 | **AlertService** | Pub/sub service for Bootstrap alert banners (`success`, `error`, etc.). Rendered by `<alert>` in `app.component.html`. See [front-end-alerts.md](front-end-alerts.md). |
+| **`AccountService`** | Angular singleton that calls auth and user CRUD endpoints, stores the JWT in `localStorage`, and exposes the current session. See [account-service.md](account-service.md). |
 | **`localStorage`** | Browser storage where `AccountService` persists the logged-in user object (including the token). |
 | **SPA** | Single-page application—the Angular app served at `http://localhost:4200` during development. |
 

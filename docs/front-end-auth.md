@@ -104,6 +104,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 ## Related docs
 
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
+- [account-service.md](account-service.md) — `AccountService` methods, endpoints, and component usage
 - [front-end-models.md](front-end-models.md) — Angular form fields vs API JSON (`loginName`, register vs editor)
 - [front-end-alerts.md](front-end-alerts.md) — success/error banners and AlertService usage
 - [quick-start.md](quick-start.md) — run the stack and sign in
