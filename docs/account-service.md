@@ -79,7 +79,7 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 | Component | AccountService calls | Notes |
 |-----------|---------------------|-------|
 | `auth/login/login.component.ts` | `login()` | Navigates home on success; errors via `AlertService` |
-| `auth/register/register.component.ts` | `register()` | Legacy form fields (`username`, `firstName`, `lastName`) — misaligned with API; see [front-end-models.md](front-end-models.md) |
+| `auth/register/register.component.ts` | `register()` | Legacy form fields — see [front-end-login-register.md](front-end-login-register.md) and [front-end-models.md](front-end-models.md) |
 | `users/list/list.component.ts` | `getAll()`, `delete()` | Loads table on init; delete removes row on success |
 | `users/add-edit/add-edit.component.ts` | `getById()`, `register()` (add), `update()` (edit) | API-aligned fields (`loginName`, `displayName`, nested `address`); alerts via `AlertService` |
 
@@ -106,6 +106,7 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 ## Related docs
 
 - [front-end-auth.md](front-end-auth.md) — JWT flow, interceptors, and route guards
+- [front-end-login-register.md](front-end-login-register.md) — login/register forms, returnUrl, and register quirks
 - [front-end-models.md](front-end-models.md) — form fields vs API JSON shapes
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and CRUD UI flow
 - [front-end-alerts.md](front-end-alerts.md) — success/error banners in forms

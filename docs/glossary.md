@@ -10,10 +10,10 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **Bearer token** | HTTP header format the API expects on protected endpoints: `Authorization: Bearer <jwt>`. |
 | **Login credentials** | Hardcoded development username/password (`admin` / `123456789`) validated in `AuthService`. Not stored in the database. |
 | **User record** | A profile row in SQL Server (`Users` table) managed through CRUD endpoints. Creating a user does **not** create a login account. |
-| **Register page** | Angular form that posts to `POST /api/v1/users`. It requires an existing JWT—it is not public sign-up. |
+| **Register page** | Angular form that posts to `POST /api/v1/users`. It requires an existing JWT—it is not public sign-up. See [front-end-login-register.md](front-end-login-register.md). |
 | **Fake backend** | `fakeBackendProvider` in `app.module.ts` that intercepts legacy tutorial HTTP routes (`/users/authenticate`, etc.). Remove it when using the real API exclusively. See [fake-backend.md](fake-backend.md). |
 | **CORS** | Cross-Origin Resource Sharing — browser security requiring the API to allow requests from the Angular dev server origin (`http://localhost:4200`). Configured in `CorsOriginConfiguration.cs`. See [cors-configuration.md](cors-configuration.md). |
-| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. See [angular-routing.md](angular-routing.md). |
+| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. Checks `localStorage` only—not JWT expiry. See [angular-routing.md](angular-routing.md) and [front-end-login-register.md](front-end-login-register.md). |
 
 ## API and data model
 
@@ -50,6 +50,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **AlertService** | Pub/sub service for Bootstrap alert banners (`success`, `error`, etc.). Rendered by `<alert>` in `app.component.html`. See [front-end-alerts.md](front-end-alerts.md). |
 | **`AccountService`** | Angular singleton that calls auth and user CRUD endpoints, stores the JWT in `localStorage`, and exposes the current session. See [account-service.md](account-service.md). |
 | **Users module** | Lazy-loaded Angular module at `/users` with list, add, and edit screens. See [front-end-users.md](front-end-users.md). |
+| **Auth module** | Lazy-loaded Angular module at `/account` with login and register forms. See [front-end-login-register.md](front-end-login-register.md). |
 | **App shell** | Root `AppComponent` layout: navbar (when logged in), global `<alert>`, and top-level `router-outlet`. See [front-end-shell.md](front-end-shell.md). |
 | **`localStorage`** | Browser storage where `AccountService` persists the logged-in user object (including the token). |
 | **SPA** | Single-page application—the Angular app served at `http://localhost:4200` during development. |

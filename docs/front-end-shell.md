@@ -145,6 +145,7 @@ The page also still references "Angular 10" in copy while the project uses Angul
 - [front-end-alerts.md](front-end-alerts.md) — AlertService and the global `<alert>` component
 - [account-service.md](account-service.md) — login/logout and `user` BehaviorSubject
 - [front-end-models.md](front-end-models.md) — TypeScript `User` vs API JSON shapes
+- [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register forms and returnUrl flow
 - [front-end-users.md](front-end-users.md) — Users module list and editor screens
 - [fake-backend.md](fake-backend.md) — removing the tutorial fake backend from `AppModule`
 - [solution-structure.md](solution-structure.md) — Angular folder layout and module overview

@@ -103,6 +103,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 
 ## Related docs
 
+- [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register forms, returnUrl, and register quirks
 - [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [account-service.md](account-service.md) — `AccountService` methods, endpoints, and component usage

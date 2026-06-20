@@ -86,6 +86,7 @@ See [improvement-ideas.md](improvement-ideas.md) for a suggested first contribut
 
 - [domain-model.md](domain-model.md) — entity, resource, and SQL column mapping
 - [account-service.md](account-service.md) — HTTP methods, session, and which components call the API
+- [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register forms and legacy field quirks
 - [front-end-users.md](front-end-users.md) — Users module list/editor components and form fields
 - [front-end-auth.md](front-end-auth.md) — JWT storage, interceptors, and route guards
 - [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
