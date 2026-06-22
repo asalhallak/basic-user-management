@@ -87,7 +87,7 @@ Class-level `[Authorize]` protects every action. Requests without a valid JWT ar
 | Method | Route | Action | Request body | Response |
 |--------|-------|--------|--------------|----------|
 | `GET` | `/api/v1/users` | `Get()` | — | `200` — array of `UserResource` |
-| `GET` | `/api/v1/users/{id}` | `Get(int id)` | — | `200` — `UserResource` or `null` |
+| `GET` | `/api/v1/users/{id}` | `Get(int id)` | — | `200` — `UserResource`; `404` when missing |
 | `POST` | `/api/v1/users` | `Add` | `UserResource` | `200` — domain `User` entity |
 | `PUT` | `/api/v1/users/{id}` | `Update` | `UserResource` | `200` — empty body |
 | `DELETE` | `/api/v1/users/{id}` | `Delete` | — | `200` — empty body |
@@ -98,7 +98,6 @@ Class-level `[Authorize]` protects every action. Requests without a valid JWT ar
 
 | Quirk | Detail | Fix starting point |
 |-------|--------|-------------------|
-| Missing user returns `200` with `null` | `Get(int id)` always returns `Ok(...)` | Add a null check; return `NotFound()` — see [api-errors.md](api-errors.md) |
 | POST returns entity, not DTO | `Add` returns `Ok(_user)` where `_user` is a `User` entity | Map to `UserResource` before returning — see [automapper-mapping.md](automapper-mapping.md) |
 | PUT sets route id on body | `user.Id = id` before mapping | Ensures URL and body stay aligned |
 

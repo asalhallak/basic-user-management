@@ -16,16 +16,16 @@ This sample API intentionally keeps validation and error handling minimal. The t
 
 ## Users — documented vs actual behavior
 
-The README lists `404 Not Found` for a missing user ID. The current implementation does **not** return `404` for `GET /users/{id}` when the ID does not exist — it returns `200 OK` with a `null` body because `UsersService.Get` uses `FirstOrDefault()` and the controller always calls `Ok(...)`.
+`GET /users/{id}` returns `404 Not Found` when the ID does not exist. The controller checks for a `null` result from `UsersService.Get` before mapping to `UserResource`.
 
 | Situation | Documented | Actual today | Body |
 |-----------|------------|--------------|------|
 | `GET /users/{id}` — ID exists | `200` | `200` | user object |
-| `GET /users/{id}` — ID missing | `404` | `200` | `null` |
-| `DELETE /users/{id}` — ID missing | `200` | `500` | developer exception page (in Development) |
-| `PUT /users/{id}` — ID missing | `200` | `200` or `500` | may update nothing or fail depending on EF state |
+| `GET /users/{id}` — ID missing | `404` | `404` | empty |
+| `DELETE /users/{id}` — ID missing | `404` | `500` | developer exception page (in Development) |
+| `PUT /users/{id}` — ID missing | `404` | `200` or `500` | may update nothing or fail depending on EF state |
 
-When hardening the API, add explicit not-found checks in `UsersService` or the controller and return `NotFound()` — see [code-map.md](code-map.md) and [api-users-crud.md](api-users-crud.md).
+When hardening the API further, add similar not-found checks for `DELETE` and `PUT` — see [code-map.md](code-map.md) and [api-users-crud.md](api-users-crud.md).
 
 ## Database constraint violations
 
@@ -54,7 +54,7 @@ In **non-Development** environments, unhandled exceptions return a generic `500`
 |---------|--------------|-------------|
 | `401` on every `/users` call | Missing, expired, or wrong JWT | `make token` or log in again |
 | `500` on `POST /users` | Duplicate `loginName` | Use a unique `loginName` or delete the existing user |
-| `200` with `null` for `GET /users/{id}` | ID does not exist | Treat as not found in clients, or add server-side `404` handling |
+| `404 Not Found` for `GET /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 | `500` on `DELETE /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 
 ## Related docs
