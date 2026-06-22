@@ -128,6 +128,7 @@ See also [code-map.md](code-map.md) and [improvement-ideas.md](improvement-ideas
 
 ## Related docs
 
+- [client-server-auth.md](client-server-auth.md) — client vs server auth layers and expired-token scenarios
 - [front-end-auth.md](front-end-auth.md) — Angular JWT storage, interceptors, and `AuthGuard`
 - [api-resources.md](api-resources.md) — `Credentials` and `Claims` DTO reference
 - [api-request-flow.md](api-request-flow.md) — full HTTP pipeline and authenticated request sequence

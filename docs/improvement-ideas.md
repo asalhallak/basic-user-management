@@ -73,6 +73,7 @@ Before exposing this stack beyond `localhost`, work through [SECURITY.md](../SEC
 - [api-controllers.md](api-controllers.md) — AuthController, UsersController, routing conventions, and add-endpoint checklist
 - [api-services.md](api-services.md) — AuthService, UsersService, DI registration, and known quirks
 - [api-resources.md](api-resources.md) — API DTO classes, JSON properties, and endpoint matrix
+- [client-server-auth.md](client-server-auth.md) — client vs server auth layers and why AuthGuard alone is not security
 - [api-jwt-authentication.md](api-jwt-authentication.md) — API login, token signing, and bearer validation
 - [api-users-crud.md](api-users-crud.md) — per-endpoint Users CRUD behavior and quirks
 - [api-errors.md](api-errors.md) — current error statuses and edge cases

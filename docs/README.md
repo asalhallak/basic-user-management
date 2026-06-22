@@ -19,6 +19,7 @@ Supplementary guides and assets for local development. The main setup guide live
 | [api-controllers.md](api-controllers.md) | API controller layer: `AuthController`, `UsersController`, routing conventions, and adding endpoints |
 | [api-services.md](api-services.md) | Application services: `AuthService`, `UsersService`, DI registration, quirks, and add-service checklist |
 | [api-jwt-authentication.md](api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
+| [client-server-auth.md](client-server-auth.md) | Client vs server auth layers: AuthGuard/localStorage vs JWT middleware and `[Authorize]` |
 | [cors-configuration.md](cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [front-end-auth.md](front-end-auth.md) | How the Angular app stores the JWT, interceptors, and route guards |
 | [front-end-interceptors.md](front-end-interceptors.md) | HTTP interceptor chain: JwtInterceptor, ErrorInterceptor, registration order, and error flow |
