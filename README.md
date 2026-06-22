@@ -452,6 +452,7 @@ Additional guides live under [`docs/`](docs/README.md):
 | [docs/api-controllers.md](docs/api-controllers.md) | API controller layer: AuthController, UsersController, routing conventions, and adding endpoints |
 | [docs/api-services.md](docs/api-services.md) | Application services: AuthService, UsersService, DI registration, quirks, and add-service checklist |
 | [docs/api-jwt-authentication.md](docs/api-jwt-authentication.md) | API-side JWT: login flow, token signing, bearer validation, and `[Authorize]` |
+| [docs/client-server-auth.md](docs/client-server-auth.md) | Client vs server auth: Angular route guards vs API JWT enforcement |
 | [docs/cors-configuration.md](docs/cors-configuration.md) | CORS policy for Angular ↔ API local dev, middleware order, and production tightening |
 | [docs/front-end-auth.md](docs/front-end-auth.md) | Angular JWT flow: localStorage, interceptors, and route guards |
 | [docs/front-end-interceptors.md](docs/front-end-interceptors.md) | HTTP interceptor chain: JwtInterceptor, ErrorInterceptor, order, and error flow |

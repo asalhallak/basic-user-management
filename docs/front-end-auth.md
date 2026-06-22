@@ -103,6 +103,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 
 ## Related docs
 
+- [client-server-auth.md](client-server-auth.md) — how client route protection differs from API JWT enforcement
 - [front-end-interceptors.md](front-end-interceptors.md) — JwtInterceptor, ErrorInterceptor, chain order, and debugging
 - [front-end-login-register.md](front-end-login-register.md) — AuthModule login/register forms, returnUrl, and register quirks
 - [fake-backend.md](fake-backend.md) — tutorial fake-backend routes, storage, and removal
