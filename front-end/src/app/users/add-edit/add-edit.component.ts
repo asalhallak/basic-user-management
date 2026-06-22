@@ -48,11 +48,18 @@ export class AddEditComponent implements OnInit {
         });
 
         if (!this.isAddMode) {
+            this.loading = true;
             this.accountService.getById(this.id)
                 .pipe(first())
-                .subscribe(x => {
-                    console.log(x)
-                    this.form.patchValue(x);
+                .subscribe({
+                    next: user => {
+                        this.form.patchValue(user);
+                        this.loading = false;
+                    },
+                    error: error => {
+                        this.alertService.error(error);
+                        this.router.navigate(['../'], { relativeTo: this.route });
+                    }
                 });
         }
     }
@@ -61,7 +68,6 @@ export class AddEditComponent implements OnInit {
     get controls() { return this.form.controls; }
 
     onSubmit() {
-        console.log(this.form.value)
         this.submitted = true;
 
         // reset alerts on submit
@@ -81,7 +87,6 @@ export class AddEditComponent implements OnInit {
     }
 
     private createUser() {
-        console.log(this.form.value)
         this.accountService.register(this.form.value)
             .pipe(first())
             .subscribe({

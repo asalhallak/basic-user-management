@@ -47,7 +47,7 @@
             <input type="text" formControlName="profilePictureUrl" class="form-control"
                    [ngClass]="{ 'is-invalid': submitted && controls.profilePictureUrl.errors }" />
             <div *ngIf="submitted && controls.profilePictureUrl.errors" class="invalid-feedback">
-                <div *ngIf="controls.profilePictureUrl.errors.required">Salary is required</div>
+                <div *ngIf="controls.profilePictureUrl.errors.required">Profile Picture Url is required</div>
             </div>
         </div>
     </div>
