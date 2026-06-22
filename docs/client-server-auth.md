@@ -51,7 +51,7 @@ return false;
 |-------|-------------------|-------------------------------|
 | `userValue` present | A `user` object exists in `localStorage` | JWT signature, expiry, or claim contents |
 
-An expired or tampered token still passes the guard until an API call fails. See [front-end-login-register.md — AuthGuard](front-end-login-register.md#authguard-and-jwt-expiry) and [angular-routing.md](angular-routing.md).
+An expired or tampered token still passes the guard until an API call fails. See [front-end-login-register.md — AuthGuard interaction](front-end-login-register.md#authguard-interaction) and [angular-routing.md](angular-routing.md).
 
 ### Session storage
 
