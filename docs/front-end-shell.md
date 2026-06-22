@@ -104,17 +104,15 @@ Post-login landing page declared in `AppModule` (not lazy-loaded).
 | [`home/home.component.ts`](../front-end/src/app/home/home.component.ts) | Reads `accountService.userValue` once in the constructor |
 | [`home/home.component.html`](../front-end/src/app/home/home.component.html) | Greeting and link to `/users` |
 
-### Known quirk: greeting field mismatch
+### Home greeting
 
-The template greets with `{{ user.firstName }}`, but the API login response stores `userName`, not `firstName`:
+The template greets with `{{ user.userName }}`, matching the API login response:
 
 ```json
 { "userName": "admin", "token": "..." }
 ```
 
-The legacy TypeScript `User` model in [`models/user.ts`](../front-end/src/app/models/user.ts) still defines tutorial fields (`firstName`, `lastName`, `username`) that do not match the API session object. After login, the home page may show **"Hi !"** with a blank name. Aligning the template with `user.userName` (or mapping the login response) is a small first contribution — see [front-end-models.md](front-end-models.md) and [improvement-ideas.md](improvement-ideas.md).
-
-The page also still references "Angular 10" in copy while the project uses Angular 11 ([technology-stack.md](technology-stack.md)).
+The legacy TypeScript `User` model in [`models/user.ts`](../front-end/src/app/models/user.ts) still defines tutorial fields (`firstName`, `lastName`, `username`) used by the register form and fake backend. The session object after login only includes `userName` and `token` — see [front-end-models.md](front-end-models.md).
 
 ## AppModule bootstrap
 
@@ -135,7 +133,7 @@ The page also still references "Angular 10" in copy while the project uses Angul
 | Add a top-level nav link | `app.component.html` — add `<a routerLink="...">` inside the navbar |
 | Change logout behavior | `app.component.ts` → `logout()` or `AccountService.logout()` |
 | Hide navbar on additional routes | Ensure `AccountService.user` is null on those routes, or adjust `*ngIf` |
-| Fix home greeting | `home.component.html` — use a field present on the login response (`userName`) |
+| Fix home greeting | Already uses `userName` from the login response — see [Home greeting](#home-greeting) |
 | Add a global footer or header | `app.component.html` — outside nested feature layouts |
 
 ## Related docs
