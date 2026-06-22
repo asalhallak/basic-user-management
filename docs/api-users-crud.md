@@ -125,7 +125,7 @@ Components live under `front-end/src/app/users/`. Form field names align with th
 | Task | Start in | Doc |
 |------|----------|-----|
 | Return `404` for missing user on `DELETE` | `UsersController.Delete(int id)` or `UsersService.Delete` | [api-errors.md](api-errors.md) |
-| Return `409` for duplicate `loginName` | `UsersService.Add` or controller | [improvement-ideas.md](improvement-ideas.md) |
+| Return `409` for duplicate `loginName` | ~~`UsersService.Add` or controller~~ | Fixed — see [api-errors.md](api-errors.md) |
 | ~~Map POST response to `UserResource`~~ | ~~`UsersController.Add`~~ | Fixed — see [automapper-mapping.md](automapper-mapping.md) |
 | Add `[Required]` or FluentValidation | `UserResource` | [improvement-ideas.md](improvement-ideas.md) |
 

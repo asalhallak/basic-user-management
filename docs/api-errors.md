@@ -31,10 +31,11 @@ This sample API intentionally keeps validation and error handling minimal. The t
 
 | Situation | Typical status | What you see |
 |-----------|----------------|--------------|
-| `POST /users` with a duplicate `loginName` | `500` | SQL Server unique-constraint error surfaced through EF Core |
+| `POST /users` with a duplicate `loginName` | `409` | `{ "message": "A user with this loginName already exists." }` |
+| `PUT /users/{id}` with a `loginName` already used by another user | `409` | Same message as duplicate `POST` |
 | `POST /users` with `loginName: null` | `200` or `500` | Multiple `null` values are allowed by the filtered unique index |
 
-There is no application-level duplicate check or `409 Conflict` response today.
+The controller checks for an existing `loginName` before insert or update via `UsersService.LoginNameExists`.
 
 ## Malformed or incomplete JSON
 
@@ -51,7 +52,8 @@ In **non-Development** environments, unhandled exceptions return a generic `500`
 | Symptom | Likely cause | What to try |
 |---------|--------------|-------------|
 | `401` on every `/users` call | Missing, expired, or wrong JWT | `make token` or log in again |
-| `500` on `POST /users` | Duplicate `loginName` | Use a unique `loginName` or delete the existing user |
+| `500` on `POST /users` | Unexpected server error (not a duplicate `loginName`) | Check API logs; duplicates now return `409` |
+| `409 Conflict` on `POST` or `PUT /users` | Duplicate `loginName` | Use a unique `loginName` or update the existing user |
 | `404 Not Found` for `GET /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 | `404 Not Found` for `DELETE /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 | `404 Not Found` for `PUT /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |

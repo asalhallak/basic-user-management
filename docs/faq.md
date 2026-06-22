@@ -73,7 +73,7 @@ That is expected. Protected routes require `Authorization: Bearer <token>`. A `4
 
 ### Why does creating a user with a duplicate `loginName` fail?
 
-`Users.LoginName` has a unique database constraint. A duplicate insert returns `500` from the API. See [api-errors.md](api-errors.md).
+`Users.LoginName` has a unique database constraint. Duplicate create or update requests return `409 Conflict` with a clear message. See [api-errors.md](api-errors.md).
 
 ## Security
 

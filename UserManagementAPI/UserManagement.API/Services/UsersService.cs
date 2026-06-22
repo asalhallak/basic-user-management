@@ -55,5 +55,17 @@ namespace UserManagementAPI.Services
             _unitOfWork.Complete();
             return user;
         }
+
+        public bool LoginNameExists(string loginName, int? excludeUserId = null)
+        {
+            if (string.IsNullOrWhiteSpace(loginName))
+            {
+                return false;
+            }
+
+            return _unitOfWork.Users
+                .Find(u => u.LoginName == loginName && (!excludeUserId.HasValue || u.Id != excludeUserId.Value))
+                .Any();
+        }
     }
 }

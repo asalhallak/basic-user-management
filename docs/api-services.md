@@ -99,9 +99,10 @@ See [api-jwt-authentication.md](api-jwt-authentication.md) for token signing, va
 |--------|-----------------|-----------|-------|
 | `GetAll()` | `Users.GetAllIncludeAddress()` | No | Eager-loads nested `Address` |
 | `Get(int id)` | `Users.GetIncludeAddress(id)` | No | Returns `null` when ID missing |
-| `Add(User user)` | `Users.Add(user)` then `Complete()` | Yes | No duplicate `loginName` check |
+| `Add(User user)` | `Users.Add(user)` then `Complete()` | Yes | Duplicate `loginName` checked in controller via `LoginNameExists` |
 | `Update(User user)` | `GetById(id)` → `Update(user)` then `Complete()` | Yes | Returns `false` when ID missing |
 | `Delete(int id)` | `GetById(id)` → `Remove(user)` → `Complete()` | Yes | Returns `false` when ID missing |
+| `LoginNameExists(string loginName, int? excludeUserId)` | `Users.Find(...)` | No | Used before create/update to detect duplicate `loginName` |
 
 Every write calls `_unitOfWork.Complete()` to flush changes to SQL Server in one transaction.
 
@@ -111,7 +112,7 @@ These behaviors are intentional simplifications for the sample. See [api-errors.
 
 | Quirk | What happens | Where to fix |
 |-------|--------------|--------------|
-| Duplicate `loginName` | Database unique constraint → `500` | Catch `DbUpdateException` or pre-check |
+| Duplicate `loginName` | ~~Database unique constraint → `500`~~ | Fixed — controller returns `409 Conflict` via `LoginNameExists` |
 | No input validation | Partial JSON can persist defaults | Add validation on `UserResource` before mapping |
 
 For endpoint-by-endpoint traces (controller → service → repository), see [api-users-crud.md](api-users-crud.md).
