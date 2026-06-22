@@ -67,9 +67,9 @@ That is expected. Protected routes require `Authorization: Bearer <token>`. A `4
 
 ## API behavior
 
-### Why does `GET /api/v1/users/{id}` return `null` for a missing user?
+### What does `GET /api/v1/users/{id}` return for a missing user?
 
-The controller maps the service result without checking for a missing record, so a non-existent ID currently returns `200 OK` with a `null` body instead of `404`. This is documented as a known edge case in [api-errors.md](api-errors.md).
+`404 Not Found` with an empty body. The controller checks for a missing record before mapping the result. See [api-errors.md](api-errors.md) for other edge cases.
 
 ### Why does creating a user with a duplicate `loginName` fail?
 

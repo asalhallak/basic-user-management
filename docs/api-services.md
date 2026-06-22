@@ -111,7 +111,6 @@ These behaviors are intentional simplifications for the sample. See [api-errors.
 
 | Quirk | What happens | Where to fix |
 |-------|--------------|--------------|
-| Missing user on `GET` | Service returns `null`; controller still returns `200` with `null` body | Add a null check in `UsersController.Get(int id)` or `UsersService.Get` |
 | Missing user on `DELETE` | `GetById` returns `null`; `Remove(null)` throws → `500` | Check existence before remove |
 | Duplicate `loginName` | Database unique constraint → `500` | Catch `DbUpdateException` or pre-check |
 | No input validation | Partial JSON can persist defaults | Add validation on `UserResource` before mapping |

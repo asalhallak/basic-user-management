@@ -34,7 +34,7 @@ flowchart LR
 | Method | Route | Controller | Service | Response |
 |--------|-------|------------|---------|----------|
 | `GET` | `/api/v1/users` | `Get()` | `GetAll()` | `200` — JSON array of `UserResource` |
-| `GET` | `/api/v1/users/{id}` | `Get(id)` | `Get(id)` | `200` — `UserResource` or `null` if missing |
+| `GET` | `/api/v1/users/{id}` | `Get(id)` | `Get(id)` | `200` — `UserResource`; `404` when missing |
 | `POST` | `/api/v1/users` | `Add(user)` | `Add(entity)` | `200` — domain `User` entity (not mapped DTO) |
 | `PUT` | `/api/v1/users/{id}` | `Update(id, user)` | `Update(entity)` | `200` — empty body |
 | `DELETE` | `/api/v1/users/{id}` | `Delete(id)` | `Delete(id)` | `200` — empty body |
@@ -57,10 +57,8 @@ flowchart LR
 
 1. `UsersController.Get(int id)` calls `_usersService.Get(id)`.
 2. `UserRepository.GetIncludeAddress(id)` uses `FirstOrDefault()` — returns `null` when the ID does not exist.
-3. AutoMapper maps the result to `UserResource`.
-4. Returns `Ok(users)` regardless of whether the entity was found.
-
-**Quirk:** Missing IDs return `200 OK` with a `null` body instead of `404 Not Found`. See [api-errors.md](api-errors.md) and [improvement-ideas.md](improvement-ideas.md).
+3. When the entity is missing, the controller returns `404 Not Found`.
+4. Otherwise AutoMapper maps the entity to `UserResource` and returns `200 OK`.
 
 ## `POST /users` — create a user
 

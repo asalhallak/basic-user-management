@@ -34,8 +34,13 @@ namespace UserManagementAPI.Controllers.V1
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var users = _mapper.Map<UserResource>(_usersService.Get(id));
-            return Ok(users);
+            var user = _usersService.Get(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<UserResource>(user));
         }
 
         [HttpPost]
