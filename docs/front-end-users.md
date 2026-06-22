@@ -134,7 +134,7 @@ Errors call `alertService.error(error)` and reset `loading`. Success messages us
 
 ### Edit mode preload
 
-When `!isAddMode`, `getById(id)` runs on init and `patchValue(x)` fills the form. There is no loading indicator or error handler if the ID is missing or the request fails.
+When `!isAddMode`, `getById(id)` runs on init and `patchValue(user)` fills the form. While loading, the Save button shows a spinner (`loading = true`). If the request fails (for example `404` for a missing ID), `AlertService.error()` displays the message and the user is redirected to the user list.
 
 ## AccountService calls
 
@@ -156,9 +156,9 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 | Missing `dateOfBirth` / user `country` | Form omits API fields the list displays | Add date picker and country field, or hide columns |
 | `register()` for create | Method name suggests auth registration | Rename to `createUser()` when refactoring callers |
 | ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — `AlertService.error()` and reset `isDeleting` on failure |
-| Edit load errors silent | `getById` has no error handler | Show alert and redirect to list on `404` |
-| Wrong validation message | `profilePictureUrl` invalid feedback says "Salary is required" | Fix template copy in `add-edit.component.html` |
-| `console.log` calls | Debug logging left in `onSubmit` and `getById` | Remove before production hardening |
+| ~~Edit load errors silent~~ | ~~`getById` has no error handler~~ | Fixed — `AlertService.error()` and redirect to list on failure |
+| ~~Wrong validation message~~ | ~~`profilePictureUrl` invalid feedback says "Salary is required"~~ | Fixed — template copy corrected in `add-edit.component.html` |
+| ~~`console.log` calls~~ | ~~Debug logging left in `onSubmit` and `getById`~~ | Fixed — removed from `add-edit.component.ts` |
 
 These are documented starting points in [improvement-ideas.md](improvement-ideas.md).
 
