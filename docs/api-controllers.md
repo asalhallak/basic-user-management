@@ -89,7 +89,7 @@ Class-level `[Authorize]` protects every action. Requests without a valid JWT ar
 | `GET` | `/api/v1/users` | `Get()` | — | `200` — array of `UserResource` |
 | `GET` | `/api/v1/users/{id}` | `Get(int id)` | — | `200` — `UserResource`; `404` when missing |
 | `POST` | `/api/v1/users` | `Add` | `UserResource` | `200` — domain `User` entity |
-| `PUT` | `/api/v1/users/{id}` | `Update` | `UserResource` | `200` — empty body |
+| `PUT` | `/api/v1/users/{id}` | `Update` | `UserResource` | `200` — empty body; `404` when missing |
 | `DELETE` | `/api/v1/users/{id}` | `Delete` | — | `200` — empty body; `404` when missing |
 
 **AutoMapper at the boundary:** `GET` actions map domain entities to `UserResource` DTOs before returning. `POST` and `PUT` map inbound `UserResource` to domain `User` entities before calling the service.

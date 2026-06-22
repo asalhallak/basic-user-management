@@ -100,7 +100,7 @@ See [api-jwt-authentication.md](api-jwt-authentication.md) for token signing, va
 | `GetAll()` | `Users.GetAllIncludeAddress()` | No | Eager-loads nested `Address` |
 | `Get(int id)` | `Users.GetIncludeAddress(id)` | No | Returns `null` when ID missing |
 | `Add(User user)` | `Users.Add(user)` then `Complete()` | Yes | No duplicate `loginName` check |
-| `Update(User user)` | `Users.Update(user)` then `Complete()` | Yes | Expects entity with `Id` set |
+| `Update(User user)` | `GetById(id)` → `Update(user)` then `Complete()` | Yes | Returns `false` when ID missing |
 | `Delete(int id)` | `GetById(id)` → `Remove(user)` → `Complete()` | Yes | Returns `false` when ID missing |
 
 Every write calls `_unitOfWork.Complete()` to flush changes to SQL Server in one transaction.

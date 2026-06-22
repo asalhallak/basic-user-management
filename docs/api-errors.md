@@ -16,16 +16,14 @@ This sample API intentionally keeps validation and error handling minimal. The t
 
 ## Users — documented vs actual behavior
 
-`GET /users/{id}` returns `404 Not Found` when the ID does not exist. The controller checks for a `null` result from `UsersService.Get` before mapping to `UserResource`.
+`GET /users/{id}` and `DELETE /users/{id}` return `404 Not Found` when the ID does not exist. `PUT /users/{id}` follows the same pattern: the service checks for the user before updating.
 
 | Situation | Documented | Actual today | Body |
 |-----------|------------|--------------|------|
 | `GET /users/{id}` — ID exists | `200` | `200` | user object |
 | `GET /users/{id}` — ID missing | `404` | `404` | empty |
 | `DELETE /users/{id}` — ID missing | `404` | `404` | empty |
-| `PUT /users/{id}` — ID missing | `404` | `200` or `500` | may update nothing or fail depending on EF state |
-
-When hardening the API further, add a similar not-found check for `PUT` — see [code-map.md](code-map.md) and [api-users-crud.md](api-users-crud.md).
+| `PUT /users/{id}` — ID missing | `404` | `404` | empty |
 
 ## Database constraint violations
 
@@ -56,6 +54,7 @@ In **non-Development** environments, unhandled exceptions return a generic `500`
 | `500` on `POST /users` | Duplicate `loginName` | Use a unique `loginName` or delete the existing user |
 | `404 Not Found` for `GET /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 | `404 Not Found` for `DELETE /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
+| `404 Not Found` for `PUT /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 
 ## Related docs
 
