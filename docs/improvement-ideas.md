@@ -13,7 +13,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | User `GET` by ID | ~~`200` with `null` when ID is missing~~ | Fixed — `UsersController.Get` returns `404 NotFound()` when the service returns `null` |
 | User `DELETE` | ~~`500` when ID is missing~~ | Fixed — `UsersController.Delete` returns `404 NotFound()` when the user does not exist |
 | User `PUT` | ~~`200` or `500` when ID is missing~~ | Fixed — `UsersController.Update` returns `404 NotFound()` when the user does not exist |
-| Duplicate `loginName` | `500` from database constraint | Catch unique violation; return `409 Conflict` |
+| Duplicate `loginName` | ~~`500` from database constraint~~ | Fixed — `UsersController` returns `409 Conflict` via `UsersService.LoginNameExists` |
 | Validation | No `[Required]` on API models | Add FluentValidation or data annotations on `UserResource` |
 | POST `/users` response | ~~Returns domain `User` entity instead of mapped `UserResource`~~ | Fixed — `UsersController.Add` maps the created entity to `UserResource` before returning |
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API — see [fake-backend.md](fake-backend.md) |
@@ -28,7 +28,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 Documented mismatches between intended REST behavior and the current implementation are listed in [api-errors.md](api-errors.md). The highest-impact fixes for API consumers:
 
 1. ~~**Not-found handling** — `UsersService.Get` uses `FirstOrDefault()`; the controller always returns `Ok(...)`. Add an explicit check and `NotFound()` when the entity is missing.~~ Fixed for `GET /users/{id}` in `UsersController.Get(int id)`, `DELETE /users/{id}` in `UsersController.Delete(int id)`, and `PUT /users/{id}` in `UsersController.Update(int id, ...)`. See [code-map](code-map.md), [api-services.md](api-services.md), [api-controllers.md](api-controllers.md), and [api-users-crud.md](api-users-crud.md).
-2. **Conflict responses** — Duplicate `loginName` values surface as `500`. Catch `DbUpdateException` (or check before insert) and return `409` with a clear message.
+2. ~~**Conflict responses** — Duplicate `loginName` values surface as `500`. Catch `DbUpdateException` (or check before insert) and return `409` with a clear message.~~ Fixed — `UsersController.Add` and `Update` call `UsersService.LoginNameExists` and return `409 Conflict`.
 3. **Input validation** — Partial JSON bodies can persist unexpected defaults. Add validation on `UserResource` and return `400 Bad Request` with problem details.
 
 ## Front-end integration
