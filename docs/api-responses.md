@@ -59,9 +59,7 @@ Returns a single user object with the same shape as one element from the list ab
 
 ### `GET /users/{id}` — not found
 
-**Intended:** `404` with an empty body when the ID does not exist.
-
-**Current behavior:** `200 OK` with a `null` body because the controller does not check for a missing record. See [api-errors.md](api-errors.md) for edge cases and improvement notes.
+`404` with an empty body when the ID does not exist.
 
 ### `POST /users` — success (`200`)
 
