@@ -36,7 +36,7 @@ flowchart LR
 | `GET` | `/api/v1/users` | `Get()` | `GetAll()` | `200` — JSON array of `UserResource` |
 | `GET` | `/api/v1/users/{id}` | `Get(id)` | `Get(id)` | `200` — `UserResource`; `404` when missing |
 | `POST` | `/api/v1/users` | `Add(user)` | `Add(entity)` | `200` — domain `User` entity (not mapped DTO) |
-| `PUT` | `/api/v1/users/{id}` | `Update(id, user)` | `Update(entity)` | `200` — empty body |
+| `PUT` | `/api/v1/users/{id}` | `Update(id, user)` | `Update(entity)` | `200` — empty body; `404` when missing |
 | `DELETE` | `/api/v1/users/{id}` | `Delete(id)` | `Delete(id)` | `200` — empty body; `404` when missing |
 
 ## `GET /users` — list all users
@@ -82,13 +82,13 @@ flowchart LR
 
 1. Route `id` is copied onto the DTO: `user.Id = id` before mapping.
 2. `_mapper.Map<User>(user)` builds the entity (including nested address when provided).
-3. `UsersService.Update` calls `_unitOfWork.Users.Update(user)` then `Complete()`.
-4. Returns `200 OK` with an empty body.
+3. `UsersService.Update` loads the user with `_unitOfWork.Users.GetById(id)`. When the entity is missing, the controller returns `404 Not Found`.
+4. Otherwise `_unitOfWork.Users.Update(user)` then `Complete()`.
+5. Returns `200 OK` with an empty body.
 
 **Notes:**
 
 - Send the fields you want to change plus any required nested `address` data the form expects.
-- Updating a non-existent ID may succeed silently or fail at EF depending on state — see [api-errors.md](api-errors.md).
 - Partial updates are not implemented; the Angular editor sends the full form payload.
 
 ## `DELETE /users/{id}` — delete a user
