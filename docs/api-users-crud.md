@@ -35,7 +35,7 @@ flowchart LR
 |--------|-------|------------|---------|----------|
 | `GET` | `/api/v1/users` | `Get()` | `GetAll()` | `200` — JSON array of `UserResource` |
 | `GET` | `/api/v1/users/{id}` | `Get(id)` | `Get(id)` | `200` — `UserResource`; `404` when missing |
-| `POST` | `/api/v1/users` | `Add(user)` | `Add(entity)` | `200` — domain `User` entity (not mapped DTO) |
+| `POST` | `/api/v1/users` | `Add(user)` | `Add(entity)` | `200` — mapped `UserResource` |
 | `PUT` | `/api/v1/users/{id}` | `Update(id, user)` | `Update(entity)` | `200` — empty body; `404` when missing |
 | `DELETE` | `/api/v1/users/{id}` | `Delete(id)` | `Delete(id)` | `200` — empty body; `404` when missing |
 
@@ -68,9 +68,7 @@ flowchart LR
 2. `_mapper.Map<User>(user)` converts the DTO (including nested `address`) to a domain entity.
 3. `UsersService.Add` calls `_unitOfWork.Users.Add(user)` then `_unitOfWork.Complete()` to persist.
 4. EF Core assigns `id` and `address.id` via identity columns.
-5. The controller returns `Ok(_user)` with the **domain entity**, not a mapped `UserResource`.
-
-**Quirk:** The POST response bypasses AutoMapper outbound mapping. JSON shape usually matches expectations, but the response does not use `[JsonProperty]` attributes from `UserResource`. See [automapper-mapping.md — POST response quirk](automapper-mapping.md#post-response-quirk).
+5. The controller maps the created entity to `UserResource` and returns `200 OK`.
 
 **Constraints:** `loginName` must be unique at the database level. Duplicates surface as `500` — see [api-errors.md](api-errors.md).
 
@@ -128,7 +126,7 @@ Components live under `front-end/src/app/users/`. Form field names align with th
 |------|----------|-----|
 | Return `404` for missing user on `DELETE` | `UsersController.Delete(int id)` or `UsersService.Delete` | [api-errors.md](api-errors.md) |
 | Return `409` for duplicate `loginName` | `UsersService.Add` or controller | [improvement-ideas.md](improvement-ideas.md) |
-| Map POST response to `UserResource` | `UsersController.Add` | [automapper-mapping.md](automapper-mapping.md) |
+| ~~Map POST response to `UserResource`~~ | ~~`UsersController.Add`~~ | Fixed — see [automapper-mapping.md](automapper-mapping.md) |
 | Add `[Required]` or FluentValidation | `UserResource` | [improvement-ideas.md](improvement-ideas.md) |
 
 ## Related docs
@@ -137,7 +135,7 @@ Components live under `front-end/src/app/users/`. Form field names align with th
 - [api-responses.md](api-responses.md) — example JSON response bodies
 - [api-resources.md](api-resources.md) — DTO classes, JSON properties, and endpoint matrix
 - [api-errors.md](api-errors.md) — `401`, `500`, and missing-user edge cases
-- [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping and POST response quirk
+- [automapper-mapping.md](automapper-mapping.md) — entity ↔ DTO mapping
 - [repository-pattern.md](repository-pattern.md) — `IUnitOfWork`, `UserRepository`, and `Complete()`
 - [api-request-flow.md](api-request-flow.md) — HTTP middleware and layered request flow
 - [code-map.md](code-map.md) — file locations when changing endpoints or persistence
