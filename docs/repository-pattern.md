@@ -138,10 +138,8 @@ There is no existence check before update — a missing ID may update nothing or
 ### Delete user
 
 1. `UsersService.Delete` loads the user with `GetById(id)`.
-2. If the ID does not exist, `GetById` returns `null` and `Remove(null)` throws → `500` in Development.
-3. On success, `Complete()` deletes the row.
-
-Known gap: return `404` when the user is missing. See [improvement-ideas.md](improvement-ideas.md).
+2. When the ID does not exist, the controller returns `404 Not Found`.
+3. Otherwise `Remove(user)` then `Complete()` deletes the row.
 
 ## ApplicationContext settings
 

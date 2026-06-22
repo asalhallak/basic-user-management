@@ -31,11 +31,17 @@ namespace UserManagementAPI.Services
             _unitOfWork.Complete();
             return user;
         }
-        public void Delete(int id)
+        public bool Delete(int id)
         {
             var user = _unitOfWork.Users.GetById(id);
+            if (user == null)
+            {
+                return false;
+            }
+
             _unitOfWork.Users.Remove(user);
             _unitOfWork.Complete();
+            return true;
         }
         public User Add(User user)
         {

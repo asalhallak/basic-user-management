@@ -53,7 +53,11 @@ namespace UserManagementAPI.Controllers.V1
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            _usersService.Delete(id);
+            if (!_usersService.Delete(id))
+            {
+                return NotFound();
+            }
+
             return Ok();
         }
 

@@ -22,10 +22,10 @@ This sample API intentionally keeps validation and error handling minimal. The t
 |-----------|------------|--------------|------|
 | `GET /users/{id}` — ID exists | `200` | `200` | user object |
 | `GET /users/{id}` — ID missing | `404` | `404` | empty |
-| `DELETE /users/{id}` — ID missing | `404` | `500` | developer exception page (in Development) |
+| `DELETE /users/{id}` — ID missing | `404` | `404` | empty |
 | `PUT /users/{id}` — ID missing | `404` | `200` or `500` | may update nothing or fail depending on EF state |
 
-When hardening the API further, add similar not-found checks for `DELETE` and `PUT` — see [code-map.md](code-map.md) and [api-users-crud.md](api-users-crud.md).
+When hardening the API further, add a similar not-found check for `PUT` — see [code-map.md](code-map.md) and [api-users-crud.md](api-users-crud.md).
 
 ## Database constraint violations
 
@@ -55,7 +55,7 @@ In **non-Development** environments, unhandled exceptions return a generic `500`
 | `401` on every `/users` call | Missing, expired, or wrong JWT | `make token` or log in again |
 | `500` on `POST /users` | Duplicate `loginName` | Use a unique `loginName` or delete the existing user |
 | `404 Not Found` for `GET /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
-| `500` on `DELETE /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
+| `404 Not Found` for `DELETE /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 
 ## Related docs
 

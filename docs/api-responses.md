@@ -95,6 +95,10 @@ Empty body. The update is applied in place; fetch the user with `GET /users/{id}
 
 Empty body.
 
+### `DELETE /users/{id}` — not found
+
+`404` with an empty body when the ID does not exist.
+
 ## Quick reference
 
 | Endpoint | Success status | Response body |
@@ -107,6 +111,7 @@ Empty body.
 | `POST /users` | `200` | created user object |
 | `PUT /users/{id}` | `200` | empty |
 | `DELETE /users/{id}` | `200` | empty |
+| `DELETE /users/{id}` | `404` | empty |
 | Any protected route | `401` | empty (missing, expired, or invalid JWT) |
 
 ## Related docs

@@ -37,7 +37,7 @@ flowchart LR
 | `GET` | `/api/v1/users/{id}` | `Get(id)` | `Get(id)` | `200` — `UserResource`; `404` when missing |
 | `POST` | `/api/v1/users` | `Add(user)` | `Add(entity)` | `200` — domain `User` entity (not mapped DTO) |
 | `PUT` | `/api/v1/users/{id}` | `Update(id, user)` | `Update(entity)` | `200` — empty body |
-| `DELETE` | `/api/v1/users/{id}` | `Delete(id)` | `Delete(id)` | `200` — empty body |
+| `DELETE` | `/api/v1/users/{id}` | `Delete(id)` | `Delete(id)` | `200` — empty body; `404` when missing |
 
 ## `GET /users` — list all users
 
@@ -96,10 +96,9 @@ flowchart LR
 **Flow:**
 
 1. `UsersService.Delete(id)` loads the user with `_unitOfWork.Users.GetById(id)`.
-2. `_unitOfWork.Users.Remove(user)` then `Complete()`.
-3. Returns `200 OK` with an empty body.
-
-**Quirk:** Deleting a non-existent ID passes `null` to `Remove`, which throws and returns `500` in Development. Add an existence check and return `404` — see [improvement-ideas.md](improvement-ideas.md).
+2. When the entity is missing, the controller returns `404 Not Found`.
+3. Otherwise `_unitOfWork.Users.Remove(user)` then `Complete()`.
+4. Returns `200 OK` with an empty body.
 
 **Foreign key:** `Users.AddressId` uses `ON DELETE RESTRICT`. Deleting an address row directly while a user references it will fail; delete through the user endpoint or clear the relationship first.
 
@@ -127,7 +126,7 @@ Components live under `front-end/src/app/users/`. Form field names align with th
 
 | Task | Start in | Doc |
 |------|----------|-----|
-| Return `404` for missing user on `GET` | `UsersController.Get(int id)` or `UsersService.Get` | [api-errors.md](api-errors.md) |
+| Return `404` for missing user on `DELETE` | `UsersController.Delete(int id)` or `UsersService.Delete` | [api-errors.md](api-errors.md) |
 | Return `409` for duplicate `loginName` | `UsersService.Add` or controller | [improvement-ideas.md](improvement-ideas.md) |
 | Map POST response to `UserResource` | `UsersController.Add` | [automapper-mapping.md](automapper-mapping.md) |
 | Add `[Required]` or FluentValidation | `UserResource` | [improvement-ideas.md](improvement-ideas.md) |

@@ -101,7 +101,7 @@ See [api-jwt-authentication.md](api-jwt-authentication.md) for token signing, va
 | `Get(int id)` | `Users.GetIncludeAddress(id)` | No | Returns `null` when ID missing |
 | `Add(User user)` | `Users.Add(user)` then `Complete()` | Yes | No duplicate `loginName` check |
 | `Update(User user)` | `Users.Update(user)` then `Complete()` | Yes | Expects entity with `Id` set |
-| `Delete(int id)` | `GetById(id)` → `Remove(user)` → `Complete()` | Yes | Throws if user not found |
+| `Delete(int id)` | `GetById(id)` → `Remove(user)` → `Complete()` | Yes | Returns `false` when ID missing |
 
 Every write calls `_unitOfWork.Complete()` to flush changes to SQL Server in one transaction.
 
@@ -111,7 +111,6 @@ These behaviors are intentional simplifications for the sample. See [api-errors.
 
 | Quirk | What happens | Where to fix |
 |-------|--------------|--------------|
-| Missing user on `DELETE` | `GetById` returns `null`; `Remove(null)` throws → `500` | Check existence before remove |
 | Duplicate `loginName` | Database unique constraint → `500` | Catch `DbUpdateException` or pre-check |
 | No input validation | Partial JSON can persist defaults | Add validation on `UserResource` before mapping |
 
