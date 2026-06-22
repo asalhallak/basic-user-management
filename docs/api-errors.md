@@ -39,7 +39,9 @@ The controller checks for an existing `loginName` before insert or update via `U
 
 ## Malformed or incomplete JSON
 
-ASP.NET Core model binding accepts partial bodies. Missing optional fields may default to `null`, `0`, or `false` depending on the property type. There is no `[Required]` validation on `UserResource`, so invalid create/update payloads may persist unexpected values or fail at the database layer.
+`UserResource` requires `loginName` and `displayName` on `POST /users` and `PUT /users/{id}`. When either is missing or empty, ASP.NET Core returns `400 Bad Request` with a validation problem details body (automatic `[ApiController]` behavior).
+
+Other fields still bind to .NET defaults when omitted (`0`, `false`, `null`, `0001-01-01` for dates). Additional validation (for example on nested `address` or numeric ranges) is not implemented yet — see [improvement-ideas.md](improvement-ideas.md).
 
 ## Development vs production errors
 
@@ -54,6 +56,7 @@ In **non-Development** environments, unhandled exceptions return a generic `500`
 | `401` on every `/users` call | Missing, expired, or wrong JWT | `make token` or log in again |
 | `500` on `POST /users` | Unexpected server error (not a duplicate `loginName`) | Check API logs; duplicates now return `409` |
 | `409 Conflict` on `POST` or `PUT /users` | Duplicate `loginName` | Use a unique `loginName` or update the existing user |
+| `400 Bad Request` on `POST` or `PUT /users` | Missing or empty `loginName` / `displayName` | Include both fields in the JSON body |
 | `404 Not Found` for `GET /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 | `404 Not Found` for `DELETE /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |
 | `404 Not Found` for `PUT /users/{id}` | ID does not exist | Confirm the ID with `GET /users` first |

@@ -78,7 +78,7 @@ Invalid credentials return `401 Unauthorized` with an empty body (no `Claims` ob
 | `salary` | `Salary` | float | Send explicitly | Send fields to update | Present |
 | `profilePictureUrl` | `ProfilePictureUrl` | string | Optional | Optional | Present (may be null) |
 
-There is no `[Required]` validation on the API models today. Omitted properties bind to .NET defaults (`0`, `false`, `null`, `0001-01-01` for dates). See [improvement-ideas.md](improvement-ideas.md).
+`loginName` and `displayName` are marked `[Required]` on `UserResource`. Missing or empty values on `POST` or `PUT` return `400 Bad Request`. Other properties still bind to .NET defaults when omitted (`0`, `false`, `null`, `0001-01-01` for dates). See [api-errors.md](api-errors.md) and [improvement-ideas.md](improvement-ideas.md).
 
 **Example create body:**
 

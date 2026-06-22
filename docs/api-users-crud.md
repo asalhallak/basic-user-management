@@ -70,9 +70,9 @@ flowchart LR
 4. EF Core assigns `id` and `address.id` via identity columns.
 5. The controller maps the created entity to `UserResource` and returns `200 OK`.
 
-**Constraints:** `loginName` must be unique at the database level. Duplicates surface as `500` — see [api-errors.md](api-errors.md).
+**Constraints:** `loginName` must be unique at the database level. Duplicates return `409 Conflict` — see [api-errors.md](api-errors.md).
 
-**Required fields:** No `[Required]` validation on `UserResource`. Partial bodies may persist default values (`0`, `false`, `null`). See [domain-model.md](domain-model.md) for the full field list.
+**Required fields:** `loginName` and `displayName` are required on `UserResource`. Missing or empty values return `400 Bad Request`. Other omitted fields may persist default values (`0`, `false`, `null`). See [domain-model.md](domain-model.md) for the full field list.
 
 ## `PUT /users/{id}` — update a user
 
@@ -127,7 +127,7 @@ Components live under `front-end/src/app/users/`. Form field names align with th
 | Return `404` for missing user on `DELETE` | `UsersController.Delete(int id)` or `UsersService.Delete` | [api-errors.md](api-errors.md) |
 | Return `409` for duplicate `loginName` | ~~`UsersService.Add` or controller~~ | Fixed — see [api-errors.md](api-errors.md) |
 | ~~Map POST response to `UserResource`~~ | ~~`UsersController.Add`~~ | Fixed — see [automapper-mapping.md](automapper-mapping.md) |
-| Add `[Required]` or FluentValidation | `UserResource` | [improvement-ideas.md](improvement-ideas.md) |
+| ~~Add `[Required]` or FluentValidation~~ | ~~`UserResource`~~ | Partially fixed — `loginName` and `displayName` are required; extend with FluentValidation for remaining fields |
 
 ## Related docs
 
