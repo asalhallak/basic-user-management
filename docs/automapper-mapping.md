@@ -63,22 +63,20 @@ The extension scans the assembly for `Profile` subclasses (including `DomainToRe
 |----------|-------------------|---------|
 | `GET /users` | `Get()` | `_mapper.Map<List<UserResource>>(entities)` |
 | `GET /users/{id}` | `Get(id)` | `_mapper.Map<UserResource>(entity)` |
-| `POST /users` | `Add(user)` | Inbound: `_mapper.Map<User>(user)`; outbound: returns the **entity** directly (see note below) |
+| `POST /users` | `Add(user)` | Inbound: `_mapper.Map<User>(user)`; outbound: `_mapper.Map<UserResource>(created)` |
 | `PUT /users/{id}` | `Update(id, user)` | Inbound only; returns `200` with empty body |
 | `DELETE /users/{id}` | `Delete(id)` | No mapping |
 
-### POST response quirk
+### POST response mapping
 
-`UsersController.Add` returns `Ok(_user)` where `_user` is a domain `User` entity, not a mapped `UserResource`. ASP.NET Core serializes it with the same camelCase property names, so clients usually see the expected JSON shape—but the response bypasses AutoMapper and does not use `[JsonProperty]` attributes from `UserResource`.
-
-For consistency, a small improvement would be:
+`UsersController.Add` maps the persisted domain entity to `UserResource` before returning:
 
 ```csharp
 var created = _usersService.Add(_mapper.Map<User>(user));
 return Ok(_mapper.Map<UserResource>(created));
 ```
 
-That change is listed as a good first task in [improvement-ideas.md](improvement-ideas.md).
+This keeps POST responses consistent with `GET` endpoints and applies `[JsonProperty]` attributes from `UserResource`.
 
 ## Nested address mapping
 

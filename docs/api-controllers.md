@@ -88,17 +88,16 @@ Class-level `[Authorize]` protects every action. Requests without a valid JWT ar
 |--------|-------|--------|--------------|----------|
 | `GET` | `/api/v1/users` | `Get()` | — | `200` — array of `UserResource` |
 | `GET` | `/api/v1/users/{id}` | `Get(int id)` | — | `200` — `UserResource`; `404` when missing |
-| `POST` | `/api/v1/users` | `Add` | `UserResource` | `200` — domain `User` entity |
+| `POST` | `/api/v1/users` | `Add` | `UserResource` | `200` — mapped `UserResource` |
 | `PUT` | `/api/v1/users/{id}` | `Update` | `UserResource` | `200` — empty body; `404` when missing |
 | `DELETE` | `/api/v1/users/{id}` | `Delete` | — | `200` — empty body; `404` when missing |
 
-**AutoMapper at the boundary:** `GET` actions map domain entities to `UserResource` DTOs before returning. `POST` and `PUT` map inbound `UserResource` to domain `User` entities before calling the service.
+**AutoMapper at the boundary:** `GET` and `POST` actions map domain entities to `UserResource` DTOs before returning. `POST` and `PUT` map inbound `UserResource` to domain `User` entities before calling the service.
 
 **Known quirks** (documented behavior, not controller bugs):
 
 | Quirk | Detail | Fix starting point |
 |-------|--------|-------------------|
-| POST returns entity, not DTO | `Add` returns `Ok(_user)` where `_user` is a `User` entity | Map to `UserResource` before returning — see [automapper-mapping.md](automapper-mapping.md) |
 | PUT sets route id on body | `user.Id = id` before mapping | Ensures URL and body stay aligned |
 
 For step-by-step flows through service and repository layers, see [api-users-crud.md](api-users-crud.md).

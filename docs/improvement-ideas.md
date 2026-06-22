@@ -15,7 +15,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | User `PUT` | ~~`200` or `500` when ID is missing~~ | Fixed — `UsersController.Update` returns `404 NotFound()` when the user does not exist |
 | Duplicate `loginName` | `500` from database constraint | Catch unique violation; return `409 Conflict` |
 | Validation | No `[Required]` on API models | Add FluentValidation or data annotations on `UserResource` |
-| POST `/users` response | Returns domain `User` entity instead of mapped `UserResource` | Map outbound response in `UsersController.Add` — see [automapper-mapping.md](automapper-mapping.md) |
+| POST `/users` response | ~~Returns domain `User` entity instead of mapped `UserResource`~~ | Fixed — `UsersController.Add` maps the created entity to `UserResource` before returning |
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API — see [fake-backend.md](fake-backend.md) |
 | Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName`; register form still uses legacy fields |

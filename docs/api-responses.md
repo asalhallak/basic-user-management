@@ -63,7 +63,7 @@ Returns a single user object with the same shape as one element from the list ab
 
 ### `POST /users` — success (`200`)
 
-Returns the created user with server-assigned `id` (and `address.id` when an address was included). Property names match the request body plus generated IDs.
+Returns the created user as a mapped `UserResource` with server-assigned `id` (and `address.id` when an address was included). Property names match the request body plus generated IDs.
 
 ```json
 {
