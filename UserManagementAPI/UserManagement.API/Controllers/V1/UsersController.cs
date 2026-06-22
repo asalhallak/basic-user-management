@@ -46,6 +46,11 @@ namespace UserManagementAPI.Controllers.V1
         [HttpPost]
         public IActionResult Add([FromBody] UserResource user)
         {
+            if (_usersService.LoginNameExists(user?.LoginName))
+            {
+                return Conflict(new { message = "A user with this loginName already exists." });
+            }
+
             var created = _usersService.Add(_mapper.Map<User>(user));
             return Ok(_mapper.Map<UserResource>(created));
         }
@@ -65,6 +70,11 @@ namespace UserManagementAPI.Controllers.V1
         public IActionResult Update(int id, [FromBody] UserResource user)
         {
             user.Id = id;
+            if (_usersService.LoginNameExists(user?.LoginName, id))
+            {
+                return Conflict(new { message = "A user with this loginName already exists." });
+            }
+
             if (!_usersService.Update(_mapper.Map<User>(user)))
             {
                 return NotFound();

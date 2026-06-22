@@ -40,7 +40,7 @@ Controllers accept and return `UserResource` / `AddressResource` JSON. Services 
 | JSON property | C# (`UserResource` / `User`) | SQL column (`Users`) | Notes |
 |---------------|--------------------------------|----------------------|-------|
 | `id` | `Id` | `Id` | Identity primary key; omitted on create |
-| `loginName` | `LoginName` | `LoginName` | Unique index (`IX_Users_LoginName`); duplicate values return `500` (see [api-errors.md](api-errors.md)) |
+| `loginName` | `LoginName` | `LoginName` | Unique index (`IX_Users_LoginName`); duplicate values return `409 Conflict` (see [api-errors.md](api-errors.md)) |
 | `displayName` | `DisplayName` | `DisplayName` | |
 | `dateOfBirth` | `DateOfBirth` | `DateOfBirth` | ISO 8601 datetime in JSON |
 | `country` | `Country` | `Country` | User's country (separate from address country) |
