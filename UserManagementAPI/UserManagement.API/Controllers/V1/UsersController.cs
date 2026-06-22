@@ -65,7 +65,11 @@ namespace UserManagementAPI.Controllers.V1
         public IActionResult Update(int id, [FromBody] UserResource user)
         {
             user.Id = id;
-            _usersService.Update(_mapper.Map<User>(user));
+            if (!_usersService.Update(_mapper.Map<User>(user)))
+            {
+                return NotFound();
+            }
+
             return Ok();
         }
     }

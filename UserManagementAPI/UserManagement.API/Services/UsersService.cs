@@ -25,11 +25,17 @@ namespace UserManagementAPI.Services
             var user = _unitOfWork.Users.GetIncludeAddress(id);
             return user;
         }
-        public User Update(User user)
+        public bool Update(User user)
         {
+            var existing = _unitOfWork.Users.GetById(user.Id);
+            if (existing == null)
+            {
+                return false;
+            }
+
             _unitOfWork.Users.Update(user);
             _unitOfWork.Complete();
-            return user;
+            return true;
         }
         public bool Delete(int id)
         {
