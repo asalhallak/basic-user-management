@@ -24,6 +24,7 @@ flowchart TB
     List -->|getAll, delete| Account
     Add -->|register| Account
     Edit -->|getById, update| Account
+    List --> Alert
     Add --> Alert
     Edit --> Alert
     Account --> Users
@@ -78,7 +79,7 @@ On init, calls `accountService.getAll()` and binds the result to `users`. While 
 | Behavior | Detail |
 |----------|--------|
 | Optimistic UI | Row stays until delete succeeds |
-| Error handling | No `subscribe` error handler — failed deletes leave the spinner enabled |
+| Error handling | Failed load or delete shows `AlertService.error()`; delete failures reset `isDeleting` on the row |
 | Confirmation | No confirm dialog before delete |
 
 For API delete behavior and missing-ID quirks, see [api-users-crud.md](api-users-crud.md) and [api-errors.md](api-errors.md).
@@ -154,7 +155,7 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 | Dead password validators | `passwordValidators` are defined in `ngOnInit()` but no password control exists | Remove unused validator setup |
 | Missing `dateOfBirth` / user `country` | Form omits API fields the list displays | Add date picker and country field, or hide columns |
 | `register()` for create | Method name suggests auth registration | Rename to `createUser()` when refactoring callers |
-| Delete errors silent | No `error` callback on delete `subscribe` | Add `AlertService.error()` and reset `isDeleting` |
+| ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — `AlertService.error()` and reset `isDeleting` on failure |
 | Edit load errors silent | `getById` has no error handler | Show alert and redirect to list on `404` |
 | Wrong validation message | `profilePictureUrl` invalid feedback says "Salary is required" | Fix template copy in `add-edit.component.html` |
 | `console.log` calls | Debug logging left in `onSubmit` and `getById` | Remove before production hardening |
