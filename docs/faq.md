@@ -59,7 +59,7 @@ Creating a user through the API or UI does not create a login account. To add re
 
 ### Should I remove the fake backend?
 
-Yes, when using the real API exclusively. Remove `fakeBackendProvider` from the `providers` array in `front-end/src/app/app.module.ts`. The fake backend intercepts legacy tutorial routes (`/users/authenticate`) and can mask real API issues. See [fake-backend.md](fake-backend.md), [front-end-auth.md](front-end-auth.md), and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
+It is already removed from `AppModule`. The app calls the ASP.NET Core API exclusively. If you cloned an older version or still see tutorial tokens (`fake-jwt-token`) in DevTools, clear browser local storage for `http://localhost:4200`. The legacy interceptor source remains in `helpers/fake-backend.ts` for reference — see [fake-backend.md](fake-backend.md).
 
 ### Why does `GET /api/v1/users` return `401` without a token?
 

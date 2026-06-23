@@ -313,13 +313,13 @@ The Angular app was adapted from a tutorial that used a local fake backend. When
 |------|-----------|-----|-------|
 | Login payload | `{ userName, password }` in `account.service.ts` | `{ userName, password }` in `Credentials.cs` | Aligned — the login form control is still named `username` in the template. |
 | User model | `username`, `firstName`, `lastName` (register form UI) | `loginName`, `displayName`, nested `address` | Register maps legacy fields to API shape on submit; user list/editor uses API fields directly. |
-| Fake backend | `fakeBackendProvider` in `app.module.ts` | N/A | Intercepts legacy `/users/authenticate` routes. Remove this provider when using the real API exclusively. |
+| Fake backend | Removed from `app.module.ts` (see `helpers/fake-backend.ts` for legacy code) | N/A | The app calls the real API exclusively; clear stale `localStorage` if you previously ran the tutorial mock. |
 
 **Recommended steps to use the real API end-to-end:**
 
-1. Remove `fakeBackendProvider` from the `providers` array in `front-end/src/app/app.module.ts`.
-2. Log in with the [default credentials](#default-login) before using register or user management screens.
-3. For full user records (address, salary, etc.), use **Users → Add**; the register form creates minimal records with mapped `loginName` and `displayName`.
+1. Log in with the [default credentials](#default-login) before using register or user management screens.
+2. For full user records (address, salary, etc.), use **Users → Add**; the register form creates minimal records with mapped `loginName` and `displayName`.
+3. If login fails after upgrading from an older clone, clear browser local storage for `http://localhost:4200` and log in again.
 
 ## API reference
 
@@ -730,7 +730,7 @@ This restores and builds the API, then runs `npm ci` and a production front-end 
 | Port `1434` already in use | Another SQL Server instance on the host | Stop the conflicting service or change the host port in `docker-compose.yml` and update `appsettings.json` to match |
 | API returns `401` on all user endpoints | Missing or expired JWT | Log in again via `/api/v1/auth/login` and include `Authorization: Bearer <token>` |
 | Front end cannot reach the API | API not running or wrong URL | Confirm `dotnet run` is active and `environment.apiUrl` points to `http://localhost:5000` |
-| Login works in curl but not in the UI | Fake backend still enabled or stale local storage | Remove `fakeBackendProvider` from `app.module.ts` and clear browser local storage |
+| Login works in curl but not in the UI | Stale local storage from an older tutorial run | Clear browser local storage for `http://localhost:4200` and log in again |
 | Register fails with `401` | User endpoints require a JWT | Log in first; register is not a public endpoint (see [Authentication vs user data](#authentication-vs-user-data)) |
 | `dotnet ef` command not found | EF Core CLI tool not installed | Run `make install-ef` or `dotnet tool install --global dotnet-ef` |
 | `npm run build` fails with OpenSSL error on Node 17+ | Angular 11 Webpack incompatibility | Use Node.js 16 (as in CI), or run `NODE_OPTIONS=--openssl-legacy-provider npm run build` |

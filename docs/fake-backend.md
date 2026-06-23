@@ -1,12 +1,12 @@
 # Fake backend interceptor
 
-The Angular app includes a **fake backend** — an HTTP interceptor left over from the original tutorial. It simulates a REST API in the browser so the UI could run without a real server. This project now targets the ASP.NET Core API, but the interceptor is still registered by default.
+The Angular app includes a **fake backend** — an HTTP interceptor left over from the original tutorial. It simulates a REST API in the browser so the UI could run without a real server. **This project no longer registers it by default** — `fakeBackendProvider` was removed from `app.module.ts` so all HTTP traffic goes to the ASP.NET Core API.
 
 For the real JWT flow, see [front-end-auth.md](front-end-auth.md). For field-name mismatches between the tutorial UI and the API, see [front-end-models.md](front-end-models.md).
 
 ## What it does
 
-`FakeBackendInterceptor` (`front-end/src/app/helpers/fake-backend.ts`) is registered as an `HTTP_INTERCEPTORS` provider in `app.module.ts`. It inspects outgoing `HttpClient` requests and, for matching legacy routes, returns synthetic responses instead of calling the network.
+`FakeBackendInterceptor` (`front-end/src/app/helpers/fake-backend.ts`) is **not registered** in current `app.module.ts`. The file remains for reference if you need to understand the original tutorial behavior or re-enable the mock locally.
 
 ```mermaid
 flowchart LR
