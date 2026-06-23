@@ -152,7 +152,8 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 
 | Quirk | Detail | Suggested fix |
 |-------|--------|---------------|
-| Dead password validators | `passwordValidators` are defined in `ngOnInit()` but no password control exists | Remove unused validator setup |
+| ~~Dead password validators~~ | ~~`passwordValidators` are defined in `ngOnInit()` but no password control exists~~ | Fixed — unused validator setup removed from `add-edit.component.ts` |
+| ~~Country field invalid styling~~ | ~~`address.country` input used `city.errors` for `is-invalid` class~~ | Fixed — template now checks `country.errors` in `add-edit.component.html` |
 | Missing `dateOfBirth` / user `country` | Form omits API fields the list displays | Add date picker and country field, or hide columns |
 | `register()` for create | Method name suggests auth registration | Rename to `createUser()` when refactoring callers |
 | ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — `AlertService.error()` and reset `isDeleting` on failure |
