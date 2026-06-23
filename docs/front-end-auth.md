@@ -65,9 +65,9 @@ Registered in `front-end/src/app/app.module.ts` (order matters — JWT runs befo
 | Interceptor | File | Behavior |
 |-------------|------|----------|
 | `JwtInterceptor` | `helpers/jwt.interceptor.ts` | If `localStorage.user.token` exists and the request URL starts with `environment.apiUrl`, adds `Authorization: Bearer <token>` |
-| `ErrorInterceptor` | `helpers/error.interceptor.ts` | On `401` or `403` with a stored user, calls `logout()` and re-throws the error |
+| `ErrorInterceptor` | `helpers/error.interceptor.ts` | On `401` or `403` with a stored user, calls `logout()` and shows a session-expired alert; all HTTP errors show a global toast via `AlertService` |
 
-Form components pass re-thrown errors to `AlertService.error()` — see [front-end-alerts.md](front-end-alerts.md). The interceptor does not show alerts itself.
+See [front-end-alerts.md](front-end-alerts.md) for how error messages are parsed and displayed.
 
 The JWT interceptor only attaches headers to requests aimed at the configured API base URL (`environment.apiUrl`). Third-party URLs are left unchanged.
 
