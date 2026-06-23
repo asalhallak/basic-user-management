@@ -1,24 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { AccountService, AlertService } from '../../services';
+import { AccountService } from '../../services';
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
     users = null;
 
-    constructor(
-        private accountService: AccountService,
-        private alertService: AlertService
-    ) {}
+    constructor(private accountService: AccountService) {}
 
     ngOnInit() {
         this.accountService.getAll()
             .pipe(first())
             .subscribe({
                 next: users => this.users = users,
-                error: error => {
-                    this.alertService.error(error);
+                error: () => {
                     this.users = [];
                 }
             });
@@ -31,8 +27,7 @@ export class ListComponent implements OnInit {
             .pipe(first())
             .subscribe({
                 next: () => this.users = this.users.filter(x => x.id !== id),
-                error: error => {
-                    this.alertService.error(error);
+                error: () => {
                     user.isDeleting = false;
                 }
             });

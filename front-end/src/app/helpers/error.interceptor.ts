@@ -3,7 +3,7 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { AccountService } from '../services';
+import { AccountService, AlertService } from '../services';
 
 /** Map ASP.NET Core error bodies (validation, conflict, plain text) to a user-facing string. */
 export function extractHttpErrorMessage(err: HttpErrorResponse): string {
@@ -46,17 +46,24 @@ export function extractHttpErrorMessage(err: HttpErrorResponse): string {
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private accountService: AccountService) {}
+    constructor(
+        private accountService: AccountService,
+        private alertService: AlertService
+    ) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
+            const message = extractHttpErrorMessage(err);
+
             if ([401, 403].includes(err.status) && this.accountService.userValue) {
-                // auto logout if 401 or 403 response returned from api
                 this.accountService.logout();
+                this.alertService.error('Your session has expired. Please log in again.');
+            } else {
+                this.alertService.error(message);
             }
 
             console.error(err);
-            return throwError(extractHttpErrorMessage(err));
+            return throwError(message);
         }))
     }
 }
