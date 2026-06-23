@@ -103,6 +103,7 @@ Built with `FormBuilder` in `ngOnInit()`:
 |---------|------------|-------------|
 | `displayName` | `required` | ✓ |
 | `loginName` | `required` | ✓ |
+| `dateOfBirth` | `required` | ✓ (`type="date"`; ISO date sent to API) |
 | `isActive` | `required` | ✓ (boolean select) |
 | `salary` | `required` | ✓ |
 | `profilePictureUrl` | `required` | ✓ |
@@ -117,7 +118,6 @@ Built with `FormBuilder` in `ngOnInit()`:
 
 | API field | Effect when omitted |
 |-----------|---------------------|
-| `dateOfBirth` | Defaults to `0001-01-01` or null depending on binding — list may show an empty date |
 | `country` (user-level) | Only `address.country` is collected; top-level `country` on `UserResource` is not set |
 
 See [front-end-models.md](front-end-models.md) for the full field mapping table.
@@ -154,7 +154,8 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 |-------|--------|---------------|
 | ~~Dead password validators~~ | ~~`passwordValidators` are defined in `ngOnInit()` but no password control exists~~ | Fixed — unused validator setup removed from `add-edit.component.ts` |
 | ~~Country field invalid styling~~ | ~~`address.country` input used `city.errors` for `is-invalid` class~~ | Fixed — template now checks `country.errors` in `add-edit.component.html` |
-| Missing `dateOfBirth` / user `country` | Form omits API fields the list displays | Add date picker and country field, or hide columns |
+| ~~Missing `dateOfBirth`~~ | ~~Form omits API field the list displays~~ | Fixed — `dateOfBirth` date input added to add/edit form; edit mode normalizes ISO values for the picker |
+| Missing user `country` | Only `address.country` is collected; top-level `country` on `UserResource` is not set | Add a user-level country field, or hide the column |
 | `register()` for create | Method name suggests auth registration | Rename to `createUser()` when refactoring callers |
 | ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — `AlertService.error()` and reset `isDeleting` on failure |
 | ~~Edit load errors silent~~ | ~~`getById` has no error handler~~ | Fixed — `AlertService.error()` and redirect to list on failure |

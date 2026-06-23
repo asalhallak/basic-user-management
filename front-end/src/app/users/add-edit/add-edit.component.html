@@ -21,6 +21,14 @@
     </div>
     <div class="form-row">
         <div class="form-group col">
+            <label for="dateOfBirth">Date Of Birth</label>
+            <input type="date" formControlName="dateOfBirth" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && controls.dateOfBirth.errors }" />
+            <div *ngIf="submitted && controls.dateOfBirth.errors" class="invalid-feedback">
+                <div *ngIf="controls.dateOfBirth.errors.required">Date Of Birth is required</div>
+            </div>
+        </div>
+        <div class="form-group col">
             <label for="isActive">Is Active</label>
             <select formControlName="isActive" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && controls.isActive.errors }">
