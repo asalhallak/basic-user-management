@@ -77,7 +77,7 @@ The parent `LayoutComponent` renders child routes inside a centered column (`col
 3. Set `loading = true`.
 4. Call `accountService.login(username, password)`.
 5. On success, read `returnUrl` from query params (default `/`) and `navigateByUrl(returnUrl)`.
-6. On error, call `alertService.error(error)` and reset `loading`.
+6. On error, reset `loading` (error toast is shown by `ErrorInterceptor`).
 
 The default dev credentials are `admin` / `123456789` — see [README — Default login](../README.md#default-login).
 

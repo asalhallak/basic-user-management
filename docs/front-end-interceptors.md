@@ -32,7 +32,7 @@ flowchart LR
 | Interceptor | File | Runs when | Outgoing | Response |
 |-------------|------|-----------|----------|----------|
 | `JwtInterceptor` | `helpers/jwt.interceptor.ts` | Always | Adds `Authorization: Bearer <token>` when logged in and URL starts with `environment.apiUrl` | Pass-through |
-| `ErrorInterceptor` | `helpers/error.interceptor.ts` | Always | Pass-through | Catches errors; auto-logout on `401`/`403`; re-throws a string message |
+| `ErrorInterceptor` | `helpers/error.interceptor.ts` | Always | Pass-through | Catches errors; auto-logout on `401`/`403`; shows `AlertService` toast; re-throws a string message |
 
 API calls use full URLs like `http://localhost:5000/api/v1/...` (built from `environment.apiUrl` in `AccountService`).
 
@@ -68,18 +68,19 @@ Source: `front-end/src/app/helpers/error.interceptor.ts`
 
 The interceptor wraps `next.handle(request)` with RxJS `catchError`:
 
-1. If the HTTP status is `401` or `403` **and** `AccountService.userValue` exists, call `logout()` (clears `localStorage` and navigates to `/account/login`).
-2. Log the raw error to the console.
-3. Re-throw a user-facing string via `extractHttpErrorMessage()` (not the full `HttpErrorResponse`). The helper reads, in order: plain-text bodies, `{ message }` (for example `409 Conflict`), ASP.NET Core validation `errors` maps (`400 Bad Request`), then `title`, then `statusText`.
+1. If the HTTP status is `401` or `403` **and** `AccountService.userValue` exists, call `logout()` (clears `localStorage` and navigates to `/account/login`) and show a session-expired message via `AlertService`.
+2. Otherwise, show the parsed error message via `AlertService.error()`.
+3. Log the raw error to the console.
+4. Re-throw a user-facing string via `extractHttpErrorMessage()` (not the full `HttpErrorResponse`). The helper reads, in order: plain-text bodies, `{ message }` (for example `409 Conflict`), ASP.NET Core validation `errors` maps (`400 Bad Request`), then `title`, then `statusText`.
 
-Form components subscribe with `{ error: (message) => this.alertService.error(message) }` — see [front-end-alerts.md](front-end-alerts.md). The interceptor does **not** call `AlertService` itself; that is a documented improvement idea in [improvement-ideas.md](improvement-ideas.md).
+Form components no longer call `AlertService.error()` in their `subscribe({ error })` handlers — the interceptor owns global error toasts. Components still handle local cleanup (for example resetting `loading` or `isDeleting` flags). See [front-end-alerts.md](front-end-alerts.md).
 
-| Status | Logged-in session | Interceptor action | Typical UI follow-up |
-|--------|-------------------|--------------------|----------------------|
-| `401` / `403` | Yes | `logout()` + re-throw message | Redirect to login; optional alert in form handler |
-| `401` / `403` | No | Re-throw only | Login form shows error banner |
-| `400` / `404` / `500` | Any | Re-throw only | Form handler calls `AlertService.error()` |
-| Network failure (`status === 0`) | Any | Re-throw `statusText` | Alert or console only |
+| Status | Logged-in session | Interceptor action | Component follow-up |
+|--------|-------------------|--------------------|---------------------|
+| `401` / `403` | Yes | `logout()` + session-expired alert + re-throw | Reset local loading/delete flags if needed |
+| `401` / `403` | No | Parsed error alert + re-throw | Login form resets `loading` |
+| `400` / `404` / `409` / `500` | Any | Parsed error alert + re-throw | Reset `loading` or navigation as needed |
+| Network failure (`status === 0`) | Any | Alert + re-throw `statusText` | Reset local state if needed |
 
 **Note:** `AuthGuard` checks only that a `user` object exists in `localStorage` — not JWT expiry. An expired token still passes the guard until an API call returns `401` and this interceptor logs the user out.
 
@@ -123,8 +124,9 @@ sequenceDiagram
     Err->>API: forward request
     API-->>Err: 401 Unauthorized
     Err->>Acct: logout()
+    Err->>Err: AlertService.error(session expired)
     Err-->>List: throwError(message)
-    List->>List: AlertService.error(message)
+    List->>List: reset local state (e.g. users = [])
 ```
 
 ## Common pitfalls
@@ -145,7 +147,7 @@ sequenceDiagram
 |------|------|
 | `front-end/src/app/app.module.ts` | Registers interceptor providers |
 | `front-end/src/app/helpers/jwt.interceptor.ts` | Attach Bearer token to API requests |
-| `front-end/src/app/helpers/error.interceptor.ts` | Auto-logout and error re-throw |
+| `front-end/src/app/helpers/error.interceptor.ts` | Auto-logout, global error alerts, and error re-throw |
 | `front-end/src/app/helpers/fake-backend.ts` | Legacy tutorial interceptor (not registered in `AppModule`) |
 | `front-end/src/app/helpers/index.ts` | Barrel exports for helpers |
 | `front-end/src/app/services/account.service.ts` | Builds API URLs; owns session used by interceptors |
