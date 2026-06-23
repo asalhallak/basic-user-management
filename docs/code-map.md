@@ -16,7 +16,7 @@ A quick reference for where to change common behavior. For architecture and setu
 | Change API base URL from the UI | `front-end/src/environments/environment.ts` | Production URL in `environment.prod.ts` |
 | Change login/register UI | `front-end/src/app/auth/` | Login/register forms, `returnUrl`, and register quirks; see [front-end-login-register.md](front-end-login-register.md) and [front-end-models.md](front-end-models.md) |
 | Change user list/editor UI | `front-end/src/app/users/` | List and add/edit components post to `/api/v1/users`; see [front-end-users.md](front-end-users.md) |
-| Remove tutorial fake backend | `front-end/src/app/app.module.ts` | Drop `fakeBackendProvider` when using the real API only; see [fake-backend.md](fake-backend.md) |
+| Tutorial fake backend (legacy) | `front-end/src/app/helpers/fake-backend.ts` | Not registered in `app.module.ts`; reference only — see [fake-backend.md](fake-backend.md) |
 | Understand JWT flow in the UI | [front-end-auth.md](front-end-auth.md) | `AccountService`, interceptors, `AuthGuard`, and `localStorage`; see [client-server-auth.md](client-server-auth.md) for client vs server layers |
 | Change JWT attachment or global HTTP errors | `front-end/src/app/helpers/jwt.interceptor.ts`, `error.interceptor.ts` | Registration order in `app.module.ts`; see [front-end-interceptors.md](front-end-interceptors.md) |
 | Change front-end API calls or session | `front-end/src/app/services/account.service.ts` | Login, logout, and user CRUD HTTP methods; see [account-service.md](account-service.md) |

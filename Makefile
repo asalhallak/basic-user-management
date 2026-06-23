@@ -3,7 +3,7 @@
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
 
-check-deps: ## Verify Docker, .NET, Node.js, and npm are installed
+check-deps: ## Verify Docker, .NET, Node.js, npm, and curl are installed
 	./scripts/check-deps.sh
 
 install: install-ef ## Install npm packages, restore .NET dependencies, and ensure dotnet-ef is available

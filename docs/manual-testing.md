@@ -97,7 +97,7 @@ Inspect schema or data with sqlcmd examples in [database.md](database.md).
 | `make ci` — OpenSSL / Webpack error | Use Node.js 16 (`.nvmrc`); see [ci-and-builds.md](ci-and-builds.md) |
 | `make migrate` — connection refused | Wait 15–30s after `make db-up`, or run `make db-logs` |
 | `make verify` — front end check fails | Confirm `make run-frontend` is running, or use `make verify-api` |
-| UI login works in curl but not browser | Remove `fakeBackendProvider` from `app.module.ts`; clear `localStorage` |
+| UI login works in curl but not browser | Clear `localStorage` for `http://localhost:4200`; confirm `environment.apiUrl` matches the API |
 
 Full troubleshooting: [README — Troubleshooting](../README.md#troubleshooting).
 
