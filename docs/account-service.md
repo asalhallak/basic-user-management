@@ -59,7 +59,7 @@ All paths are relative to `environment.apiUrl`.
 
 | Method | HTTP | Endpoint | Auth | Used by |
 |--------|------|----------|------|---------|
-| `login(username, password)` | `POST` | `/api/v1/auth/login` | No | `LoginComponent` |
+| `login(userName, password)` | `POST` | `/api/v1/auth/login` | No | `LoginComponent` |
 | `register(user)` | `POST` | `/api/v1/users` | Yes (JWT) | `RegisterComponent`, `AddEditComponent` (create) |
 | `getAll()` | `GET` | `/api/v1/users` | Yes | `ListComponent` |
 | `getById(id)` | `GET` | `/api/v1/users/{id}` | Yes | `AddEditComponent` (edit mode) |
@@ -68,7 +68,7 @@ All paths are relative to `environment.apiUrl`.
 
 ### Login payload
 
-The service sends `{ username, password }`. The API model uses `userName`, but ASP.NET Core model binding is case-insensitive, so login works without renaming the field. Prefer `userName` for consistency with [api-responses.md](api-responses.md).
+The service sends `{ userName, password }`, matching the `Credentials` model on the API ([api-resources.md](api-resources.md)). The login form control is still named `username` in the template; `LoginComponent` passes its value as the first argument to `login()`.
 
 ### `register()` naming
 
@@ -88,7 +88,7 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 | Quirk | Detail | Fix / reference |
 |-------|--------|-----------------|
 | Method name `register` | Creates a user record, not a login account | Rename only if you refactor callers; document intent in PR |
-| Register form fields | Sends `username`, `firstName`, `lastName` | Align with `loginName`, `displayName`, `address` — [improvement-ideas.md](improvement-ideas.md) |
+| Register form labels | UI still shows legacy `username`, `firstName`, `lastName` labels | `RegisterComponent.onSubmit()` maps to `{ loginName, displayName, isActive: true }` before calling `register()` — see [front-end-login-register.md](front-end-login-register.md) |
 | `update()` localStorage sync | Only runs when `id == userValue.id` | Login session uses `userName`/`token`, not a user row `id`, so this branch rarely fires in the sample app |
 | Fake backend | `fakeBackendProvider` intercepts legacy `/users/authenticate` routes | Remove from `app.module.ts` when using the real API — [code-map.md](code-map.md) |
 | No shared error UI | Failed calls re-throw; each component calls `AlertService.error()` | Optional: wire [ErrorInterceptor](front-end-alerts.md) to alerts globally |
