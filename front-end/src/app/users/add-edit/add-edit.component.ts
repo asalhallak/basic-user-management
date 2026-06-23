@@ -28,6 +28,7 @@ export class AddEditComponent implements OnInit {
         this.form = this.formBuilder.group({
             displayName: ['', Validators.required],
             loginName: ['', Validators.required],
+            dateOfBirth: ['', Validators.required],
             isActive: [false, Validators.required],
             salary: ['', Validators.required],
             profilePictureUrl: ['', Validators.required],
@@ -47,7 +48,10 @@ export class AddEditComponent implements OnInit {
                 .pipe(first())
                 .subscribe({
                     next: user => {
-                        this.form.patchValue(user);
+                        this.form.patchValue({
+                            ...user,
+                            dateOfBirth: user.dateOfBirth ? String(user.dateOfBirth).split('T')[0] : '',
+                        });
                         this.loading = false;
                     },
                     error: error => {
