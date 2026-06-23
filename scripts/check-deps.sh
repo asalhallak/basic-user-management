@@ -7,6 +7,7 @@ usage() {
 Usage: check-deps.sh [--help]
 
 Verify that Docker, .NET SDK, Node.js, npm, and curl are available on PATH.
+Warns when Node.js is not major version 16 (see .nvmrc and CI).
 Also reports whether the optional dotnet-ef global tool is installed.
 
 Exit code 0 when all required tools are present; 1 otherwise.
@@ -45,6 +46,16 @@ require ".NET SDK" dotnet "dotnet --version"
 require "Node.js" node "node --version"
 require "npm" npm "npm --version"
 require "curl" curl "curl --version"
+
+if command -v node >/dev/null 2>&1; then
+  node_major="$(node -e "console.log(process.versions.node.split('.')[0])" 2>/dev/null || true)"
+  if [[ -n "${node_major}" && "${node_major}" != "16" ]]; then
+    echo ""
+    echo "WARN: Node.js major version is ${node_major} (recommended: 16 per .nvmrc and GitHub Actions CI)"
+    echo "      Angular 11 front-end builds may fail on Node 17+ without NODE_OPTIONS=--openssl-legacy-provider"
+    echo "      See README.md#troubleshooting or run: nvm use"
+  fi
+fi
 
 echo ""
 echo "==> Optional tools"
