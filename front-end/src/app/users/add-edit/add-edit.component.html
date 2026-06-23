@@ -74,7 +74,7 @@
             <div class="form-group col">
                 <label for="country">Country</label>
                 <input type="text" formControlName="country" class="form-control"
-                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.city.errors }" />
+                       [ngClass]="{ 'is-invalid': submitted && controls.address.controls.country.errors }" />
                 <div *ngIf="submitted && controls.address.controls.country.errors" class="invalid-feedback">
                     <div *ngIf="controls.address.controls.country.errors.required">country is required</div>
                 </div>
