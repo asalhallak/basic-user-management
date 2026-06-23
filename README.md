@@ -319,7 +319,7 @@ The Angular app was adapted from a tutorial that used a local fake backend. When
 
 1. Remove `fakeBackendProvider` from the `providers` array in `front-end/src/app/app.module.ts`.
 2. Log in with the [default credentials](#default-login) before using register or user management screens.
-3. Align register/create payloads with the [user model](#user-model) (`loginName`, `displayName`, `address`, etc.).
+3. For full user records (address, salary, etc.), use **Users → Add**; the register form creates minimal records with mapped `loginName` and `displayName`.
 
 ## API reference
 
