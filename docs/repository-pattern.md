@@ -130,10 +130,11 @@ One `SaveChanges` call persists the full graph. See [domain-model.md — Create 
 ### Update user
 
 1. Controller sets `user.Id` from the route and maps to a `User` entity.
-2. `UsersService.Update` calls `Update` then `Complete()`.
-3. EF marks the entity (and nested address, if supplied) as modified.
+2. `UsersService.Update` loads the user with `GetById(id)`. When the entity is missing, the service returns `false` and the controller responds with `404 Not Found`.
+3. When the user exists, the service calls `Update` then `Complete()`.
+4. EF marks the entity (and nested address, if supplied) as modified.
 
-There is no existence check before update — a missing ID may update nothing or fail depending on EF state. See [api-errors.md](api-errors.md).
+Duplicate `loginName` values are checked in the controller before update; conflicts return `409 Conflict`. See [api-errors.md](api-errors.md).
 
 ### Delete user
 
@@ -146,7 +147,7 @@ There is no existence check before update — a missing ID may update nothing or
 | Setting | Value | Effect |
 |---------|-------|--------|
 | `ChangeTracker.LazyLoadingEnabled` | `false` | Navigation properties are not loaded implicitly — use `Include` |
-| Unique index | `Users.LoginName` | Duplicate login names fail at the database layer (`500` today) |
+| Unique index | `Users.LoginName` | Enforced in SQL; the controller also checks duplicates and returns `409 Conflict` before insert/update |
 | Unique index | `Users.Id`, `Addresses.Id` | Primary keys |
 
 DbSets: `Users`, `Addresses`. Schema is created by the initial migration in `Migrations/20201129195226_init.cs`.
@@ -171,4 +172,4 @@ Keep repository interfaces in `UserManagement.Domain` free of EF types so tests 
 - [code-map.md](code-map.md) — file locations for repositories, services, and schema changes
 - [solution-structure.md](solution-structure.md) — project references and DI registration
 - [api-errors.md](api-errors.md) — missing-user and constraint failure behavior
-- [improvement-ideas.md](improvement-ideas.md) — suggested hardening (404 handling, duplicate loginName)
+- [improvement-ideas.md](improvement-ideas.md) — known gaps and good first contribution ideas
