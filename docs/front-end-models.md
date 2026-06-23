@@ -27,7 +27,7 @@ flowchart LR
         UserRes["UserResource: loginName, displayName, address"]
     end
 
-    Login -->|username, password| Cred
+    Login -->|userName, password| Cred
     Register -->|"maps on submit: loginName, displayName"| UserRes
     Editor -->|loginName, displayName, address| UserRes
     Model -.->|outdated shape| UserRes
@@ -39,7 +39,7 @@ flowchart LR
 
 | Angular (`account.service.ts`) | API (`Credentials.cs`) | Notes |
 |--------------------------------|------------------------|-------|
-| `username` | `userName` | ASP.NET Core binding is case-insensitive; login works with either spelling |
+| `userName` | `userName` | Login form control is still named `username` in the template |
 | `password` | `password` | Compared to hardcoded dev credentials in `AuthService` |
 
 Stored session in `localStorage` uses the API response shape: `{ userName, token }`.

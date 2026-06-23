@@ -48,7 +48,7 @@ Invalid credentials return `401 Unauthorized` with an empty body. Example respon
 | `Credentials` | `Resources/Credentials.cs` | `userName`, `password` | Login request body |
 | `Claims` | `Resources/Claim.cs` | `userName`, `token` | Login response body |
 
-ASP.NET Core model binding is case-insensitive, so `username` from the Angular app also binds to `UserName`. Prefer `userName` to match the API contract.
+The Angular app sends `{ userName, password }` from `AccountService.login()`, matching the `Credentials` model.
 
 ## Token generation
 
