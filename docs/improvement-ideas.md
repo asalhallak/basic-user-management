@@ -17,8 +17,8 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Validation | `[Required]` on `loginName` and `displayName`; other fields still optional | Extend with FluentValidation or more data annotations on `UserResource` |
 | POST `/users` response | ~~Returns domain `User` entity instead of mapped `UserResource`~~ | Fixed — `UsersController.Add` maps the created entity to `UserResource` before returning |
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API — see [fake-backend.md](fake-backend.md) |
-| Register form | Field names don't match API (`username` vs `loginName`) | Align form and `AccountService` with [front-end-models.md](front-end-models.md) and [user model](../README.md#user-model) |
-| Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName`; register form still uses legacy fields |
+| Register form | ~~Field names don't match API (`username` vs `loginName`)~~ | Fixed — `RegisterComponent.onSubmit()` maps legacy form fields to `loginName` and `displayName` before calling `POST /api/v1/users`; see [front-end-login-register.md](front-end-login-register.md) |
+| Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
 | Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md). Users list load/delete errors and add-edit load errors now use `AlertService` in `ListComponent` and `AddEditComponent`. |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
@@ -38,7 +38,7 @@ The Angular app was adapted from a tutorial that used a local fake backend. When
 - Remove `fakeBackendProvider` from `front-end/src/app/app.module.ts` ([fake-backend.md](fake-backend.md), [front-end-auth.md](front-end-auth.md)).
 - Add or change routes following the lazy-module pattern in [angular-routing.md](angular-routing.md).
 - Log in with the [default credentials](../README.md#default-login) before using register or user management screens.
-- Align the register form with API field names (`loginName`, `displayName`, nested `address`). See [front-end-models.md](front-end-models.md), [account-service.md](account-service.md), [front-end-users.md](front-end-users.md), and [README — Front-end and API integration](../README.md#front-end-and-api-integration).
+- ~~Align the register form with API field names (`loginName`, `displayName`, nested `address`).~~ Fixed — `RegisterComponent` maps legacy tutorial fields to `loginName` and `displayName` on submit; for full address and salary fields use **Users → Add** — see [front-end-login-register.md](front-end-login-register.md) and [front-end-users.md](front-end-users.md).
 - Surface API errors consistently via `AlertService` instead of per-form `subscribe` handlers — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md).
 
 ## Testing
