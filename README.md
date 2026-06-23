@@ -312,7 +312,7 @@ The Angular app was adapted from a tutorial that used a local fake backend. When
 | Area | Front end | API | Notes |
 |------|-----------|-----|-------|
 | Login payload | `{ username, password }` in `account.service.ts` | `{ userName, password }` in `Credentials.cs` | ASP.NET Core model binding is case-insensitive, so login usually works. Prefer `userName` for consistency with the API. |
-| User model | `username`, `firstName`, `lastName` (register form) | `loginName`, `displayName`, nested `address` | User list/editor aligns with the API; the register form does not. |
+| User model | `username`, `firstName`, `lastName` (register form UI) | `loginName`, `displayName`, nested `address` | Register maps legacy fields to API shape on submit; user list/editor uses API fields directly. |
 | Fake backend | `fakeBackendProvider` in `app.module.ts` | N/A | Intercepts legacy `/users/authenticate` routes. Remove this provider when using the real API exclusively. |
 
 **Recommended steps to use the real API end-to-end:**

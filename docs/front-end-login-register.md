@@ -99,26 +99,28 @@ After a successful login, the component restores that path so deep links work wi
 
 | Control | Validators | Maps to API? |
 |---------|------------|--------------|
-| `firstName` | `required` | ✗ — API expects `displayName` |
-| `lastName` | `required` | ✗ — not sent as a separate field |
-| `username` | `required` | ✗ — API expects `loginName` |
-| `password` | `required`, `minLength(6)` | ✗ — user records have no password column |
+| `firstName` | `required` | ✓ — combined into `displayName` on submit |
+| `lastName` | `required` | ✓ — combined into `displayName` on submit |
+| `username` | `required` | ✓ — mapped to `loginName` on submit |
+| `password` | `required`, `minLength(6)` | ✗ — user records have no password column (legacy tutorial field) |
 
-The form posts `this.form.value` directly to `accountService.register()`, which calls `POST /api/v1/users`. That endpoint requires a JWT and expects `UserResource` JSON — see [front-end-models.md](front-end-models.md).
+The form maps legacy tutorial field names to `UserResource` JSON in `onSubmit()` before calling `accountService.register()`, which posts to `POST /api/v1/users`. That endpoint requires a JWT — see [front-end-models.md](front-end-models.md).
 
 ### Submit flow
 
 1. Same validation and alert clearing pattern as login.
-2. Call `accountService.register(this.form.value)`.
-3. On success, show `Registration successful` via `AlertService` with `{ keepAfterRouteChange: true }`, then navigate to `../login`.
-4. On error, show the re-thrown message from `ErrorInterceptor` (often `401` if not logged in).
+2. If no session exists (`!accountService.userValue`), redirect to `../login`.
+3. Map `{ username, firstName, lastName }` to `{ loginName, displayName, isActive: true }`.
+4. Call `accountService.register(body)`.
+5. On success, show `Registration successful` via `AlertService` with `{ keepAfterRouteChange: true }`, then navigate to `../login`.
+6. On error, show the re-thrown message from `ErrorInterceptor` (often `401` if not logged in).
 
 ### Why register often fails
 
 | Symptom | Cause |
 |---------|-------|
 | `401 Unauthorized` | User endpoints require JWT — log in first |
-| `500` or silent persistence issues | Wrong JSON field names (`username` vs `loginName`) |
+| `400 Bad Request` | Missing required API fields (should not occur after field mapping) |
 | Password ignored | API does not store passwords on user records |
 
 Register is **not** a public sign-up flow. It creates a SQL user record while you are already authenticated. See [README — Authentication vs user data](../README.md#authentication-vs-user-data).
@@ -136,7 +138,7 @@ The guard checks only that a `user` object exists in `localStorage` — it does 
 | User action | AccountService method | HTTP | Auth header |
 |-------------|----------------------|------|-------------|
 | Login submit | `login(username, password)` | `POST /api/v1/auth/login` | No |
-| Register submit | `register(form.value)` | `POST /api/v1/users` | Yes (via `JwtInterceptor`) |
+| Register submit | `register({ loginName, displayName, isActive })` | `POST /api/v1/users` | Yes (via `JwtInterceptor`) |
 
 After login, `localStorage` stores `{ userName, token }`. See [account-service.md](account-service.md) for session details.
 
@@ -144,7 +146,6 @@ After login, `localStorage` stores `{ userName, token }`. See [account-service.m
 
 | Quirk | Detail | Suggested fix |
 |-------|--------|---------------|
-| Register field names | `username`, `firstName`, `lastName` vs API `loginName`, `displayName` | Align with [front-end-users.md](front-end-users.md) add-edit form |
 | Register requires login | Protected `POST /users` from a public route | Document flow (this page) or redesign as admin-only |
 | Guard ignores token expiry | Stale JWT in storage still unlocks routes | Optional client-side expiry check in `AuthGuard` |
 | Login uses `username` | Works via case-insensitive binding | Prefer `userName` for consistency with API |
@@ -159,7 +160,7 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 3. Visit `/users` while logged out — redirect to login with `returnUrl=/users`.
 4. Log in again — land on `/users`.
 5. Open `/account/register` **without** logging in — submit fails with `401`.
-6. Log in, then register — observe field mismatch or API errors unless payload is aligned.
+6. Log in, then register — user record is created with mapped `loginName` and `displayName` (password field is ignored by the API).
 
 Full checklist: [manual-testing.md — Manual UI walkthrough](manual-testing.md#3-manual-ui-walkthrough).
 
