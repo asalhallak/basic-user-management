@@ -39,7 +39,7 @@ Login credentials are hardcoded in `AuthService` for local development (`admin` 
 2. **`AuthService.Login`** (`Services/AuthService.cs`) compares credentials against the hardcoded values. On success it builds a `Claims` DTO and calls `JwtHelper.GenerateToken`.
 3. **`JwtHelper.GenerateToken`** (`Helpers/JwtHelper.cs`) signs a JWT and returns the string. The `Claims` object is serialized as `{ "userName": "...", "token": "..." }` for the HTTP response.
 
-Invalid credentials return `401 Unauthorized` with an empty body. Example response shapes are in [api-responses.md](api-responses.md).
+Missing or empty `userName` / `password` return `400 Bad Request` with validation problem details (`[Required]` on `Credentials`). Invalid credentials return `401 Unauthorized` with an empty body. Example response shapes are in [api-responses.md](api-responses.md).
 
 ### Request and response DTOs
 
