@@ -55,8 +55,7 @@ export class AddEditComponent implements OnInit {
                         });
                         this.loading = false;
                     },
-                    error: error => {
-                        this.alertService.error(error);
+                    error: () => {
                         this.router.navigate(['../'], { relativeTo: this.route });
                     }
                 });
@@ -93,8 +92,7 @@ export class AddEditComponent implements OnInit {
                     this.alertService.success('User added successfully', { keepAfterRouteChange: true });
                     this.router.navigate(['../'], { relativeTo: this.route });
                 },
-                error: error => {
-                    this.alertService.error(error);
+                error: () => {
                     this.loading = false;
                 }
             });
@@ -108,8 +106,7 @@ export class AddEditComponent implements OnInit {
                     this.alertService.success('Update successful', { keepAfterRouteChange: true });
                     this.router.navigate(['../../'], { relativeTo: this.route });
                 },
-                error: error => {
-                    this.alertService.error(error);
+                error: () => {
                     this.loading = false;
                 }
             });
