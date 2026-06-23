@@ -42,7 +42,7 @@ These names appear in different layers and mean different things:
 | `username` | Angular login/register forms | Legacy tutorial spelling; login works because ASP.NET Core binding is case-insensitive |
 | `loginName` | User CRUD API (`UserResource`) | Unique identifier for a **user record** in SQL Server — not the login account |
 
-The user editor uses `loginName` and `displayName` correctly; the register form and `models/user.ts` still use legacy field names. See [front-end-models.md](front-end-models.md) and [domain-model.md](domain-model.md).
+The user editor uses `loginName` and `displayName` directly. The register form still shows legacy tutorial labels (`username`, `firstName`, `lastName`) in the UI, but `RegisterComponent.onSubmit()` maps them to `loginName` and `displayName` before calling the API. The TypeScript `User` model in `models/user.ts` still reflects the tutorial shape. See [front-end-models.md](front-end-models.md) and [domain-model.md](domain-model.md).
 
 ### Why does the register page return `401`?
 

@@ -34,7 +34,7 @@ flowchart TB
 | Module | `front-end/src/app/auth/auth.module.ts` |
 | Lazy loaded | Yes — via `loadChildren` in `app-routing.module.ts` |
 | Auth required | No — public routes; register still calls a **protected** API endpoint |
-| API alignment | Login works with the real API; register form uses legacy tutorial field names |
+| API alignment | Login works with the real API; register keeps legacy form labels but maps to API fields on submit |
 
 ## Module layout
 
