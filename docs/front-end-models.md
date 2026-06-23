@@ -51,7 +51,7 @@ Stored session in `localStorage` uses the API response shape: `{ userName, token
 | `loginName` | ✓ form control | `username` → mapped in `onSubmit()` | `username` |
 | `displayName` | ✓ form control | `firstName` + `lastName` → mapped in `onSubmit()` | `firstName` / `lastName` |
 | `dateOfBirth` | ✓ form control (`type="date"`) | — | ✓ |
-| `country` | via `address.country` | — | — |
+| `country` | ✓ form control | — | ✓ |
 | `isActive` | ✓ form control | — | — |
 | `salary` | ✓ form control | — | — |
 | `profilePictureUrl` | ✓ form control | — | — |

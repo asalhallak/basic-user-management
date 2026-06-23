@@ -47,6 +47,14 @@
                 <div *ngIf="controls.salary.errors.required">Salary is required</div>
             </div>
         </div>
+        <div class="form-group col">
+            <label for="country">Country</label>
+            <input type="text" formControlName="country" class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && controls.country.errors }" />
+            <div *ngIf="submitted && controls.country.errors" class="invalid-feedback">
+                <div *ngIf="controls.country.errors.required">Country is required</div>
+            </div>
+        </div>
     </div>
     <div class="form-row">
 
