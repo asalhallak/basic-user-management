@@ -15,6 +15,7 @@ The UI uses a small publish/subscribe pattern:
 ```mermaid
 sequenceDiagram
     participant Form as LoginComponent
+    participant Err as ErrorInterceptor
     participant Svc as AlertService
     participant UI as AlertComponent
     participant API as UserManagement.API
@@ -22,12 +23,13 @@ sequenceDiagram
     Form->>Svc: clear() on submit
     Form->>API: POST /api/v1/auth/login
     API-->>Form: 401 / error body
-    Form->>Svc: error(message)
+    Form->>Err: ErrorInterceptor catches error
+    Err->>Svc: error(message)
     Svc-->>UI: onAlert() emits Alert
     UI-->>Form: Renders alert-danger banner
 ```
 
-Components call `AlertService` directly; there is no global HTTP-to-alert bridge. Each form handles API errors in its `subscribe({ error })` handler.
+`ErrorInterceptor` calls `AlertService.error()` for all failed HTTP responses. Form components still call `clear()` before submit and `success()` after saves; their `subscribe({ error })` handlers only reset local state (for example `loading` or `isDeleting` flags).
 
 ## AlertService API
 
@@ -83,9 +85,10 @@ To scope alerts to a layout, add `<alert id="my-region"></alert>` and pass `{ id
 
 | Component | File | When |
 |-----------|------|------|
-| Login | `auth/login/login.component.ts` | `clear()` on submit; `error()` on failed login |
-| Register | `auth/register/register.component.ts` | `clear()` on submit; `success()` after create; `error()` on failure |
-| Add / edit user | `users/add-edit/add-edit.component.ts` | `clear()` on submit; `success({ keepAfterRouteChange: true })` after save; `error()` on failure |
+| Login | `auth/login/login.component.ts` | `clear()` on submit |
+| Register | `auth/register/register.component.ts` | `clear()` on submit; `success()` after create |
+| Add / edit user | `users/add-edit/add-edit.component.ts` | `clear()` on submit; `success({ keepAfterRouteChange: true })` after save |
+| ErrorInterceptor | `helpers/error.interceptor.ts` | `error()` on any failed HTTP response; session-expired message on `401`/`403` with an active session |
 
 Login and register layouts do **not** embed their own `<alert>` tag. Messages render in the global `<alert>` in `app.component.html`, which sits above nested `router-outlet` content.
 
@@ -93,10 +96,11 @@ Login and register layouts do **not** embed their own `<alert>` tag. Messages re
 
 Failed HTTP calls flow through `ErrorInterceptor` (`helpers/error.interceptor.ts`) — see [front-end-interceptors.md](front-end-interceptors.md) for the full chain and status matrix:
 
-1. On `401` or `403` while a user session exists, `AccountService.logout()` runs.
-2. The interceptor logs the error and re-throws a string from `extractHttpErrorMessage()` in `error.interceptor.ts`.
+1. On `401` or `403` while a user session exists, `AccountService.logout()` runs and a session-expired message is shown.
+2. For all other failures, the interceptor shows the parsed message from `extractHttpErrorMessage()` in `error.interceptor.ts`.
+3. The interceptor re-throws the message so components can reset local state in their `subscribe({ error })` handlers.
 
-Form components pass that string to `alertService.error(error)`. Validation failures (`400`) and duplicate `loginName` responses (`409`) now surface field-level or conflict messages when the API returns JSON bodies. Empty bodies (typical for `401`) still fall back to `statusText` such as `Unauthorized`.
+Validation failures (`400`) and duplicate `loginName` responses (`409`) surface field-level or conflict messages when the API returns JSON bodies. Empty bodies (typical for login `401`) fall back to `statusText` such as `Unauthorized`.
 
 ## Common patterns
 
@@ -125,7 +129,7 @@ this.alertService.info('Changes saved locally', { autoClose: true });
 
 ## Extension ideas
 
-- Wire `ErrorInterceptor` to `AlertService` for consistent global error toasts (today each form handles errors locally).
+- ~~Wire `ErrorInterceptor` to `AlertService` for consistent global error toasts.~~ Fixed — the interceptor shows all HTTP error messages; components only reset local state in error handlers.
 - ~~Map ASP.NET Core validation/problem-details JSON into readable `error()` messages.~~ Fixed — `extractHttpErrorMessage()` in `error.interceptor.ts` parses validation `errors` and `{ message }` bodies before re-throw.
 - Replace Bootstrap classes in `AlertComponent.cssClass()` if you migrate to Angular Material snack bars.
 

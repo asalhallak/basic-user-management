@@ -79,7 +79,7 @@ On init, calls `accountService.getAll()` and binds the result to `users`. While 
 | Behavior | Detail |
 |----------|--------|
 | Optimistic UI | Row stays until delete succeeds |
-| Error handling | Failed load or delete shows `AlertService.error()`; delete failures reset `isDeleting` on the row |
+| Error handling | Failed load or delete shows a global alert via `ErrorInterceptor`; delete failures reset `isDeleting` on the row |
 | Confirmation | No confirm dialog before delete |
 
 For API delete behavior and missing-ID quirks, see [api-users-crud.md](api-users-crud.md) and [api-errors.md](api-errors.md).
@@ -125,11 +125,11 @@ See [front-end-models.md](front-end-models.md) for the full field mapping table.
 4. **Add mode:** `accountService.register(form.value)` → success alert → navigate to `../` (user list).
 5. **Edit mode:** `accountService.update(id, form.value)` → success alert → navigate to `../../` (user list).
 
-Errors call `alertService.error(error)` and reset `loading`. Success messages use `{ keepAfterRouteChange: true }` so the banner survives navigation — see [front-end-alerts.md](front-end-alerts.md).
+Errors reset `loading` in the component; the error message is shown globally by `ErrorInterceptor`. Success messages use `{ keepAfterRouteChange: true }` so the banner survives navigation — see [front-end-alerts.md](front-end-alerts.md).
 
 ### Edit mode preload
 
-When `!isAddMode`, `getById(id)` runs on init and `patchValue(user)` fills the form. While loading, the Save button shows a spinner (`loading = true`). If the request fails (for example `404` for a missing ID), `AlertService.error()` displays the message and the user is redirected to the user list.
+When `!isAddMode`, `getById(id)` runs on init and `patchValue(user)` fills the form. While loading, the Save button shows a spinner (`loading = true`). If the request fails (for example `404` for a missing ID), `ErrorInterceptor` shows the error and the component redirects to the user list.
 
 ## AccountService calls
 
@@ -152,8 +152,8 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 | ~~Missing `dateOfBirth`~~ | ~~Form omits API field the list displays~~ | Fixed — `dateOfBirth` date input added to add/edit form; edit mode normalizes ISO values for the picker |
 | ~~Missing user `country`~~ | ~~Only `address.country` is collected; top-level `country` on `UserResource` is not set~~ | Fixed — user-level `country` input added to add/edit form |
 | `register()` for create | Method name suggests auth registration | Rename to `createUser()` when refactoring callers |
-| ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — `AlertService.error()` and reset `isDeleting` on failure |
-| ~~Edit load errors silent~~ | ~~`getById` has no error handler~~ | Fixed — `AlertService.error()` and redirect to list on failure |
+| ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — global error alert via `ErrorInterceptor`; reset `isDeleting` on failure |
+| ~~Edit load errors silent~~ | ~~`getById` has no error handler~~ | Fixed — global error alert via `ErrorInterceptor`; redirect to list on failure |
 | ~~Wrong validation message~~ | ~~`profilePictureUrl` invalid feedback says "Salary is required"~~ | Fixed — template copy corrected in `add-edit.component.html` |
 | ~~Required profile picture URL~~ | ~~Form required `profilePictureUrl` though API treats it as optional~~ | Fixed — optional field in add/edit form; label notes "(optional)" |
 | ~~`console.log` calls~~ | ~~Debug logging left in `onSubmit` and `getById`~~ | Fixed — removed from `add-edit.component.ts` |

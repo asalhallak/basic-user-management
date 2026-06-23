@@ -19,7 +19,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Fake backend | ~~Still registered in `app.module.ts`~~ | Fixed — `fakeBackendProvider` removed; the app uses the real API exclusively. Legacy interceptor code remains in `helpers/fake-backend.ts` for reference — see [fake-backend.md](fake-backend.md) |
 | Register form | ~~Field names don't match API (`username` vs `loginName`)~~ | Fixed — `RegisterComponent.onSubmit()` maps legacy form fields to `loginName` and `displayName` before calling `POST /api/v1/users`; see [front-end-login-register.md](front-end-login-register.md) |
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
-| Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md). Users list load/delete errors and add-edit load errors now use `AlertService` in `ListComponent` and `AddEditComponent`. Validation and conflict JSON from the API is parsed into readable strings in `extractHttpErrorMessage()` before re-throw. Add-edit form cleanup: removed dead password validators; fixed `address.country` invalid CSS class binding. Add-edit form now collects `dateOfBirth` and user-level `country` (list column was previously empty for new users). |
+| Error toasts | ~~Each form handles API errors locally; no global alert from `ErrorInterceptor`~~ | Fixed — `ErrorInterceptor` calls `AlertService.error()` for all failed HTTP responses; session expiry shows a dedicated message on `401`/`403` with an active session. Components reset local state only in error handlers. Validation and conflict JSON is parsed in `extractHttpErrorMessage()` before display. |
 | Add/edit `profilePictureUrl` | ~~Required in form despite optional on API~~ | Fixed — optional in add/edit form, matching `UserResource` and API docs |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
@@ -40,7 +40,7 @@ The Angular app was adapted from a tutorial that used a local fake backend. The 
 - Add or change routes following the lazy-module pattern in [angular-routing.md](angular-routing.md).
 - Log in with the [default credentials](../README.md#default-login) before using register or user management screens.
 - ~~Align the register form with API field names (`loginName`, `displayName`, nested `address`).~~ Fixed — `RegisterComponent` maps legacy tutorial fields to `loginName` and `displayName` on submit; for full address and salary fields use **Users → Add** — see [front-end-login-register.md](front-end-login-register.md) and [front-end-users.md](front-end-users.md).
-- Surface API errors consistently via `AlertService` instead of per-form `subscribe` handlers — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md).
+- ~~Surface API errors consistently via `AlertService` instead of per-form `subscribe` handlers.~~ Fixed — `ErrorInterceptor` shows global error toasts; see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md).
 
 ## Testing
 
