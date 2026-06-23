@@ -42,8 +42,19 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
+        if (!this.accountService.userValue) {
+            this.router.navigate(['../login'], { relativeTo: this.route });
+            return;
+        }
+
         this.loading = true;
-        this.accountService.register(this.form.value)
+        const { username, firstName, lastName } = this.form.value;
+        const body = {
+            loginName: username,
+            displayName: `${firstName} ${lastName}`.trim(),
+            isActive: true,
+        };
+        this.accountService.register(body)
             .pipe(first())
             .subscribe({
                 next: () => {
