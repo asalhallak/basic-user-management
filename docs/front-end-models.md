@@ -54,7 +54,7 @@ Stored session in `localStorage` uses the API response shape: `{ userName, token
 | `country` | ✓ form control | — | ✓ |
 | `isActive` | ✓ form control | — | — |
 | `salary` | ✓ form control | — | — |
-| `profilePictureUrl` | ✓ form control | — | — |
+| `profilePictureUrl` | ✓ form control (optional) | — | — |
 | `address` | ✓ nested form group | — | — |
 | `password` | not sent | ✓ (ignored by API) | ✓ |
 
