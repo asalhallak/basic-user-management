@@ -100,7 +100,7 @@ flowchart TD
 | `make ci` — OpenSSL / Webpack error | Switch to Node.js 16 (`.nvmrc`) | [ci-and-builds.md](ci-and-builds.md) |
 | Migration connection refused | `make db-logs`, wait, `make migrate` | [database.md](database.md) |
 | `make verify` fails on front end | Confirm `make run-frontend` is running, or use `make verify-api` | [scripts.md](scripts.md) |
-| Login works in curl but not browser | Remove `fakeBackendProvider`; clear `localStorage` | [front-end-auth.md](front-end-auth.md) |
+| Login works in curl but not browser | Clear `localStorage` for `http://localhost:4200`; confirm `environment.apiUrl` | [front-end-auth.md](front-end-auth.md) |
 | `401` on `/users` | Re-login; token may have expired (7-day lifetime) | [faq.md](faq.md) |
 
 Full troubleshooting table: [README — Troubleshooting](../README.md#troubleshooting).

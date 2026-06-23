@@ -9,24 +9,20 @@ All interceptors are registered in `front-end/src/app/app.module.ts`. Angular ru
 ```typescript
 providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    fakeBackendProvider,  // also an HTTP_INTERCEPTORS provider
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 ],
 ```
 
-Because `fakeBackendProvider` is listed last, it runs **first** on outgoing requests. That lets legacy tutorial URLs short-circuit before JWT headers are attached.
+`fakeBackendProvider` is **not** registered — the app calls the ASP.NET Core API exclusively. Legacy tutorial interceptor source remains in `helpers/fake-backend.ts` for reference; see [fake-backend.md](fake-backend.md).
 
 ```mermaid
 flowchart LR
     Component[Component / AccountService]
-    Fake[FakeBackendInterceptor]
     JWT[JwtInterceptor]
     Error[ErrorInterceptor]
     API[UserManagement.API]
 
-    Component --> Fake
-    Fake -->|legacy URL| Browser[In-memory response]
-    Fake -->|pass through| JWT
+    Component --> JWT
     JWT --> Error
     Error --> API
     API --> Error
@@ -35,11 +31,10 @@ flowchart LR
 
 | Interceptor | File | Runs when | Outgoing | Response |
 |-------------|------|-----------|----------|----------|
-| `FakeBackendInterceptor` | `helpers/fake-backend.ts` | Default (remove for production-style dev) | Matches legacy `/users/*` paths | Returns synthetic `HttpResponse` |
-| `JwtInterceptor` | `helpers/jwt.interceptor.ts` | Always (real API path) | Adds `Authorization: Bearer <token>` when logged in and URL starts with `environment.apiUrl` | Pass-through |
+| `JwtInterceptor` | `helpers/jwt.interceptor.ts` | Always | Adds `Authorization: Bearer <token>` when logged in and URL starts with `environment.apiUrl` | Pass-through |
 | `ErrorInterceptor` | `helpers/error.interceptor.ts` | Always | Pass-through | Catches errors; auto-logout on `401`/`403`; re-throws a string message |
 
-Real API calls use full URLs like `http://localhost:5000/api/v1/...` (built from `environment.apiUrl` in `AccountService`). The fake backend only handles relative tutorial paths — see [fake-backend.md](fake-backend.md).
+API calls use full URLs like `http://localhost:5000/api/v1/...` (built from `environment.apiUrl` in `AccountService`).
 
 ## JwtInterceptor
 
@@ -138,7 +133,8 @@ sequenceDiagram
 |---------|--------------|-----|
 | API calls never include `Authorization` | `apiUrl` mismatch or not logged in | Align `environment.ts` with the API port; log in again |
 | Immediate redirect to login on any error | Token rejected by API | Re-login; check `JwtSecret` and token expiry (7 days) |
-| Login works but CRUD hits fake data | Component uses legacy relative URL | Use `AccountService` methods with `environment.apiUrl` |
+| Login works but CRUD hits wrong host | Component uses a relative URL or wrong `apiUrl` | Use `AccountService` methods; align `environment.apiUrl` with the running API |
+| Login works in curl but not browser | Stale `localStorage` from an older tutorial run | Clear site data for `http://localhost:4200` and log in again |
 | Error message is generic (`Unauthorized`) | API returns empty body on `401` | Expected — `extractHttpErrorMessage` falls back to `statusText` |
 | `400` shows `Bad Request` instead of field names | Old interceptor ignored validation `errors` map | Fixed — validation messages are joined into one string |
 | Double logout / flicker | Multiple parallel `401` responses | Harmless — `logout()` is idempotent |
@@ -150,7 +146,7 @@ sequenceDiagram
 | `front-end/src/app/app.module.ts` | Registers interceptor providers |
 | `front-end/src/app/helpers/jwt.interceptor.ts` | Attach Bearer token to API requests |
 | `front-end/src/app/helpers/error.interceptor.ts` | Auto-logout and error re-throw |
-| `front-end/src/app/helpers/fake-backend.ts` | Optional tutorial interceptor |
+| `front-end/src/app/helpers/fake-backend.ts` | Legacy tutorial interceptor (not registered in `AppModule`) |
 | `front-end/src/app/helpers/index.ts` | Barrel exports for helpers |
 | `front-end/src/app/services/account.service.ts` | Builds API URLs; owns session used by interceptors |
 | `front-end/src/environments/environment.ts` | `apiUrl` gate for JWT attachment |
