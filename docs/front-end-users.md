@@ -107,7 +107,7 @@ Built with `FormBuilder` in `ngOnInit()`:
 | `country` | `required` | ✓ (user-level `UserResource.country`, separate from `address.country`) |
 | `isActive` | `required` | ✓ (boolean select) |
 | `salary` | `required` | ✓ |
-| `profilePictureUrl` | `required` | ✓ |
+| `profilePictureUrl` | — (optional) | ✓ when provided |
 | `address.city` | `required` | ✓ (nested) |
 | `address.state` | `required` | ✓ |
 | `address.country` | `required` | ✓ |
@@ -155,6 +155,7 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 | ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — `AlertService.error()` and reset `isDeleting` on failure |
 | ~~Edit load errors silent~~ | ~~`getById` has no error handler~~ | Fixed — `AlertService.error()` and redirect to list on failure |
 | ~~Wrong validation message~~ | ~~`profilePictureUrl` invalid feedback says "Salary is required"~~ | Fixed — template copy corrected in `add-edit.component.html` |
+| ~~Required profile picture URL~~ | ~~Form required `profilePictureUrl` though API treats it as optional~~ | Fixed — optional field in add/edit form; label notes "(optional)" |
 | ~~`console.log` calls~~ | ~~Debug logging left in `onSubmit` and `getById`~~ | Fixed — removed from `add-edit.component.ts` |
 
 These are documented starting points in [improvement-ideas.md](improvement-ideas.md).
