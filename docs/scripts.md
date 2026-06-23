@@ -39,7 +39,7 @@ flowchart TD
 
 ## check-deps.sh
 
-Verifies prerequisites listed in the [README](../README.md#prerequisites). Also reports whether the optional `dotnet-ef` global tool is installed (warns if missing; run `make install-ef`).
+Verifies prerequisites listed in the [README](../README.md#prerequisites). Warns when Node.js is not major version **16** (matches `.nvmrc` and CI; Node 17+ can break Angular 11 builds). Also reports whether the optional `dotnet-ef` global tool is installed (warns if missing; run `make install-ef`).
 
 ```bash
 ./scripts/check-deps.sh
@@ -47,6 +47,8 @@ make check-deps   # equivalent
 ```
 
 **Required tools:** Docker, .NET SDK, Node.js, npm, curl.
+
+**Node.js version:** The script prints a warning (not a failure) when the active Node major version is not `16`. Use `nvm use` or install Node 16 before running `npm run build` locally.
 
 ## status.sh
 
