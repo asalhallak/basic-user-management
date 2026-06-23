@@ -94,9 +94,9 @@ Login and register layouts do **not** embed their own `<alert>` tag. Messages re
 Failed HTTP calls flow through `ErrorInterceptor` (`helpers/error.interceptor.ts`) — see [front-end-interceptors.md](front-end-interceptors.md) for the full chain and status matrix:
 
 1. On `401` or `403` while a user session exists, `AccountService.logout()` runs.
-2. The interceptor logs the error and re-throws `err.error?.message || err.statusText`.
+2. The interceptor logs the error and re-throws a string from `extractHttpErrorMessage()` in `error.interceptor.ts`.
 
-Form components pass that string to `alertService.error(error)`. The API often returns plain text or an empty body, so users may see generic messages like `Unauthorized` rather than detailed problem descriptions.
+Form components pass that string to `alertService.error(error)`. Validation failures (`400`) and duplicate `loginName` responses (`409`) now surface field-level or conflict messages when the API returns JSON bodies. Empty bodies (typical for `401`) still fall back to `statusText` such as `Unauthorized`.
 
 ## Common patterns
 
@@ -126,7 +126,7 @@ this.alertService.info('Changes saved locally', { autoClose: true });
 ## Extension ideas
 
 - Wire `ErrorInterceptor` to `AlertService` for consistent global error toasts (today each form handles errors locally).
-- Map ASP.NET Core validation/problem-details JSON into readable `error()` messages.
+- ~~Map ASP.NET Core validation/problem-details JSON into readable `error()` messages.~~ Fixed — `extractHttpErrorMessage()` in `error.interceptor.ts` parses validation `errors` and `{ message }` bodies before re-throw.
 - Replace Bootstrap classes in `AlertComponent.cssClass()` if you migrate to Angular Material snack bars.
 
 ## Related docs

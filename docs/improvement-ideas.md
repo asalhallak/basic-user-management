@@ -19,7 +19,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Fake backend | Still registered in `app.module.ts` | Remove `fakeBackendProvider` when using the real API — see [fake-backend.md](fake-backend.md) |
 | Register form | ~~Field names don't match API (`username` vs `loginName`)~~ | Fixed — `RegisterComponent.onSubmit()` maps legacy form fields to `loginName` and `displayName` before calling `POST /api/v1/users`; see [front-end-login-register.md](front-end-login-register.md) |
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
-| Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md). Users list load/delete errors and add-edit load errors now use `AlertService` in `ListComponent` and `AddEditComponent`. |
+| Error toasts | Each form handles API errors locally; no global alert from `ErrorInterceptor` | Wire interceptor to `AlertService` — see [front-end-alerts.md](front-end-alerts.md) and [front-end-interceptors.md](front-end-interceptors.md). Users list load/delete errors and add-edit load errors now use `AlertService` in `ListComponent` and `AddEditComponent`. Validation and conflict JSON from the API is parsed into readable strings in `extractHttpErrorMessage()` before re-throw. |
 | Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 

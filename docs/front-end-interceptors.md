@@ -75,7 +75,7 @@ The interceptor wraps `next.handle(request)` with RxJS `catchError`:
 
 1. If the HTTP status is `401` or `403` **and** `AccountService.userValue` exists, call `logout()` (clears `localStorage` and navigates to `/account/login`).
 2. Log the raw error to the console.
-3. Re-throw `err.error?.message || err.statusText` as a plain string (not the full `HttpErrorResponse`).
+3. Re-throw a user-facing string via `extractHttpErrorMessage()` (not the full `HttpErrorResponse`). The helper reads, in order: plain-text bodies, `{ message }` (for example `409 Conflict`), ASP.NET Core validation `errors` maps (`400 Bad Request`), then `title`, then `statusText`.
 
 Form components subscribe with `{ error: (message) => this.alertService.error(message) }` — see [front-end-alerts.md](front-end-alerts.md). The interceptor does **not** call `AlertService` itself; that is a documented improvement idea in [improvement-ideas.md](improvement-ideas.md).
 
@@ -139,7 +139,8 @@ sequenceDiagram
 | API calls never include `Authorization` | `apiUrl` mismatch or not logged in | Align `environment.ts` with the API port; log in again |
 | Immediate redirect to login on any error | Token rejected by API | Re-login; check `JwtSecret` and token expiry (7 days) |
 | Login works but CRUD hits fake data | Component uses legacy relative URL | Use `AccountService` methods with `environment.apiUrl` |
-| Error message is generic (`Unauthorized`) | API returns empty body on `401` | Expected today — `ErrorInterceptor` falls back to `statusText` |
+| Error message is generic (`Unauthorized`) | API returns empty body on `401` | Expected — `extractHttpErrorMessage` falls back to `statusText` |
+| `400` shows `Bad Request` instead of field names | Old interceptor ignored validation `errors` map | Fixed — validation messages are joined into one string |
 | Double logout / flicker | Multiple parallel `401` responses | Harmless — `logout()` is idempotent |
 
 ## Related files

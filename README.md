@@ -368,7 +368,7 @@ All user endpoints require a valid `Authorization: Bearer <token>` header.
 | `200 OK` | Successful login, read, create, update, or delete |
 | `400 Bad Request` | Missing or empty required fields on create/update (`loginName`, `displayName`) |
 | `401 Unauthorized` | Missing/invalid JWT on a protected route, or invalid login credentials |
-| `404 Not Found` | Requested user ID does not exist (intended; see [docs/api-errors.md](docs/api-errors.md) for current behavior) |
+| `404 Not Found` | Requested user ID does not exist |
 | `409 Conflict` | Duplicate `loginName` on create or update (see [docs/api-errors.md](docs/api-errors.md)) |
 
 Protected routes always require `Authorization: Bearer <token>`. Re-authenticate when a token expires (see [Configuration reference](#configuration-reference)).
