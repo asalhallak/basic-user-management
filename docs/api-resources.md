@@ -153,7 +153,7 @@ Creating a user with `loginName: "jdoe"` does not create a login account. See [R
 
 ### Front-end naming mismatches
 
-The Angular register form uses legacy field names (`username`, `firstName`, `lastName`) that do not match `UserResource`. The user list/editor aligns with the API. See [front-end-models.md](front-end-models.md) and [account-service.md](account-service.md).
+The Angular register form still uses legacy tutorial labels in the UI (`username`, `firstName`, `lastName`), but `RegisterComponent.onSubmit()` maps them to `loginName` and `displayName` before posting. The user list/editor sends API field names directly. See [front-end-models.md](front-end-models.md) and [account-service.md](account-service.md).
 
 ## Adding or changing a DTO
 

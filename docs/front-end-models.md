@@ -28,7 +28,7 @@ flowchart LR
     end
 
     Login -->|username, password| Cred
-    Register -->|username, firstName, lastName| UserRes
+    Register -->|"maps on submit: loginName, displayName"| UserRes
     Editor -->|loginName, displayName, address| UserRes
     Model -.->|outdated shape| UserRes
 ```
@@ -48,8 +48,8 @@ Stored session in `localStorage` uses the API response shape: `{ userName, token
 
 | API field (`UserResource`) | User editor (`add-edit.component`) | Register form | `models/user.ts` |
 |----------------------------|------------------------------------|---------------|------------------|
-| `loginName` | ✓ form control | `username` (wrong name) | `username` |
-| `displayName` | ✓ form control | — | `firstName` / `lastName` (wrong shape) |
+| `loginName` | ✓ form control | `username` → mapped in `onSubmit()` | `username` |
+| `displayName` | ✓ form control | `firstName` + `lastName` → mapped in `onSubmit()` | `firstName` / `lastName` |
 | `dateOfBirth` | optional | — | — |
 | `country` | via `address.country` | — | — |
 | `isActive` | ✓ form control | — | — |
@@ -58,7 +58,7 @@ Stored session in `localStorage` uses the API response shape: `{ userName, token
 | `address` | ✓ nested form group | — | — |
 | `password` | not sent | ✓ (ignored by API) | ✓ |
 
-The **user list and editor** already post the correct JSON shape. The **register page** and **`User` TypeScript class** still reflect the original tutorial and do not match the API.
+The **user list and editor** post the correct JSON shape directly. The **register page** keeps legacy form labels but maps them to `loginName` and `displayName` in `onSubmit()` before calling the API. The **`User` TypeScript class** still reflects the original tutorial shape and is not used for register payloads.
 
 ## Source file map
 
@@ -71,16 +71,15 @@ The **user list and editor** already post the correct JSON shape. The **register
 | User create/edit (API-aligned) | `front-end/src/app/users/add-edit/add-edit.component.ts` |
 | User list | `front-end/src/app/users/list/list.component.ts` |
 
-## Aligning the register form
+## Register form mapping (current behavior)
 
-To make registration post valid user records:
+Registration already posts valid minimal user records when you are logged in:
 
 1. Log in first — `POST /users` requires a JWT (see [Authentication vs user data](../README.md#authentication-vs-user-data)).
-2. Replace register form fields with API names (`loginName`, `displayName`, nested `address`, etc.) or map values in `onSubmit()` before calling `accountService.register()`.
-3. Update `models/user.ts` to match `UserResource`, or introduce separate types for login session vs user records.
-4. Remove unused `password` from the register payload — the API does not store passwords on user records.
+2. `RegisterComponent.onSubmit()` maps `{ username, firstName, lastName }` to `{ loginName, displayName, isActive: true }`.
+3. The password field is validated in the UI but not sent to the API — user records have no password column.
 
-See [improvement-ideas.md](improvement-ideas.md) for a suggested first contribution.
+Optional follow-ups: rename form controls to match API field names, update `models/user.ts` to match `UserResource`, or use **Users → Add** for full address and salary fields. See [front-end-login-register.md](front-end-login-register.md) and [improvement-ideas.md](improvement-ideas.md).
 
 ## Related docs
 

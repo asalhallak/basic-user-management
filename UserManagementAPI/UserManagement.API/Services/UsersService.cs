@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
-using Microsoft.VisualBasic;
 
 namespace UserManagementAPI.Services
 {
