@@ -65,10 +65,10 @@ The parent `LayoutComponent` renders child routes inside a centered column (`col
 
 | Control | Validators | Sent to API |
 |---------|------------|-------------|
-| `username` | `required` | ✓ as `{ username, password }` |
+| `username` | `required` | ✓ — passed to `login()` as `{ userName, password }` |
 | `password` | `required` | ✓ |
 
-`AccountService.login()` posts to `POST /api/v1/auth/login`. The body uses `username`, which ASP.NET Core binds to `Credentials.UserName` (`userName` in JSON) case-insensitively.
+`AccountService.login()` posts to `POST /api/v1/auth/login` with `{ userName, password }`, matching the API `Credentials` model.
 
 ### Submit flow
 
@@ -148,7 +148,7 @@ After login, `localStorage` stores `{ userName, token }`. See [account-service.m
 |-------|--------|---------------|
 | Register requires login | Protected `POST /users` from a public route | Document flow (this page) or redesign as admin-only |
 | Guard ignores token expiry | Stale JWT in storage still unlocks routes | Optional client-side expiry check in `AuthGuard` |
-| Login uses `username` | Works via case-insensitive binding | Prefer `userName` for consistency with API |
+| Login form control name | Template uses `username`; JSON body sends `userName` | Fixed — `AccountService.login()` posts `{ userName, password }`; see [account-service.md](account-service.md) |
 | Fake backend | May intercept legacy tutorial routes | Remove `fakeBackendProvider` from `app.module.ts` — [fake-backend.md](fake-backend.md) |
 
 See [improvement-ideas.md](improvement-ideas.md) for contribution starting points.

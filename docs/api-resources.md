@@ -42,7 +42,7 @@ Controllers bind JSON to these types via ASP.NET Core model binding. Outbound se
 | `userName` | `UserName` | string | Hardcoded login is `admin`; not the same as user-record `loginName` |
 | `password` | `Password` | string | Hardcoded development password |
 
-ASP.NET Core binding is case-insensitive, so `username` from the Angular app also binds to `UserName`. Prefer `userName` to match the API contract. See [front-end-models.md](front-end-models.md).
+The Angular app sends `{ userName, password }` from `AccountService.login()`, matching the API contract. See [front-end-models.md](front-end-models.md).
 
 **Example:**
 
