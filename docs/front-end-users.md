@@ -104,6 +104,7 @@ Built with `FormBuilder` in `ngOnInit()`:
 | `displayName` | `required` | ✓ |
 | `loginName` | `required` | ✓ |
 | `dateOfBirth` | `required` | ✓ (`type="date"`; ISO date sent to API) |
+| `country` | `required` | ✓ (user-level `UserResource.country`, separate from `address.country`) |
 | `isActive` | `required` | ✓ (boolean select) |
 | `salary` | `required` | ✓ |
 | `profilePictureUrl` | `required` | ✓ |
@@ -113,12 +114,6 @@ Built with `FormBuilder` in `ngOnInit()`:
 | `address.postalCode` | `required` | ✓ |
 | `address.streetName` | `required` | ✓ |
 | `address.streetNumber` | `required` | ✓ |
-
-**Not collected in the form** (but exist on the API model):
-
-| API field | Effect when omitted |
-|-----------|---------------------|
-| `country` (user-level) | Only `address.country` is collected; top-level `country` on `UserResource` is not set |
 
 See [front-end-models.md](front-end-models.md) for the full field mapping table.
 
@@ -155,7 +150,7 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 | ~~Dead password validators~~ | ~~`passwordValidators` are defined in `ngOnInit()` but no password control exists~~ | Fixed — unused validator setup removed from `add-edit.component.ts` |
 | ~~Country field invalid styling~~ | ~~`address.country` input used `city.errors` for `is-invalid` class~~ | Fixed — template now checks `country.errors` in `add-edit.component.html` |
 | ~~Missing `dateOfBirth`~~ | ~~Form omits API field the list displays~~ | Fixed — `dateOfBirth` date input added to add/edit form; edit mode normalizes ISO values for the picker |
-| Missing user `country` | Only `address.country` is collected; top-level `country` on `UserResource` is not set | Add a user-level country field, or hide the column |
+| ~~Missing user `country`~~ | ~~Only `address.country` is collected; top-level `country` on `UserResource` is not set~~ | Fixed — user-level `country` input added to add/edit form |
 | `register()` for create | Method name suggests auth registration | Rename to `createUser()` when refactoring callers |
 | ~~Delete errors silent~~ | ~~No `error` callback on delete `subscribe`~~ | Fixed — `AlertService.error()` and reset `isDeleting` on failure |
 | ~~Edit load errors silent~~ | ~~`getById` has no error handler~~ | Fixed — `AlertService.error()` and redirect to list on failure |

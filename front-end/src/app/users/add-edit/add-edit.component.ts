@@ -29,6 +29,7 @@ export class AddEditComponent implements OnInit {
             displayName: ['', Validators.required],
             loginName: ['', Validators.required],
             dateOfBirth: ['', Validators.required],
+            country: ['', Validators.required],
             isActive: [false, Validators.required],
             salary: ['', Validators.required],
             profilePictureUrl: ['', Validators.required],
