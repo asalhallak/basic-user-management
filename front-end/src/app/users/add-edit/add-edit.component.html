@@ -59,12 +59,8 @@
     <div class="form-row">
 
         <div class="form-group col">
-            <label for="profilePictureUrl">Profile Picture Url</label>
-            <input type="text" formControlName="profilePictureUrl" class="form-control"
-                   [ngClass]="{ 'is-invalid': submitted && controls.profilePictureUrl.errors }" />
-            <div *ngIf="submitted && controls.profilePictureUrl.errors" class="invalid-feedback">
-                <div *ngIf="controls.profilePictureUrl.errors.required">Profile Picture Url is required</div>
-            </div>
+            <label for="profilePictureUrl">Profile Picture Url <span class="text-muted">(optional)</span></label>
+            <input type="text" formControlName="profilePictureUrl" class="form-control" />
         </div>
     </div>
     <div formGroupName="address">

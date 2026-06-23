@@ -32,7 +32,7 @@ export class AddEditComponent implements OnInit {
             country: ['', Validators.required],
             isActive: [false, Validators.required],
             salary: ['', Validators.required],
-            profilePictureUrl: ['', Validators.required],
+            profilePictureUrl: [''],
             address: this.formBuilder.group({
                 city: ['', Validators.required],
                 postalCode: ['', Validators.required],
