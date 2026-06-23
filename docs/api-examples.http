@@ -76,6 +76,14 @@ Content-Type: application/json
   "password": "wrong-password"
 }
 
+### Login with missing fields (expect 400)
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "userName": "{{userName}}"
+}
+
 ### Users endpoint without a token (expect 401)
 GET {{baseUrl}}/users
 
@@ -83,11 +91,11 @@ GET {{baseUrl}}/users
 GET {{baseUrl}}/users
 Authorization: Bearer invalid-token
 
-### Get a user ID that does not exist (expect 200 with null body today, not 404)
+### Get a user ID that does not exist (expect 404)
 GET {{baseUrl}}/users/99999
 Authorization: Bearer {{token}}
 
-### Create a user with a duplicate loginName (expect 500 — unique index violation)
+### Create a user with a duplicate loginName (expect 409 Conflict)
 POST {{baseUrl}}/users
 Authorization: Bearer {{token}}
 Content-Type: application/json

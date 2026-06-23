@@ -9,6 +9,7 @@ This sample API intentionally keeps validation and error handling minimal. The t
 | Situation | Status | Body | Notes |
 |-----------|--------|------|-------|
 | Valid credentials | `200` | `{ userName, token }` | See [api-responses.md](api-responses.md) |
+| Missing or empty `userName` / `password` | `400` | validation problem details | `[Required]` on `Credentials`; automatic `[ApiController]` validation |
 | Wrong username or password | `401` | empty | `AuthService.Login` returns `null`; controller responds with `Unauthorized()` |
 | Missing `Authorization` on a protected route | `401` | empty | JWT middleware rejects the request |
 | Expired or malformed JWT | `401` | empty | Re-login via `POST /auth/login` |
@@ -54,6 +55,7 @@ In **non-Development** environments, unhandled exceptions return a generic `500`
 | Symptom | Likely cause | What to try |
 |---------|--------------|-------------|
 | `401` on every `/users` call | Missing, expired, or wrong JWT | `make token` or log in again |
+| `400 Bad Request` on login | Missing or empty `userName` / `password` | Send both fields in the JSON body |
 | `500` on `POST /users` | Unexpected server error (not a duplicate `loginName`) | Check API logs; duplicates now return `409` |
 | `409 Conflict` on `POST` or `PUT /users` | Duplicate `loginName` | Use a unique `loginName` or update the existing user |
 | `400 Bad Request` on `POST` or `PUT /users` | Missing or empty `loginName` / `displayName` | Include both fields in the JSON body |
