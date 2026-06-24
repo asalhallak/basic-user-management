@@ -11,10 +11,13 @@ describe('AccountService', () => {
     let httpMock: HttpTestingController;
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
-    beforeEach(() => {
+    const configureService = (storedUser?: User) => {
         localStorage.clear();
-        routerSpy.navigate.calls.reset();
+        if (storedUser) {
+            localStorage.setItem('user', JSON.stringify(storedUser));
+        }
 
+        TestBed.resetTestingModule();
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
             providers: [
@@ -25,6 +28,11 @@ describe('AccountService', () => {
 
         service = TestBed.inject(AccountService);
         httpMock = TestBed.inject(HttpTestingController);
+    };
+
+    beforeEach(() => {
+        routerSpy.navigate.calls.reset();
+        configureService();
     });
 
     afterEach(() => {
@@ -63,5 +71,44 @@ describe('AccountService', () => {
         expect(localStorage.getItem('user')).toBeNull();
         expect(service.userValue).toBeNull();
         expect(routerSpy.navigate).toHaveBeenCalledWith(['/account/login']);
+    });
+
+    it('update PUTs params to the users endpoint', () => {
+        configureService({ id: '1', userName: 'admin', token: 'jwt-token' } as User);
+        const params = { displayName: 'Jane Smith', isActive: true };
+
+        service.update('42', params).subscribe();
+
+        const req = httpMock.expectOne(`${environment.apiUrl}/api/v1/users/42`);
+        expect(req.request.method).toBe('PUT');
+        expect(req.request.body).toEqual(params);
+        req.flush({});
+    });
+
+    it('update merges params into localStorage when editing the logged-in user', () => {
+        const loggedInUser = { id: '7', userName: 'admin', token: 'jwt-token', displayName: 'Admin' } as User;
+        configureService(loggedInUser);
+
+        const params = { displayName: 'Admin Updated' };
+
+        service.update('7', params).subscribe(() => {
+            const expectedUser = { ...loggedInUser, ...params };
+            expect(service.userValue).toEqual(expectedUser);
+            expect(JSON.parse(localStorage.getItem('user'))).toEqual(expectedUser);
+        });
+
+        httpMock.expectOne(`${environment.apiUrl}/api/v1/users/7`).flush({});
+    });
+
+    it('update does not change localStorage when editing another user', () => {
+        const loggedInUser = { id: '7', userName: 'admin', token: 'jwt-token', displayName: 'Admin' } as User;
+        configureService(loggedInUser);
+
+        service.update('99', { displayName: 'Someone Else' }).subscribe(() => {
+            expect(service.userValue).toEqual(loggedInUser);
+            expect(JSON.parse(localStorage.getItem('user'))).toEqual(loggedInUser);
+        });
+
+        httpMock.expectOne(`${environment.apiUrl}/api/v1/users/99`).flush({});
     });
 });
