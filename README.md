@@ -690,7 +690,7 @@ The repository exposes test-related npm scripts but does not include automated t
 
 | Command | Location | Status |
 |---------|----------|--------|
-| `npm test` | `front-end/` | Karma/Jasmine configured; no `*.spec.ts` files present |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
 | `dotnet test` | N/A | No .NET test projects in the solution |

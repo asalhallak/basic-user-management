@@ -71,7 +71,7 @@ The interceptor wraps `next.handle(request)` with RxJS `catchError`:
 1. If the HTTP status is `401` or `403` **and** `AccountService.userValue` exists, call `logout()` (clears `localStorage` and navigates to `/account/login`) and show a session-expired message via `AlertService`.
 2. Otherwise, show the parsed error message via `AlertService.error()`.
 3. Log the raw error to the console.
-4. Re-throw a user-facing string via `extractHttpErrorMessage()` (not the full `HttpErrorResponse`). The helper reads, in order: plain-text bodies, `{ message }` (for example `409 Conflict`), ASP.NET Core validation `errors` maps (`400 Bad Request`), then `title`, then `statusText`.
+4. Re-throw a user-facing string via `extractHttpErrorMessage()` in `error-message.util.ts` (re-exported from `error.interceptor.ts`). The helper reads, in order: plain-text bodies, `{ message }` (for example `409 Conflict`), ASP.NET Core validation `errors` maps (`400 Bad Request`), then `title`, then `statusText`.
 
 Form components no longer call `AlertService.error()` in their `subscribe({ error })` handlers — the interceptor owns global error toasts. Components still handle local cleanup (for example resetting `loading` or `isDeleting` flags). See [front-end-alerts.md](front-end-alerts.md).
 
