@@ -689,13 +689,13 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `AuthGuard`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthService.Login`.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthService.Login`.
 
 | Command | Location | Status |
 |---------|----------|--------|
 | `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthService.Login` credential and token tests |
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `AuthGuard`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
@@ -712,6 +712,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 - ~~Angular `AccountService.delete` sends DELETE without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AccountService.register` POSTs user payload without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AuthGuard` allows authenticated routes and redirects with `returnUrl` when logged out~~ Fixed — see `front-end/src/app/helpers/auth.guard.spec.ts`
+- ~~Angular `AlertService` publishes typed alerts and filters by id~~ Fixed — see `front-end/src/app/services/alert.service.spec.ts`
 - `UsersController` CRUD with an in-memory database or test container
 
 ## Continuous integration
