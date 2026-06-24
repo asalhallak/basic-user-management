@@ -687,11 +687,12 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-The repository exposes test-related npm scripts but does not include automated tests yet.
+Automated coverage is limited but present: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper. There is no .NET test project or end-to-end suite yet.
 
 | Command | Location | Status |
 |---------|----------|--------|
 | `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `make test-frontend` | repository root | Same headless Karma run as CI |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
 | `dotnet test` | N/A | No .NET test projects in the solution |
