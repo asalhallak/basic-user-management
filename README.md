@@ -222,6 +222,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make run-frontend` | Run the Angular dev server with `npm start` (listens on `http://localhost:4200`) |
 | `make build-api` | Build the .NET solution |
 | `make build-frontend` | Production build of the Angular app |
+| `make test-api` | Run .NET unit tests (AuthService login) |
 | `make test-frontend` | Run Angular unit tests once (ChromeHeadless; matches CI) |
 | `make build` | Build API and front end |
 | `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
@@ -673,6 +674,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │       └── services/           # API client & alerts
 └── UserManagementAPI/
     ├── UserManagement.API/           # Web API entry point
+    ├── UserManagement.API.Tests/     # xUnit tests (AuthService login)
     ├── UserManagement.Domain/        # Entities & interfaces
     └── UserManagement.DataAccess.EFCore/  # Persistence & migrations
 ```
@@ -687,21 +689,22 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but present: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper. There is no .NET test project or end-to-end suite yet.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper and xUnit tests for `AuthService.Login`.
 
 | Command | Location | Status |
 |---------|----------|--------|
+| `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthService.Login` credential and token tests |
+| `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
-| `dotnet test` | N/A | No .NET test projects in the solution |
 
 **Smoke testing:** Use `./scripts/verify-stack.sh` or the [Verify the stack](#verify-the-stack) checklist after starting Docker, the API, and the front end.
 
 **Good first tests to add:**
 
-- `AuthService.Login` returns a token for valid credentials and `null` otherwise
+- ~~`AuthService.Login` returns a token for valid credentials and `null` otherwise~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/AuthServiceTests.cs`
 - `UsersController` CRUD with an in-memory database or test container
 - Angular `AccountService.login` maps the API response into local storage
 
@@ -711,7 +714,7 @@ GitHub Actions runs on every push and pull request to `main`:
 
 | Job | What it verifies |
 |-----|------------------|
-| `build` | `dotnet build` for the API solution, `npm run build` for the Angular app, and headless Karma unit tests (`extractHttpErrorMessage`) |
+| `build` | `dotnet build` and `dotnet test` for the API solution, `npm run build` and headless Karma unit tests for the Angular app |
 
 Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The front-end job uses Node.js 16 to stay compatible with Angular 11 (newer Node versions may require `NODE_OPTIONS=--openssl-legacy-provider` for local builds).
 
@@ -721,7 +724,7 @@ Run the same steps locally before opening a pull request:
 make ci
 ```
 
-This restores and builds the API, then runs `npm ci`, a production front-end build, and headless unit tests—matching CI without starting Docker or the dev servers.
+This restores and builds the API, runs API unit tests, then runs `npm ci`, a production front-end build, and headless unit tests—matching CI without starting Docker or the dev servers.
 
 ## Troubleshooting
 

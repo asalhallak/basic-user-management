@@ -1,12 +1,13 @@
 # Manual testing checklist
 
-A short pre-pull-request checklist for verifying changes locally. CI builds the API and front end and runs headless front-end unit tests (see [ci-and-builds.md](ci-and-builds.md)); runtime smoke checks are your responsibility.
+A short pre-pull-request checklist for verifying changes locally. CI builds the API and front end and runs API and front-end unit tests (see [ci-and-builds.md](ci-and-builds.md)); runtime smoke checks are your responsibility.
 
 ## Quick reference
 
 | Goal | Command | Requires |
 |------|---------|----------|
 | Compile like CI | `make ci` | .NET SDK, Node.js 16 |
+| API unit tests | `make test-api` | .NET SDK (run after `make build-api`) |
 | Front-end unit tests | `make test-frontend` | Node.js 16 (or `NODE_OPTIONS=--openssl-legacy-provider` on Node 17+) |
 | See what is running | `make status` | Docker (for DB row) |
 | Full stack smoke test | `make verify` | Docker, running API, Angular dev server |

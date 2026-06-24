@@ -24,11 +24,12 @@ jobs:
           cache: npm
           cache-dependency-path: front-end/package-lock.json
 
-      - name: Build API
+      - name: Build and test API
         run: |
           cd UserManagementAPI
           dotnet restore
           dotnet build --no-restore
+          dotnet test --no-build --verbosity normal
 
       - name: Build and test front end
         run: |

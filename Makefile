@@ -1,4 +1,4 @@
-.PHONY: help check-deps install install-ef setup db-up db-down db-logs db-reset migrate run-api run-frontend build-api build-frontend test-frontend build ci clean status verify verify-api token
+.PHONY: help check-deps install install-ef setup db-up db-down db-logs db-reset migrate run-api run-frontend build-api build-frontend test-api test-frontend build ci clean status verify verify-api token
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z0-9_-]+:.*##' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -58,13 +58,16 @@ build-api: ## Build the .NET solution
 build-frontend: ## Production build of the Angular app
 	cd front-end && npm run build
 
+test-api: ## Run .NET unit tests (AuthService login)
+	cd UserManagementAPI && dotnet test --verbosity normal
+
 test-frontend: ## Run Angular unit tests once (ChromeHeadless; matches CI)
 	cd front-end && npm test -- --watch=false --browsers=ChromeHeadless
 
 build: build-api build-frontend ## Build API and front end
 
 ci: ## Run the same build steps as GitHub Actions CI (no database required)
-	cd UserManagementAPI && dotnet restore && dotnet build --no-restore
+	cd UserManagementAPI && dotnet restore && dotnet build --no-restore && dotnet test --no-build --verbosity normal
 	cd front-end && npm ci && npm run build && npm test -- --watch=false --browsers=ChromeHeadless
 
 clean: ## Remove build artifacts (dotnet bin/obj and front-end dist)
