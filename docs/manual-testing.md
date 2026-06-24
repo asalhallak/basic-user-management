@@ -1,6 +1,6 @@
 # Manual testing checklist
 
-A short pre-pull-request checklist for verifying changes locally. CI only compiles the solution (see [ci-and-builds.md](ci-and-builds.md)); runtime smoke checks are your responsibility.
+A short pre-pull-request checklist for verifying changes locally. CI builds the API and front end and runs headless front-end unit tests (see [ci-and-builds.md](ci-and-builds.md)); runtime smoke checks are your responsibility.
 
 ## Quick reference
 

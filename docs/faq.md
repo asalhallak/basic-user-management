@@ -10,7 +10,7 @@ Use **Node.js 16** (see `.nvmrc` and [CI](../.github/workflows/ci.yml)). Angular
 
 ### `make ci` passes but `make verify` fails — why?
 
-`make ci` only compiles the API and front end (same as GitHub Actions). It does **not** start Docker, the API, or the Angular dev server. Smoke checks need a running stack:
+`make ci` builds the API and front end and runs headless front-end unit tests (same as GitHub Actions). It does **not** start Docker, the API, or the Angular dev server. Smoke checks need a running stack:
 
 ```bash
 make setup
