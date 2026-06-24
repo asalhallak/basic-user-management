@@ -89,7 +89,7 @@ The JWT interceptor (`helpers/jwt.interceptor.ts`) only attaches `Authorization`
 | .NET SDK | `ci.yml` | `3.1.x` | Matches `UserManagement.API.csproj` target |
 | `NODE_OPTIONS` | Local only (Node 17+) | `--openssl-legacy-provider` | Workaround for Angular 11 Webpack on newer Node; CI uses Node 16 |
 
-CI does not start Docker or run smoke scripts — only `dotnet build` and `npm run build`. Use `make ci` locally to match.
+CI does not start Docker or run smoke scripts — it runs `dotnet build`, `npm run build`, and headless front-end unit tests. Use `make ci` locally to match.
 
 ## Hardcoded development credentials
 

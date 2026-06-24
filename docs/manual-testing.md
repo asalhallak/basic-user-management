@@ -7,6 +7,7 @@ A short pre-pull-request checklist for verifying changes locally. CI only compil
 | Goal | Command | Requires |
 |------|---------|----------|
 | Compile like CI | `make ci` | .NET SDK, Node.js 16 |
+| Front-end unit tests | `make test-frontend` | Node.js 16 (or `NODE_OPTIONS=--openssl-legacy-provider` on Node 17+) |
 | See what is running | `make status` | Docker (for DB row) |
 | Full stack smoke test | `make verify` | Docker, running API, Angular dev server |
 | API-only smoke test | `make verify-api` | Docker, running API |
