@@ -212,4 +212,57 @@ describe('AccountService', () => {
 
         httpMock.expectOne(`${environment.apiUrl}/api/v1/users/42`).flush({});
     });
+
+    it('register POSTs user body to the users endpoint', () => {
+        const body = {
+            loginName: 'jdoe',
+            displayName: 'Jane Doe',
+            isActive: true
+        };
+
+        service.register(body).subscribe();
+
+        const req = httpMock.expectOne(`${environment.apiUrl}/api/v1/users`);
+        expect(req.request.method).toBe('POST');
+        expect(req.request.body).toEqual(body);
+        req.flush({});
+    });
+
+    it('register returns the API response', () => {
+        const body = {
+            loginName: 'jdoe',
+            displayName: 'Jane Doe',
+            isActive: true
+        };
+        const apiUser = {
+            id: '42',
+            loginName: 'jdoe',
+            displayName: 'Jane Doe',
+            isActive: true
+        };
+
+        service.register(body).subscribe(response => {
+            expect(response).toEqual(apiUser);
+        });
+
+        httpMock.expectOne(`${environment.apiUrl}/api/v1/users`).flush(apiUser);
+    });
+
+    it('register does not change localStorage or userValue', () => {
+        const loggedInUser = { id: '7', userName: 'admin', token: 'jwt-token' } as User;
+        configureService(loggedInUser);
+
+        const body = {
+            loginName: 'jdoe',
+            displayName: 'Jane Doe',
+            isActive: true
+        };
+
+        service.register(body).subscribe(() => {
+            expect(service.userValue).toEqual(loggedInUser);
+            expect(JSON.parse(localStorage.getItem('user'))).toEqual(loggedInUser);
+        });
+
+        httpMock.expectOne(`${environment.apiUrl}/api/v1/users`).flush({});
+    });
 });
