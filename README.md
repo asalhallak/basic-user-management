@@ -689,13 +689,13 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `AccountService.login`, `AccountService.update`, and `AccountService.getById`, plus xUnit tests for `AuthService.Login`.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `AccountService.login`, `AccountService.update`, `AccountService.getById`, and `AccountService.getAll`, plus xUnit tests for `AuthService.Login`.
 
 | Command | Location | Status |
 |---------|----------|--------|
 | `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthService.Login` credential and token tests |
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `AccountService.login`, `AccountService.update`, and `AccountService.getById` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `AccountService.login`, `AccountService.update`, `AccountService.getById`, and `AccountService.getAll` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
@@ -708,6 +708,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 - ~~Angular `AccountService.login` maps the API response into local storage~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AccountService.update` syncs local storage when editing the logged-in user~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AccountService.getById` fetches a user without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
+- ~~Angular `AccountService.getAll` fetches the user list without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - `UsersController` CRUD with an in-memory database or test container
 
 ## Continuous integration
