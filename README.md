@@ -222,6 +222,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make run-frontend` | Run the Angular dev server with `npm start` (listens on `http://localhost:4200`) |
 | `make build-api` | Build the .NET solution |
 | `make build-frontend` | Production build of the Angular app |
+| `make test-frontend` | Run Angular unit tests once (ChromeHeadless; matches CI) |
 | `make build` | Build API and front end |
 | `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
 | `make clean` | Remove .NET `bin`/`obj` folders and the Angular `dist` output |
@@ -709,7 +710,7 @@ GitHub Actions runs on every push and pull request to `main`:
 
 | Job | What it verifies |
 |-----|------------------|
-| `build` | `dotnet build` for the API solution and `npm run build` for the Angular app |
+| `build` | `dotnet build` for the API solution, `npm run build` for the Angular app, and headless Karma unit tests (`extractHttpErrorMessage`) |
 
 Workflow file: [`.github/workflows/ci.yml`](.github/workflows/ci.yml). The front-end job uses Node.js 16 to stay compatible with Angular 11 (newer Node versions may require `NODE_OPTIONS=--openssl-legacy-provider` for local builds).
 
@@ -719,7 +720,7 @@ Run the same steps locally before opening a pull request:
 make ci
 ```
 
-This restores and builds the API, then runs `npm ci` and a production front-end build—matching CI without starting Docker or the dev servers.
+This restores and builds the API, then runs `npm ci`, a production front-end build, and headless unit tests—matching CI without starting Docker or the dev servers.
 
 ## Troubleshooting
 

@@ -30,8 +30,9 @@ jobs:
           dotnet restore
           dotnet build --no-restore
 
-      - name: Build front end
+      - name: Build and test front end
         run: |
           cd front-end
           npm ci
           npm run build
+          npm test -- --watch=false --browsers=ChromeHeadless
