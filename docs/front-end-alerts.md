@@ -127,6 +127,12 @@ this.router.navigate(['../../'], { relativeTo: this.route });
 this.alertService.info('Changes saved locally', { autoClose: true });
 ```
 
+## Unit tests
+
+`AlertService` has Karma/Jasmine coverage in `front-end/src/app/services/alert.service.spec.ts`. The tests verify typed convenience methods (`success`, `error`, `info`, `warn`), default alert id assignment, per-id filtering via `onAlert(id)`, optional flag forwarding, and `clear()`.
+
+Run them with `make test-frontend` or as part of `make ci`.
+
 ## Extension ideas
 
 - ~~Wire `ErrorInterceptor` to `AlertService` for consistent global error toasts.~~ Fixed — the interceptor shows all HTTP error messages; components only reset local state in error handlers.

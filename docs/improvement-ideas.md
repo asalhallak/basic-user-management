@@ -21,7 +21,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
 | Error toasts | ~~Each form handles API errors locally; no global alert from `ErrorInterceptor`~~ | Fixed — `ErrorInterceptor` calls `AlertService.error()` for all failed HTTP responses; session expiry shows a dedicated message on `401`/`403` with an active session. Components reset local state only in error handlers. Validation and conflict JSON is parsed in `extractHttpErrorMessage()` before display. |
 | Add/edit `profilePictureUrl` | ~~Required in form despite optional on API~~ | Fixed — optional in add/edit form, matching `UserResource` and API docs |
-| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `AuthGuard`, `AuthService.Login`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or Angular component tests |
+| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `AuthGuard`, `AlertService`, `AuthService.Login`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or Angular component tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 
 ## API hardening
@@ -58,6 +58,7 @@ The repository has minimal automated tests. Suggested starting points (see also 
 | `AccountService.delete` | ~~Angular unit test: DELETE by ID without changing session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
 | `AccountService.register` | ~~Angular unit test: POST user payload without changing session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
 | `AuthGuard` | ~~Angular unit test: allow authenticated routes; redirect with `returnUrl` when logged out~~ Fixed — see `front-end/src/app/helpers/auth.guard.spec.ts` |
+| `AlertService` | ~~Angular unit test: typed convenience methods, default id, and per-id filtering~~ Fixed — see `front-end/src/app/services/alert.service.spec.ts` |
 
 Run `make ci` after adding tests to confirm builds still pass.
 
