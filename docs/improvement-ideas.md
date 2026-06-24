@@ -21,7 +21,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
 | Error toasts | ~~Each form handles API errors locally; no global alert from `ErrorInterceptor`~~ | Fixed — `ErrorInterceptor` calls `AlertService.error()` for all failed HTTP responses; session expiry shows a dedicated message on `401`/`403` with an active session. Components reset local state only in error handlers. Validation and conflict JSON is parsed in `extractHttpErrorMessage()` before display. |
 | Add/edit `profilePictureUrl` | ~~Required in form despite optional on API~~ | Fixed — optional in add/edit form, matching `UserResource` and API docs |
-| Tests | Karma/Protractor configured; no specs; no .NET test project | Add `AuthService` unit tests or API integration tests |
+| Tests | Karma/Jasmine configured; `extractHttpErrorMessage` unit tests added; no .NET test project | Add `AuthService` unit tests or API integration tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 
 ## API hardening
@@ -44,10 +44,11 @@ The Angular app was adapted from a tutorial that used a local fake backend. The 
 
 ## Testing
 
-The repository has no automated tests yet. Suggested starting points (see also [README — Testing](../README.md#testing)):
+The repository has minimal automated tests. Suggested starting points (see also [README — Testing](../README.md#testing)):
 
 | Target | Suggestion |
 |--------|------------|
+| `extractHttpErrorMessage` | ~~Unit test parsing of validation, conflict, and plain-text API errors~~ Fixed — see `front-end/src/app/helpers/error-message.util.spec.ts` |
 | `AuthService.Login` | Unit test: valid credentials return a token; invalid return `null` |
 | `UsersController` | Integration test with in-memory EF provider or Testcontainers SQL Server |
 | `AccountService.login` | Angular unit test: maps API response into `localStorage` |
