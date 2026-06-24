@@ -689,13 +689,13 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper and xUnit tests for `AuthService.Login`.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper and `AccountService.login`, plus xUnit tests for `AuthService.Login`.
 
 | Command | Location | Status |
 |---------|----------|--------|
 | `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthService.Login` credential and token tests |
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage` and `AccountService.login` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
@@ -705,8 +705,8 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 **Good first tests to add:**
 
 - ~~`AuthService.Login` returns a token for valid credentials and `null` otherwise~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/AuthServiceTests.cs`
+- ~~Angular `AccountService.login` maps the API response into local storage~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - `UsersController` CRUD with an in-memory database or test container
-- Angular `AccountService.login` maps the API response into local storage
 
 ## Continuous integration
 
