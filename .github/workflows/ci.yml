@@ -17,6 +17,13 @@ jobs:
         with:
           dotnet-version: "3.1.x"
 
+      - name: Install libssl1.1 for .NET Core 3.1 test host
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget -q http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+          sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -24,11 +31,12 @@ jobs:
           cache: npm
           cache-dependency-path: front-end/package-lock.json
 
-      - name: Build API
+      - name: Build and test API
         run: |
           cd UserManagementAPI
           dotnet restore
           dotnet build --no-restore
+          dotnet test --no-build --verbosity normal
 
       - name: Build and test front end
         run: |

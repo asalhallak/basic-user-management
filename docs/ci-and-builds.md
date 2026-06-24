@@ -4,11 +4,12 @@ How GitHub Actions verifies changes and how to run the same checks on your machi
 
 ## What CI runs
 
-On every push and pull request to `main`, [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs three build steps:
+On every push and pull request to `main`, [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs four build steps:
 
 | Step | Command | Purpose |
 |------|---------|---------|
 | Build API | `dotnet restore` + `dotnet build --no-restore` | Compile the .NET solution |
+| Test API | `dotnet test --no-build` | Run xUnit tests (currently `AuthService.Login`) |
 | Build front end | `npm ci` + `npm run build` | Production Angular build |
 | Test front end | `npm test -- --watch=false --browsers=ChromeHeadless` | Run Karma/Jasmine unit tests (currently `extractHttpErrorMessage`) |
 
@@ -21,7 +22,7 @@ CI does **not**:
 - Start Docker or SQL Server
 - Apply EF Core migrations
 - Run `make verify` or other runtime smoke checks
-- Execute `dotnet test` (no .NET test project yet)
+- Start the API or run integration tests against a live database
 
 A green CI badge means the solution builds; it does not prove the stack runs end-to-end.
 
@@ -33,6 +34,7 @@ A green CI badge means the solution builds; it does not prove the stack runs end
 | Quick local build | `make build` | Uses existing `node_modules`; faster for iterative work |
 | API compile only | `make build-api` | .NET solution only |
 | Front-end production build | `make build-frontend` | Angular `dist/` output |
+| API unit tests | `make test-api` | xUnit run; same command as CI (run after `make build-api`) |
 | Front-end unit tests | `make test-frontend` | Headless Karma run; same command as CI |
 | Remove build artifacts | `make clean` | Deletes `bin`/`obj` and `front-end/dist` |
 | Full runtime smoke check | `make verify` | Requires Docker, running API, and Angular dev server |
