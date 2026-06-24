@@ -111,4 +111,50 @@ describe('AccountService', () => {
 
         httpMock.expectOne(`${environment.apiUrl}/api/v1/users/99`).flush({});
     });
+
+    it('getById GETs the user from the users endpoint', () => {
+        const apiUser = {
+            id: '42',
+            loginName: 'jdoe',
+            displayName: 'Jane Doe'
+        } as User;
+
+        service.getById('42').subscribe();
+
+        const req = httpMock.expectOne(`${environment.apiUrl}/api/v1/users/42`);
+        expect(req.request.method).toBe('GET');
+        req.flush(apiUser);
+    });
+
+    it('getById returns the user from the API response', () => {
+        const apiUser = {
+            id: '42',
+            loginName: 'jdoe',
+            displayName: 'Jane Doe'
+        } as User;
+
+        service.getById('42').subscribe(user => {
+            expect(user).toEqual(apiUser);
+        });
+
+        httpMock.expectOne(`${environment.apiUrl}/api/v1/users/42`).flush(apiUser);
+    });
+
+    it('getById does not change localStorage or userValue', () => {
+        const loggedInUser = { id: '7', userName: 'admin', token: 'jwt-token' } as User;
+        configureService(loggedInUser);
+
+        const fetchedUser = {
+            id: '42',
+            loginName: 'jdoe',
+            displayName: 'Jane Doe'
+        } as User;
+
+        service.getById('42').subscribe(() => {
+            expect(service.userValue).toEqual(loggedInUser);
+            expect(JSON.parse(localStorage.getItem('user'))).toEqual(loggedInUser);
+        });
+
+        httpMock.expectOne(`${environment.apiUrl}/api/v1/users/42`).flush(fetchedUser);
+    });
 });
