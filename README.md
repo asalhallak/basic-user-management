@@ -224,6 +224,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make build-frontend` | Production build of the Angular app |
 | `make test-api` | Run .NET unit tests (AuthController, UsersController, AuthService, JwtHelper, UsersService) |
 | `make test-frontend` | Run Angular unit tests once (ChromeHeadless; matches CI) |
+| `make test` | Run all unit tests (`test-api` then `test-frontend`; run after `make build`) |
 | `make build` | Build API and front end |
 | `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
 | `make clean` | Remove .NET `bin`/`obj` folders and the Angular `dist` output |
@@ -695,8 +696,9 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 |---------|----------|--------|
 | `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD/duplicate-login tests |
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
+| `make test` | repository root | Runs `test-api` then `test-frontend` (run after `make build`) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
 
