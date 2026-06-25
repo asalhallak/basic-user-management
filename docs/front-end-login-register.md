@@ -153,6 +153,17 @@ After login, `localStorage` stores `{ userName, token }`. See [account-service.m
 
 See [improvement-ideas.md](improvement-ideas.md) for contribution starting points.
 
+## Unit tests
+
+`LoginComponent` has Karma/Jasmine coverage in `front-end/src/app/auth/login/login.component.spec.ts`:
+
+- Invalid form does not call `AccountService.login`
+- Valid submit calls `login(username, password)`
+- Success navigates to `/` or the `returnUrl` query parameter
+- Failed login resets the `loading` flag
+
+Run with `make test-frontend` or as part of `make ci`.
+
 ## Manual testing
 
 1. Open `http://localhost:4200/account/login` — form loads without a JWT.
@@ -171,6 +182,7 @@ Full checklist: [manual-testing.md — Manual UI walkthrough](manual-testing.md#
 | `front-end/src/app/auth/auth.module.ts` | Module declaration |
 | `front-end/src/app/auth/auth-routing.module.ts` | Child route table |
 | `front-end/src/app/auth/login/login.component.ts` | Login form and `returnUrl` navigation |
+| `front-end/src/app/auth/login/login.component.spec.ts` | LoginComponent unit tests |
 | `front-end/src/app/auth/register/register.component.ts` | Legacy register form |
 | `front-end/src/app/services/account.service.ts` | `login()` and `register()` HTTP calls |
 | `front-end/src/app/helpers/auth.guard.ts` | Redirects unauthenticated users to login |
