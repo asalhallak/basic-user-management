@@ -45,7 +45,11 @@ namespace UserManagementAPI.Tests
             var token = jwtHelper.GenerateToken(user);
             var handler = new JwtSecurityTokenHandler();
             var jwt = handler.ReadJwtToken(token);
-            var nameClaim = jwt.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name);
+            var nameClaim = jwt.Claims.FirstOrDefault(c =>
+                c.Type == ClaimTypes.Name ||
+                c.Type == "unique_name" ||
+                c.Type == "name" ||
+                c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name");
 
             Assert.NotNull(nameClaim);
             Assert.Equal("admin", nameClaim.Value);
