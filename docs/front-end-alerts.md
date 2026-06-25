@@ -129,7 +129,10 @@ this.alertService.info('Changes saved locally', { autoClose: true });
 
 ## Unit tests
 
-`AlertService` has Karma/Jasmine coverage in `front-end/src/app/services/alert.service.spec.ts`. The tests verify typed convenience methods (`success`, `error`, `info`, `warn`), default alert id assignment, per-id filtering via `onAlert(id)`, optional flag forwarding, and `clear()`.
+| File | What it covers |
+|------|----------------|
+| `front-end/src/app/services/alert.service.spec.ts` | Typed convenience methods, default alert id, per-id filtering via `onAlert(id)`, optional flag forwarding, and `clear()` |
+| `front-end/src/app/components/alert.component.spec.ts` | Alert rendering, id scoping, clear/keepAfterRouteChange behavior, route navigation clears, dismiss/fade, auto-close, and `cssClass()` mapping |
 
 Run them with `make test-frontend` or as part of `make ci`.
 
