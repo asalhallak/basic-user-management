@@ -21,7 +21,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
 | Error toasts | ~~Each form handles API errors locally; no global alert from `ErrorInterceptor`~~ | Fixed — `ErrorInterceptor` calls `AlertService.error()` for all failed HTTP responses; session expiry shows a dedicated message on `401`/`403` with an active session. Components reset local state only in error handlers. Validation and conflict JSON is parsed in `extractHttpErrorMessage()` before display. |
 | Add/edit `profilePictureUrl` | ~~Required in form despite optional on API~~ | Fixed — optional in add/edit form, matching `UserResource` and API docs |
-| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertService`, `AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD/duplicate-login, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or more Angular component tests |
+| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD/duplicate-login, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or more Angular component tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 
 ## API hardening
@@ -68,6 +68,7 @@ The repository has minimal automated tests. Suggested starting points (see also 
 | `RegisterComponent` | ~~Angular unit test: form validation, legacy field mapping, session check, success navigation, and error loading reset~~ Fixed — see `front-end/src/app/auth/register/register.component.spec.ts` |
 | `AddEditComponent` | ~~Angular unit test: add/edit mode, form validation, user load with date formatting, create/update success navigation, and error loading reset~~ Fixed — see `front-end/src/app/users/add-edit/add-edit.component.spec.ts` |
 | `ListComponent` | ~~Angular unit test: load users on init, handle load errors, delete success removal, and delete failure loading reset~~ Fixed — see `front-end/src/app/users/list/list.component.spec.ts` |
+| `AlertComponent` | ~~Angular unit test: render alerts, id scoping, clear/keepAfterRouteChange, route navigation, dismiss/fade, auto-close, and cssClass mapping~~ Fixed — see `front-end/src/app/components/alert.component.spec.ts` |
 
 Run `make ci` after adding tests to confirm builds still pass.
 
