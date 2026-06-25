@@ -103,6 +103,7 @@ Post-login landing page declared in `AppModule` (not lazy-loaded).
 |------|------|
 | [`home/home.component.ts`](../front-end/src/app/home/home.component.ts) | Reads `accountService.userValue` once in the constructor |
 | [`home/home.component.html`](../front-end/src/app/home/home.component.html) | Greeting and link to `/users` |
+| [`home/home.component.spec.ts`](../front-end/src/app/home/home.component.spec.ts) | Unit tests: session greeting, null session, and manage-users link |
 
 ### Home greeting
 

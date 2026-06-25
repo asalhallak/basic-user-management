@@ -690,7 +690,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD and duplicate-login checks.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD and duplicate-login checks.
 
 | Command | Location | Status |
 |---------|----------|--------|
@@ -698,7 +698,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `make test` | repository root | Runs `test-api` then `test-frontend` (run after `make build`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
 
@@ -716,6 +716,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 - ~~Angular `AccountService.delete` sends DELETE without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AccountService.register` POSTs user payload without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AuthGuard` allows authenticated routes and redirects with `returnUrl` when logged out~~ Fixed — see `front-end/src/app/helpers/auth.guard.spec.ts`
+- ~~Angular `HomeComponent` reads session from AccountService and greets with `userName`~~ Fixed — see `front-end/src/app/home/home.component.spec.ts`
 - ~~Angular `AlertService` publishes typed alerts and filters by id~~ Fixed — see `front-end/src/app/services/alert.service.spec.ts`
 - ~~Angular `JwtInterceptor` attaches Bearer tokens to API requests when logged in~~ Fixed — see `front-end/src/app/helpers/jwt.interceptor.spec.ts`
 - ~~Angular `ErrorInterceptor` shows global error alerts and logs out on session expiry~~ Fixed — see `front-end/src/app/helpers/error.interceptor.spec.ts`
