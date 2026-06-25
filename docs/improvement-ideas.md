@@ -21,7 +21,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
 | Error toasts | ~~Each form handles API errors locally; no global alert from `ErrorInterceptor`~~ | Fixed — `ErrorInterceptor` calls `AlertService.error()` for all failed HTTP responses; session expiry shows a dedicated message on `401`/`403` with an active session. Components reset local state only in error handlers. Validation and conflict JSON is parsed in `extractHttpErrorMessage()` before display. |
 | Add/edit `profilePictureUrl` | ~~Required in form despite optional on API~~ | Fixed — optional in add/edit form, matching `UserResource` and API docs |
-| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD/duplicate-login, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or more Angular component tests |
+| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD/duplicate-login, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or more Angular component tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 
 ## API hardening
@@ -51,11 +51,11 @@ The repository has **unit test coverage** for core API services/controllers and 
 | Target | Suggestion |
 |--------|------------|
 | API integration tests | End-to-end controller tests with in-memory EF Core or Testcontainers SQL Server (unit tests mock services today) |
-| `HomeComponent` | Unit test greeting when logged in vs logged out |
+| ~~`HomeComponent`~~ | ~~Unit test greeting when logged in vs logged out~~ Fixed — see `front-end/src/app/home/home.component.spec.ts` |
 | Layout / shell components | Unit tests for `AppComponent`, `AuthLayoutComponent`, and `UsersLayoutComponent` navbar visibility |
 | E2E / smoke tests | Optional Cypress or Playwright flow: login → list users → create → edit → delete |
 
-**Already covered** (for reference): `extractHttpErrorMessage`, `AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`, `UsersController`, all `AccountService` HTTP methods, `AuthGuard`, `AlertService`, `JwtInterceptor`, `ErrorInterceptor`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, and `AlertComponent`. Spec file paths are listed in the README testing section.
+**Already covered** (for reference): `extractHttpErrorMessage`, `AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`, `UsersController`, all `AccountService` HTTP methods, `AuthGuard`, `AlertService`, `JwtInterceptor`, `ErrorInterceptor`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, and `AlertComponent`. Spec file paths are listed in the README testing section.
 
 Run `make ci` after adding tests to confirm builds still pass.
 
