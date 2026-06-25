@@ -11,7 +11,7 @@ On every push and pull request to `main`, [`.github/workflows/ci.yml`](../.githu
 | Build API | `dotnet restore` + `dotnet build --no-restore` | Compile the .NET solution |
 | Test API | `dotnet test --no-build` | Run xUnit tests (currently `AuthService.Login`) |
 | Build front end | `npm ci` + `npm run build` | Production Angular build |
-| Test front end | `npm test -- --watch=false --browsers=ChromeHeadless` | Run Karma/Jasmine unit tests (`extractHttpErrorMessage`, `JwtInterceptor`, `AuthGuard`, `AlertService`, `AccountService`) |
+| Test front end | `npm test -- --watch=false --browsers=ChromeHeadless` | Run Karma/Jasmine unit tests (`extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService`) |
 
 The workflow uses **.NET SDK 3.1.x** and **Node.js 16** (matching [`.nvmrc`](../.nvmrc)).
 
