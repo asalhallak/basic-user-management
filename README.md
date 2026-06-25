@@ -690,7 +690,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD and duplicate-login checks.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD and duplicate-login checks.
 
 | Command | Location | Status |
 |---------|----------|--------|
@@ -698,7 +698,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `make test` | repository root | Runs `test-api` then `test-frontend` (run after `make build`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
 
@@ -726,6 +726,8 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 - ~~Angular `ListComponent` loads users on init, handles load errors, and manages delete loading state~~ Fixed — see `front-end/src/app/users/list/list.component.spec.ts`
 - ~~Angular `AlertComponent` renders alerts, scopes by id, clears on navigation, and auto-dismisses~~ Fixed — see `front-end/src/app/components/alert.component.spec.ts`
 - ~~`UsersController` maps CRUD actions to `200 OK`, `404 NotFound`, and `409 Conflict`~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/UsersControllerTests.cs`
+- ~~Angular `AppComponent` shows the navbar when logged in and delegates logout~~ Fixed — see `front-end/src/app/app.component.spec.ts`
+- ~~Angular auth and users `LayoutComponent` shell behavior~~ Fixed — see `front-end/src/app/auth/layout.component.spec.ts` and `front-end/src/app/users/layout.component.spec.ts`
 - `UsersController` integration tests with an in-memory database or test container
 
 ## Continuous integration
