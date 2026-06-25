@@ -162,6 +162,14 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 - Success navigates to `/` or the `returnUrl` query parameter
 - Failed login resets the `loading` flag
 
+`RegisterComponent` has Karma/Jasmine coverage in `front-end/src/app/auth/register/register.component.spec.ts`:
+
+- Invalid form does not call `AccountService.register`
+- Valid submit without a session redirects to login
+- Valid submit with a session maps legacy fields to `{ loginName, displayName, isActive: true }`
+- Success shows a registration alert and navigates to login
+- Failed registration resets the `loading` flag
+
 Run with `make test-frontend` or as part of `make ci`.
 
 ## Manual testing
@@ -184,6 +192,7 @@ Full checklist: [manual-testing.md — Manual UI walkthrough](manual-testing.md#
 | `front-end/src/app/auth/login/login.component.ts` | Login form and `returnUrl` navigation |
 | `front-end/src/app/auth/login/login.component.spec.ts` | LoginComponent unit tests |
 | `front-end/src/app/auth/register/register.component.ts` | Legacy register form |
+| `front-end/src/app/auth/register/register.component.spec.ts` | RegisterComponent unit tests |
 | `front-end/src/app/services/account.service.ts` | `login()` and `register()` HTTP calls |
 | `front-end/src/app/helpers/auth.guard.ts` | Redirects unauthenticated users to login |
 
