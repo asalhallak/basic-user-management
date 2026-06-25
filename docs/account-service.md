@@ -90,7 +90,7 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 | Method name `register` | Creates a user record, not a login account | Rename only if you refactor callers; document intent in PR |
 | Register form labels | UI still shows legacy `username`, `firstName`, `lastName` labels | `RegisterComponent.onSubmit()` maps to `{ loginName, displayName, isActive: true }` before calling `register()` — see [front-end-login-register.md](front-end-login-register.md) |
 | `update()` localStorage sync | Only runs when `id == userValue.id` | Login session uses `userName`/`token`, not a user row `id`, so this branch rarely fires in the sample app |
-| Fake backend | `fakeBackendProvider` intercepts legacy `/users/authenticate` routes | Remove from `app.module.ts` when using the real API — [code-map.md](code-map.md) |
+| ~~Fake backend~~ | ~~`fakeBackendProvider` intercepts legacy `/users/authenticate` routes~~ | Fixed — provider removed from `app.module.ts`; legacy code remains in `helpers/fake-backend.ts` for reference — [fake-backend.md](fake-backend.md) |
 | ~~No shared error UI~~ | ~~Each component called `AlertService.error()` locally~~ | Fixed — `ErrorInterceptor` shows global error toasts — see [front-end-alerts.md](front-end-alerts.md) |
 
 ## Related files
