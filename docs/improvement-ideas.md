@@ -21,7 +21,7 @@ For security limitations before any deployment, see [SECURITY.md](../SECURITY.md
 | Home greeting | ~~Template uses `firstName` but login stores `userName`~~ | Fixed — home page uses `user.userName` |
 | Error toasts | ~~Each form handles API errors locally; no global alert from `ErrorInterceptor`~~ | Fixed — `ErrorInterceptor` calls `AlertService.error()` for all failed HTTP responses; session expiry shows a dedicated message on `401`/`403` with an active session. Components reset local state only in error handlers. Validation and conflict JSON is parsed in `extractHttpErrorMessage()` before display. |
 | Add/edit `profilePictureUrl` | ~~Required in form despite optional on API~~ | Fixed — optional in add/edit form, matching `UserResource` and API docs |
-| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AuthService.Login`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or Angular component tests |
+| Tests | Karma/Jasmine configured; `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AuthService.Login`, `JwtHelper.GenerateToken`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` unit tests added | Add API integration tests or Angular component tests |
 | CORS / HTTPS | Permissive for localhost | Tighten before any non-local deployment — see [cors-configuration.md](cors-configuration.md) |
 
 ## API hardening
@@ -50,6 +50,7 @@ The repository has minimal automated tests. Suggested starting points (see also 
 |--------|------------|
 | `extractHttpErrorMessage` | ~~Unit test parsing of validation, conflict, and plain-text API errors~~ Fixed — see `front-end/src/app/helpers/error-message.util.spec.ts` |
 | `AuthService.Login` | ~~Unit test: valid credentials return a token; invalid return `null`~~ Fixed — see `UserManagement.API.Tests/AuthServiceTests.cs` |
+| `JwtHelper.GenerateToken` | ~~Unit test: JWT contains userName claim and 7-day expiry~~ Fixed — see `UserManagement.API.Tests/JwtHelperTests.cs` |
 | `UsersController` | Integration test with in-memory EF provider or Testcontainers SQL Server |
 | `AccountService.login` | ~~Angular unit test: maps API response into `localStorage`~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
 | `AccountService.update` | ~~Angular unit test: PUT payload, session sync for own record, no sync for other users~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
