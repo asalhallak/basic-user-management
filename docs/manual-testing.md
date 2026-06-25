@@ -7,6 +7,7 @@ A short pre-pull-request checklist for verifying changes locally. CI builds the 
 | Goal | Command | Requires |
 |------|---------|----------|
 | Compile like CI | `make ci` | .NET SDK, Node.js 16 |
+| All unit tests | `make test` | .NET SDK, Node.js 16 (run after `make build`) |
 | API unit tests | `make test-api` | .NET SDK (run after `make build-api`) |
 | Front-end unit tests | `make test-frontend` | Node.js 16 (or `NODE_OPTIONS=--openssl-legacy-provider` on Node 17+) |
 | See what is running | `make status` | Docker (for DB row) |

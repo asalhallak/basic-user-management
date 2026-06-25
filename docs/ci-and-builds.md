@@ -34,6 +34,7 @@ A green CI badge means the solution builds; it does not prove the stack runs end
 | Quick local build | `make build` | Uses existing `node_modules`; faster for iterative work |
 | API compile only | `make build-api` | .NET solution only |
 | Front-end production build | `make build-frontend` | Angular `dist/` output |
+| All unit tests | `make test` | Runs `test-api` then `test-frontend` (run after `make build`) |
 | API unit tests | `make test-api` | xUnit run; same command as CI (run after `make build-api`) |
 | Front-end unit tests | `make test-frontend` | Headless Karma run; same command as CI |
 | Remove build artifacts | `make clean` | Deletes `bin`/`obj` and `front-end/dist` |
