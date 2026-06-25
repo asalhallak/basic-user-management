@@ -52,10 +52,10 @@ The repository has **unit test coverage** for core API services/controllers and 
 |--------|------------|
 | API integration tests | End-to-end controller tests with in-memory EF Core or Testcontainers SQL Server (unit tests mock services today) |
 | ~~`HomeComponent`~~ | ~~Unit test greeting when logged in vs logged out~~ Fixed — see `front-end/src/app/home/home.component.spec.ts` |
-| Layout / shell components | Unit tests for `AppComponent`, `AuthLayoutComponent`, and `UsersLayoutComponent` navbar visibility |
+| ~~Layout / shell components~~ | ~~Unit tests for `AppComponent`, `AuthLayoutComponent`, and `UsersLayoutComponent` navbar visibility~~ Fixed — see `app.component.spec.ts`, `auth/layout.component.spec.ts`, and `users/layout.component.spec.ts` |
 | E2E / smoke tests | Optional Cypress or Playwright flow: login → list users → create → edit → delete |
 
-**Already covered** (for reference): `extractHttpErrorMessage`, `AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`, `UsersController`, all `AccountService` HTTP methods, `AuthGuard`, `AlertService`, `JwtInterceptor`, `ErrorInterceptor`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, and `AlertComponent`. Spec file paths are listed in the README testing section.
+**Already covered** (for reference): `extractHttpErrorMessage`, `AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`, `UsersController`, all `AccountService` HTTP methods, `AuthGuard`, `AlertService`, `JwtInterceptor`, `ErrorInterceptor`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, and `AlertComponent`. Spec file paths are listed in the README testing section.
 
 Run `make ci` after adding tests to confirm builds still pass.
 
