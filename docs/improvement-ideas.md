@@ -44,31 +44,18 @@ The Angular app was adapted from a tutorial that used a local fake backend. The 
 
 ## Testing
 
-The repository has minimal automated tests. Suggested starting points (see also [README — Testing](../README.md#testing)):
+The repository has **unit test coverage** for core API services/controllers and front-end helpers, services, and feature components (see [README — Testing](../README.md#testing)). Run `make test` or `make ci` locally; CI runs both `dotnet test` and `npm test`.
+
+**Remaining gaps** — good next steps if you want to extend coverage:
 
 | Target | Suggestion |
 |--------|------------|
-| `extractHttpErrorMessage` | ~~Unit test parsing of validation, conflict, and plain-text API errors~~ Fixed — see `front-end/src/app/helpers/error-message.util.spec.ts` |
-| `AuthController.Login` | ~~Unit test: valid credentials return `200 OK` with token; invalid return `401 Unauthorized`~~ Fixed — see `UserManagement.API.Tests/AuthControllerTests.cs` |
-| `AuthService.Login` | ~~Unit test: valid credentials return a token; invalid return `null`~~ Fixed — see `UserManagement.API.Tests/AuthServiceTests.cs` |
-| `JwtHelper.GenerateToken` | ~~Unit test: JWT contains userName claim and 7-day expiry~~ Fixed — see `UserManagement.API.Tests/JwtHelperTests.cs` |
-| `UsersService` | ~~Unit test: CRUD methods, not-found handling, and `LoginNameExists` duplicate checks~~ Fixed — see `UserManagement.API.Tests/UsersServiceTests.cs` |
-| `UsersController` | ~~Unit test: CRUD actions map to Ok, NotFound, and Conflict responses~~ Fixed — see `UserManagement.API.Tests/UsersControllerTests.cs`; integration tests with in-memory EF or Testcontainers SQL Server remain optional |
-| `AccountService.login` | ~~Angular unit test: maps API response into `localStorage`~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
-| `AccountService.update` | ~~Angular unit test: PUT payload, session sync for own record, no sync for other users~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
-| `AccountService.getById` | ~~Angular unit test: GET by ID returns API user without changing session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
-| `AccountService.getAll` | ~~Angular unit test: GET users list returns API array without changing session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
-| `AccountService.delete` | ~~Angular unit test: DELETE by ID without changing session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
-| `AccountService.register` | ~~Angular unit test: POST user payload without changing session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts` |
-| `AuthGuard` | ~~Angular unit test: allow authenticated routes; redirect with `returnUrl` when logged out~~ Fixed — see `front-end/src/app/helpers/auth.guard.spec.ts` |
-| `AlertService` | ~~Angular unit test: typed convenience methods, default id, and per-id filtering~~ Fixed — see `front-end/src/app/services/alert.service.spec.ts` |
-| `JwtInterceptor` | ~~Angular unit test: attach Bearer token to API requests when logged in~~ Fixed — see `front-end/src/app/helpers/jwt.interceptor.spec.ts` |
-| `ErrorInterceptor` | ~~Angular unit test: global error alerts, session expiry logout, and error re-throw~~ Fixed — see `front-end/src/app/helpers/error.interceptor.spec.ts` |
-| `LoginComponent` | ~~Angular unit test: form validation, login call, returnUrl navigation, and error loading reset~~ Fixed — see `front-end/src/app/auth/login/login.component.spec.ts` |
-| `RegisterComponent` | ~~Angular unit test: form validation, legacy field mapping, session check, success navigation, and error loading reset~~ Fixed — see `front-end/src/app/auth/register/register.component.spec.ts` |
-| `AddEditComponent` | ~~Angular unit test: add/edit mode, form validation, user load with date formatting, create/update success navigation, and error loading reset~~ Fixed — see `front-end/src/app/users/add-edit/add-edit.component.spec.ts` |
-| `ListComponent` | ~~Angular unit test: load users on init, handle load errors, delete success removal, and delete failure loading reset~~ Fixed — see `front-end/src/app/users/list/list.component.spec.ts` |
-| `AlertComponent` | ~~Angular unit test: render alerts, id scoping, clear/keepAfterRouteChange, route navigation, dismiss/fade, auto-close, and cssClass mapping~~ Fixed — see `front-end/src/app/components/alert.component.spec.ts` |
+| API integration tests | End-to-end controller tests with in-memory EF Core or Testcontainers SQL Server (unit tests mock services today) |
+| `HomeComponent` | Unit test greeting when logged in vs logged out |
+| Layout / shell components | Unit tests for `AppComponent`, `AuthLayoutComponent`, and `UsersLayoutComponent` navbar visibility |
+| E2E / smoke tests | Optional Cypress or Playwright flow: login → list users → create → edit → delete |
+
+**Already covered** (for reference): `extractHttpErrorMessage`, `AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`, `UsersController`, all `AccountService` HTTP methods, `AuthGuard`, `AlertService`, `JwtInterceptor`, `ErrorInterceptor`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, and `AlertComponent`. Spec file paths are listed in the README testing section.
 
 Run `make ci` after adding tests to confirm builds still pass.
 
