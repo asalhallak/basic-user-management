@@ -58,7 +58,7 @@ build-api: ## Build the .NET solution
 build-frontend: ## Production build of the Angular app
 	cd front-end && npm run build
 
-test-api: ## Run .NET unit tests (AuthService login, JwtHelper token generation, UsersService CRUD)
+test-api: ## Run .NET unit tests (AuthController login, AuthService, JwtHelper token generation, UsersService CRUD)
 	cd UserManagementAPI && dotnet test --verbosity normal
 
 test-frontend: ## Run Angular unit tests once (ErrorInterceptor, JwtInterceptor, AlertService, AuthGuard, AccountService CRUD; ChromeHeadless; matches CI)

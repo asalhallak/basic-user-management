@@ -9,7 +9,7 @@ On every push and pull request to `main`, [`.github/workflows/ci.yml`](../.githu
 | Step | Command | Purpose |
 |------|---------|---------|
 | Build API | `dotnet restore` + `dotnet build --no-restore` | Compile the .NET solution |
-| Test API | `dotnet test --no-build` | Run xUnit tests (`AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`) |
+| Test API | `dotnet test --no-build` | Run xUnit tests (`AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`) |
 | Build front end | `npm ci` + `npm run build` | Production Angular build |
 | Test front end | `npm test -- --watch=false --browsers=ChromeHeadless` | Run Karma/Jasmine unit tests (`extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService`) |
 

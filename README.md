@@ -222,7 +222,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make run-frontend` | Run the Angular dev server with `npm start` (listens on `http://localhost:4200`) |
 | `make build-api` | Build the .NET solution |
 | `make build-frontend` | Production build of the Angular app |
-| `make test-api` | Run .NET unit tests (AuthService, JwtHelper, UsersService) |
+| `make test-api` | Run .NET unit tests (AuthController, AuthService, JwtHelper, UsersService) |
 | `make test-frontend` | Run Angular unit tests once (ChromeHeadless; matches CI) |
 | `make build` | Build API and front end |
 | `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
@@ -674,7 +674,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │       └── services/           # API client & alerts
 └── UserManagementAPI/
     ├── UserManagement.API/           # Web API entry point
-    ├── UserManagement.API.Tests/     # xUnit tests (AuthService, JwtHelper, UsersService)
+    ├── UserManagement.API.Tests/     # xUnit tests (AuthController, AuthService, JwtHelper, UsersService)
     ├── UserManagement.Domain/        # Entities & interfaces
     └── UserManagement.DataAccess.EFCore/  # Persistence & migrations
 ```
@@ -689,11 +689,11 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD and duplicate-login checks.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD and duplicate-login checks.
 
 | Command | Location | Status |
 |---------|----------|--------|
-| `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD/duplicate-login tests |
+| `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthController.Login`, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD/duplicate-login tests |
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
@@ -704,6 +704,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 
 **Good first tests to add:**
 
+- ~~`AuthController.Login` maps valid credentials to `200 OK` and invalid credentials to `401 Unauthorized`~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/AuthControllerTests.cs`
 - ~~`AuthService.Login` returns a token for valid credentials and `null` otherwise~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/AuthServiceTests.cs`
 - ~~`UsersService` CRUD and duplicate `loginName` checks~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/UsersServiceTests.cs`
 - ~~Angular `AccountService.login` maps the API response into local storage~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
