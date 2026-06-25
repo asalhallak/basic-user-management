@@ -61,6 +61,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | Term | Meaning in this project |
 |------|-------------------------|
 | **`make ci`** | Compile and unit-test check matching GitHub Actions. Does not start Docker or dev servers. |
+| **`make test`** | Run all unit tests (`test-api` then `test-frontend`). Faster than `make ci` when you only need tests after a build. |
 | **`make verify`** | Runtime smoke test: database up, JWT guard, login, authenticated users, and front end. |
 | **`make status`** | Informational report of what appears to be running. Never fails. |
 | **`make token`** | Fetches a JWT from the running API via `scripts/get-token.sh`. |
