@@ -689,11 +689,11 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthService.Login`.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthService.Login` and `JwtHelper.GenerateToken`.
 
 | Command | Location | Status |
 |---------|----------|--------|
-| `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthService.Login` credential and token tests |
+| `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthService.Login` credential tests and `JwtHelper.GenerateToken` JWT claim/expiry tests |
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
