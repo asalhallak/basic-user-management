@@ -9,6 +9,10 @@ using UserManagementAPI.Services;
 
 namespace UserManagementAPI.Controllers.V1
 {
+    /// <summary>
+    /// Protected user CRUD endpoints under <c>/api/v1/users</c>.
+    /// Maps between <see cref="UserResource"/> DTOs and domain entities via <see cref="IMapper"/>.
+    /// </summary>
     [Route("api/v1/users")]
     [Authorize]
     [ApiController]
@@ -24,6 +28,10 @@ namespace UserManagementAPI.Controllers.V1
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Lists all user records with nested addresses.
+        /// </summary>
+        /// <returns><see cref="OkObjectResult"/> containing an array of <see cref="UserResource"/>.</returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,6 +39,11 @@ namespace UserManagementAPI.Controllers.V1
             return Ok(users);
         }
 
+        /// <summary>
+        /// Returns a single user by primary key.
+        /// </summary>
+        /// <param name="id">User ID from the route.</param>
+        /// <returns><see cref="UserResource"/> on success; <see cref="NotFoundResult"/> when missing.</returns>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -43,6 +56,11 @@ namespace UserManagementAPI.Controllers.V1
             return Ok(_mapper.Map<UserResource>(user));
         }
 
+        /// <summary>
+        /// Creates a new user record.
+        /// </summary>
+        /// <param name="user">Request body mapped to a domain <see cref="User"/>.</param>
+        /// <returns>Created <see cref="UserResource"/>; <see cref="ConflictObjectResult"/> when <c>loginName</c> is taken.</returns>
         [HttpPost]
         public IActionResult Add([FromBody] UserResource user)
         {
@@ -55,6 +73,11 @@ namespace UserManagementAPI.Controllers.V1
             return Ok(_mapper.Map<UserResource>(created));
         }
 
+        /// <summary>
+        /// Deletes a user by primary key.
+        /// </summary>
+        /// <param name="id">User ID from the route.</param>
+        /// <returns><see cref="OkResult"/> on success; <see cref="NotFoundResult"/> when missing.</returns>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -66,6 +89,12 @@ namespace UserManagementAPI.Controllers.V1
             return Ok();
         }
 
+        /// <summary>
+        /// Updates an existing user. The route <paramref name="id"/> is applied to the body before mapping.
+        /// </summary>
+        /// <param name="id">User ID from the route.</param>
+        /// <param name="user">Updated fields in <see cref="UserResource"/> shape.</param>
+        /// <returns><see cref="OkResult"/> on success; <see cref="NotFoundResult"/> when missing; <see cref="ConflictObjectResult"/> when <c>loginName</c> is taken.</returns>
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] UserResource user)
         {
