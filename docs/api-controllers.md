@@ -57,6 +57,8 @@ Controllers do **not** call EF Core or repositories directly. Business logic and
 
 **File:** `UserManagementAPI/UserManagement.API/Controllers/V1/AuthController.cs`
 
+The class and `Login` action include XML doc comments for IDE tooltips and generated API docs.
+
 | Method | Route | Action | Request body | Responses |
 |--------|-------|--------|--------------|-----------|
 | `POST` | `/api/v1/auth/login` | `Login` | `Credentials` (`userName`, `password`) | `200` + `Claims` (token) or `401` |
@@ -81,6 +83,8 @@ There is no `[Authorize]` on this controller — login must be reachable without
 ## UsersController
 
 **File:** `UserManagementAPI/UserManagement.API/Controllers/V1/UsersController.cs`
+
+The class and each CRUD action include XML doc comments describing routes, status codes, and mapping behavior.
 
 Class-level `[Authorize]` protects every action. Requests without a valid JWT are rejected by bearer middleware before the action runs.
 
