@@ -5,6 +5,13 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '../../services';
 
+/**
+ * Public login form. Posts `{ userName, password }` via `AccountService.login` and
+ * navigates to `returnUrl` (or `/`) on success. Form control is named `username`
+ * but maps to API `userName` in the service call.
+ *
+ * @see docs/front-end-login-register.md
+ */
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     form: FormGroup;

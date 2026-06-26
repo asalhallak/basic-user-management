@@ -5,6 +5,13 @@ import { Subscription } from 'rxjs';
 import { Alert, AlertType } from '../models';
 import { AlertService } from '../services';
 
+/**
+ * Global toast host subscribed to `AlertService`. Renders alerts scoped by `@Input() id`,
+ * auto-dismisses when `autoClose` is set, and clears on navigation unless
+ * `keepAfterRouteChange` is true.
+ *
+ * @see docs/front-end-alerts.md
+ */
 @Component({ selector: 'alert', templateUrl: 'alert.component.html' })
 export class AlertComponent implements OnInit, OnDestroy {
     @Input() id = 'default-alert';

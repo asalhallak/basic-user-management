@@ -5,6 +5,13 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '../../services';
 
+/**
+ * Authenticated user registration (not public sign-up). Maps legacy tutorial form fields
+ * (`username`, `firstName`, `lastName`) to API `loginName` and `displayName` before
+ * calling `POST /api/v1/users`. Redirects to login when no JWT session is present.
+ *
+ * @see docs/front-end-login-register.md
+ */
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
