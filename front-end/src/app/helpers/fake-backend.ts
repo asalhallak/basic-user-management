@@ -3,10 +3,20 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-// array in local storage for registered users
+/** `localStorage` key for the tutorial in-memory user list (separate from real API session). */
 const usersKey = 'angular-10-registration-login-example-users';
 let users = JSON.parse(localStorage.getItem(usersKey)) || [];
 
+/**
+ * Legacy tutorial HTTP interceptor that simulates REST routes in the browser.
+ * Not registered in `AppModule` — kept for reference only.
+ *
+ * Handles tutorial-style paths (`/users/authenticate`, `/users/register`, etc.) and
+ * returns a static `fake-jwt-token`. All other requests pass through to the next interceptor.
+ *
+ * @see docs/fake-backend.md
+ * @see docs/front-end-interceptors.md
+ */
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -130,8 +140,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 }
 
+/**
+ * Angular DI provider for {@link FakeBackendInterceptor}.
+ * Not registered in `AppModule`; import and add to `providers` only for local tutorial-style mocking.
+ *
+ * @see docs/fake-backend.md
+ */
 export const fakeBackendProvider = {
-    // use fake backend in place of Http service for backend-less development
     provide: HTTP_INTERCEPTORS,
     useClass: FakeBackendInterceptor,
     multi: true
