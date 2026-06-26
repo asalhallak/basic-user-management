@@ -19,7 +19,7 @@ Server-to-server tools (curl, REST Client, `verify-stack.sh`) are **not** subjec
 
 ## Current policy
 
-CORS is configured in `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` and wired from `Startup.cs`:
+CORS is configured in `UserManagementAPI/UserManagement.API/MiddlewareConfiguration/CorsOriginConfiguration.cs` and wired from `Startup.cs`. Both files include XML doc comments describing the policy and extension methods:
 
 | Registration | Method | When it runs |
 |--------------|--------|--------------|
