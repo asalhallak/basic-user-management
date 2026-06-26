@@ -78,7 +78,10 @@ namespace UserManagementAPI
                 app.UseDeveloperExceptionPage();
             }
             app.UseCorsOrigin();
-            app.UseHttpsRedirection();
+            if (!env.IsEnvironment("Testing"))
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseRouting();
 
