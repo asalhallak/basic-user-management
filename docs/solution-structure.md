@@ -72,7 +72,7 @@ HTTP entry point and application services.
 | `Mapper/` | AutoMapper profiles (entity ↔ resource) |
 | `Helpers/` | `JwtHelper` — token creation |
 | `MiddlewareConfiguration/` | CORS setup for local Angular dev — see [cors-configuration.md](cors-configuration.md) |
-| `Startup.cs` | DI registration, JWT middleware, EF `DbContext` |
+| `Startup.cs` | DI registration, JWT middleware, EF `DbContext` (includes XML doc comments) |
 | `appsettings.json` | Connection string, `JwtSecret` |
 
 ### UserManagement.Domain
