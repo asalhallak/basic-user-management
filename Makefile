@@ -61,7 +61,7 @@ build-frontend: ## Production build of the Angular app
 test-api: ## Run .NET unit and integration tests (AuthController, UsersController, AuthService, JwtHelper, UsersService, HTTP pipeline)
 	cd UserManagementAPI && dotnet test --verbosity normal
 
-test-frontend: ## Run Angular unit tests once (AlertComponent, ErrorInterceptor, JwtInterceptor, AlertService, AuthGuard, HomeComponent, LoginComponent, AccountService CRUD; ChromeHeadless; matches CI)
+test-frontend: ## Run Angular unit tests once (helpers, services, AppComponent, auth/users shells, login/register, list/add-edit; ChromeHeadless; matches CI)
 	cd front-end && npm test -- --watch=false --browsers=ChromeHeadless
 
 test: test-api test-frontend ## Run all unit tests (API + front end)
