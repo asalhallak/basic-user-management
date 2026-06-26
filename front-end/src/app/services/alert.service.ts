@@ -4,12 +4,17 @@ import { filter } from 'rxjs/operators';
 
 import { Alert, AlertType } from '../models';
 
+/**
+ * Pub/sub service for global success, error, info, and warning banners.
+ * Components subscribe via `onAlert()`; `<alert>` in `app.component.html` renders messages.
+ * See docs/front-end-alerts.md.
+ */
 @Injectable({ providedIn: 'root' })
 export class AlertService {
     private subject = new Subject<Alert>();
     private defaultId = 'default-alert';
 
-    // enable subscribing to alerts observable
+    /** Observable stream filtered to alerts for the given host id (default: `default-alert`). */
     onAlert(id = this.defaultId): Observable<Alert> {
         return this.subject.asObservable().pipe(filter(x => x && x.id === id));
     }

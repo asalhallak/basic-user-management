@@ -1,6 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
-/** Map ASP.NET Core error bodies (validation, conflict, plain text) to a user-facing string. */
+/**
+ * Map ASP.NET Core error bodies to a user-facing string for toast display.
+ * Handles plain text, `{ message }`, validation `{ errors }`, and `{ title }` shapes.
+ */
 export function extractHttpErrorMessage(err: HttpErrorResponse): string {
     const body = err.error;
 
