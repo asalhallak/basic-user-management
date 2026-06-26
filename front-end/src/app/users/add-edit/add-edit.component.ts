@@ -5,6 +5,13 @@ import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '../../services';
 
+/**
+ * Create or edit a user with full `UserResource` fields including nested address.
+ * Route param `id` selects edit mode; absence selects add mode. Uses API field names
+ * directly (`loginName`, `displayName`, etc.) unlike the register form.
+ *
+ * @see docs/front-end-users.md
+ */
 @Component({ templateUrl: 'add-edit.component.html' })
 export class AddEditComponent implements OnInit {
     form: FormGroup;

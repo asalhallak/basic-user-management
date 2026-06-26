@@ -3,6 +3,12 @@ import { first } from 'rxjs/operators';
 
 import { AccountService } from '../../services';
 
+/**
+ * Protected user list. Loads all users on init and supports inline delete with
+ * per-row loading state (`isDeleting`). API errors surface via `ErrorInterceptor`.
+ *
+ * @see docs/front-end-users.md
+ */
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
     users = null;
