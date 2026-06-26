@@ -9,7 +9,7 @@ On every push and pull request to `main`, [`.github/workflows/ci.yml`](../.githu
 | Step | Command | Purpose |
 |------|---------|---------|
 | Build API | `dotnet restore` + `dotnet build --no-restore` | Compile the .NET solution |
-| Test API | `dotnet test --no-build` | Run xUnit tests (`AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`) |
+| Test API | `dotnet test --no-build` | Run xUnit tests (`AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService`, HTTP integration tests with in-memory EF Core) |
 | Build front end | `npm ci` + `npm run build` | Production Angular build |
 | Test front end | `npm test -- --watch=false --browsers=ChromeHeadless` | Run Karma/Jasmine unit tests (`extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `HomeComponent`, `LoginComponent`, `AlertService`, `AccountService`) |
 
@@ -22,7 +22,7 @@ CI does **not**:
 - Start Docker or SQL Server
 - Apply EF Core migrations
 - Run `make verify` or other runtime smoke checks
-- Start the API or run integration tests against a live database
+- Run integration tests against a live SQL Server database (in-memory HTTP integration tests run via `dotnet test`)
 
 A green CI badge means the solution builds; it does not prove the stack runs end-to-end.
 

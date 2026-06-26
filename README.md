@@ -222,7 +222,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make run-frontend` | Run the Angular dev server with `npm start` (listens on `http://localhost:4200`) |
 | `make build-api` | Build the .NET solution |
 | `make build-frontend` | Production build of the Angular app |
-| `make test-api` | Run .NET unit tests (AuthController, UsersController, AuthService, JwtHelper, UsersService) |
+| `make test-api` | Run .NET unit and integration tests (AuthController, UsersController, AuthService, JwtHelper, UsersService, HTTP pipeline) |
 | `make test-frontend` | Run Angular unit tests once (ChromeHeadless; matches CI) |
 | `make test` | Run all unit tests (`test-api` then `test-frontend`; run after `make build`) |
 | `make build` | Build API and front end |
@@ -675,7 +675,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 │       └── services/           # API client & alerts
 └── UserManagementAPI/
     ├── UserManagement.API/           # Web API entry point
-    ├── UserManagement.API.Tests/     # xUnit tests (AuthController, UsersController, AuthService, JwtHelper, UsersService)
+    ├── UserManagement.API.Tests/     # xUnit tests (AuthController, UsersController, AuthService, JwtHelper, UsersService, ApiIntegrationTests)
     ├── UserManagement.Domain/        # Entities & interfaces
     └── UserManagement.DataAccess.EFCore/  # Persistence & migrations
 ```
@@ -690,11 +690,11 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD and duplicate-login checks.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD and duplicate-login checks, and HTTP integration tests for login, JWT protection, and users CRUD via `WebApplicationFactory` with an in-memory database.
 
 | Command | Location | Status |
 |---------|----------|--------|
-| `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, and `UsersService` CRUD/duplicate-login tests |
+| `dotnet test` | `UserManagementAPI/` | xUnit; includes `AuthController.Login`, `UsersController` CRUD/not-found/conflict mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD/duplicate-login tests, and HTTP integration tests (`ApiIntegrationTests`) |
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `make test` | repository root | Runs `test-api` then `test-frontend` (run after `make build`) |
@@ -728,7 +728,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 - ~~`UsersController` maps CRUD actions to `200 OK`, `404 NotFound`, and `409 Conflict`~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/UsersControllerTests.cs`
 - ~~Angular `AppComponent` shows the navbar when logged in and delegates logout~~ Fixed — see `front-end/src/app/app.component.spec.ts`
 - ~~Angular auth and users `LayoutComponent` shell behavior~~ Fixed — see `front-end/src/app/auth/layout.component.spec.ts` and `front-end/src/app/users/layout.component.spec.ts`
-- `UsersController` integration tests with an in-memory database or test container
+- ~~`UsersController` integration tests with an in-memory database or test container~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/ApiIntegrationTests.cs`
 
 ## Continuous integration
 
