@@ -122,25 +122,14 @@ On create, EF Core inserts the nested `Address` and links it via `Users.AddressI
 |--------|-------|------|--------------|---------------|
 | `POST` | `/api/v1/auth/login` | No | `Credentials` | `Claims` |
 | `GET` | `/api/v1/users` | Yes | — | `UserResource[]` |
-| `GET` | `/api/v1/users/{id}` | Yes | — | `UserResource` or `null` (see [api-errors.md](api-errors.md)) |
-| `POST` | `/api/v1/users` | Yes | `UserResource` | Domain `User` entity (see quirk below) |
+| `GET` | `/api/v1/users/{id}` | Yes | — | `UserResource` or `404 Not Found` (see [api-errors.md](api-errors.md)) |
+| `POST` | `/api/v1/users` | Yes | `UserResource` | `UserResource` (mapped from the created entity) |
 | `PUT` | `/api/v1/users/{id}` | Yes | `UserResource` | Empty `200 OK` body |
 | `DELETE` | `/api/v1/users/{id}` | Yes | — | Empty `200 OK` body |
 
 Per-endpoint controller and service flow: [api-users-crud.md](api-users-crud.md).
 
 ## Known quirks
-
-### POST returns a domain entity, not `UserResource`
-
-`UsersController.Add` returns `Ok(_user)` where `_user` is a `User` entity, not a mapped `UserResource`:
-
-```csharp
-var _user = _usersService.Add(_mapper.Map<User>(user));
-return Ok(_user);
-```
-
-JSON output is usually similar because property names align, but the serializer uses entity types (no `[JsonProperty]` attributes on entities). For a consistent API contract, map the outbound response with `_mapper.Map<UserResource>(_user)`. See [automapper-mapping.md](automapper-mapping.md) and [improvement-ideas.md](improvement-ideas.md).
 
 ### `loginName` vs `userName`
 
