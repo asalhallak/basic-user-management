@@ -8,6 +8,10 @@ import { extractHttpErrorMessage } from './error-message.util';
 
 export { extractHttpErrorMessage } from './error-message.util';
 
+/**
+ * Shows API errors via `AlertService` and logs the user out on session expiry (`401`/`403`).
+ * Re-throws a user-facing message so callers can reset local loading state.
+ */
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(

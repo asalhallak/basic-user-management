@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AccountService } from '../services';
 
+/** Attaches `Authorization: Bearer` to requests targeting `environment.apiUrl` when logged in. */
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     constructor(private accountService: AccountService) { }

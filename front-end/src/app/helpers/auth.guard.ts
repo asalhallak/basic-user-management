@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { AccountService } from '../services';
 
+/** Blocks unauthenticated navigation and redirects to login with `returnUrl`. */
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
