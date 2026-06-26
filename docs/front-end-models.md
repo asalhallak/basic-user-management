@@ -64,7 +64,8 @@ The **user list and editor** post the correct JSON shape directly. The **registe
 
 | Concern | File |
 |---------|------|
-| Legacy TypeScript model | `front-end/src/app/models/user.ts` |
+| Legacy TypeScript model (JSDoc on class and fields) | `front-end/src/app/models/user.ts` |
+| Alert toast model (JSDoc on class, fields, and `AlertType`) | `front-end/src/app/models/alert.ts` |
 | HTTP client (login, CRUD) | `front-end/src/app/services/account.service.ts` |
 | Login form | `front-end/src/app/auth/login/login.component.ts` |
 | Register form (legacy fields) | `front-end/src/app/auth/register/register.component.ts` |
