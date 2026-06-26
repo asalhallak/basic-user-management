@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout.component';
 import { ListComponent } from './list/list.component';
 import { AddEditComponent } from './add-edit/add-edit.component';
 
+/** Child routes under `/users`: list, create, and edit screens inside the users layout shell. */
 const routes: Routes = [
     {
         path: '', component: LayoutComponent,
@@ -16,6 +17,12 @@ const routes: Routes = [
     }
 ];
 
+/**
+ * Feature routing for {@link UsersModule} (`/users`, `/users/add`, `/users/edit/:id`).
+ *
+ * @see docs/angular-routing.md
+ * @see docs/front-end-users.md
+ */
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
