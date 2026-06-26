@@ -100,7 +100,7 @@ Barrel re-exports keep imports short:
 | Barrel | Exports |
 |--------|---------|
 | [`services/index.ts`](../front-end/src/app/services/index.ts) | `AccountService`, `AlertService` |
-| [`helpers/index.ts`](../front-end/src/app/helpers/index.ts) | `AuthGuard`, interceptors, `fakeBackendProvider` |
+| [`helpers/index.ts`](../front-end/src/app/helpers/index.ts) | `AuthGuard`, JWT/error interceptors, `extractHttpErrorMessage` |
 
 Feature modules import services from `'../services'` (or `'../../services'` from nested folders) without adding them to `providers`.
 
