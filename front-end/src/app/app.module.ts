@@ -9,6 +9,13 @@ import { AppComponent } from './app.component';
 import { AlertComponent } from './components';
 import { HomeComponent } from './home';
 
+/**
+ * Root Angular module bootstrapped in `main.ts`.
+ * Owns global HTTP interceptors, the shell components, and lazy route imports.
+ *
+ * @see docs/front-end-modules.md
+ * @see docs/front-end-interceptors.md
+ */
 @NgModule({
     imports: [
         BrowserModule,
@@ -27,4 +34,4 @@ import { HomeComponent } from './home';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { };
+export class AppModule { }

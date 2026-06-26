@@ -11,7 +11,6 @@ flowchart TB
         Home[HomeComponent]
         Alert[AlertComponent]
         Interceptors[JWT + Error interceptors]
-        Fake[fakeBackendProvider optional]
     end
 
     subgraph auth [AuthModule — lazy at /account]
@@ -56,7 +55,7 @@ Routing modules (`AppRoutingModule`, `AuthRoutingModule`, `UsersRoutingModule`) 
 |---------|----------|-------|
 | Browser bootstrap | `bootstrap: [AppComponent]` | Root shell with navbar and global `<alert>` |
 | HTTP client | `HttpClientModule` | Required for all API calls |
-| Global interceptors | `providers` in `app.module.ts` | `JwtInterceptor`, `ErrorInterceptor`, optional `fakeBackendProvider` — see [front-end-interceptors.md](front-end-interceptors.md) |
+| Global interceptors | `providers` in `app.module.ts` | `JwtInterceptor`, `ErrorInterceptor` — see [front-end-interceptors.md](front-end-interceptors.md) |
 | Top-level routes | `AppRoutingModule` | `/`, lazy `/users`, lazy `/account`, wildcard redirect |
 | Shared UI | `AlertComponent` | Rendered once in `app.component.html` — see [front-end-alerts.md](front-end-alerts.md) |
 
@@ -140,6 +139,19 @@ Example: a read-only `/reports` area.
 | Duplicate component name errors | Two `LayoutComponent` classes in the same module | Keep one layout per feature module; names can repeat across modules |
 | Route loads but template is blank | Missing `<router-outlet>` in feature `LayoutComponent` | Follow `auth/layout.component.html` or `users/layout.component.html` |
 | API calls hit fake routes | `fakeBackendProvider` still in `AppModule` | Remove from `app.module.ts` — [fake-backend.md](fake-backend.md) |
+
+## Source files (JSDoc)
+
+Module and routing entry points include JSDoc comments that link back to this page and related routing docs:
+
+| File | JSDoc summary |
+|------|---------------|
+| [`app.module.ts`](../front-end/src/app/app.module.ts) | Root module: interceptors, shell components, lazy imports |
+| [`app-routing.module.ts`](../front-end/src/app/app-routing.module.ts) | Top-level routes and lazy `loadChildren` factories |
+| [`auth/auth.module.ts`](../front-end/src/app/auth/auth.module.ts) | Lazy auth feature module (`/account/*`) |
+| [`auth/auth-routing.module.ts`](../front-end/src/app/auth/auth-routing.module.ts) | Login and register child routes |
+| [`users/users.module.ts`](../front-end/src/app/users/users.module.ts) | Lazy users feature module (`/users/*`) |
+| [`users/users-routing.module.ts`](../front-end/src/app/users/users-routing.module.ts) | List, add, and edit child routes |
 
 ## Related docs
 

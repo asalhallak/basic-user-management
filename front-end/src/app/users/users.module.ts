@@ -7,6 +7,12 @@ import { LayoutComponent } from './layout.component';
 import { ListComponent } from './list/list.component';
 import { AddEditComponent } from './add-edit/add-edit.component';
 
+/**
+ * Lazy-loaded user management feature module (`/users/*`).
+ *
+ * @see docs/front-end-modules.md
+ * @see docs/front-end-users.md
+ */
 @NgModule({
     imports: [
         CommonModule,

@@ -8,6 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {AuthRoutingModule} from "./auth-routing.module";
 
+/**
+ * Lazy-loaded login and register feature module (`/account/*`).
+ *
+ * @see docs/front-end-modules.md
+ * @see docs/front-end-login-register.md
+ */
 @NgModule({
     imports: [
         CommonModule,
