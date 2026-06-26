@@ -102,10 +102,17 @@ providers: [
 
 | File | Role |
 |------|------|
-| `front-end/src/app/helpers/fake-backend.ts` | `FakeBackendInterceptor` and `fakeBackendProvider` |
-| `front-end/src/app/app.module.ts` | Registers the provider alongside JWT and error interceptors |
+| `front-end/src/app/helpers/fake-backend.ts` | `FakeBackendInterceptor` and `fakeBackendProvider` (JSDoc on class and provider) |
+| `front-end/src/app/app.module.ts` | Registers `JwtInterceptor` and `ErrorInterceptor` only — does **not** register `fakeBackendProvider` |
 | `front-end/src/app/services/account.service.ts` | Real API client (uses `environment.apiUrl`) |
-| `front-end/src/app/helpers/index.ts` | Re-exports helpers including `fakeBackendProvider` |
+| `front-end/src/app/helpers/index.ts` | Re-exports `AuthGuard`, JWT/error interceptors, and `extractHttpErrorMessage` — **not** `fakeBackendProvider` |
+
+## Source files (JSDoc)
+
+| File | JSDoc summary |
+|------|---------------|
+| [`fake-backend.ts`](../front-end/src/app/helpers/fake-backend.ts) | Legacy interceptor: tutorial routes, `fake-jwt-token`, and `localStorage` user list |
+| [`fakeBackendProvider`](../front-end/src/app/helpers/fake-backend.ts) | Optional DI provider — import directly from this file to re-enable locally |
 
 ## Related docs
 

@@ -45,7 +45,7 @@ Files:
 |------|------|
 | [`app.component.ts`](../front-end/src/app/app.component.ts) | Subscribes to `AccountService.user` for navbar visibility; exposes `logout()` |
 | [`app.component.html`](../front-end/src/app/app.component.html) | Navbar, global `<alert>`, root `router-outlet`, tutorial credits |
-| [`app.module.ts`](../front-end/src/app/app.module.ts) | Declares `AppComponent`, `HomeComponent`, `AlertComponent`; registers interceptors and `fakeBackendProvider` — see [front-end-modules.md](front-end-modules.md) |
+| [`app.module.ts`](../front-end/src/app/app.module.ts) | Declares `AppComponent`, `HomeComponent`, `AlertComponent`; registers JWT and error interceptors — see [front-end-modules.md](front-end-modules.md) |
 
 ### Navbar
 
@@ -123,7 +123,6 @@ The legacy TypeScript `User` model in [`models/user.ts`](../front-end/src/app/mo
 |--------------|---------|
 | `JwtInterceptor` | Attach Bearer token to `environment.apiUrl` requests — [front-end-auth.md](front-end-auth.md) |
 | `ErrorInterceptor` | Auto-logout on `401`/`403` — [front-end-auth.md](front-end-auth.md) |
-| `fakeBackendProvider` | Optional tutorial mock API — remove for real API-only dev ([fake-backend.md](fake-backend.md)) |
 | `HomeComponent`, `AlertComponent` | Eager-loaded in root module |
 | `AuthModule`, `UsersModule` | Lazy-loaded via `AppRoutingModule` |
 
