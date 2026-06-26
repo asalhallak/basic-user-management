@@ -91,7 +91,7 @@ See [api-jwt-authentication.md](api-jwt-authentication.md) for token signing, va
 
 **File:** `UserManagementAPI/UserManagement.API/Services/UsersService.cs`
 
-**Purpose:** Orchestrate user CRUD through `IUnitOfWork`. Returns domain `User` entities; the controller maps them to `UserResource` DTOs on `GET` and `POST` responses.
+**Purpose:** Orchestrate user CRUD through `IUnitOfWork`. Returns domain `User` entities; the controller maps them to `UserResource` DTOs on `GET` and `POST` responses. Public methods include XML doc comments for IDE tooltips and generated API docs.
 
 ### Methods
 
