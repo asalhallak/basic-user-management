@@ -27,16 +27,29 @@ using UserManagementAPI.Services;
 
 namespace UserManagementAPI
 {
+    /// <summary>
+    /// Application composition root: registers DI services, JWT authentication, EF Core, and AutoMapper.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes startup with configuration from <c>appsettings.json</c>, environment variables, and user secrets.
+        /// </summary>
+        /// <param name="configuration">Application configuration (connection strings, JWT secret, etc.).</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Application configuration bound at startup.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Registers services for dependency injection: CORS, controllers, EF Core, AutoMapper, JWT bearer auth, and application services.
+        /// </summary>
+        /// <param name="services">The service collection to populate.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCorsOrigin();
@@ -70,7 +83,11 @@ namespace UserManagementAPI
             services.AddScoped<JwtHelper>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the HTTP request pipeline: CORS, HTTPS redirection (except in Testing), routing, authentication, authorization, and controller endpoints.
+        /// </summary>
+        /// <param name="app">The application builder.</param>
+        /// <param name="env">Hosting environment (Development, Testing, Production).</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
