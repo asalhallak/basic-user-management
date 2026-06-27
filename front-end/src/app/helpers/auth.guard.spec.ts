@@ -12,6 +12,10 @@ describe('AuthGuard', () => {
     const accountServiceStub = {
         get userValue(): User | null {
             return userValue;
+        },
+        isLoggedIn(): boolean {
+            const token = userValue?.token;
+            return typeof token === 'string' && token.length > 0;
         }
     };
 

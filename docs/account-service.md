@@ -47,11 +47,12 @@ On construction, the service reads `localStorage.getItem('user')` into a `Behavi
 
 | Method | Effect on session |
 |--------|-------------------|
+| `isLoggedIn()` | Returns `true` when `userValue.token` is a non-empty string — used by `AuthGuard`, `JwtInterceptor`, `ErrorInterceptor`, and `AppComponent` |
 | `login()` | Writes `{ userName, token }` to `localStorage`; emits on `user` |
 | `logout()` | Removes `user`; emits `null`; navigates to `/account/login` |
 | `update()` | If the updated row ID matches the logged-in user's `id`, merges params into stored `user` |
 
-The JWT interceptor reads `userValue.token` on every API request. The error interceptor calls `logout()` when a stored session receives `401` or `403`.
+The JWT interceptor calls `isLoggedIn()` before attaching headers. The error interceptor calls `logout()` when a logged-in session receives `401` or `403`.
 
 ## HTTP methods
 

@@ -23,7 +23,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
             const message = extractHttpErrorMessage(err);
 
-            if ([401, 403].includes(err.status) && this.accountService.userValue) {
+            if ([401, 403].includes(err.status) && this.accountService.isLoggedIn()) {
                 this.accountService.logout();
                 this.alertService.error('Your session has expired. Please log in again.');
             } else {

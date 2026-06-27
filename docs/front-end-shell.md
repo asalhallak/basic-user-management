@@ -50,7 +50,7 @@ Files:
 
 ### Navbar
 
-The dark Bootstrap navbar renders only when a user session exists (`*ngIf="user"`):
+The dark Bootstrap navbar renders only when `AccountService.isLoggedIn()` is true (`*ngIf="isLoggedIn"` on `AppComponent`):
 
 | Link | Target | Notes |
 |------|--------|-------|
