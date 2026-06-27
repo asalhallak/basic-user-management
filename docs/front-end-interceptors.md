@@ -40,9 +40,9 @@ API calls use full URLs like `http://localhost:5000/api/v1/...` (built from `env
 
 Source: `front-end/src/app/helpers/jwt.interceptor.ts`
 
-The interceptor reads the current session from `AccountService.userValue` (backed by `localStorage` key `user`). It clones the request when **both** conditions hold:
+The interceptor calls `AccountService.isLoggedIn()` (backed by `localStorage` key `user`) and clones the request when **both** conditions hold:
 
-1. `user.token` is a non-empty string (aligned with `AuthGuard` and `AccountService` startup validation).
+1. `isLoggedIn()` returns true (non-empty `token` on the stored session — same rule as `AuthGuard` and startup validation).
 2. `request.url.startsWith(environment.apiUrl)` (request targets this project's API).
 
 ```typescript
@@ -68,7 +68,7 @@ Source: `front-end/src/app/helpers/error.interceptor.ts`
 
 The interceptor wraps `next.handle(request)` with RxJS `catchError`:
 
-1. If the HTTP status is `401` or `403` **and** `AccountService.userValue` exists, call `logout()` (clears `localStorage` and navigates to `/account/login`) and show a session-expired message via `AlertService`.
+1. If the HTTP status is `401` or `403` **and** `AccountService.isLoggedIn()` returns true, call `logout()` (clears `localStorage` and navigates to `/account/login`) and show a session-expired message via `AlertService`.
 2. Otherwise, show the parsed error message via `AlertService.error()`.
 3. Log the raw error to the console.
 4. Re-throw a user-facing string via `extractHttpErrorMessage()` in `error-message.util.ts` (re-exported from `error.interceptor.ts`). The helper reads, in order: plain-text bodies, `{ message }` (for example `409 Conflict`), ASP.NET Core validation `errors` maps (`400 Bad Request`), then `title`, then `statusText`.
@@ -82,7 +82,7 @@ Form components no longer call `AlertService.error()` in their `subscribe({ erro
 | `400` / `404` / `409` / `500` | Any | Parsed error alert + re-throw | Reset `loading` or navigation as needed |
 | Network failure (`status === 0`) | Any | Alert + re-throw `statusText` | Reset local state if needed |
 
-**Note:** `AuthGuard` requires a non-empty `token` on the stored session (aligned with `JwtInterceptor` and `AccountService` startup validation) — not JWT expiry. An expired token still passes the guard until an API call returns `401` and this interceptor logs the user out.
+**Note:** `AuthGuard` and `JwtInterceptor` both delegate to `AccountService.isLoggedIn()` — they check for a non-empty stored `token`, not JWT expiry. An expired token still passes the guard until an API call returns `401` and this interceptor logs the user out.
 
 ## End-to-end example
 
