@@ -65,6 +65,10 @@ It is already removed from `AppModule`. The app calls the ASP.NET Core API exclu
 
 If `localStorage` contains a **corrupted** `user` entry (for example after manual edits in DevTools), older builds could fail during `AccountService` construction. The service now removes invalid JSON, non-object values, and objects missing a non-empty `token`, then starts logged out. If the UI is still blank, clear site data for `http://localhost:4200` and reload. See [account-service.md](account-service.md).
 
+### Why am I redirected to login even though `localStorage` has a `user` entry?
+
+`AuthGuard`, `JwtInterceptor`, and `AccountService` all require a **non-empty JWT string** on the stored session. A `user` object with a missing or empty `token` is treated as logged out: the guard redirects to `/account/login`, the JWT interceptor skips the `Authorization` header, and startup validation clears the entry from `localStorage`. Log in again or remove the stale `user` key in DevTools → Application → Local Storage. See [front-end-auth.md](front-end-auth.md) and [angular-routing.md](angular-routing.md).
+
 ### Why does `GET /api/v1/users` return `401` without a token?
 
 That is expected. Protected routes require `Authorization: Bearer <token>`. A `401` without a token means the API is up and JWT protection is working. Log in via `POST /api/v1/auth/login` or run `make token`.

@@ -76,4 +76,14 @@ describe('JwtInterceptor', () => {
         expect(req.request.headers.has('Authorization')).toBe(false);
         req.flush([]);
     });
+
+    it('does not add Authorization header when session has an empty token', () => {
+        userValue = { userName: 'admin', token: '' } as User;
+
+        http.get(`${environment.apiUrl}/api/v1/users`).subscribe();
+
+        const req = httpMock.expectOne(`${environment.apiUrl}/api/v1/users`);
+        expect(req.request.headers.has('Authorization')).toBe(false);
+        req.flush([]);
+    });
 });
