@@ -690,7 +690,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.isLoggedIn`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD and duplicate-login checks, and HTTP integration tests for login, JWT protection, and users CRUD via `WebApplicationFactory` with an in-memory database.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.isLoggedIn`, `AccountService.login`, `AccountService.logout`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD and duplicate-login checks, and HTTP integration tests for login, JWT protection, and users CRUD via `WebApplicationFactory` with an in-memory database.
 
 | Command | Location | Status |
 |---------|----------|--------|
@@ -698,7 +698,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `make test` | repository root | Runs `test-api` then `test-frontend` (run after `make build`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.isLoggedIn`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.isLoggedIn`, `AccountService.login`, `AccountService.logout`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
 
@@ -710,6 +710,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 - ~~`AuthService.Login` returns a token for valid credentials and `null` otherwise~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/AuthServiceTests.cs`
 - ~~`UsersService` CRUD and duplicate `loginName` checks~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/UsersServiceTests.cs`
 - ~~Angular `AccountService.login` maps the API response into local storage~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
+- ~~Angular `AccountService.logout` clears localStorage and navigates to login~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AccountService.update` syncs local storage when editing the logged-in user~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AccountService.getById` fetches a user without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
 - ~~Angular `AccountService.getAll` fetches the user list without changing the logged-in session~~ Fixed — see `front-end/src/app/services/account.service.spec.ts`
