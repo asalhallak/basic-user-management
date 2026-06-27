@@ -13,7 +13,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **Register page** | Angular form that posts to `POST /api/v1/users`. It requires an existing JWT—it is not public sign-up. See [front-end-login-register.md](front-end-login-register.md). |
 | **Fake backend** | Legacy tutorial HTTP interceptor in `helpers/fake-backend.ts` that simulated API routes in the browser. **Not registered** in `app.module.ts` — the app uses the real ASP.NET Core API. Clear stale `localStorage` if you see tutorial tokens (`fake-jwt-token`). See [fake-backend.md](fake-backend.md). |
 | **CORS** | Cross-Origin Resource Sharing — browser security requiring the API to allow requests from the Angular dev server origin (`http://localhost:4200`). Configured in `CorsOriginConfiguration.cs`. See [cors-configuration.md](cors-configuration.md). |
-| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. Requires a non-empty JWT in `AccountService.userValue` (not expiry). See [client-server-auth.md](client-server-auth.md), [angular-routing.md](angular-routing.md), [front-end-login-register.md](front-end-login-register.md), and [front-end-interceptors.md](front-end-interceptors.md). |
+| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. Requires `AccountService.isLoggedIn()` to return true (non-empty JWT; expiry is not checked). See [client-server-auth.md](client-server-auth.md), [angular-routing.md](angular-routing.md), [front-end-login-register.md](front-end-login-register.md), and [front-end-interceptors.md](front-end-interceptors.md). |
 
 ## API and data model
 
@@ -49,6 +49,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **Interceptor** | Angular `HTTP_INTERCEPTORS` chain: `JwtInterceptor` attaches the stored JWT to `environment.apiUrl` requests; `ErrorInterceptor` auto-logouts on `401`/`403` and re-throws error messages. See [front-end-interceptors.md](front-end-interceptors.md). |
 | **AlertService** | Pub/sub service for Bootstrap alert banners (`success`, `error`, etc.). Rendered by `<alert>` in `app.component.html`. See [front-end-alerts.md](front-end-alerts.md). |
 | **`AccountService`** | Angular singleton that calls auth and user CRUD endpoints, stores the JWT in `localStorage`, and exposes the current session. See [account-service.md](account-service.md). |
+| **`isLoggedIn()`** | `AccountService` helper that returns true when the stored session includes a non-empty JWT string. Shared by `AuthGuard`, `JwtInterceptor`, `ErrorInterceptor`, `AppComponent`, auth `LayoutComponent`, and `RegisterComponent`. |
 | **Users module** | Lazy-loaded Angular module at `/users` with list, add, and edit screens. See [front-end-users.md](front-end-users.md). |
 | **Auth module** | Lazy-loaded Angular module at `/account` with login and register forms. See [front-end-login-register.md](front-end-login-register.md). |
 | **NgModule** | Angular module boundary (`AppModule`, `AuthModule`, `UsersModule`). Root module registers interceptors; feature modules lazy-load on first navigation. See [front-end-modules.md](front-end-modules.md). |
