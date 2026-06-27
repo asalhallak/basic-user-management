@@ -94,11 +94,27 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 | ~~Fake backend~~ | ~~`fakeBackendProvider` intercepts legacy `/users/authenticate` routes~~ | Fixed — provider removed from `app.module.ts`; legacy code remains in `helpers/fake-backend.ts` for reference — [fake-backend.md](fake-backend.md) |
 | ~~No shared error UI~~ | ~~Each component called `AlertService.error()` locally~~ | Fixed — `ErrorInterceptor` shows global error toasts — see [front-end-alerts.md](front-end-alerts.md) |
 
+## Unit tests
+
+`front-end/src/app/services/account.service.spec.ts` covers session persistence, HTTP wiring, and logout behavior. Run with `npm test` in `front-end/` or `make test-frontend` from the repository root.
+
+| Area | What is verified |
+|------|------------------|
+| Session load | Corrupt JSON, non-object values, and sessions without a non-empty `token` are cleared on startup |
+| `isLoggedIn()` | Returns `true` only when `userValue.token` is a non-empty string |
+| `login()` | POSTs `{ userName, password }`, stores the API response in `localStorage`, and emits on `user` |
+| `logout()` | Removes `localStorage.user`, emits `null`, and navigates to `/account/login` |
+| `register()` / CRUD | HTTP method, URL, and body; read/delete/register do not change the logged-in session |
+| `update()` | Merges into `localStorage` only when editing the logged-in user's row |
+
+`AppComponent` and `ErrorInterceptor` delegate logout to `AccountService.logout()` — see `app.component.spec.ts` and `error.interceptor.spec.ts`.
+
 ## Related files
 
 | File | Role |
 |------|------|
 | `front-end/src/app/services/account.service.ts` | API client and session store |
+| `front-end/src/app/services/account.service.spec.ts` | Unit tests for session, login, logout, and CRUD |
 | `front-end/src/app/models/user.ts` | TypeScript `User` interface (partial vs API) |
 | `front-end/src/app/helpers/jwt.interceptor.ts` | Attaches Bearer token from `userValue` |
 | `front-end/src/app/helpers/error.interceptor.ts` | Auto-logout on auth errors |
