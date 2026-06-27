@@ -43,8 +43,9 @@ Files:
 
 | File | Role |
 |------|------|
+| [`index.html`](../front-end/src/index.html) | Browser tab title (`Basic User Management`) and Bootstrap CSS CDN |
 | [`app.component.ts`](../front-end/src/app/app.component.ts) | Subscribes to `AccountService.user` for navbar visibility; exposes `logout()` |
-| [`app.component.html`](../front-end/src/app/app.component.html) | Navbar, global `<alert>`, root `router-outlet`, tutorial credits |
+| [`app.component.html`](../front-end/src/app/app.component.html) | Navbar, global `<alert>`, root `router-outlet`, attribution link to the original tutorial |
 | [`app.module.ts`](../front-end/src/app/app.module.ts) | Declares `AppComponent`, `HomeComponent`, `AlertComponent`; registers JWT and error interceptors — see [front-end-modules.md](front-end-modules.md) |
 
 ### Navbar
