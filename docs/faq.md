@@ -61,6 +61,10 @@ Creating a user through the API or UI does not create a login account. To add re
 
 It is already removed from `AppModule`. The app calls the ASP.NET Core API exclusively. If you cloned an older version or still see tutorial tokens (`fake-jwt-token`) in DevTools, clear browser local storage for `http://localhost:4200`. The legacy interceptor source remains in `helpers/fake-backend.ts` for reference — see [fake-backend.md](fake-backend.md).
 
+### The Angular app shows a blank page on load — what happened?
+
+If `localStorage` contains a **corrupted** `user` entry (for example after manual edits in DevTools), older builds could fail during `AccountService` construction. The service now removes invalid JSON and starts logged out. If the UI is still blank, clear site data for `http://localhost:4200` and reload. See [account-service.md](account-service.md).
+
 ### Why does `GET /api/v1/users` return `401` without a token?
 
 That is expected. Protected routes require `Authorization: Bearer <token>`. A `401` without a token means the API is up and JWT protection is working. Log in via `POST /api/v1/auth/login` or run `make token`.

@@ -35,6 +35,24 @@ describe('AccountService', () => {
         configureService();
     });
 
+    it('clears corrupted localStorage and starts logged out', () => {
+        localStorage.setItem('user', '{invalid-json');
+        TestBed.resetTestingModule();
+        TestBed.configureTestingModule({
+            imports: [HttpClientTestingModule],
+            providers: [
+                AccountService,
+                { provide: Router, useValue: routerSpy }
+            ]
+        });
+
+        service = TestBed.inject(AccountService);
+        httpMock = TestBed.inject(HttpTestingController);
+
+        expect(service.userValue).toBeNull();
+        expect(localStorage.getItem('user')).toBeNull();
+    });
+
     afterEach(() => {
         httpMock.verify();
         localStorage.clear();

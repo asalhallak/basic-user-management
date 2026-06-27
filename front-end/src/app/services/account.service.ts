@@ -22,8 +22,23 @@ export class AccountService {
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.userSubject = new BehaviorSubject<User>(this.loadStoredUser());
         this.user = this.userSubject.asObservable();
+    }
+
+    /** Parses the persisted session; clears corrupt entries so the app can start logged out. */
+    private loadStoredUser(): User | null {
+        const raw = localStorage.getItem('user');
+        if (raw == null) {
+            return null;
+        }
+
+        try {
+            return JSON.parse(raw) as User;
+        } catch {
+            localStorage.removeItem('user');
+            return null;
+        }
     }
 
     /** Current session snapshot (or null when logged out). Used by guards and interceptors. */
