@@ -10,7 +10,7 @@ When changing local ports or credentials, update these together:
 |--------|-----------------|
 | SQL host port | `docker-compose.yml` (`ports`), `appsettings.json` (`DefaultConnection`) |
 | SA password | `docker-compose.yml` (`SA_PASSWORD`), `appsettings.json` (`DefaultConnection`) |
-| API port | `launchSettings.json`, script defaults (`API_URL`), `environment.ts` (`apiUrl`) |
+| API port | `launchSettings.json`, script defaults (`API_URL`), `environment.ts` and `environment.prod.ts` (`apiUrl`) |
 | JWT secret | `appsettings.json` (`JwtSecret`) only (front end does not sign tokens) |
 
 See [database.md](database.md) for connection-string details and [README — Configuration reference](../README.md#configuration-reference) for default values.
@@ -68,7 +68,7 @@ JWT lifetime (7 days) is set in code: `UserManagementAPI/UserManagement.API/Help
 | File | When used | Key setting |
 |------|-----------|-------------|
 | `front-end/src/environments/environment.ts` | `ng serve` / `npm start` | `apiUrl: 'http://localhost:5000'` |
-| `front-end/src/environments/environment.prod.ts` | `ng build` / `npm run build` | Production API URL |
+| `front-end/src/environments/environment.prod.ts` | `ng build` / `npm run build` | `apiUrl: 'http://localhost:5000'` (replace with your deployed API host before shipping) |
 
 The JWT interceptor (`helpers/jwt.interceptor.ts`) only attaches `Authorization` headers to requests whose URL starts with `environment.apiUrl`. See [front-end-auth.md](front-end-auth.md).
 
