@@ -109,7 +109,7 @@ The form maps legacy tutorial field names to `UserResource` JSON in `onSubmit()`
 ### Submit flow
 
 1. Same validation and alert clearing pattern as login.
-2. If no session exists (`!accountService.userValue`), redirect to `../login`.
+2. If `!accountService.isLoggedIn()`, redirect to `../login`.
 3. Map `{ username, firstName, lastName }` to `{ loginName, displayName, isActive: true }`.
 4. Call `accountService.register(body)`.
 5. On success, show `Registration successful` via `AlertService` with `{ keepAfterRouteChange: true }`, then navigate to `../login`.

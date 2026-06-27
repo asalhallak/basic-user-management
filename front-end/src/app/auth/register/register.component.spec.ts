@@ -13,7 +13,7 @@ describe('RegisterComponent', () => {
     let userValue: User | null = null;
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     const alertServiceSpy = jasmine.createSpyObj('AlertService', ['clear', 'success']);
-    const accountServiceSpy = jasmine.createSpyObj('AccountService', ['register']);
+    const accountServiceSpy = jasmine.createSpyObj('AccountService', ['register', 'isLoggedIn']);
     const activatedRouteStub = {} as ActivatedRoute;
 
     Object.defineProperty(accountServiceSpy, 'userValue', {
@@ -22,6 +22,7 @@ describe('RegisterComponent', () => {
 
     beforeEach(async () => {
         userValue = null;
+        accountServiceSpy.isLoggedIn.and.callFake(() => userValue != null && userValue.token?.length > 0);
         routerSpy.navigate.calls.reset();
         alertServiceSpy.clear.calls.reset();
         alertServiceSpy.success.calls.reset();
@@ -59,6 +60,16 @@ describe('RegisterComponent', () => {
     });
 
     it('redirects to login when the form is valid but no session exists', () => {
+        component.form.setValue(validForm);
+
+        component.onSubmit();
+
+        expect(routerSpy.navigate).toHaveBeenCalledWith(['../login'], { relativeTo: activatedRouteStub });
+        expect(accountServiceSpy.register).not.toHaveBeenCalled();
+    });
+
+    it('redirects to login when the form is valid but the session has an empty token', () => {
+        userValue = { userName: 'admin', token: '' } as User;
         component.form.setValue(validForm);
 
         component.onSubmit();

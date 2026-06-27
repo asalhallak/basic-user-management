@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
-        if (!this.accountService.userValue) {
+        if (!this.accountService.isLoggedIn()) {
             this.router.navigate(['../login'], { relativeTo: this.route });
             return;
         }

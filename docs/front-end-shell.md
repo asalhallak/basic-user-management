@@ -82,7 +82,7 @@ Lazy-loaded modules wrap their routes in a layout component with a nested outlet
 
 | File | Behavior |
 |------|----------|
-| [`auth/layout.component.ts`](../front-end/src/app/auth/layout.component.ts) | Redirects to `/` if `userValue` already exists (prevents login page while signed in) |
+| [`auth/layout.component.ts`](../front-end/src/app/auth/layout.component.ts) | Redirects to `/` when `isLoggedIn()` is true (prevents login page while signed in) |
 | [`auth/layout.component.html`](../front-end/src/app/auth/layout.component.html) | Centered column (`col-md-6 offset-md-3`) around nested `router-outlet` |
 
 Routes: `/account/login`, `/account/register`. No navbar until login succeeds and the root shell re-renders with a session.

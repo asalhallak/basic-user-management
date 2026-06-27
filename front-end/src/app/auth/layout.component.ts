@@ -15,8 +15,8 @@ export class LayoutComponent {
         private router: Router,
         private accountService: AccountService
     ) {
-        // redirect to home if already logged in
-        if (this.accountService.userValue) {
+        // redirect to home if already logged in (same rule as AuthGuard)
+        if (this.accountService.isLoggedIn()) {
             this.router.navigate(['/']);
         }
     }
