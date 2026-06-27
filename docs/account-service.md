@@ -43,7 +43,7 @@ flowchart LR
 
 ## Session management
 
-On construction, the service reads `localStorage.getItem('user')` into a `BehaviorSubject<User>`. Components subscribe via `accountService.user` or read the current value with `accountService.userValue`.
+On construction, the service reads `localStorage.getItem('user')` into a `BehaviorSubject<User>`. Missing keys start logged out; **invalid JSON is removed** so a corrupted tutorial session cannot crash the app on startup. Components subscribe via `accountService.user` or read the current value with `accountService.userValue`.
 
 | Method | Effect on session |
 |--------|-------------------|
