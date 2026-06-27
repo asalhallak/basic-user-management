@@ -148,8 +148,9 @@ sequenceDiagram
 | `front-end/src/app/app.module.ts` | Registers interceptor providers |
 | `front-end/src/app/helpers/jwt.interceptor.ts` | Attach Bearer token to API requests |
 | `front-end/src/app/helpers/error.interceptor.ts` | Auto-logout, global error alerts, and error re-throw |
+| `front-end/src/app/helpers/error-message.util.ts` | Parse ASP.NET Core error bodies for toast display |
 | `front-end/src/app/helpers/fake-backend.ts` | Legacy tutorial interceptor (not registered in `AppModule`) |
-| `front-end/src/app/helpers/index.ts` | Barrel exports for helpers |
+| `front-end/src/app/helpers/index.ts` | Barrel exports for guards, interceptors, and error helper |
 | `front-end/src/app/services/account.service.ts` | Builds API URLs; owns session used by interceptors |
 | `front-end/src/environments/environment.ts` | `apiUrl` gate for JWT attachment |
 

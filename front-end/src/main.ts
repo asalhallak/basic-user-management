@@ -1,3 +1,11 @@
+/**
+ * Angular browser bootstrap entry point.
+ *
+ * Loads polyfills, bootstraps `AppModule`, and stores the platform ref on `window.ngRef`
+ * so hot module reload can destroy the previous instance before re-bootstrapping.
+ *
+ * @see docs/front-end-modules.md
+ */
 import './polyfills';
 
 import { enableProdMode } from '@angular/core';

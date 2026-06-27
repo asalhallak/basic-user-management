@@ -101,6 +101,9 @@ Barrel re-exports keep imports short:
 |--------|---------|
 | [`services/index.ts`](../front-end/src/app/services/index.ts) | `AccountService`, `AlertService` |
 | [`helpers/index.ts`](../front-end/src/app/helpers/index.ts) | `AuthGuard`, JWT/error interceptors, `extractHttpErrorMessage` |
+| [`models/index.ts`](../front-end/src/app/models/index.ts) | `User`, `Alert`, `AlertType` |
+| [`components/index.ts`](../front-end/src/app/components/index.ts) | `AlertComponent` |
+| [`home/index.ts`](../front-end/src/app/home/index.ts) | `HomeComponent` |
 
 Feature modules import services from `'../services'` (or `'../../services'` from nested folders) without adding them to `providers`.
 
@@ -146,12 +149,18 @@ Module and routing entry points include JSDoc comments that link back to this pa
 
 | File | JSDoc summary |
 |------|---------------|
+| [`main.ts`](../front-end/src/main.ts) | Browser bootstrap; destroys prior platform ref on hot reload |
 | [`app.module.ts`](../front-end/src/app/app.module.ts) | Root module: interceptors, shell components, lazy imports |
 | [`app-routing.module.ts`](../front-end/src/app/app-routing.module.ts) | Top-level routes and lazy `loadChildren` factories |
 | [`auth/auth.module.ts`](../front-end/src/app/auth/auth.module.ts) | Lazy auth feature module (`/account/*`) |
 | [`auth/auth-routing.module.ts`](../front-end/src/app/auth/auth-routing.module.ts) | Login and register child routes |
 | [`users/users.module.ts`](../front-end/src/app/users/users.module.ts) | Lazy users feature module (`/users/*`) |
 | [`users/users-routing.module.ts`](../front-end/src/app/users/users-routing.module.ts) | List, add, and edit child routes |
+| [`services/index.ts`](../front-end/src/app/services/index.ts) | Barrel: root-scoped `AccountService`, `AlertService` |
+| [`helpers/index.ts`](../front-end/src/app/helpers/index.ts) | Barrel: guards, interceptors, `extractHttpErrorMessage` |
+| [`models/index.ts`](../front-end/src/app/models/index.ts) | Barrel: `User`, `Alert`, `AlertType` |
+| [`components/index.ts`](../front-end/src/app/components/index.ts) | Barrel: global `AlertComponent` |
+| [`home/index.ts`](../front-end/src/app/home/index.ts) | Barrel: authenticated `HomeComponent` |
 
 ## Related docs
 
