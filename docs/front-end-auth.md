@@ -75,7 +75,7 @@ The JWT interceptor only attaches headers to requests aimed at the configured AP
 
 `AuthGuard` (`helpers/auth.guard.ts`) protects `/` and `/users/*`:
 
-- If `localStorage` contains a `user` object, navigation proceeds.
+- If `AccountService.userValue` includes a non-empty JWT (`token`), navigation proceeds.
 - Otherwise the user is redirected to `/account/login?returnUrl=<attempted path>`.
 
 Public routes live under `/account` (login and register). Route tables are listed in [code-map.md — Angular routes](code-map.md#angular-routes). For lazy loading, layout components, and the full navigation flow, see [angular-routing.md](angular-routing.md).

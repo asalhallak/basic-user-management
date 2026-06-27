@@ -82,7 +82,7 @@ Form components no longer call `AlertService.error()` in their `subscribe({ erro
 | `400` / `404` / `409` / `500` | Any | Parsed error alert + re-throw | Reset `loading` or navigation as needed |
 | Network failure (`status === 0`) | Any | Alert + re-throw `statusText` | Reset local state if needed |
 
-**Note:** `AuthGuard` checks only that a `user` object exists in `localStorage` — not JWT expiry. An expired token still passes the guard until an API call returns `401` and this interceptor logs the user out.
+**Note:** `AuthGuard` requires a non-empty `token` on the stored session (aligned with `JwtInterceptor` and `AccountService` startup validation) — not JWT expiry. An expired token still passes the guard until an API call returns `401` and this interceptor logs the user out.
 
 ## End-to-end example
 

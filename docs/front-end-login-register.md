@@ -129,9 +129,9 @@ For an API-aligned create flow, use **Users → Add** (`/users/add`) instead —
 
 ## AuthGuard interaction
 
-Login and register routes are **public** (no `canActivate: [AuthGuard]`). Protected routes (`/`, `/users/*`) redirect here when `AccountService.userValue` is missing.
+Login and register routes are **public** (no `canActivate: [AuthGuard]`). Protected routes (`/`, `/users/*`) redirect here when `AccountService.userValue` is missing or has no non-empty `token`.
 
-The guard checks only that a `user` object exists in `localStorage` — it does **not** decode or validate JWT expiry. An expired token still passes the guard until an API call returns `401` and `ErrorInterceptor` logs the user out.
+The guard requires a stored JWT string but does **not** decode or validate expiry. An expired token still passes the guard until an API call returns `401` and `ErrorInterceptor` logs the user out.
 
 ## AccountService calls
 
