@@ -86,7 +86,7 @@ The solution follows a classic layered layout:
 ## Prerequisites
 
 - [.NET SDK 3.1+](https://dotnet.microsoft.com/download)
-- [Node.js 12+](https://nodejs.org/) and npm (Node **16** recommended; see `.nvmrc` and [Troubleshooting](#troubleshooting))
+- [Node.js 16](https://nodejs.org/) and npm (see `.nvmrc`; Node 17+ may require `NODE_OPTIONS=--openssl-legacy-provider` — see [Troubleshooting](#troubleshooting))
 - [Docker](https://www.docker.com/) (for the database)
 - [curl](https://curl.se/) (for smoke checks and API examples)
 - [dotnet-ef](https://learn.microsoft.com/en-us/ef/core/cli/dotnet) global tool (for migrations)
