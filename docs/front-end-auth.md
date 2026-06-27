@@ -64,7 +64,7 @@ Registered in `front-end/src/app/app.module.ts` (order matters — JWT runs befo
 
 | Interceptor | File | Behavior |
 |-------------|------|----------|
-| `JwtInterceptor` | `helpers/jwt.interceptor.ts` | If `localStorage.user.token` exists and the request URL starts with `environment.apiUrl`, adds `Authorization: Bearer <token>` |
+| `JwtInterceptor` | `helpers/jwt.interceptor.ts` | When `AccountService.userValue.token` is a non-empty string and the request URL starts with `environment.apiUrl`, adds `Authorization: Bearer <token>` |
 | `ErrorInterceptor` | `helpers/error.interceptor.ts` | On `401` or `403` with a stored user, calls `logout()` and shows a session-expired alert; all HTTP errors show a global toast via `AlertService` |
 
 See [front-end-alerts.md](front-end-alerts.md) for how error messages are parsed and displayed.

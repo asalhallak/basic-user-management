@@ -31,7 +31,7 @@ Source files:
 flowchart TD
     Visit[Browser navigates to URL]
     Guard{AuthGuard on route?}
-    HasUser{user in localStorage?}
+    HasUser{non-empty JWT in session?}
     Login["/account/login?returnUrl=..."]
     Component[Render target component]
     Wildcard["/** → redirect to /"]

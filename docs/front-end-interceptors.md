@@ -42,7 +42,7 @@ Source: `front-end/src/app/helpers/jwt.interceptor.ts`
 
 The interceptor reads the current session from `AccountService.userValue` (backed by `localStorage` key `user`). It clones the request when **both** conditions hold:
 
-1. `user.token` is present (user is logged in).
+1. `user.token` is a non-empty string (aligned with `AuthGuard` and `AccountService` startup validation).
 2. `request.url.startsWith(environment.apiUrl)` (request targets this project's API).
 
 ```typescript
