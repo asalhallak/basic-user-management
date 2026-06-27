@@ -698,7 +698,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 | `make test-api` | repository root | Same xUnit run as CI (run after `make build-api`) |
 | `make test-frontend` | repository root | Same headless Karma run as CI |
 | `make test` | repository root | Runs `test-api` then `test-frontend` (run after `make build`) |
-| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
+| `npm test` | `front-end/` | Karma/Jasmine; includes unit tests for `extractHttpErrorMessage`, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.isLoggedIn`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete` (run `npm test -- --watch=false --browsers=ChromeHeadless` in CI-like environments) |
 | `npm run lint` | `front-end/` | TSLint available |
 | `npm run e2e` | `front-end/` | Protractor configured; no e2e specs present |
 
