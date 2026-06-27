@@ -209,7 +209,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | Target | What it does |
 |--------|----------------|
 | `make help` | List all targets |
-| `make check-deps` | Verify Docker, .NET, Node.js, and npm are on PATH |
+| `make check-deps` | Verify Docker, .NET, Node.js, npm, and curl are on PATH |
 | `make install` | Run `npm install`, `dotnet restore`, and install `dotnet-ef` if missing |
 | `make install-ef` | Install the `dotnet-ef` global tool (required for migrations) |
 | `make setup` | Start the database and apply migrations (first-time setup) |
@@ -226,7 +226,7 @@ The repository root includes a `Makefile` that wraps the commands above for day-
 | `make test-frontend` | Run Angular unit tests once (ChromeHeadless; matches CI) |
 | `make test` | Run all unit tests (`test-api` then `test-frontend`; run after `make build`) |
 | `make build` | Build API and front end |
-| `make ci` | Run CI-equivalent builds (`dotnet restore/build` + `npm ci` + `npm run build`) |
+| `make ci` | Run CI-equivalent build and test steps (`dotnet restore/build/test` + `npm ci` + `npm run build` + headless `npm test`; no database required) |
 | `make clean` | Remove .NET `bin`/`obj` folders and the Angular `dist` output |
 | `make status` | Show whether the database, API, and front end are running |
 | `make verify` | Run `./scripts/verify-stack.sh` (full stack) |
@@ -690,7 +690,7 @@ curl -s -X DELETE http://localhost:5000/api/v1/users/{id} \
 
 ## Testing
 
-Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD and duplicate-login checks, and HTTP integration tests for login, JWT protection, and users CRUD via `WebApplicationFactory` with an in-memory database.
+Automated coverage is limited but growing: CI and `make ci` run headless Karma/Jasmine unit tests for the Angular `extractHttpErrorMessage` helper, `JwtInterceptor`, `ErrorInterceptor`, `AuthGuard`, `AppComponent`, auth and users `LayoutComponent`, `HomeComponent`, `LoginComponent`, `RegisterComponent`, `AddEditComponent`, `ListComponent`, `AlertComponent`, `AlertService`, `AccountService.isLoggedIn`, `AccountService.login`, `AccountService.register`, `AccountService.update`, `AccountService.getById`, `AccountService.getAll`, and `AccountService.delete`, plus xUnit tests for `AuthController.Login`, `UsersController` CRUD and HTTP status mapping, `AuthService.Login`, `JwtHelper.GenerateToken`, `UsersService` CRUD and duplicate-login checks, and HTTP integration tests for login, JWT protection, and users CRUD via `WebApplicationFactory` with an in-memory database.
 
 | Command | Location | Status |
 |---------|----------|--------|

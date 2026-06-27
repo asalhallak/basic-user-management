@@ -81,10 +81,12 @@ flowchart LR
     subgraph ci [GitHub Actions CI]
         Restore[dotnet restore]
         BuildApi[dotnet build]
+        TestApi[dotnet test]
         NpmCi[npm ci]
         BuildFe[npm run build]
         TestFe[npm test headless]
         Restore --> BuildApi
+        BuildApi --> TestApi
         NpmCi --> BuildFe
         BuildFe --> TestFe
     end
