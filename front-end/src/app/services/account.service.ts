@@ -61,6 +61,12 @@ export class AccountService {
         return this.userSubject.value;
     }
 
+    /** True when the stored session includes a non-empty JWT string. Shared by AuthGuard and JwtInterceptor. */
+    public isLoggedIn(): boolean {
+        const token = this.userValue?.token;
+        return typeof token === 'string' && token.length > 0;
+    }
+
     /** POST /api/v1/auth/login — stores `{ userName, token }` in localStorage on success. */
     login(userName: string, password: string) {
         return this.http.post<User>(`${environment.apiUrl}/api/v1/auth/login`, { userName, password })

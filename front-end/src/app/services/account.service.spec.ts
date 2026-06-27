@@ -69,6 +69,22 @@ describe('AccountService', () => {
         expectInvalidStoredUserClearsSession('{"userName":"admin","token":""}');
     });
 
+    it('isLoggedIn returns true when a non-empty token is stored', () => {
+        configureService({ userName: 'admin', token: 'jwt-token' } as User);
+
+        expect(service.isLoggedIn()).toBe(true);
+    });
+
+    it('isLoggedIn returns false when logged out', () => {
+        expect(service.isLoggedIn()).toBe(false);
+    });
+
+    it('isLoggedIn returns false when the stored session has an empty token', () => {
+        configureService({ userName: 'admin', token: '' } as User);
+
+        expect(service.isLoggedIn()).toBe(false);
+    });
+
     afterEach(() => {
         httpMock.verify();
         localStorage.clear();

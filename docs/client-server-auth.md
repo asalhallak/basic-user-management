@@ -39,8 +39,7 @@ flowchart LR
 `AuthGuard` (`front-end/src/app/helpers/auth.guard.ts`) runs before protected routes (`/` and `/users/*`):
 
 ```typescript
-const user = this.accountService.userValue;
-if (user?.token) {
+if (this.accountService.isLoggedIn()) {
     return true;
 }
 this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url }});

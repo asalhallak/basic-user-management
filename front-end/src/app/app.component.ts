@@ -17,6 +17,11 @@ export class AppComponent {
         this.accountService.user.subscribe(x => this.user = x);
     }
 
+    /** Mirrors `AccountService.isLoggedIn()` for navbar and layout styling. */
+    get isLoggedIn(): boolean {
+        return this.accountService.isLoggedIn();
+    }
+
     logout() {
         this.accountService.logout();
     }

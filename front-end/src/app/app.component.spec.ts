@@ -28,6 +28,11 @@ describe('AppComponent', () => {
                     provide: AccountService,
                     useValue: {
                         user: userSubject.asObservable(),
+                        isLoggedIn: () => {
+                            const user = userSubject.value;
+                            const token = user?.token;
+                            return typeof token === 'string' && token.length > 0;
+                        },
                         logout: logoutSpy
                     }
                 }
@@ -59,6 +64,15 @@ describe('AppComponent', () => {
 
     it('hides the navbar when logged out', () => {
         userSubject.next(null);
+
+        fixture = TestBed.createComponent(AppComponent);
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('nav.navbar')).toBeNull();
+    });
+
+    it('hides the navbar when session has an empty token', () => {
+        userSubject.next({ userName: 'admin', token: '' } as User);
 
         fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();

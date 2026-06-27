@@ -64,7 +64,7 @@ Registered in `front-end/src/app/app.module.ts` (order matters — JWT runs befo
 
 | Interceptor | File | Behavior |
 |-------------|------|----------|
-| `JwtInterceptor` | `helpers/jwt.interceptor.ts` | When `AccountService.userValue.token` is a non-empty string and the request URL starts with `environment.apiUrl`, adds `Authorization: Bearer <token>` |
+| `JwtInterceptor` | `helpers/jwt.interceptor.ts` | When `AccountService.isLoggedIn()` is true and the request URL starts with `environment.apiUrl`, adds `Authorization: Bearer <token>` |
 | `ErrorInterceptor` | `helpers/error.interceptor.ts` | On `401` or `403` with a stored user, calls `logout()` and shows a session-expired alert; all HTTP errors show a global toast via `AlertService` |
 
 See [front-end-alerts.md](front-end-alerts.md) for how error messages are parsed and displayed.
@@ -75,7 +75,7 @@ The JWT interceptor only attaches headers to requests aimed at the configured AP
 
 `AuthGuard` (`helpers/auth.guard.ts`) protects `/` and `/users/*`:
 
-- If `AccountService.userValue` includes a non-empty JWT (`token`), navigation proceeds.
+- If `AccountService.isLoggedIn()` returns true, navigation proceeds.
 - Otherwise the user is redirected to `/account/login?returnUrl=<attempted path>`.
 
 Public routes live under `/account` (login and register). Route tables are listed in [code-map.md — Angular routes](code-map.md#angular-routes). For lazy loading, layout components, and the full navigation flow, see [angular-routing.md](angular-routing.md).
