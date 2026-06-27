@@ -35,8 +35,8 @@ describe('AccountService', () => {
         configureService();
     });
 
-    it('clears corrupted localStorage and starts logged out', () => {
-        localStorage.setItem('user', '{invalid-json');
+    const expectInvalidStoredUserClearsSession = (storedValue: string) => {
+        localStorage.setItem('user', storedValue);
         TestBed.resetTestingModule();
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
@@ -51,6 +51,22 @@ describe('AccountService', () => {
 
         expect(service.userValue).toBeNull();
         expect(localStorage.getItem('user')).toBeNull();
+    };
+
+    it('clears corrupted localStorage and starts logged out', () => {
+        expectInvalidStoredUserClearsSession('{invalid-json');
+    });
+
+    it('clears non-object localStorage values and starts logged out', () => {
+        expectInvalidStoredUserClearsSession('"not-a-session"');
+    });
+
+    it('clears stored sessions without a token and starts logged out', () => {
+        expectInvalidStoredUserClearsSession('{"userName":"admin"}');
+    });
+
+    it('clears stored sessions with an empty token and starts logged out', () => {
+        expectInvalidStoredUserClearsSession('{"userName":"admin","token":""}');
     });
 
     afterEach(() => {

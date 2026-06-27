@@ -34,11 +34,26 @@ export class AccountService {
         }
 
         try {
-            return JSON.parse(raw) as User;
+            const parsed = JSON.parse(raw);
+            if (!this.isStoredSession(parsed)) {
+                localStorage.removeItem('user');
+                return null;
+            }
+            return parsed;
         } catch {
             localStorage.removeItem('user');
             return null;
         }
+    }
+
+    /** Requires a plain object with a non-empty JWT string from login. */
+    private isStoredSession(value: unknown): value is User {
+        if (value == null || typeof value !== 'object' || Array.isArray(value)) {
+            return false;
+        }
+
+        const token = (value as User).token;
+        return typeof token === 'string' && token.length > 0;
     }
 
     /** Current session snapshot (or null when logged out). Used by guards and interceptors. */
