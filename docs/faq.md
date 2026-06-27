@@ -63,7 +63,7 @@ It is already removed from `AppModule`. The app calls the ASP.NET Core API exclu
 
 ### The Angular app shows a blank page on load — what happened?
 
-If `localStorage` contains a **corrupted** `user` entry (for example after manual edits in DevTools), older builds could fail during `AccountService` construction. The service now removes invalid JSON and starts logged out. If the UI is still blank, clear site data for `http://localhost:4200` and reload. See [account-service.md](account-service.md).
+If `localStorage` contains a **corrupted** `user` entry (for example after manual edits in DevTools), older builds could fail during `AccountService` construction. The service now removes invalid JSON, non-object values, and objects missing a non-empty `token`, then starts logged out. If the UI is still blank, clear site data for `http://localhost:4200` and reload. See [account-service.md](account-service.md).
 
 ### Why does `GET /api/v1/users` return `401` without a token?
 
