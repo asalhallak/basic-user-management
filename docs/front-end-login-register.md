@@ -149,7 +149,7 @@ After login, `localStorage` stores `{ userName, token }`. See [account-service.m
 | Register requires login | Protected `POST /users` from a public route | Document flow (this page) or redesign as admin-only |
 | Guard ignores token expiry | Stale JWT in storage still unlocks routes | Optional client-side expiry check in `AuthGuard` |
 | Login form control name | Template uses `username`; JSON body sends `userName` | Fixed — `AccountService.login()` posts `{ userName, password }`; see [account-service.md](account-service.md) |
-| Fake backend | May intercept legacy tutorial routes | Remove `fakeBackendProvider` from `app.module.ts` — [fake-backend.md](fake-backend.md) |
+| Fake backend | Legacy interceptor only runs if you re-add `fakeBackendProvider` to `app.module.ts` | Default `AppModule` uses the real API; clear tutorial keys from `localStorage` if needed — [fake-backend.md](fake-backend.md) |
 
 See [improvement-ideas.md](improvement-ideas.md) for contribution starting points.
 

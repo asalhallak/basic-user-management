@@ -141,7 +141,7 @@ Example: a read-only `/reports` area.
 | `NullInjectorError: No provider for HttpClient` | Feature module used without `AppModule` importing `HttpClientModule` | Keep `HttpClientModule` in `AppModule` imports |
 | Duplicate component name errors | Two `LayoutComponent` classes in the same module | Keep one layout per feature module; names can repeat across modules |
 | Route loads but template is blank | Missing `<router-outlet>` in feature `LayoutComponent` | Follow `auth/layout.component.html` or `users/layout.component.html` |
-| API calls hit fake routes | `fakeBackendProvider` still in `AppModule` | Remove from `app.module.ts` — [fake-backend.md](fake-backend.md) |
+| API calls hit fake routes | `fakeBackendProvider` re-enabled locally or stale tutorial `localStorage` | Confirm `app.module.ts` registers only JWT/error interceptors; clear site data — [fake-backend.md](fake-backend.md) |
 
 ## Source files (JSDoc)
 

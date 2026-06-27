@@ -86,7 +86,7 @@ Public routes live under `/account` (login and register). Route tables are liste
 |---------|--------------|-----|
 | API calls lack `Authorization` header | Not logged in, or `apiUrl` mismatch | Log in; confirm `environment.apiUrl` matches the running API |
 | Sudden redirect to login | Token expired or invalid | Log in again (tokens last 7 days) |
-| Login works in REST Client but not UI | `fakeBackendProvider` still enabled or stale `localStorage` | Remove it from `app.module.ts` (see [fake-backend.md](fake-backend.md), [code-map.md](code-map.md)) |
+| Login works in REST Client but not UI | Stale tutorial `localStorage` or `fakeBackendProvider` re-enabled for debugging | Clear site data for `http://localhost:4200`; confirm `app.module.ts` does not register `fakeBackendProvider` — [fake-backend.md](fake-backend.md), [code-map.md](code-map.md) |
 | Register returns `401` | User endpoints require JWT | Log in first; register is not public sign-up |
 
 ## Related files
