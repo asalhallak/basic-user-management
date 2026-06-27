@@ -48,7 +48,7 @@ return false;
 
 | Check | What it validates | What it does **not** validate |
 |-------|-------------------|-------------------------------|
-| Non-empty `token` on `userValue` | A JWT string is present in the stored session (same rule as `JwtInterceptor`) | JWT signature, expiry, or claim contents |
+| `AccountService.isLoggedIn()` | A non-empty JWT string is present in the stored session (same rule as `JwtInterceptor` and `ErrorInterceptor`) | JWT signature, expiry, or claim contents |
 
 An expired or tampered token still passes the guard until an API call fails. See [front-end-login-register.md — AuthGuard interaction](front-end-login-register.md#authguard-interaction) and [angular-routing.md](angular-routing.md).
 
@@ -74,7 +74,7 @@ Without a stored token, protected API calls go out **without** the header and th
 
 ### ErrorInterceptor (inbound failures)
 
-On `401` or `403` when a user object exists, the interceptor calls `AccountService.logout()` and re-throws the error. That redirects to login and clears stale sessions after token expiry or revocation.
+On `401` or `403` when `AccountService.isLoggedIn()` returns true, the interceptor calls `AccountService.logout()` and re-throws the error. That redirects to login and clears stale sessions after token expiry or revocation.
 
 ## Server-side protection
 
