@@ -48,7 +48,7 @@ flowchart TD
 
 ### Protected routes
 
-`AuthGuard` checks `AccountService.userValue` (backed by `localStorage`). If no session exists, the guard redirects to `/account/login` and preserves the intended URL in a `returnUrl` query parameter:
+`AuthGuard` checks `AccountService.userValue` for a non-empty JWT (`token`). If no valid session exists, the guard redirects to `/account/login` and preserves the intended URL in a `returnUrl` query parameter:
 
 ```typescript
 this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url }});

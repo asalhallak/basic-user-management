@@ -13,7 +13,7 @@ Short definitions for terms used across the README, API, Angular app, and script
 | **Register page** | Angular form that posts to `POST /api/v1/users`. It requires an existing JWT—it is not public sign-up. See [front-end-login-register.md](front-end-login-register.md). |
 | **Fake backend** | Legacy tutorial HTTP interceptor in `helpers/fake-backend.ts` that simulated API routes in the browser. **Not registered** in `app.module.ts` — the app uses the real ASP.NET Core API. Clear stale `localStorage` if you see tutorial tokens (`fake-jwt-token`). See [fake-backend.md](fake-backend.md). |
 | **CORS** | Cross-Origin Resource Sharing — browser security requiring the API to allow requests from the Angular dev server origin (`http://localhost:4200`). Configured in `CorsOriginConfiguration.cs`. See [cors-configuration.md](cors-configuration.md). |
-| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. Checks `localStorage` only—not JWT expiry. See [client-server-auth.md](client-server-auth.md), [angular-routing.md](angular-routing.md), [front-end-login-register.md](front-end-login-register.md), and [front-end-interceptors.md](front-end-interceptors.md). |
+| **AuthGuard** | Angular route guard that redirects unauthenticated visitors to `/account/login` with a `returnUrl` query parameter. Requires a non-empty JWT in `AccountService.userValue` (not expiry). See [client-server-auth.md](client-server-auth.md), [angular-routing.md](angular-routing.md), [front-end-login-register.md](front-end-login-register.md), and [front-end-interceptors.md](front-end-interceptors.md). |
 
 ## API and data model
 

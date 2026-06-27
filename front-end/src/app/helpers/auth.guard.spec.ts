@@ -49,4 +49,14 @@ describe('AuthGuard', () => {
             { queryParams: { returnUrl: '/users/add' } }
         );
     });
+
+    it('redirects to login when session exists without a token', () => {
+        userValue = { userName: 'admin' } as User;
+
+        expect(guard.canActivate(route, state)).toBe(false);
+        expect(routerSpy.navigate).toHaveBeenCalledWith(
+            ['/account/login'],
+            { queryParams: { returnUrl: '/users/add' } }
+        );
+    });
 });

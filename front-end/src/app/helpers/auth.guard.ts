@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 import { AccountService } from '../services';
 
-/** Blocks unauthenticated navigation and redirects to login with `returnUrl`. */
+/** Blocks unauthenticated navigation and redirects to login with `returnUrl`. Requires a non-empty JWT on the stored session. */
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const user = this.accountService.userValue;
-        if (user) {
+        if (user?.token) {
             // authorised so return true
             return true;
         }

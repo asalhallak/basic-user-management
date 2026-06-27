@@ -40,7 +40,7 @@ flowchart LR
 
 ```typescript
 const user = this.accountService.userValue;
-if (user) {
+if (user?.token) {
     return true;
 }
 this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url }});
@@ -49,7 +49,7 @@ return false;
 
 | Check | What it validates | What it does **not** validate |
 |-------|-------------------|-------------------------------|
-| `userValue` present | A `user` object exists in `localStorage` | JWT signature, expiry, or claim contents |
+| Non-empty `token` on `userValue` | A JWT string is present in the stored session (same rule as `JwtInterceptor`) | JWT signature, expiry, or claim contents |
 
 An expired or tampered token still passes the guard until an API call fails. See [front-end-login-register.md — AuthGuard interaction](front-end-login-register.md#authguard-interaction) and [angular-routing.md](angular-routing.md).
 
