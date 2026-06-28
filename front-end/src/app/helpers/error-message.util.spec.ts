@@ -75,4 +75,9 @@ describe('extractHttpErrorMessage', () => {
         });
         expect(extractHttpErrorMessage(err)).toBe('Validation failed');
     });
+
+    it('falls back to statusText when the error body is an empty object', () => {
+        const err = new HttpErrorResponse({ error: {}, status: 502, statusText: 'Bad Gateway' });
+        expect(extractHttpErrorMessage(err)).toBe('Bad Gateway');
+    });
 });

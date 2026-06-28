@@ -762,6 +762,7 @@ This restores and builds the API, runs API unit tests, then runs `npm ci`, a pro
 | Register fails with `401` | User endpoints require a JWT | Log in first; register is not a public endpoint (see [Authentication vs user data](#authentication-vs-user-data)) |
 | `dotnet ef` command not found | EF Core CLI tool not installed | Run `make install-ef` or `dotnet tool install --global dotnet-ef` |
 | `npm run build` fails with OpenSSL error on Node 17+ | Angular 11 Webpack incompatibility | Use Node.js 16 (as in CI), or run `NODE_OPTIONS=--openssl-legacy-provider npm run build` |
+| `dotnet test` fails with `libssl.so.1.1` on Ubuntu 22.04+ | .NET Core 3.1 test host requires libssl1.1 | See [docs/ci-and-builds.md](docs/ci-and-builds.md#net-core-31-and-openssl-on-ubuntu) and the install step in [`.github/workflows/ci.yml`](.github/workflows/ci.yml) |
 
 **Reset the database completely:**
 
