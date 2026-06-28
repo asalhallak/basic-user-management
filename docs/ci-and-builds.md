@@ -15,6 +15,22 @@ On every push and pull request to `main`, [`.github/workflows/ci.yml`](../.githu
 
 The workflow uses **.NET SDK 3.1.x** and **Node.js 16** (matching [`.nvmrc`](../.nvmrc)).
 
+### .NET Core 3.1 and OpenSSL on Ubuntu
+
+GitHub Actions runners use Ubuntu 22.04+, which ships OpenSSL 3.x. The .NET Core 3.1 test host still depends on **libssl1.1**, so CI installs it before `dotnet test`:
+
+```yaml
+# .github/workflows/ci.yml (excerpt)
+- name: Install libssl1.1 for .NET Core 3.1 test host
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y wget
+    wget -q http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+    sudo dpkg -i libssl1.1_1.1.1f-1ubuntu2_amd64.deb
+```
+
+If `make test-api` or `dotnet test` fails locally on Ubuntu 22.04+ with a missing `libssl.so.1.1` or similar OpenSSL error, install the same package (or run tests in a container/VM with libssl1.1 available). Upgrading the solution to a newer .NET target would remove this dependency long term.
+
 ## What CI does not run
 
 CI does **not**:
@@ -70,6 +86,7 @@ If CI passes locally with `make ci` but `make build` fails, run `npm ci` in `fro
 | Symptom | Likely cause | Fix |
 |---------|--------------|-----|
 | `dotnet build` errors | API compile or package issues | Run `make build-api` locally and fix reported errors |
+| `dotnet test` fails with `libssl.so.1.1` / OpenSSL errors on Ubuntu 22.04+ | .NET Core 3.1 test host needs libssl1.1 | Install libssl1.1 as in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml), or run tests on a machine with the library available |
 | `npm ci` fails | `package-lock.json` out of sync with `package.json` | Run `npm install` in `front-end/` and commit the updated lockfile |
 | `npm run build` fails with OpenSSL / `ERR_OSSL_EVP_UNSUPPORTED` | Node.js 17+ locally | Use Node 16 (`nvm use`) or `NODE_OPTIONS=--openssl-legacy-provider npm run build` |
 | CI green but app broken at runtime | CI does not smoke-test | Run `make verify` after starting the stack |
@@ -79,9 +96,11 @@ If CI passes locally with `make ci` but `make build` fails, run `npm ci` in `fro
 ```mermaid
 flowchart LR
     subgraph ci [GitHub Actions CI]
+        LibSsl[install libssl1.1]
         Restore[dotnet restore]
         BuildApi[dotnet build]
         TestApi[dotnet test]
+        LibSsl --> Restore
         NpmCi[npm ci]
         BuildFe[npm run build]
         TestFe[npm test headless]
