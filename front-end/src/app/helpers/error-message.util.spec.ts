@@ -47,6 +47,18 @@ describe('extractHttpErrorMessage', () => {
         expect(extractHttpErrorMessage(err)).toBe('One or more validation errors occurred.');
     });
 
+    it('prefers message over detail when both are present', () => {
+        const err = new HttpErrorResponse({
+            error: {
+                message: 'A user with this loginName already exists.',
+                detail: 'Duplicate key violation.'
+            },
+            status: 409,
+            statusText: 'Conflict'
+        });
+        expect(extractHttpErrorMessage(err)).toBe('A user with this loginName already exists.');
+    });
+
     it('returns detail from a ProblemDetails body when message and errors are absent', () => {
         const err = new HttpErrorResponse({
             error: {
