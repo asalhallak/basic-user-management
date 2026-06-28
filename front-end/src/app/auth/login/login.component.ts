@@ -7,8 +7,9 @@ import { AccountService, AlertService } from '../../services';
 
 /**
  * Public login form. Posts `{ userName, password }` via `AccountService.login` and
- * navigates to `returnUrl` (or `/`) on success. Form control is named `username`
- * but maps to API `userName` in the service call.
+ * navigates to `returnUrl` (or `/`) on success. Redirects away on init when a JWT
+ * session already exists. Form control is named `username` but maps to API `userName`
+ * in the service call.
  *
  * @see docs/front-end-login-register.md
  */
@@ -27,6 +28,12 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        if (this.accountService.isLoggedIn()) {
+            const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+            this.router.navigateByUrl(returnUrl);
+            return;
+        }
+
         this.form = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required]
