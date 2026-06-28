@@ -70,7 +70,7 @@ Use this when you touched Angular components, routing, interceptors, or the logi
 | 6 | Delete the user | User removed from the list |
 | 7 | Log out and revisit `/users` | Redirect back to login |
 
-**Register page note:** `POST /users` requires a JWT. The register form is not public sign-up — log in first. See [README — Authentication vs user data](../README.md#authentication-vs-user-data).
+**Register page note:** `POST /users` requires a JWT. The register form is not public sign-up — log in first. Visiting `/account/register` while logged out redirects to login immediately. See [README — Authentication vs user data](../README.md#authentication-vs-user-data).
 
 ## 4. API spot checks
 

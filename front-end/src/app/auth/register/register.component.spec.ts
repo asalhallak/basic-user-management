@@ -20,14 +20,23 @@ describe('RegisterComponent', () => {
         get: () => userValue
     });
 
-    beforeEach(async () => {
-        userValue = null;
-        accountServiceSpy.isLoggedIn.and.callFake(() => userValue != null && userValue.token?.length > 0);
+    const initComponent = (session: User | null = null) => {
+        userValue = session;
+        accountServiceSpy.isLoggedIn.and.callFake(() => {
+            const token = userValue?.token;
+            return typeof token === 'string' && token.length > 0;
+        });
         routerSpy.navigate.calls.reset();
         alertServiceSpy.clear.calls.reset();
         alertServiceSpy.success.calls.reset();
         accountServiceSpy.register.calls.reset();
 
+        fixture = TestBed.createComponent(RegisterComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    };
+
+    beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [ReactiveFormsModule],
             declarations: [RegisterComponent],
@@ -38,10 +47,6 @@ describe('RegisterComponent', () => {
                 { provide: AlertService, useValue: alertServiceSpy }
             ]
         }).compileComponents();
-
-        fixture = TestBed.createComponent(RegisterComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     const validForm = {
@@ -51,69 +56,77 @@ describe('RegisterComponent', () => {
         password: 'secret1'
     };
 
-    it('does not call register when the form is invalid', () => {
-        component.onSubmit();
-
-        expect(component.submitted).toBe(true);
-        expect(alertServiceSpy.clear).toHaveBeenCalled();
-        expect(accountServiceSpy.register).not.toHaveBeenCalled();
-    });
-
-    it('redirects to login when the form is valid but no session exists', () => {
-        component.form.setValue(validForm);
-
-        component.onSubmit();
+    it('redirects to login on init when no session exists', () => {
+        initComponent(null);
 
         expect(routerSpy.navigate).toHaveBeenCalledWith(['../login'], { relativeTo: activatedRouteStub });
-        expect(accountServiceSpy.register).not.toHaveBeenCalled();
+        expect(component.form).toBeUndefined();
     });
 
-    it('redirects to login when the form is valid but the session has an empty token', () => {
-        userValue = { userName: 'admin', token: '' } as User;
-        component.form.setValue(validForm);
-
-        component.onSubmit();
+    it('redirects to login on init when the session has an empty token', () => {
+        initComponent({ userName: 'admin', token: '' } as User);
 
         expect(routerSpy.navigate).toHaveBeenCalledWith(['../login'], { relativeTo: activatedRouteStub });
-        expect(accountServiceSpy.register).not.toHaveBeenCalled();
+        expect(component.form).toBeUndefined();
     });
 
-    it('calls register with mapped API fields when the form is valid and a session exists', () => {
-        userValue = { userName: 'admin', token: 'jwt-token' } as User;
-        accountServiceSpy.register.and.returnValue(of({}));
-        component.form.setValue(validForm);
-
-        component.onSubmit();
-
-        expect(accountServiceSpy.register).toHaveBeenCalledWith({
-            loginName: 'jdoe',
-            displayName: 'Jane Doe',
-            isActive: true
+    describe('when logged in', () => {
+        beforeEach(() => {
+            initComponent({ userName: 'admin', token: 'jwt-token' } as User);
         });
-    });
 
-    it('shows a success alert and navigates to login when registration succeeds', () => {
-        userValue = { userName: 'admin', token: 'jwt-token' } as User;
-        accountServiceSpy.register.and.returnValue(of({}));
-        component.form.setValue(validForm);
+        it('does not call register when the form is invalid', () => {
+            component.onSubmit();
 
-        component.onSubmit();
+            expect(component.submitted).toBe(true);
+            expect(alertServiceSpy.clear).toHaveBeenCalled();
+            expect(accountServiceSpy.register).not.toHaveBeenCalled();
+        });
 
-        expect(alertServiceSpy.success).toHaveBeenCalledWith(
-            'Registration successful',
-            { keepAfterRouteChange: true }
-        );
-        expect(routerSpy.navigate).toHaveBeenCalledWith(['../login'], { relativeTo: activatedRouteStub });
-    });
+        it('calls register with mapped API fields when the form is valid', () => {
+            accountServiceSpy.register.and.returnValue(of({}));
+            component.form.setValue(validForm);
 
-    it('resets loading when registration fails', () => {
-        userValue = { userName: 'admin', token: 'jwt-token' } as User;
-        accountServiceSpy.register.and.returnValue(throwError(() => new Error('Conflict')));
-        component.form.setValue(validForm);
-        component.loading = true;
+            component.onSubmit();
 
-        component.onSubmit();
+            expect(accountServiceSpy.register).toHaveBeenCalledWith({
+                loginName: 'jdoe',
+                displayName: 'Jane Doe',
+                isActive: true
+            });
+        });
 
-        expect(component.loading).toBe(false);
+        it('shows a success alert and navigates to login when registration succeeds', () => {
+            accountServiceSpy.register.and.returnValue(of({}));
+            component.form.setValue(validForm);
+
+            component.onSubmit();
+
+            expect(alertServiceSpy.success).toHaveBeenCalledWith(
+                'Registration successful',
+                { keepAfterRouteChange: true }
+            );
+            expect(routerSpy.navigate).toHaveBeenCalledWith(['../login'], { relativeTo: activatedRouteStub });
+        });
+
+        it('redirects to login on submit when the session expires before submit', () => {
+            accountServiceSpy.isLoggedIn.and.returnValue(false);
+            component.form.setValue(validForm);
+
+            component.onSubmit();
+
+            expect(routerSpy.navigate).toHaveBeenCalledWith(['../login'], { relativeTo: activatedRouteStub });
+            expect(accountServiceSpy.register).not.toHaveBeenCalled();
+        });
+
+        it('resets loading when registration fails', () => {
+            accountServiceSpy.register.and.returnValue(throwError(() => new Error('Conflict')));
+            component.form.setValue(validForm);
+            component.loading = true;
+
+            component.onSubmit();
+
+            expect(component.loading).toBe(false);
+        });
     });
 });
