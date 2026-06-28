@@ -47,6 +47,30 @@ describe('extractHttpErrorMessage', () => {
         expect(extractHttpErrorMessage(err)).toBe('One or more validation errors occurred.');
     });
 
+    it('returns detail from a ProblemDetails body when message and errors are absent', () => {
+        const err = new HttpErrorResponse({
+            error: {
+                title: 'Bad Request',
+                detail: 'The loginName field is required.'
+            },
+            status: 400,
+            statusText: 'Bad Request'
+        });
+        expect(extractHttpErrorMessage(err)).toBe('The loginName field is required.');
+    });
+
+    it('prefers validation errors over detail and title', () => {
+        const err = new HttpErrorResponse({
+            error: {
+                title: 'Validation failed',
+                detail: 'One or more fields are invalid.',
+                errors: { loginName: ['The LoginName field is required.'] }
+            },
+            status: 400
+        });
+        expect(extractHttpErrorMessage(err)).toBe('The LoginName field is required.');
+    });
+
     it('returns statusText when the error body is null', () => {
         const err = new HttpErrorResponse({ error: null, status: 500 });
         expect(extractHttpErrorMessage(err)).toBe('Unknown Error');

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 /**
  * Map ASP.NET Core error bodies to a user-facing string for toast display.
- * Handles plain text, `{ message }`, validation `{ errors }`, and `{ title }` shapes.
+ * Handles plain text, `{ message }`, validation `{ errors }`, `{ detail }`, and `{ title }` shapes.
  */
 export function extractHttpErrorMessage(err: HttpErrorResponse): string {
     const body = err.error;
@@ -33,6 +33,10 @@ export function extractHttpErrorMessage(err: HttpErrorResponse): string {
         if (messages.length > 0) {
             return messages.join(' ');
         }
+    }
+
+    if (typeof body.detail === 'string' && body.detail.length > 0) {
+        return body.detail;
     }
 
     if (typeof body.title === 'string' && body.title.length > 0) {
