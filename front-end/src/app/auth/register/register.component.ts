@@ -8,7 +8,7 @@ import { AccountService, AlertService } from '../../services';
 /**
  * Authenticated user registration (not public sign-up). Maps legacy tutorial form fields
  * (`username`, `firstName`, `lastName`) to API `loginName` and `displayName` before
- * calling `POST /api/v1/users`. Redirects to login when no JWT session is present.
+ * calling `POST /api/v1/users`. Redirects to login on init when no JWT session is present.
  *
  * @see docs/front-end-login-register.md
  */
@@ -27,6 +27,11 @@ export class RegisterComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        if (!this.accountService.isLoggedIn()) {
+            this.router.navigate(['../login'], { relativeTo: this.route });
+            return;
+        }
+
         this.form = this.formBuilder.group({
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],

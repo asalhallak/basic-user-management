@@ -109,11 +109,15 @@ The form maps legacy tutorial field names to `UserResource` JSON in `onSubmit()`
 ### Submit flow
 
 1. Same validation and alert clearing pattern as login.
-2. If `!accountService.isLoggedIn()`, redirect to `../login`.
+2. If `!accountService.isLoggedIn()` (for example session expired after the page loaded), redirect to `../login`.
 3. Map `{ username, firstName, lastName }` to `{ loginName, displayName, isActive: true }`.
 4. Call `accountService.register(body)`.
 5. On success, show `Registration successful` via `AlertService` with `{ keepAfterRouteChange: true }`, then navigate to `../login`.
-6. On error, show the re-thrown message from `ErrorInterceptor` (often `401` if not logged in).
+6. On error, show the re-thrown message from `ErrorInterceptor` (for example `409 Conflict` on duplicate `loginName`).
+
+### Unauthenticated access
+
+`ngOnInit()` redirects to `/account/login` when `AccountService.isLoggedIn()` returns false, so visitors without a JWT never see the register form. The template uses `*ngIf="form"` so the reactive form is not bound until a session exists. `onSubmit()` still re-checks `isLoggedIn()` in case the session expires while the page is open.
 
 ### Why register often fails
 
@@ -164,9 +168,10 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 
 `RegisterComponent` has Karma/Jasmine coverage in `front-end/src/app/auth/register/register.component.spec.ts`:
 
+- Redirects to login on init when no session or an empty token is stored
 - Invalid form does not call `AccountService.register`
-- Valid submit without a session redirects to login
 - Valid submit with a session maps legacy fields to `{ loginName, displayName, isActive: true }`
+- Redirects to login on submit when the session expires after the page loads
 - Success shows a registration alert and navigates to login
 - Failed registration resets the `loading` flag
 
@@ -178,8 +183,8 @@ Run with `make test-frontend` or as part of `make ci`.
 2. Log in with `admin` / `123456789` — redirect to `/` (or `returnUrl` if present).
 3. Visit `/users` while logged out — redirect to login with `returnUrl=/users`.
 4. Log in again — land on `/users`.
-5. Open `/account/register` **without** logging in — submit fails with `401`.
-6. Log in, then register — user record is created with mapped `loginName` and `displayName` (password field is ignored by the API).
+5. Open `/account/register` **without** logging in — redirect to `/account/login` immediately (no form shown).
+6. Log in, then open `/account/register` — form loads; submit creates a user record with mapped `loginName` and `displayName` (password field is ignored by the API).
 
 Full checklist: [manual-testing.md — Manual UI walkthrough](manual-testing.md#3-manual-ui-walkthrough).
 
