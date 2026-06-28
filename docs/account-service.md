@@ -47,7 +47,7 @@ On construction, the service reads `localStorage.getItem('user')` into a `Behavi
 
 | Method | Effect on session |
 |--------|-------------------|
-| `isLoggedIn()` | Returns `true` when `userValue.token` is a non-empty string — used by `AuthGuard`, `JwtInterceptor`, `ErrorInterceptor`, `AppComponent`, auth `LayoutComponent`, and `RegisterComponent` |
+| `isLoggedIn()` | Returns `true` when `userValue.token` is a non-empty string — used by `AuthGuard`, `JwtInterceptor`, `ErrorInterceptor`, `AppComponent`, `LoginComponent`, and `RegisterComponent` |
 | `login()` | Writes `{ userName, token }` to `localStorage`; emits on `user` |
 | `logout()` | Removes `user`; emits `null`; navigates to `/account/login` |
 | `update()` | If the updated row ID matches the logged-in user's `id`, merges params into stored `user` |

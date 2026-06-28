@@ -44,6 +44,10 @@ These names appear in different layers and mean different things:
 
 The user editor uses `loginName` and `displayName` directly. The register form still shows legacy tutorial labels (`username`, `firstName`, `lastName`) in the UI, but `RegisterComponent.onSubmit()` maps them to `loginName` and `displayName` before calling the API. The TypeScript `User` model in `models/user.ts` still reflects the tutorial shape. See [front-end-models.md](front-end-models.md) and [domain-model.md](domain-model.md).
 
+### Why does `/account/register` redirect to login?
+
+The register form creates a user record through `POST /api/v1/users`, which requires a JWT. `RegisterComponent` redirects to `/account/login` on init when `AccountService.isLoggedIn()` returns false, so visitors without a session never see the form. Log in with the [default credentials](../README.md#default-login) first, then open register again. See [front-end-login-register.md](front-end-login-register.md#unauthenticated-access).
+
 ### Why does the register page return `401`?
 
 `POST /api/v1/users` requires a JWT. The register form is **not** public sign-up — log in with the [default credentials](../README.md#default-login) (`admin` / `123456789`) first. See [Authentication vs user data](../README.md#authentication-vs-user-data).
