@@ -139,7 +139,7 @@ Run them with `make test-frontend` or as part of `make ci`.
 ## Extension ideas
 
 - ~~Wire `ErrorInterceptor` to `AlertService` for consistent global error toasts.~~ Fixed — the interceptor shows all HTTP error messages; components only reset local state in error handlers.
-- ~~Map ASP.NET Core validation/problem-details JSON into readable `error()` messages.~~ Fixed — `extractHttpErrorMessage()` in `error.interceptor.ts` parses validation `errors` and `{ message }` bodies before re-throw.
+- ~~Map ASP.NET Core validation/problem-details JSON into readable `error()` messages.~~ Fixed — `extractHttpErrorMessage()` in `error.interceptor.ts` parses validation `errors`, `{ message }`, ProblemDetails `{ detail }`, and `{ title }` bodies before re-throw.
 - Replace Bootstrap classes in `AlertComponent.cssClass()` if you migrate to Angular Material snack bars.
 
 ## Related docs
