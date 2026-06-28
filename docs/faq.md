@@ -73,6 +73,12 @@ If `localStorage` contains a **corrupted** `user` entry (for example after manua
 
 That is expected. Protected routes require `Authorization: Bearer <token>`. A `401` without a token means the API is up and JWT protection is working. Log in via `POST /api/v1/auth/login` or run `make token`.
 
+### Why can I open protected pages but API calls fail with "session expired"?
+
+`AccountService.isLoggedIn()` only checks that `localStorage.user.token` is a **non-empty string**. It does **not** decode the JWT or validate expiry. `AuthGuard` and `JwtInterceptor` use the same rule, so an expired token still unlocks routes and attaches the `Authorization` header until the API rejects it.
+
+When a logged-in session receives `401` or `403`, `ErrorInterceptor` calls `logout()`, shows *Your session has expired. Please log in again.*, and redirects to `/account/login`. Tokens last **7 days** by default (see `JwtHelper.cs`). Log in again or run `make token` for curl testing. See [client-server-auth.md](client-server-auth.md) and [front-end-interceptors.md](front-end-interceptors.md).
+
 ## API behavior
 
 ### What does `GET /api/v1/users/{id}` return for a missing user?
