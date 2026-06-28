@@ -96,7 +96,7 @@ describe('RegisterComponent', () => {
             });
         });
 
-        it('shows a success alert and navigates to login when registration succeeds', () => {
+        it('shows a success alert and navigates to the user list when registration succeeds', () => {
             accountServiceSpy.register.and.returnValue(of({}));
             component.form.setValue(validForm);
 
@@ -106,7 +106,7 @@ describe('RegisterComponent', () => {
                 'Registration successful',
                 { keepAfterRouteChange: true }
             );
-            expect(routerSpy.navigate).toHaveBeenCalledWith(['../login'], { relativeTo: activatedRouteStub });
+            expect(routerSpy.navigate).toHaveBeenCalledWith(['/users']);
         });
 
         it('redirects to login on submit when the session expires before submit', () => {

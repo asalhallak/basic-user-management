@@ -48,6 +48,10 @@ The user editor uses `loginName` and `displayName` directly. The register form s
 
 The register form creates a user record through `POST /api/v1/users`, which requires a JWT. `RegisterComponent` redirects to `/account/login` on init when `AccountService.isLoggedIn()` returns false, so visitors without a session never see the form. Log in with the [default credentials](../README.md#default-login) first, then open register again. See [front-end-login-register.md](front-end-login-register.md#unauthenticated-access).
 
+### Why does register send me to the user list after success?
+
+The register form creates a user record while you are already logged in. On success, `RegisterComponent` navigates to `/users` so you can confirm the new row in the list. Your JWT session is unchanged — you do not need to sign in again. For the full submit flow, see [front-end-login-register.md](front-end-login-register.md#submit-flow).
+
 ### Why does the register page return `401`?
 
 `POST /api/v1/users` requires a JWT. The register form is **not** public sign-up — log in with the [default credentials](../README.md#default-login) (`admin` / `123456789`) first. See [Authentication vs user data](../README.md#authentication-vs-user-data).

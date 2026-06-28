@@ -116,7 +116,7 @@ The form maps legacy tutorial field names to `UserResource` JSON in `onSubmit()`
 2. If `!accountService.isLoggedIn()` (for example session expired after the page loaded), redirect to `../login`.
 3. Map `{ username, firstName, lastName }` to `{ loginName, displayName, isActive: true }`.
 4. Call `accountService.register(body)`.
-5. On success, show `Registration successful` via `AlertService` with `{ keepAfterRouteChange: true }`, then navigate to `../login`.
+5. On success, show `Registration successful` via `AlertService` with `{ keepAfterRouteChange: true }`, then navigate to `/users` so the new record appears in the list (the session stays active — no re-login needed).
 6. On error, show the re-thrown message from `ErrorInterceptor` (for example `409 Conflict` on duplicate `loginName`).
 
 ### Unauthenticated access
@@ -178,7 +178,7 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 - Invalid form does not call `AccountService.register`
 - Valid submit with a session maps legacy fields to `{ loginName, displayName, isActive: true }`
 - Redirects to login on submit when the session expires after the page loads
-- Success shows a registration alert and navigates to login
+- Success shows a registration alert and navigates to `/users`
 - Failed registration resets the `loading` flag
 
 Run with `make test-frontend` or as part of `make ci`.
