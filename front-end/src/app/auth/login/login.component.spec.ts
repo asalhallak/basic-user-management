@@ -11,7 +11,7 @@ describe('LoginComponent', () => {
     let fixture: ComponentFixture<LoginComponent>;
     const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     const alertServiceSpy = jasmine.createSpyObj('AlertService', ['clear']);
-    const accountServiceSpy = jasmine.createSpyObj('AccountService', ['login']);
+    const accountServiceSpy = jasmine.createSpyObj('AccountService', ['login', 'isLoggedIn']);
     const activatedRouteStub = {
         snapshot: { queryParams: {} as Record<string, string> }
     };
@@ -20,6 +20,7 @@ describe('LoginComponent', () => {
         routerSpy.navigateByUrl.calls.reset();
         alertServiceSpy.clear.calls.reset();
         accountServiceSpy.login.calls.reset();
+        accountServiceSpy.isLoggedIn.and.returnValue(false);
         activatedRouteStub.snapshot.queryParams = {};
 
         await TestBed.configureTestingModule({
@@ -36,6 +37,28 @@ describe('LoginComponent', () => {
         fixture = TestBed.createComponent(LoginComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
+    });
+
+    it('redirects to home on init when already logged in', () => {
+        accountServiceSpy.isLoggedIn.and.returnValue(true);
+
+        fixture = TestBed.createComponent(LoginComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+
+        expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/');
+        expect(component.form).toBeUndefined();
+    });
+
+    it('redirects to returnUrl on init when already logged in', () => {
+        accountServiceSpy.isLoggedIn.and.returnValue(true);
+        activatedRouteStub.snapshot.queryParams = { returnUrl: '/users' };
+
+        fixture = TestBed.createComponent(LoginComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+
+        expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/users');
     });
 
     it('does not call login when the form is invalid', () => {

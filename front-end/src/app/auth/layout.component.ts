@@ -1,23 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { AccountService } from '../services';
 
 /**
  * Auth feature shell with a nested router outlet for login and register routes.
- * Redirects to home when a session already exists.
+ * Session redirects live in child components: login sends signed-in users away;
+ * register requires a JWT and redirects when logged out.
  *
  * @see docs/front-end-shell.md
  */
 @Component({ templateUrl: 'layout.component.html' })
-export class LayoutComponent {
-    constructor(
-        private router: Router,
-        private accountService: AccountService
-    ) {
-        // redirect to home if already logged in (same rule as AuthGuard)
-        if (this.accountService.isLoggedIn()) {
-            this.router.navigate(['/']);
-        }
-    }
-}
+export class LayoutComponent { }

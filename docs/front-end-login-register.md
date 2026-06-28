@@ -79,6 +79,10 @@ The parent `LayoutComponent` renders child routes inside a centered column (`col
 5. On success, read `returnUrl` from query params (default `/`) and `navigateByUrl(returnUrl)`.
 6. On error, reset `loading` (error toast is shown by `ErrorInterceptor`).
 
+### Already signed in
+
+`ngOnInit()` redirects to `returnUrl` (default `/`) when `AccountService.isLoggedIn()` returns true, so signed-in users never see the login form. The template uses `*ngIf="form"` so the reactive form is not bound until the redirect check passes.
+
 The default dev credentials are `admin` / `123456789` — see [README — Default login](../README.md#default-login).
 
 ### returnUrl behavior
@@ -151,6 +155,7 @@ After login, `localStorage` stores `{ userName, token }`. See [account-service.m
 | Quirk | Detail | Suggested fix |
 |-------|--------|---------------|
 | Register requires login | Protected `POST /users` from a public route | Document flow (this page) or redesign as admin-only |
+| Login while signed in | `LoginComponent` redirects to `/` or `returnUrl` on init | Fixed — auth layout no longer blocks `/account/register` for signed-in users |
 | Guard ignores token expiry | Stale JWT in storage still unlocks routes | Optional client-side expiry check in `AuthGuard` |
 | Login form control name | Template uses `username`; JSON body sends `userName` | Fixed — `AccountService.login()` posts `{ userName, password }`; see [account-service.md](account-service.md) |
 | Fake backend | Legacy interceptor only runs if you re-add `fakeBackendProvider` to `app.module.ts` | Default `AppModule` uses the real API; clear tutorial keys from `localStorage` if needed — [fake-backend.md](fake-backend.md) |
@@ -161,6 +166,7 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 
 `LoginComponent` has Karma/Jasmine coverage in `front-end/src/app/auth/login/login.component.spec.ts`:
 
+- Redirects to `/` or `returnUrl` on init when a session already exists
 - Invalid form does not call `AccountService.login`
 - Valid submit calls `login(username, password)`
 - Success navigates to `/` or the `returnUrl` query parameter
