@@ -83,6 +83,22 @@ describe('RegisterComponent', () => {
             expect(accountServiceSpy.register).not.toHaveBeenCalled();
         });
 
+        it('associates labels with matching input ids', () => {
+            const compiled = fixture.nativeElement as HTMLElement;
+
+            const labelFor = (id: string) =>
+                compiled.querySelector(`label[for="${id}"]`) as HTMLLabelElement | null;
+
+            expect(labelFor('firstName')?.textContent?.trim()).toContain('First Name');
+            expect(compiled.querySelector('#firstName')).toBeTruthy();
+            expect(labelFor('lastName')?.textContent?.trim()).toContain('Last Name');
+            expect(compiled.querySelector('#lastName')).toBeTruthy();
+            expect(labelFor('username')?.textContent?.trim()).toContain('Username');
+            expect(compiled.querySelector('#username')).toBeTruthy();
+            expect(labelFor('password')?.textContent?.trim()).toContain('Password');
+            expect(compiled.querySelector('#password')).toBeTruthy();
+        });
+
         it('calls register with mapped API fields when the form is valid', () => {
             accountServiceSpy.register.and.returnValue(of({}));
             component.form.setValue(validForm);

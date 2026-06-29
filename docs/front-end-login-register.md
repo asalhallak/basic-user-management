@@ -63,6 +63,8 @@ The parent `LayoutComponent` renders child routes inside a centered column (`col
 
 ### Form fields
 
+Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly.
+
 | Control | Validators | Sent to API |
 |---------|------------|-------------|
 | `username` | `required` | ✓ — passed to `login()` as `{ userName, password }` |
@@ -100,6 +102,8 @@ After a successful login, the component restores that path so deep links work wi
 **File:** `front-end/src/app/auth/register/register.component.ts`
 
 ### Form fields
+
+Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly.
 
 | Control | Validators | Maps to API? |
 |---------|------------|--------------|
@@ -158,6 +162,7 @@ After login, `localStorage` stores `{ userName, token }`. See [account-service.m
 | Login while signed in | `LoginComponent` redirects to `/` or `returnUrl` on init | Fixed — auth layout no longer blocks `/account/register` for signed-in users |
 | Guard ignores token expiry | Stale JWT in storage still unlocks routes | Optional client-side expiry check in `AuthGuard` |
 | Login form control name | Template uses `username`; JSON body sends `userName` | Fixed — `AccountService.login()` posts `{ userName, password }`; see [account-service.md](account-service.md) |
+| Login/register label `for` without input `id` | Labels used `for="username"` etc. but inputs had no matching `id` | Fixed — `login.component.html` and `register.component.html` set unique input ids matching each `label for` |
 | Fake backend | Legacy interceptor only runs if you re-add `fakeBackendProvider` to `app.module.ts` | Default `AppModule` uses the real API; clear tutorial keys from `localStorage` if needed — [fake-backend.md](fake-backend.md) |
 
 See [improvement-ideas.md](improvement-ideas.md) for contribution starting points.
@@ -167,6 +172,7 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 `LoginComponent` has Karma/Jasmine coverage in `front-end/src/app/auth/login/login.component.spec.ts`:
 
 - Redirects to `/` or `returnUrl` on init when a session already exists
+- Associates each label with a matching input `id`
 - Invalid form does not call `AccountService.login`
 - Valid submit calls `login(username, password)`
 - Success navigates to `/` or the `returnUrl` query parameter
@@ -175,6 +181,7 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 `RegisterComponent` has Karma/Jasmine coverage in `front-end/src/app/auth/register/register.component.spec.ts`:
 
 - Redirects to login on init when no session or an empty token is stored
+- Associates each label with a matching input `id`
 - Invalid form does not call `AccountService.register`
 - Valid submit with a session maps legacy fields to `{ loginName, displayName, isActive: true }`
 - Redirects to login on submit when the session expires after the page loads
