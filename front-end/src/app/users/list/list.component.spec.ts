@@ -20,6 +20,7 @@ describe('ListComponent', () => {
     beforeEach(async () => {
         accountServiceSpy.getAll.calls.reset();
         accountServiceSpy.delete.calls.reset();
+        spyOn(window, 'confirm').and.returnValue(true);
 
         await TestBed.configureTestingModule({
             imports: [RouterTestingModule],
@@ -66,9 +67,23 @@ describe('ListComponent', () => {
         fixture.detectChanges();
         component.deleteUser('1');
 
+        expect(window.confirm).toHaveBeenCalledWith('Delete "Jane Doe"? This cannot be undone.');
         expect(accountServiceSpy.delete).toHaveBeenCalledWith('1');
         expect(component.users.length).toBe(1);
         expect(component.users[0].id).toBe('2');
+    });
+
+    it('does not delete when the user cancels the confirmation dialog', () => {
+        (window.confirm as jasmine.Spy).and.returnValue(false);
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers.map(user => ({ ...user }))));
+
+        fixture.detectChanges();
+        component.deleteUser('1');
+
+        expect(window.confirm).toHaveBeenCalled();
+        expect(accountServiceSpy.delete).not.toHaveBeenCalled();
+        expect(component.users.length).toBe(2);
+        expect(component.users[0].isDeleting).toBeUndefined();
     });
 
     it('sets isDeleting while delete is in flight', () => {
