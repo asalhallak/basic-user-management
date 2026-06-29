@@ -9,7 +9,8 @@ type UserRow = User & { isDeleting?: boolean };
 
 /**
  * Protected user list. Loads all users on init and supports inline delete with
- * per-row loading state (`isDeleting`). API errors surface via `ErrorInterceptor`.
+ * per-row loading state (`isDeleting`) and a native confirm dialog before delete.
+ * API errors surface via `ErrorInterceptor`.
  *
  * @see docs/front-end-users.md
  */
@@ -39,6 +40,12 @@ export class ListComponent implements OnInit {
         if (!user) {
             return;
         }
+
+        const label = user.displayName || user.loginName || 'this user';
+        if (!window.confirm(`Delete "${label}"? This cannot be undone.`)) {
+            return;
+        }
+
         user.isDeleting = true;
         this.accountService.delete(id)
             .pipe(first())
