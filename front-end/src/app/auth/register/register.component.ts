@@ -9,6 +9,8 @@ import { AccountService, AlertService } from '../../services';
  * Authenticated user registration (not public sign-up). Maps legacy tutorial form fields
  * (`username`, `firstName`, `lastName`) to API `loginName` and `displayName` before
  * calling `POST /api/v1/users`. Redirects to login on init when no JWT session is present.
+ * On success, shows a registration alert and navigates to `/users` so the new row appears
+ * in the list without changing the active JWT session.
  *
  * @see docs/front-end-login-register.md
  */

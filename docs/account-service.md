@@ -80,7 +80,7 @@ Despite the method name, `register()` posts to **`POST /api/v1/users`**, not a d
 | Component | AccountService calls | Notes |
 |-----------|---------------------|-------|
 | `auth/login/login.component.ts` | `login()` | Navigates home on success; errors via `AlertService` |
-| `auth/register/register.component.ts` | `register()` | Legacy form fields — see [front-end-login-register.md](front-end-login-register.md) and [front-end-models.md](front-end-models.md) |
+| `auth/register/register.component.ts` | `register()` | Legacy form fields; on success navigates to `/users` — see [front-end-login-register.md](front-end-login-register.md) and [front-end-models.md](front-end-models.md) |
 | `users/list/list.component.ts` | `getAll()`, `delete()` | Loads table on init; delete removes row on success |
 | `users/add-edit/add-edit.component.ts` | `getById()`, `register()` (add), `update()` (edit) | API-aligned fields (`loginName`, `displayName`, nested `address`); alerts via `AlertService` |
 
