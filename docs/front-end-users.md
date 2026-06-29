@@ -74,13 +74,13 @@ On init, calls `accountService.getAll()` and binds the result to `users`. While 
 
 ### Delete flow
 
-`deleteUser(id)` no-ops when the list is still loading (`users` is `null`) or the id is not found. Otherwise it sets `user.isDeleting = true` on the row (shows a small spinner on the button), calls `accountService.delete(id)`, and removes the row from the local array on success.
+`deleteUser(id)` no-ops when the list is still loading (`users` is `null`) or the id is not found. When the row exists, the browser shows a native `window.confirm` dialog naming the user's `displayName` (or `loginName` as fallback) before any API call. If the user cancels, the row is unchanged. On confirm, the component sets `user.isDeleting = true` (spinner on the button), calls `accountService.delete(id)`, and removes the row from the local array on success.
 
 | Behavior | Detail |
 |----------|--------|
 | Optimistic UI | Row stays until delete succeeds |
 | Error handling | Failed load or delete shows a global alert via `ErrorInterceptor`; delete failures reset `isDeleting` on the row |
-| Confirmation | No confirm dialog before delete |
+| Confirmation | Native `window.confirm` before delete; cancel leaves the row intact |
 
 For API delete behavior and missing-ID quirks, see [api-users-crud.md](api-users-crud.md) and [api-errors.md](api-errors.md).
 

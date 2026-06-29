@@ -67,7 +67,7 @@ Use this when you touched Angular components, routing, interceptors, or the logi
 | 3 | Navigate to **Users** | User list loads (may be empty) |
 | 4 | Create a user with a unique `loginName` | User appears in the list |
 | 5 | Edit the user | Changes persist after refresh |
-| 6 | Delete the user | User removed from the list |
+| 6 | Delete the user (confirm the browser dialog) | User removed from the list; canceling the dialog leaves the row |
 | 7 | Log out and revisit `/users` | Redirect back to login |
 | 8 | Log in, open `/account/register`, submit with unique `username` / name fields | Success alert; redirect to `/users` with the new row visible (session unchanged) |
 | 9 | Open `/account/register` while logged out | Immediate redirect to `/account/login` (no form shown) |
