@@ -69,6 +69,18 @@ describe('LoginComponent', () => {
         expect(accountServiceSpy.login).not.toHaveBeenCalled();
     });
 
+    it('associates labels with matching input ids', () => {
+        const compiled = fixture.nativeElement as HTMLElement;
+
+        const labelFor = (id: string) =>
+            compiled.querySelector(`label[for="${id}"]`) as HTMLLabelElement | null;
+
+        expect(labelFor('username')?.textContent?.trim()).toContain('Username');
+        expect(compiled.querySelector('#username')).toBeTruthy();
+        expect(labelFor('password')?.textContent?.trim()).toContain('Password');
+        expect(compiled.querySelector('#password')).toBeTruthy();
+    });
+
     it('calls login with form values when the form is valid', () => {
         accountServiceSpy.login.and.returnValue(of({ userName: 'admin', token: 'jwt-token' }));
         component.form.setValue({ username: 'admin', password: '123456789' });
