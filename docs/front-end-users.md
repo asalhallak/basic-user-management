@@ -91,7 +91,7 @@ Edit and Delete controls expose `aria-label="Edit {label}"` and `aria-label="Del
 | Optimistic UI | Row stays until delete succeeds |
 | Error handling | Failed load or delete shows a global alert via `ErrorInterceptor`; delete failures reset `isDeleting` on the row |
 | Confirmation | Native `window.confirm` before delete; cancel leaves the row intact |
-| Accessibility | Edit link and Delete button `aria-label`s use the same `rowLabel(user)` helper as the confirm dialog; table has a screen-reader caption, `scope="col"` headers, and a loading row with `role="status"` |
+| Accessibility | **Add User** link uses `aria-label="Add new user"`; Edit link and Delete button `aria-label`s use the same `rowLabel(user)` helper as the confirm dialog; Delete is `<button type="button">` so it never acts as an implicit form submit; table has a screen-reader caption, `scope="col"` headers, and a loading row with `role="status"` |
 
 For API delete behavior and missing-ID quirks, see [api-users-crud.md](api-users-crud.md) and [api-errors.md](api-errors.md).
 

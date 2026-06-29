@@ -43,6 +43,25 @@ describe('ListComponent', () => {
         expect(component.users).toEqual(sampleUsers as typeof component.users);
     });
 
+    it('sets aria-label on the Add User link', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
+
+        fixture.detectChanges();
+
+        const addLink = (fixture.nativeElement as HTMLElement).querySelector('.btn-add-user');
+        expect(addLink?.getAttribute('aria-label')).toBe('Add new user');
+    });
+
+    it('sets type="button" on delete buttons so they do not submit forms', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
+
+        fixture.detectChanges();
+
+        const buttons = (fixture.nativeElement as HTMLElement).querySelectorAll('.btn-delete-user');
+        expect(buttons.length).toBe(2);
+        buttons.forEach(button => expect(button.getAttribute('type')).toBe('button'));
+    });
+
     it('sets aria-label on delete buttons from rowLabel', () => {
         accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
 
