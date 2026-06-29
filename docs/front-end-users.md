@@ -108,7 +108,7 @@ this.isAddMode = !this.id;
 
 ### Form fields
 
-Built with `FormBuilder` in `ngOnInit()`. Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly. User-level `country` uses `id="userCountry"`; nested `address.country` uses `id="addressCountry"` to avoid duplicate label targets.
+Built with `FormBuilder` in `ngOnInit()`. Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly. User-level `country` uses `id="userCountry"`; nested `address.country` uses `id="addressCountry"` to avoid duplicate label targets. The Save button uses `type="submit"` so Enter submits the form without relying on implicit button behavior (same pattern as login/register — see [front-end-login-register.md](front-end-login-register.md)).
 
 | Control | Validators | Sent to API |
 |---------|------------|-------------|
