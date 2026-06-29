@@ -724,7 +724,7 @@ Automated coverage is limited but growing: CI and `make ci` run headless Karma/J
 - ~~Angular `LoginComponent` validates the form, calls login, and navigates on success~~ Fixed — see `front-end/src/app/auth/login/login.component.spec.ts`
 - ~~Angular `RegisterComponent` validates the form, maps legacy fields to API shape, and handles session checks~~ Fixed — see `front-end/src/app/auth/register/register.component.spec.ts`
 - ~~Angular `AddEditComponent` validates the form, loads users for edit, and handles create/update success and errors~~ Fixed — see `front-end/src/app/users/add-edit/add-edit.component.spec.ts`
-- ~~Angular `ListComponent` loads users on init, handles load errors, and manages delete loading state~~ Fixed — see `front-end/src/app/users/list/list.component.spec.ts`
+- ~~Angular `ListComponent` loads users on init, shows loading/empty states, confirms delete, and manages delete loading state~~ Fixed — see `front-end/src/app/users/list/list.component.spec.ts`
 - ~~Angular `AlertComponent` renders alerts, scopes by id, clears on navigation, and auto-dismisses~~ Fixed — see `front-end/src/app/components/alert.component.spec.ts`
 - ~~`UsersController` maps CRUD actions to `200 OK`, `404 NotFound`, and `409 Conflict`~~ Fixed — see `UserManagementAPI/UserManagement.API.Tests/UsersControllerTests.cs`
 - ~~Angular `AppComponent` shows the navbar when logged in and delegates logout~~ Fixed — see `front-end/src/app/app.component.spec.ts`
