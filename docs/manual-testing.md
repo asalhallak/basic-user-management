@@ -69,8 +69,10 @@ Use this when you touched Angular components, routing, interceptors, or the logi
 | 5 | Edit the user | Changes persist after refresh |
 | 6 | Delete the user | User removed from the list |
 | 7 | Log out and revisit `/users` | Redirect back to login |
+| 8 | Log in, open `/account/register`, submit with unique `username` / name fields | Success alert; redirect to `/users` with the new row visible (session unchanged) |
+| 9 | Open `/account/register` while logged out | Immediate redirect to `/account/login` (no form shown) |
 
-**Register page note:** `POST /users` requires a JWT. The register form is not public sign-up — log in first. Visiting `/account/register` while logged out redirects to login immediately. See [README — Authentication vs user data](../README.md#authentication-vs-user-data).
+**Register page note:** `POST /users` requires a JWT. The register form is not public sign-up — log in first. See [README — Authentication vs user data](../README.md#authentication-vs-user-data) and [front-end-login-register.md](front-end-login-register.md#submit-flow).
 
 ## 4. API spot checks
 
