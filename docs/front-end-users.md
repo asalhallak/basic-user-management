@@ -108,7 +108,7 @@ this.isAddMode = !this.id;
 
 ### Form fields
 
-Built with `FormBuilder` in `ngOnInit()`:
+Built with `FormBuilder` in `ngOnInit()`. Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly. User-level `country` uses `id="userCountry"`; nested `address.country` uses `id="addressCountry"` to avoid duplicate label targets.
 
 | Control | Validators | Sent to API |
 |---------|------------|-------------|
@@ -167,6 +167,7 @@ Despite the method name, `register()` creates a **user record**, not a login acc
 | ~~Edit load errors silent~~ | ~~`getById` has no error handler~~ | Fixed — global error alert via `ErrorInterceptor`; redirect to list on failure |
 | ~~Wrong validation message~~ | ~~`profilePictureUrl` invalid feedback says "Salary is required"~~ | Fixed — template copy corrected in `add-edit.component.html` |
 | ~~Required profile picture URL~~ | ~~Form required `profilePictureUrl` though API treats it as optional~~ | Fixed — optional field in add/edit form; label notes "(optional)" |
+| ~~Duplicate country label `for` attributes~~ | ~~User-level and address `country` labels both used `for="country"` with no matching input ids~~ | Fixed — unique ids (`userCountry`, `addressCountry`, etc.) on inputs and matching `label for` values in `add-edit.component.html` |
 | ~~`console.log` calls~~ | ~~Debug logging left in `onSubmit` and `getById`~~ | Fixed — removed from `add-edit.component.ts` |
 
 These are documented starting points in [improvement-ideas.md](improvement-ideas.md).
