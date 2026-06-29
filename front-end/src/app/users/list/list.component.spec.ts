@@ -43,6 +43,17 @@ describe('ListComponent', () => {
         expect(component.users).toEqual(sampleUsers as typeof component.users);
     });
 
+    it('sets aria-label on delete buttons from deleteLabel', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
+
+        fixture.detectChanges();
+
+        const buttons = (fixture.nativeElement as HTMLElement).querySelectorAll('.btn-delete-user');
+        expect(buttons.length).toBe(2);
+        expect(buttons[0].getAttribute('aria-label')).toBe('Delete Jane Doe');
+        expect(buttons[1].getAttribute('aria-label')).toBe('Delete Alice Smith');
+    });
+
     it('sets users to an empty array when getAll fails', () => {
         accountServiceSpy.getAll.and.returnValue(throwError(() => new Error('Server error')));
 
