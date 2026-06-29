@@ -75,6 +75,23 @@ describe('ListComponent', () => {
         deleteSubject.complete();
     });
 
+    it('does nothing when delete is called before users load', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
+
+        component.deleteUser('1');
+
+        expect(accountServiceSpy.delete).not.toHaveBeenCalled();
+    });
+
+    it('does nothing when delete is called for an unknown id', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers.map(user => ({ ...user }))));
+
+        fixture.detectChanges();
+        component.deleteUser('missing');
+
+        expect(accountServiceSpy.delete).not.toHaveBeenCalled();
+    });
+
     it('resets isDeleting when delete fails', () => {
         accountServiceSpy.getAll.and.returnValue(of(sampleUsers.map(user => ({ ...user }))));
         accountServiceSpy.delete.and.returnValue(throwError(() => new Error('Server error')));

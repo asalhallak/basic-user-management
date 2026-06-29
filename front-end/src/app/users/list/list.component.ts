@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
+import { User } from '../../models';
 import { AccountService } from '../../services';
 
 /**
@@ -11,7 +12,7 @@ import { AccountService } from '../../services';
  */
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
-    users = null;
+    users: User[] | null = null;
 
     constructor(private accountService: AccountService) {}
 
@@ -27,7 +28,14 @@ export class ListComponent implements OnInit {
     }
 
     deleteUser(id: string) {
+        if (!this.users) {
+            return;
+        }
+
         const user = this.users.find(x => x.id === id);
+        if (!user) {
+            return;
+        }
         user.isDeleting = true;
         this.accountService.delete(id)
             .pipe(first())

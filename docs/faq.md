@@ -77,6 +77,10 @@ If `localStorage` contains a **corrupted** `user` entry (for example after manua
 
 `AuthGuard`, `JwtInterceptor`, and `AccountService` all require a **non-empty JWT string** on the stored session. A `user` object with a missing or empty `token` is treated as logged out: the guard redirects to `/account/login`, the JWT interceptor skips the `Authorization` header, and startup validation clears the entry from `localStorage`. Log in again or remove the stale `user` key in DevTools → Application → Local Storage. See [front-end-auth.md](front-end-auth.md) and [angular-routing.md](angular-routing.md).
 
+### What is the `returnUrl` query parameter on the login page?
+
+When you open a protected route (for example `/users` or `/users/add`) without a JWT, `AuthGuard` sends you to `/account/login?returnUrl=<attempted path>`. After a successful login, `LoginComponent` reads that query parameter and navigates there; if it is missing, you land on `/`. Visiting an unknown URL hits the wildcard redirect to `/`, which can set `returnUrl=/`. If you are already signed in, `LoginComponent` skips the form and navigates to `returnUrl` (or `/`) on init. See [angular-routing.md](angular-routing.md) and [front-end-login-register.md](front-end-login-register.md#returnurl-behavior).
+
 ### Why does `GET /api/v1/users` return `401` without a token?
 
 That is expected. Protected routes require `Authorization: Bearer <token>`. A `401` without a token means the API is up and JWT protection is working. Log in via `POST /api/v1/auth/login` or run `make token`.

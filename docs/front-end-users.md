@@ -74,7 +74,7 @@ On init, calls `accountService.getAll()` and binds the result to `users`. While 
 
 ### Delete flow
 
-`deleteUser(id)` sets `user.isDeleting = true` on the row (shows a small spinner on the button), calls `accountService.delete(id)`, and removes the row from the local array on success.
+`deleteUser(id)` no-ops when the list is still loading (`users` is `null`) or the id is not found. Otherwise it sets `user.isDeleting = true` on the row (shows a small spinner on the button), calls `accountService.delete(id)`, and removes the row from the local array on success.
 
 | Behavior | Detail |
 |----------|--------|
