@@ -59,7 +59,9 @@ describe('AppComponent', () => {
 
         const navbar = fixture.nativeElement.querySelector('nav.navbar');
         expect(navbar).toBeTruthy();
+        expect(navbar.getAttribute('aria-label')).toBe('Main navigation');
         expect(fixture.nativeElement.querySelector('a[routerLink="/users"]')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('button[aria-label="Log out"]')).toBeTruthy();
     });
 
     it('hides the navbar when logged out', () => {
@@ -80,11 +82,14 @@ describe('AppComponent', () => {
         expect(fixture.nativeElement.querySelector('nav.navbar')).toBeNull();
     });
 
-    it('delegates logout to AccountService', () => {
+    it('delegates logout to AccountService when the navbar button is clicked', () => {
+        userSubject.next({ userName: 'admin', token: 'jwt-token' } as User);
+
         fixture = TestBed.createComponent(AppComponent);
         component = fixture.componentInstance;
+        fixture.detectChanges();
 
-        component.logout();
+        fixture.nativeElement.querySelector('button[aria-label="Log out"]').click();
 
         expect(logoutSpy).toHaveBeenCalled();
     });

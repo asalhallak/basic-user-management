@@ -71,7 +71,9 @@ this.router.navigate(['../'], { relativeTo: this.route });
 | `clear()` / empty message | Removes alerts unless `keepAfterRouteChange` is set |
 | `NavigationStart` | Calls `alertService.clear()` — wipes banners on route change |
 | `autoClose: true` | Removes the alert after 3 seconds |
-| User dismiss | `removeAlert()` with optional fade animation |
+| User dismiss | `removeAlert()` with optional fade animation; dismiss control is a `<button type="button">` with `aria-label="Dismiss alert"` |
+
+Each rendered banner uses `role="alert"` so assistive technologies announce new messages.
 
 The root template uses the default id:
 
@@ -132,7 +134,7 @@ this.alertService.info('Changes saved locally', { autoClose: true });
 | File | What it covers |
 |------|----------------|
 | `front-end/src/app/services/alert.service.spec.ts` | Typed convenience methods, default alert id, per-id filtering via `onAlert(id)`, optional flag forwarding, and `clear()` |
-| `front-end/src/app/components/alert.component.spec.ts` | Alert rendering, id scoping, clear/keepAfterRouteChange behavior, route navigation clears, dismiss/fade, auto-close, and `cssClass()` mapping |
+| `front-end/src/app/components/alert.component.spec.ts` | Alert rendering (`role="alert"`, dismiss button label), id scoping, clear/keepAfterRouteChange behavior, route navigation clears, dismiss/fade, auto-close, and `cssClass()` mapping |
 
 Run them with `make test-frontend` or as part of `make ci`.
 
