@@ -5,12 +5,14 @@ import { of, Subject, throwError } from 'rxjs';
 import { AccountService } from '../../services';
 import { ListComponent } from './list.component';
 
+type UserRow = { id: string; loginName: string; displayName: string; dateOfBirth: string; isDeleting?: boolean };
+
 describe('ListComponent', () => {
     let component: ListComponent;
     let fixture: ComponentFixture<ListComponent>;
     const accountServiceSpy = jasmine.createSpyObj('AccountService', ['getAll', 'delete']);
 
-    const sampleUsers = [
+    const sampleUsers: UserRow[] = [
         { id: '1', loginName: 'jdoe', displayName: 'Jane Doe', dateOfBirth: '1990-05-15T00:00:00' },
         { id: '2', loginName: 'asmith', displayName: 'Alice Smith', dateOfBirth: '1985-01-01T00:00:00' }
     ];
@@ -37,7 +39,7 @@ describe('ListComponent', () => {
         fixture.detectChanges();
 
         expect(accountServiceSpy.getAll).toHaveBeenCalled();
-        expect(component.users).toEqual(sampleUsers);
+        expect(component.users).toEqual(sampleUsers as typeof component.users);
     });
 
     it('sets users to an empty array when getAll fails', () => {
@@ -73,6 +75,23 @@ describe('ListComponent', () => {
 
         deleteSubject.next();
         deleteSubject.complete();
+    });
+
+    it('does nothing when delete is called before users load', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
+
+        component.deleteUser('1');
+
+        expect(accountServiceSpy.delete).not.toHaveBeenCalled();
+    });
+
+    it('does nothing when delete is called for an unknown id', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers.map(user => ({ ...user }))));
+
+        fixture.detectChanges();
+        component.deleteUser('missing');
+
+        expect(accountServiceSpy.delete).not.toHaveBeenCalled();
     });
 
     it('resets isDeleting when delete fails', () => {
