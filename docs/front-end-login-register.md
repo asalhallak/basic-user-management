@@ -63,12 +63,14 @@ The parent `LayoutComponent` renders child routes inside a centered column (`col
 
 ### Form fields
 
-Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly.
+Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly. Inputs also use standard `autocomplete` tokens so browsers and password managers can offer saved credentials on login and sensible defaults on register.
 
-| Control | Validators | Sent to API |
-|---------|------------|-------------|
-| `username` | `required` | ✓ — passed to `login()` as `{ userName, password }` |
-| `password` | `required` | ✓ |
+| Control | Validators | Autocomplete | Sent to API |
+|---------|------------|--------------|-------------|
+| `username` | `required` | `username` | ✓ — passed to `login()` as `{ userName, password }` |
+| `password` | `required` | `current-password` | ✓ |
+
+The submit button uses `type="submit"` so Enter submits the form without relying on implicit button behavior.
 
 `AccountService.login()` posts to `POST /api/v1/auth/login` with `{ userName, password }`, matching the API `Credentials` model.
 
@@ -103,14 +105,16 @@ After a successful login, the component restores that path so deep links work wi
 
 ### Form fields
 
-Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly.
+Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly. Inputs use standard `autocomplete` tokens (`given-name`, `family-name`, `username`, `new-password`) so browsers can autofill name fields; the password field uses `new-password` even though the API does not persist passwords (legacy tutorial field).
 
-| Control | Validators | Maps to API? |
-|---------|------------|--------------|
-| `firstName` | `required` | ✓ — combined into `displayName` on submit |
-| `lastName` | `required` | ✓ — combined into `displayName` on submit |
-| `username` | `required` | ✓ — mapped to `loginName` on submit |
-| `password` | `required`, `minLength(6)` | ✗ — user records have no password column (legacy tutorial field) |
+| Control | Validators | Autocomplete | Maps to API? |
+|---------|------------|--------------|--------------|
+| `firstName` | `required` | `given-name` | ✓ — combined into `displayName` on submit |
+| `lastName` | `required` | `family-name` | ✓ — combined into `displayName` on submit |
+| `username` | `required` | `username` | ✓ — mapped to `loginName` on submit |
+| `password` | `required`, `minLength(6)` | `new-password` | ✗ — user records have no password column (legacy tutorial field) |
+
+The submit button uses `type="submit"` so Enter submits the form without relying on implicit button behavior.
 
 The form maps legacy tutorial field names to `UserResource` JSON in `onSubmit()` before calling `accountService.register()`, which posts to `POST /api/v1/users`. That endpoint requires a JWT — see [front-end-models.md](front-end-models.md).
 

@@ -81,6 +81,14 @@ describe('LoginComponent', () => {
         expect(compiled.querySelector('#password')).toBeTruthy();
     });
 
+    it('sets autocomplete tokens on login inputs and type on the submit button', () => {
+        const compiled = fixture.nativeElement as HTMLElement;
+
+        expect(compiled.querySelector('#username')?.getAttribute('autocomplete')).toBe('username');
+        expect(compiled.querySelector('#password')?.getAttribute('autocomplete')).toBe('current-password');
+        expect(compiled.querySelector('button[type="submit"]')).toBeTruthy();
+    });
+
     it('calls login with form values when the form is valid', () => {
         accountServiceSpy.login.and.returnValue(of({ userName: 'admin', token: 'jwt-token' }));
         component.form.setValue({ username: 'admin', password: '123456789' });

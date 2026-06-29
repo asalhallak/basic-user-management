@@ -99,6 +99,16 @@ describe('RegisterComponent', () => {
             expect(compiled.querySelector('#password')).toBeTruthy();
         });
 
+        it('sets autocomplete tokens on register inputs and type on the submit button', () => {
+            const compiled = fixture.nativeElement as HTMLElement;
+
+            expect(compiled.querySelector('#firstName')?.getAttribute('autocomplete')).toBe('given-name');
+            expect(compiled.querySelector('#lastName')?.getAttribute('autocomplete')).toBe('family-name');
+            expect(compiled.querySelector('#username')?.getAttribute('autocomplete')).toBe('username');
+            expect(compiled.querySelector('#password')?.getAttribute('autocomplete')).toBe('new-password');
+            expect(compiled.querySelector('button[type="submit"]')).toBeTruthy();
+        });
+
         it('calls register with mapped API fields when the form is valid', () => {
             accountServiceSpy.register.and.returnValue(of({}));
             component.form.setValue(validForm);
