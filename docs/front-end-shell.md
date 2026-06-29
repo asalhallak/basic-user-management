@@ -50,13 +50,13 @@ Files:
 
 ### Navbar
 
-The dark Bootstrap navbar renders only when `AccountService.isLoggedIn()` is true (`*ngIf="isLoggedIn"` on `AppComponent`):
+The dark Bootstrap navbar renders only when `AccountService.isLoggedIn()` is true (`*ngIf="isLoggedIn"` on `AppComponent`). The `<nav>` element uses `aria-label="Main navigation"` so screen readers can identify the region.
 
-| Link | Target | Notes |
-|------|--------|-------|
+| Link / control | Target | Notes |
+|----------------|--------|-------|
 | Home | `/` | `routerLinkActive` with `exact: true` |
 | Users | `/users` | Lazy-loaded `UsersModule` |
-| Logout | click handler | Calls `AccountService.logout()` — clears `localStorage` and navigates to `/account/login` |
+| Logout | click handler | `<button type="button">` with `aria-label="Log out"` — calls `AccountService.logout()` (clears `localStorage` and navigates to `/account/login`) |
 
 Login and register pages **do not** show the navbar because `user` is null until after sign-in.
 

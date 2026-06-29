@@ -1,9 +1,9 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isLoggedIn">
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="isLoggedIn" aria-label="Main navigation">
     <div class="navbar-nav">
         <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
         <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+        <button type="button" class="nav-item nav-link btn btn-link text-light" (click)="logout()" aria-label="Log out">Logout</button>
     </div>
 </nav>
 

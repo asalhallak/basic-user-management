@@ -29,10 +29,16 @@ describe('AlertComponent', () => {
         fixture.detectChanges();
 
         alertService.success('Saved');
+        fixture.detectChanges();
 
         expect(component.alerts.length).toBe(1);
         expect(component.alerts[0].message).toBe('Saved');
         expect(component.alerts[0].type).toBe(AlertType.Success);
+
+        const banner = fixture.nativeElement.querySelector('[role="alert"]');
+        expect(banner).toBeTruthy();
+        expect(banner.textContent).toContain('Saved');
+        expect(fixture.nativeElement.querySelector('button[aria-label="Dismiss alert"]')).toBeTruthy();
     });
 
     it('only shows alerts that match the component id', () => {
