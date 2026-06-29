@@ -64,6 +64,21 @@ describe('AddEditComponent', () => {
         expect(accountServiceSpy.getById).not.toHaveBeenCalled();
     });
 
+    it('associates labels with unique input ids including separate user and address country fields', () => {
+        const compiled = fixture.nativeElement as HTMLElement;
+
+        const labelFor = (id: string) =>
+            compiled.querySelector(`label[for="${id}"]`) as HTMLLabelElement | null;
+
+        expect(labelFor('displayName')?.textContent?.trim()).toContain('Display Name');
+        expect(compiled.querySelector('#displayName')).toBeTruthy();
+        expect(labelFor('userCountry')?.textContent?.trim()).toContain('Country');
+        expect(compiled.querySelector('#userCountry')).toBeTruthy();
+        expect(labelFor('addressCountry')?.textContent?.trim()).toContain('Country');
+        expect(compiled.querySelector('#addressCountry')).toBeTruthy();
+        expect(compiled.querySelectorAll('label[for="country"]').length).toBe(0);
+    });
+
     it('does not call register when the form is invalid in add mode', () => {
         component.onSubmit();
 
