@@ -32,7 +32,7 @@ export class ListComponent implements OnInit {
     }
 
     /** User-facing label for row action `aria-label`s and delete confirmation (displayName → loginName → fallback). */
-    deleteLabel(user: UserRow): string {
+    rowLabel(user: UserRow): string {
         return user.displayName || user.loginName || 'this user';
     }
 
@@ -46,7 +46,7 @@ export class ListComponent implements OnInit {
             return;
         }
 
-        const label = this.deleteLabel(user);
+        const label = this.rowLabel(user);
         if (!window.confirm(`Delete "${label}"? This cannot be undone.`)) {
             return;
         }
