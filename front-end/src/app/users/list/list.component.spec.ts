@@ -54,6 +54,28 @@ describe('ListComponent', () => {
         expect(buttons[1].getAttribute('aria-label')).toBe('Delete Alice Smith');
     });
 
+    it('sets aria-label on edit links from deleteLabel', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
+
+        fixture.detectChanges();
+
+        const links = (fixture.nativeElement as HTMLElement).querySelectorAll('.btn-edit-user');
+        expect(links.length).toBe(2);
+        expect(links[0].getAttribute('aria-label')).toBe('Edit Jane Doe');
+        expect(links[1].getAttribute('aria-label')).toBe('Edit Alice Smith');
+    });
+
+    it('falls back to loginName on edit and delete aria-labels when displayName is missing', () => {
+        const users = [{ id: '1', loginName: 'jdoe', displayName: '', dateOfBirth: '' }];
+        accountServiceSpy.getAll.and.returnValue(of(users));
+
+        fixture.detectChanges();
+
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('.btn-edit-user')?.getAttribute('aria-label')).toBe('Edit jdoe');
+        expect(compiled.querySelector('.btn-delete-user')?.getAttribute('aria-label')).toBe('Delete jdoe');
+    });
+
     it('sets users to an empty array when getAll fails', () => {
         accountServiceSpy.getAll.and.returnValue(throwError(() => new Error('Server error')));
 
