@@ -76,7 +76,7 @@ On init, calls `accountService.getAll()` and binds the result to `users`. While 
 
 `deleteUser(id)` no-ops when the list is still loading (`users` is `null`) or the id is not found. When the row exists, the browser shows a native `window.confirm` dialog before any API call. If the user cancels, the row is unchanged. On confirm, the component sets `user.isDeleting = true` (spinner on the button), calls `accountService.delete(id)`, and removes the row from the local array on success.
 
-`deleteLabel(user)` picks the name shown in the delete confirmation and on each row's Edit/Delete `aria-label`s:
+`rowLabel(user)` picks the name shown in the delete confirmation and on each row's Edit/Delete `aria-label`s:
 
 | Priority | Field | Example confirm text |
 |----------|-------|----------------------|
@@ -91,7 +91,7 @@ Edit and Delete controls expose `aria-label="Edit {label}"` and `aria-label="Del
 | Optimistic UI | Row stays until delete succeeds |
 | Error handling | Failed load or delete shows a global alert via `ErrorInterceptor`; delete failures reset `isDeleting` on the row |
 | Confirmation | Native `window.confirm` before delete; cancel leaves the row intact |
-| Accessibility | Edit link and Delete button `aria-label`s use the same `deleteLabel(user)` helper as the confirm dialog |
+| Accessibility | Edit link and Delete button `aria-label`s use the same `rowLabel(user)` helper as the confirm dialog; table has a screen-reader caption, `scope="col"` headers, and a loading row with `role="status"` |
 
 For API delete behavior and missing-ID quirks, see [api-users-crud.md](api-users-crud.md) and [api-errors.md](api-errors.md).
 

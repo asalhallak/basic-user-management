@@ -1,12 +1,13 @@
 <h1>Users</h1>
 <a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
 <table class="table table-striped">
+    <caption class="sr-only">Registered users</caption>
     <thead>
         <tr>
-            <th style="width: 30%">Display Name</th>
-            <th style="width: 30%">Username</th>
-            <th style="width: 30%">Date Of Birth</th>
-            <th style="width: 10%"></th>
+            <th scope="col" style="width: 30%">Display Name</th>
+            <th scope="col" style="width: 30%">Username</th>
+            <th scope="col" style="width: 30%">Date Of Birth</th>
+            <th scope="col" style="width: 10%"><span class="sr-only">Actions</span></th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +16,8 @@
             <td>{{user.loginName}}</td>
             <td>{{user.dateOfBirth | date}}</td>
             <td style="white-space: nowrap">
-                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1 btn-edit-user" [attr.aria-label]="'Edit ' + deleteLabel(user)">Edit</a>
-                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting" [attr.aria-label]="'Delete ' + deleteLabel(user)">
+                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1 btn-edit-user" [attr.aria-label]="'Edit ' + rowLabel(user)">Edit</a>
+                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting" [attr.aria-label]="'Delete ' + rowLabel(user)">
                     <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
                     <span *ngIf="!user.isDeleting">Delete</span>
                 </button>
@@ -28,8 +29,8 @@
             </td>
         </tr>
         <tr *ngIf="!users">
-            <td colspan="4" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
+            <td colspan="4" class="text-center" role="status" aria-live="polite" aria-label="Loading users">
+                <span class="spinner-border spinner-border-lg align-center" aria-hidden="true"></span>
             </td>
         </tr>
     </tbody>

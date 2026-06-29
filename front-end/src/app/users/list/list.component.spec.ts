@@ -43,7 +43,7 @@ describe('ListComponent', () => {
         expect(component.users).toEqual(sampleUsers as typeof component.users);
     });
 
-    it('sets aria-label on delete buttons from deleteLabel', () => {
+    it('sets aria-label on delete buttons from rowLabel', () => {
         accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
 
         fixture.detectChanges();
@@ -54,7 +54,7 @@ describe('ListComponent', () => {
         expect(buttons[1].getAttribute('aria-label')).toBe('Delete Alice Smith');
     });
 
-    it('sets aria-label on edit links from deleteLabel', () => {
+    it('sets aria-label on edit links from rowLabel', () => {
         accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
 
         fixture.detectChanges();
@@ -93,15 +93,18 @@ describe('ListComponent', () => {
         expect(compiled.textContent).toContain('No users yet');
     });
 
-    it('shows a loading spinner while users are loading', () => {
+    it('shows a loading spinner with status semantics while users are loading', () => {
         const getAllSubject = new Subject<UserRow[]>();
         accountServiceSpy.getAll.and.returnValue(getAllSubject.asObservable());
 
         fixture.detectChanges();
 
         const compiled = fixture.nativeElement as HTMLElement;
+        const loadingCell = compiled.querySelector('[role="status"]');
         expect(component.users).toBeNull();
         expect(compiled.querySelector('.spinner-border-lg')).toBeTruthy();
+        expect(loadingCell?.getAttribute('aria-label')).toBe('Loading users');
+        expect(loadingCell?.getAttribute('aria-live')).toBe('polite');
 
         getAllSubject.next(sampleUsers);
         getAllSubject.complete();
@@ -109,6 +112,17 @@ describe('ListComponent', () => {
 
         expect(compiled.querySelector('.spinner-border-lg')).toBeFalsy();
         expect(component.users.length).toBe(2);
+    });
+
+    it('exposes table caption and column scope for screen readers', () => {
+        accountServiceSpy.getAll.and.returnValue(of(sampleUsers));
+
+        fixture.detectChanges();
+
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('caption')?.textContent?.trim()).toBe('Registered users');
+        const headers = compiled.querySelectorAll('th[scope="col"]');
+        expect(headers.length).toBe(4);
     });
 
     it('removes a user from the list when delete succeeds', () => {
