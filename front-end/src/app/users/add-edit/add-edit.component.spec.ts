@@ -64,6 +64,12 @@ describe('AddEditComponent', () => {
         expect(accountServiceSpy.getById).not.toHaveBeenCalled();
     });
 
+    it('sets type on the submit button so Enter submits the form', () => {
+        const compiled = fixture.nativeElement as HTMLElement;
+
+        expect(compiled.querySelector('button[type="submit"]')).toBeTruthy();
+    });
+
     it('associates labels with unique input ids including separate user and address country fields', () => {
         const compiled = fixture.nativeElement as HTMLElement;
 
