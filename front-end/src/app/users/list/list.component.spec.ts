@@ -5,12 +5,14 @@ import { of, Subject, throwError } from 'rxjs';
 import { AccountService } from '../../services';
 import { ListComponent } from './list.component';
 
+type UserRow = { id: string; loginName: string; displayName: string; dateOfBirth: string; isDeleting?: boolean };
+
 describe('ListComponent', () => {
     let component: ListComponent;
     let fixture: ComponentFixture<ListComponent>;
     const accountServiceSpy = jasmine.createSpyObj('AccountService', ['getAll', 'delete']);
 
-    const sampleUsers = [
+    const sampleUsers: UserRow[] = [
         { id: '1', loginName: 'jdoe', displayName: 'Jane Doe', dateOfBirth: '1990-05-15T00:00:00' },
         { id: '2', loginName: 'asmith', displayName: 'Alice Smith', dateOfBirth: '1985-01-01T00:00:00' }
     ];
@@ -37,7 +39,7 @@ describe('ListComponent', () => {
         fixture.detectChanges();
 
         expect(accountServiceSpy.getAll).toHaveBeenCalled();
-        expect(component.users).toEqual(sampleUsers);
+        expect(component.users).toEqual(sampleUsers as typeof component.users);
     });
 
     it('sets users to an empty array when getAll fails', () => {

@@ -4,6 +4,9 @@ import { first } from 'rxjs/operators';
 import { User } from '../../models';
 import { AccountService } from '../../services';
 
+/** User row with optional UI-only delete loading flag. */
+type UserRow = User & { isDeleting?: boolean };
+
 /**
  * Protected user list. Loads all users on init and supports inline delete with
  * per-row loading state (`isDeleting`). API errors surface via `ErrorInterceptor`.
@@ -12,7 +15,7 @@ import { AccountService } from '../../services';
  */
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
-    users: User[] | null = null;
+    users: UserRow[] | null = null;
 
     constructor(private accountService: AccountService) {}
 
