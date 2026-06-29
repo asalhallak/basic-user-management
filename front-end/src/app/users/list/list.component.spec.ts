@@ -50,6 +50,15 @@ describe('ListComponent', () => {
         expect(component.users).toEqual([]);
     });
 
+    it('shows an empty-state message when the user list is empty', () => {
+        accountServiceSpy.getAll.and.returnValue(of([]));
+
+        fixture.detectChanges();
+
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.textContent).toContain('No users yet');
+    });
+
     it('removes a user from the list when delete succeeds', () => {
         accountServiceSpy.getAll.and.returnValue(of(sampleUsers.map(user => ({ ...user }))));
         accountServiceSpy.delete.and.returnValue(of(undefined));

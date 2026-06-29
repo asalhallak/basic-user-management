@@ -63,7 +63,7 @@ The parent `LayoutComponent` renders child routes inside a padded container. Nav
 
 **File:** `front-end/src/app/users/list/list.component.ts`
 
-On init, calls `accountService.getAll()` and binds the result to `users`. While loading, the template shows a centered spinner (`users` is `null`).
+On init, calls `accountService.getAll()` and binds the result to `users`. While loading, the template shows a centered spinner (`users` is `null`). When the API returns an empty array, a single row shows *No users yet* with a hint to use **Add User**.
 
 | Column | Source field | Notes |
 |--------|--------------|-------|

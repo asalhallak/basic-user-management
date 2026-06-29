@@ -22,6 +22,11 @@
                 </button>
             </td>
         </tr>
+        <tr *ngIf="users && users.length === 0">
+            <td colspan="4" class="text-center text-muted">
+                No users yet. Use <strong>Add User</strong> above to create one.
+            </td>
+        </tr>
         <tr *ngIf="!users">
             <td colspan="4" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
