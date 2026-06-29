@@ -60,6 +60,24 @@ describe('ListComponent', () => {
         expect(compiled.textContent).toContain('No users yet');
     });
 
+    it('shows a loading spinner while users are loading', () => {
+        const getAllSubject = new Subject<UserRow[]>();
+        accountServiceSpy.getAll.and.returnValue(getAllSubject.asObservable());
+
+        fixture.detectChanges();
+
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(component.users).toBeNull();
+        expect(compiled.querySelector('.spinner-border-lg')).toBeTruthy();
+
+        getAllSubject.next(sampleUsers);
+        getAllSubject.complete();
+        fixture.detectChanges();
+
+        expect(compiled.querySelector('.spinner-border-lg')).toBeFalsy();
+        expect(component.users.length).toBe(2);
+    });
+
     it('removes a user from the list when delete succeeds', () => {
         accountServiceSpy.getAll.and.returnValue(of(sampleUsers.map(user => ({ ...user }))));
         accountServiceSpy.delete.and.returnValue(of(undefined));
@@ -71,6 +89,28 @@ describe('ListComponent', () => {
         expect(accountServiceSpy.delete).toHaveBeenCalledWith('1');
         expect(component.users.length).toBe(1);
         expect(component.users[0].id).toBe('2');
+    });
+
+    it('uses loginName in the delete confirmation when displayName is missing', () => {
+        const users = [{ id: '1', loginName: 'jdoe', displayName: '', dateOfBirth: '' }];
+        accountServiceSpy.getAll.and.returnValue(of(users));
+        accountServiceSpy.delete.and.returnValue(of(undefined));
+
+        fixture.detectChanges();
+        component.deleteUser('1');
+
+        expect(window.confirm).toHaveBeenCalledWith('Delete "jdoe"? This cannot be undone.');
+    });
+
+    it('uses a generic label in the delete confirmation when displayName and loginName are missing', () => {
+        const users = [{ id: '1', loginName: '', displayName: '', dateOfBirth: '' }];
+        accountServiceSpy.getAll.and.returnValue(of(users));
+        accountServiceSpy.delete.and.returnValue(of(undefined));
+
+        fixture.detectChanges();
+        component.deleteUser('1');
+
+        expect(window.confirm).toHaveBeenCalledWith('Delete "this user"? This cannot be undone.');
     });
 
     it('does not delete when the user cancels the confirmation dialog', () => {

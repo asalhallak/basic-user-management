@@ -101,6 +101,12 @@ When a logged-in session receives `401` or `403`, `ErrorInterceptor` calls `logo
 
 `Users.LoginName` has a unique database constraint. Duplicate create or update requests return `409 Conflict` with a clear message. See [api-errors.md](api-errors.md).
 
+## Front-end behavior
+
+### Why does delete ask for confirmation in the browser?
+
+The user list uses the native `window.confirm` dialog before calling `DELETE /api/v1/users/{id}`. The message names the row's `displayName`, falls back to `loginName`, or shows *this user* when both are empty. Canceling leaves the row unchanged; confirming shows a spinner on the Delete button until the API responds. See [front-end-users.md](front-end-users.md#delete-flow) and [manual-testing.md](manual-testing.md#3-manual-ui-walkthrough).
+
 ## Security
 
 ### Is this project safe to deploy?
