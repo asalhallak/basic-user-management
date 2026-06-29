@@ -31,7 +31,7 @@ export class ListComponent implements OnInit {
             });
     }
 
-    /** User-facing label for delete confirmation and button `aria-label` (displayName → loginName → fallback). */
+    /** User-facing label for row action `aria-label`s and delete confirmation (displayName → loginName → fallback). */
     deleteLabel(user: UserRow): string {
         return user.displayName || user.loginName || 'this user';
     }
