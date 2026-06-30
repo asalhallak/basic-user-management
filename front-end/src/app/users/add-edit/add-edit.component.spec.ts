@@ -70,6 +70,26 @@ describe('AddEditComponent', () => {
         expect(compiled.querySelector('button[type="submit"]')).toBeTruthy();
     });
 
+    it('groups address fields in a fieldset with a screen-reader legend', () => {
+        const compiled = fixture.nativeElement as HTMLElement;
+        const fieldset = compiled.querySelector('fieldset[formgroupname="address"]');
+
+        expect(fieldset).toBeTruthy();
+        expect(fieldset?.querySelector('legend.sr-only')?.textContent?.trim()).toBe('Address');
+    });
+
+    it('exposes accessible cancel and saving labels', () => {
+        const compiled = fixture.nativeElement as HTMLElement;
+
+        expect(compiled.querySelector('a[aria-label="Cancel and return to users list"]')).toBeTruthy();
+
+        component.loading = true;
+        fixture.detectChanges();
+
+        expect(compiled.querySelector('form')?.getAttribute('aria-busy')).toBe('true');
+        expect(compiled.querySelector('button[type="submit"]')?.getAttribute('aria-label')).toBe('Saving user');
+    });
+
     it('associates labels with unique input ids including separate user and address country fields', () => {
         const compiled = fixture.nativeElement as HTMLElement;
 
