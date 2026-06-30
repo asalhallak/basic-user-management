@@ -70,7 +70,7 @@ Each control has a matching `label for` / input `id` pair so screen readers and 
 | `username` | `required` | `username` | ✓ — passed to `login()` as `{ userName, password }` |
 | `password` | `required` | `current-password` | ✓ |
 
-The submit button uses `type="submit"` so Enter submits the form without relying on implicit button behavior.
+The submit button uses `type="submit"` so Enter submits the form without relying on implicit button behavior. While a login request is in flight, the form sets `aria-busy="true"`, the submit button exposes `aria-label="Signing in"`, and the loading spinner is marked `aria-hidden="true"`. The **Register** link uses `aria-label="Go to register page"` so screen readers distinguish it from the submit action.
 
 `AccountService.login()` posts to `POST /api/v1/auth/login` with `{ userName, password }`, matching the API `Credentials` model.
 
@@ -114,7 +114,7 @@ Each control has a matching `label for` / input `id` pair so screen readers and 
 | `username` | `required` | `username` | ✓ — mapped to `loginName` on submit |
 | `password` | `required`, `minLength(6)` | `new-password` | ✗ — user records have no password column (legacy tutorial field) |
 
-The submit button uses `type="submit"` so Enter submits the form without relying on implicit button behavior.
+The submit button uses `type="submit"` so Enter submits the form without relying on implicit button behavior. While a registration request is in flight, the form sets `aria-busy="true"`, the submit button exposes `aria-label="Registering user"`, and the loading spinner is marked `aria-hidden="true"`. The **Cancel** link uses `aria-label="Cancel and return to login"`.
 
 The form maps legacy tutorial field names to `UserResource` JSON in `onSubmit()` before calling `accountService.register()`, which posts to `POST /api/v1/users`. That endpoint requires a JWT — see [front-end-models.md](front-end-models.md).
 
@@ -177,6 +177,8 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 
 - Redirects to `/` or `returnUrl` on init when a session already exists
 - Associates each label with a matching input `id`
+- Sets `aria-busy` and submit-button `aria-label` while loading
+- Exposes `aria-label` on the register navigation link
 - Invalid form does not call `AccountService.login`
 - Valid submit calls `login(username, password)`
 - Success navigates to `/` or the `returnUrl` query parameter
@@ -186,6 +188,8 @@ See [improvement-ideas.md](improvement-ideas.md) for contribution starting point
 
 - Redirects to login on init when no session or an empty token is stored
 - Associates each label with a matching input `id`
+- Sets `aria-busy` and submit-button `aria-label` while loading
+- Exposes `aria-label` on the cancel link
 - Invalid form does not call `AccountService.register`
 - Valid submit with a session maps legacy fields to `{ loginName, displayName, isActive: true }`
 - Redirects to login on submit when the session expires after the page loads

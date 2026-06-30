@@ -1,7 +1,7 @@
 <div class="card">
     <h4 class="card-header">Register</h4>
     <div class="card-body">
-        <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <form *ngIf="form" [formGroup]="form" (ngSubmit)="onSubmit()" [attr.aria-busy]="loading ? 'true' : null">
             <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input id="firstName" type="text" formControlName="firstName" class="form-control"
@@ -40,11 +40,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" [disabled]="loading" class="btn btn-primary">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                <button type="submit" [disabled]="loading" class="btn btn-primary" [attr.aria-label]="loading ? 'Registering user' : null">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" aria-hidden="true"></span>
                     Register
                 </button>
-                <a routerLink="../login" class="btn btn-link">Cancel</a>
+                <a routerLink="../login" class="btn btn-link" aria-label="Cancel and return to login">Cancel</a>
             </div>
         </form>
     </div>
