@@ -1,6 +1,6 @@
 <h1 *ngIf="isAddMode">Add User</h1>
 <h1 *ngIf="!isAddMode">Edit User</h1>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" [attr.aria-busy]="loading ? 'true' : null">
     <div class="form-row">
         <div class="form-group col">
             <label for="displayName">Display Name</label>
@@ -63,7 +63,8 @@
             <input id="profilePictureUrl" type="text" formControlName="profilePictureUrl" class="form-control" />
         </div>
     </div>
-    <div formGroupName="address">
+    <fieldset formGroupName="address">
+        <legend class="sr-only">Address</legend>
         <div class="form-row">
             <div class="form-group col">
                 <label for="addressCity">City</label>
@@ -118,13 +119,13 @@
                 </div>
             </div>
         </div>
-    </div>
+    </fieldset>
 
     <div class="form-group">
-        <button type="submit" [disabled]="loading" class="btn btn-primary">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        <button type="submit" [disabled]="loading" class="btn btn-primary" [attr.aria-label]="loading ? 'Saving user' : null">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1" aria-hidden="true"></span>
             Save
         </button>
-        <a routerLink="/users" class="btn btn-link">Cancel</a>
+        <a routerLink="/users" class="btn btn-link" aria-label="Cancel and return to users list">Cancel</a>
     </div>
 </form>
