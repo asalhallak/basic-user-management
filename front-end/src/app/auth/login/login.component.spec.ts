@@ -89,6 +89,20 @@ describe('LoginComponent', () => {
         expect(compiled.querySelector('button[type="submit"]')).toBeTruthy();
     });
 
+    it('sets aria-busy on the form and aria-label on the submit button while loading', () => {
+        component.loading = true;
+        fixture.detectChanges();
+
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('form')?.getAttribute('aria-busy')).toBe('true');
+        expect(compiled.querySelector('button[type="submit"]')?.getAttribute('aria-label')).toBe('Signing in');
+    });
+
+    it('sets aria-label on the register link', () => {
+        const compiled = fixture.nativeElement as HTMLElement;
+        expect(compiled.querySelector('a[aria-label="Go to register page"]')).toBeTruthy();
+    });
+
     it('calls login with form values when the form is valid', () => {
         accountServiceSpy.login.and.returnValue(of({ userName: 'admin', token: 'jwt-token' }));
         component.form.setValue({ username: 'admin', password: '123456789' });

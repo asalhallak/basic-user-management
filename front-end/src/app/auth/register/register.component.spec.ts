@@ -109,6 +109,20 @@ describe('RegisterComponent', () => {
             expect(compiled.querySelector('button[type="submit"]')).toBeTruthy();
         });
 
+        it('sets aria-busy on the form and aria-label on the submit button while loading', () => {
+            component.loading = true;
+            fixture.detectChanges();
+
+            const compiled = fixture.nativeElement as HTMLElement;
+            expect(compiled.querySelector('form')?.getAttribute('aria-busy')).toBe('true');
+            expect(compiled.querySelector('button[type="submit"]')?.getAttribute('aria-label')).toBe('Registering user');
+        });
+
+        it('sets aria-label on the cancel link', () => {
+            const compiled = fixture.nativeElement as HTMLElement;
+            expect(compiled.querySelector('a[aria-label="Cancel and return to login"]')).toBeTruthy();
+        });
+
         it('calls register with mapped API fields when the form is valid', () => {
             accountServiceSpy.register.and.returnValue(of({}));
             component.form.setValue(validForm);
