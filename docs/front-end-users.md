@@ -108,7 +108,7 @@ this.isAddMode = !this.id;
 
 ### Form fields
 
-Built with `FormBuilder` in `ngOnInit()`. Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly. User-level `country` uses `id="userCountry"`; nested `address.country` uses `id="addressCountry"` to avoid duplicate label targets. The Save button uses `type="submit"` so Enter submits the form without relying on implicit button behavior (same pattern as login/register — see [front-end-login-register.md](front-end-login-register.md)).
+Built with `FormBuilder` in `ngOnInit()`. Each control has a matching `label for` / input `id` pair so screen readers and click-to-focus work correctly. User-level `country` uses `id="userCountry"`; nested `address.country` uses `id="addressCountry"` to avoid duplicate label targets. Nested address fields are grouped in a `<fieldset>` with a screen-reader-only `<legend>Address</legend>`. The Save button uses `type="submit"` so Enter submits the form without relying on implicit button behavior (same pattern as login/register — see [front-end-login-register.md](front-end-login-register.md)). While a save or edit preload is in progress, the form sets `aria-busy="true"` and the Save button shows a spinner with `aria-label="Saving user"`. The Cancel link uses `aria-label="Cancel and return to users list"`.
 
 | Control | Validators | Sent to API |
 |---------|------------|-------------|
